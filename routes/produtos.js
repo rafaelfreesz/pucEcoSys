@@ -10,4 +10,11 @@ router.get('/',(request, response, next) =>{
     })
 })
 
+router.get('/:id',(request, response, next) =>{
+    pool.query('SELECT * FROM tb_produto WHERE id = $1',[request.params['id']],(err,res)=>{        
+        if(err) return next(err);
+        response.json(res.rows);
+    })
+})
+
 module.exports=router;
