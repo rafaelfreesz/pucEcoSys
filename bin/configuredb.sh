@@ -4,7 +4,7 @@ export PGPASSWORD="node_password"
 
 database="ecoSysDB"
 
-echo "Configuring databade: $database"
+echo "Configuring database: $database"
 
 dropdb -U node_user $database
 createdb -U node_user $database
