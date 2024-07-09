@@ -3,10 +3,29 @@ const pool = require('../db');
 
 const router = Router();
 
-router.get('/',(request, response, next) =>{
-    pool.query('SELECT * FROM tb_fornecedor ORDER BY id ASC',(err,res)=>{        
+const getEnderecoFornecedor = (fornecedor) => {
+    
+    
+
+}
+
+router.get('/', (request, response, next) =>{
+    // pool.query('SELECT * FROM tb_fornecedor JOIN tb_endereco ON tb_endereco.fk_fornecedor = tb_fornecedor.id',(err,res)=>{        
+    pool.query('SELECT * FROM tb_fornecedor',(err,res)=>{        
         if(err) return next(err);
-        response.json(res.rows);
+        
+        res.rows.forEach((ro,index) => {
+            pool.query('SELECT * FROM tb_endereco WHERE fk_fornecedor = $1', [ro.id], (err,rores) => {
+                if(err || rores.rows.length>1) return next(err);
+                
+                ro['endereco']=rores.rows[0];
+                
+                if(index === res.rows.length-1)   response.json(res.rows);
+            })
+        })
+
+        
+        // response.json(res.rows);
     })
     //TODO trazer tambem o endereço
 })
