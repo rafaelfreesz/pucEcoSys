@@ -7,17 +7,22 @@ const router = Router();
 
 router.get('/', async (request, response, next) =>{
     
-    const fornecedores = (await pool.query('SELECT * FROM tb_fornecedor')).rows;
+    pool.query('SELECT * FROM tb_fornecedor ORDER BY ID', async (err,res)=>{        
+        if(err) return next(err);
 
-    await preencherEnderecos(fornecedores);
-    
-    response.json(fornecedores);
+        await preencherEnderecos(res.rows);
+        
+        response.json(res.rows);
+    })
         
 })
 
-router.get('/:id',(request, response, next) =>{
-    pool.query('SELECT * FROM tb_fornecedor WHERE id = $1',[request.params['id']],(err,res)=>{        
+router.get('/:id', (request, response, next) =>{
+    pool.query('SELECT * FROM tb_fornecedor WHERE id = $1',[request.params['id']], async (err,res)=>{        
         if(err) return next(err);
+
+        await preencherEnderecos(res.rows);
+        
         response.json(res.rows);
     })
 })
