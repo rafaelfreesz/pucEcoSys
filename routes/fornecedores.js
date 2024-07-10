@@ -3,31 +3,16 @@ const pool = require('../db');
 
 const router = Router();
 
-const getEnderecoFornecedor = (fornecedor) => {
+
+
+router.get('/', async (request, response, next) =>{
     
+    const fornecedores = (await pool.query('SELECT * FROM tb_fornecedor')).rows;
+
+    await preencherEnderecos(fornecedores);
     
-
-}
-
-router.get('/', (request, response, next) =>{
-    // pool.query('SELECT * FROM tb_fornecedor JOIN tb_endereco ON tb_endereco.fk_fornecedor = tb_fornecedor.id',(err,res)=>{        
-    pool.query('SELECT * FROM tb_fornecedor',(err,res)=>{        
-        if(err) return next(err);
+    response.json(fornecedores);
         
-        res.rows.forEach((ro,index) => {
-            pool.query('SELECT * FROM tb_endereco WHERE fk_fornecedor = $1', [ro.id], (err,rores) => {
-                if(err || rores.rows.length>1) return next(err);
-                
-                ro['endereco']=rores.rows[0];
-                
-                if(index === res.rows.length-1)   response.json(res.rows);
-            })
-        })
-
-        
-        // response.json(res.rows);
-    })
-    //TODO trazer tambem o endereço
 })
 
 router.get('/:id',(request, response, next) =>{
@@ -84,5 +69,14 @@ router.delete('/:id',(request, response, next) =>{
         response.redirect('/fornecedores');
     })
 })
+
+//Funções auxiliares
+const preencherEnderecos = async (fornecedores) => {
+
+    for await (const fornecedor of fornecedores){
+        fornecedor['endereco'] = (await pool.query('SELECT * FROM tb_endereco WHERE fk_fornecedor = $1',[fornecedor.id])).rows[0]; 
+    }
+
+}
 
 module.exports=router;
