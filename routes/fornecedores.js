@@ -30,13 +30,14 @@ router.get('/:id', (request, response, next) =>{
 router.post('/',(request, response, next) =>{
 
 
-    const {cnpj, razao_social, nome_empresarial} = request.body;
+    const {cnpj, razao_social, nome_empresarial, endereco} = request.body;
 
-    pool.query('INSERT INTO tb_fornecedor(cnpj, razao_social, nome_empresarial) VALUES ($1,$2,$3)',
+    pool.query('INSERT INTO tb_fornecedor(cnpj, razao_social, nome_empresarial) VALUES ($1,$2,$3) RETURNING *',
         [cnpj, razao_social, nome_empresarial],
-        (err,res)=>{
+        async (err,res)=>{
             if(err) return next(err);
 
+            await cadastrarEndereco(endereco, res.rows[0].id)
             response.redirect('/fornecedores');
         }
     );
@@ -60,7 +61,6 @@ router.put('/:id',(request, response, next) =>{
             [request.body[field], id],
             (err,res)=>{
                 if(err) return next(err);
-    
                 if(index === fields.length - 1) response.redirect('/fornecedores');
             }
         );
@@ -82,6 +82,15 @@ const preencherEnderecos = async (fornecedores) => {
         fornecedor['endereco'] = (await pool.query('SELECT * FROM tb_endereco WHERE fk_fornecedor = $1',[fornecedor.id])).rows[0]; 
     }
 
+}
+
+const cadastrarEndereco = async (endereco, idFornecedor) => {
+    await pool.query(
+        `INSERT INTO
+        tb_endereco(logradouro, numero, complemento, fk_fornecedor)
+        VALUES ($1,$2,$3,$4)`,
+        [endereco.logradouro, endereco.numero, endereco.complemento, idFornecedor]
+    )
 }
 
 module.exports=router;
