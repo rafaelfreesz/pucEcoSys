@@ -1,10 +1,10 @@
 const {Router} = require('express');
-const produtos = require('./produtos');
+const produto = require('./produto.routes');
 const fornecedores = require('./fornecedores');
 
 const router = Router();
 
-router.use('/produtos',produtos);
+router.use('/produtos',produto);
 router.use('/fornecedores',fornecedores);
 
 router.get('/', (request, response) =>{
