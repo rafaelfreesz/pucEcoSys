@@ -3,14 +3,11 @@ const {ProdutoController} = require('../controller/produto.controller');
 
 const router = Router();
 
-router.get('/',ProdutoController.consultarTodosProdutos)
-
-router.get('/:id',ProdutoController.consultarProdutoPorId)
-
-router.post('/',ProdutoController.incluirProduto)
-
-router.put('/:id',ProdutoController.alterarProduto)
-
-router.delete('/:id',ProdutoController.excluirProdutoPorId)
+//Rotas
+router.get('/',ProdutoController.consultarTodos)
+router.get('/:id',ProdutoController.consultarPorId)
+router.post('/',ProdutoController.incluir)
+router.put('/:id',ProdutoController.alterar)
+router.delete('/:id',ProdutoController.excluirPorId)
 
 module.exports=router;

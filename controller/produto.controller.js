@@ -1,22 +1,22 @@
 const pool = require('../db');
+const {ProdutoRepository} = require('../repository/produto.repository')
 
 class ProdutoController {
 
-    consultarTodosProdutos(request, response, next) {
-        pool.query('SELECT * FROM tb_produto ORDER BY id ASC',(err,res)=>{        
-            if(err) return next(err);
-            response.json(res.rows);
-        })
+    consultarTodos(request, response, next) {
+        ProdutoRepository.consultarTodos()
+            .then(retorno => {response.json(retorno)})
+            .catch(erro => {console.log(erro)})
     }
 
-    consultarProdutoPorId(request, response, next) {
+    consultarPorId(request, response, next) {
         pool.query('SELECT * FROM tb_produto WHERE id = $1',[request.params['id']],(err,res)=>{        
             if(err) return next(err);
             response.json(res.rows);
         })
     }
 
-    incluirProduto(request, response, next) {
+    incluir(request, response, next) {
 
 
         const {nome, descricao, preco_venda, qtd_estoque} = request.body;
@@ -31,7 +31,7 @@ class ProdutoController {
         );
     }
 
-    alterarProduto(request, response, next) {
+    alterar(request, response, next) {
 
         const {id} = request.params;
     
@@ -57,7 +57,7 @@ class ProdutoController {
         })
     }
 
-    excluirProdutoPorId(request, response, next) {
+    excluirPorId(request, response, next) {
         pool.query('DELETE FROM tb_produto WHERE id = $1',[request.params['id']],(err,res)=>{
             if(err) return next(err);
             response.redirect('/produtos');
