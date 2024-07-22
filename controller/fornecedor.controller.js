@@ -16,7 +16,9 @@ class FornecedorController {
     };
 
     incluir(request, response, next) {
-        
+        FornecedorRepository.incluir(request.body)
+            .then(() => {response.redirect('/fornecedores')})
+            .catch((erro) => {response.json(erro)})
     
     };
 

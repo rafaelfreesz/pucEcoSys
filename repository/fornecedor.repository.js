@@ -1,91 +1,57 @@
-const pool = require('../db');
+const {pool, executarQuery} = require('../db');
 
 class FornecedorRepository{
 
     consultarTodos(){
-
-        return new Promise((resolve, reject) => {
-            
-            pool.query('SELECT * FROM tb_fornecedor ORDER BY ID ASC',
-                (err,res)=>{        
-                    if(err) return reject(err);
-                    return resolve(res.rows);
-                    //TODO preencherEnderecos(res.rows);
-                
-            })
-        })
-            
+        const sql = 'SELECT * FROM tb_fornecedor ORDER BY ID ASC';
+        return executarQuery(sql);            
     };
 
     consultarPorId(id){
-
-        return new Promise((resolve, reject) => {
-
-            pool.query('SELECT * FROM tb_fornecedor WHERE id = $1',[id],
-                (err,res)=>{        
-                    if(err) return reject(err);
-                    return resolve(res.rows);    
-                    //TODO await preencherEnderecos(res.rows);
-                                                
-            })
-
-        })
+        const sql = 'SELECT * FROM tb_fornecedor WHERE id = $1'
+        //TODO await preencherEnderecos(res.rows);
+        return executarQuery(sql,[id]);
 
     };
 
     incluir(fornecedor){
-
-        return new Promise((resolve, reject) => {
-
-            pool.query('INSERT INTO tb_fornecedor(cnpj, razao_social, nome_empresarial) VALUES ($1,$2,$3) RETURNING *',
-                [
-                    fornecedor.cnpj, 
-                    fornecedor.razao_social, 
-                    fornecedor.nome_empresarial
-                ],
-                (err,res)=>{
-                    if(err) return reject(err);
-                    return resolve();
-                    //TODO await cadastrarEndereco(endereco, res.rows[0].id)
-                }
-            );
+        const sql = 'INSERT INTO tb_fornecedor(cnpj, razao_social, nome_empresarial) VALUES ($1,$2,$3) RETURNING *'
+        return executarQuery(sql,
+            [
+                fornecedor.cnpj, 
+                fornecedor.razao_social, 
+                fornecedor.nome_empresarial
+            ]);
         
-        })
 
     };
 
-    alterar(id, fornecedor){
+    async alterar(id, fornecedor){
 
-        return new Promise((resolve, reject) =>{
-            const keys = ['cnpj', 'razao_social', 'nome_empresarial'];
+        const keys = ['cnpj', 'razao_social', 'nome_empresarial'];
+        const fields = [];
         
-            const fields = [];
-        
-            keys.forEach(key => {
-                if(fornecedor[key]) fields.push(key);
-            })
-        
-            fields.forEach((field,index) => {
-                
-                pool.query(`UPDATE tb_fornecedor SET ${field} = ($1) WHERE id = ($2)`,
-                    [fornecedor[field], id],
-                    (err,res)=>{
-                        if(err) return reject(err);
-                        if(index === fields.length - 1) return resolve();
-                    }
-                );
-                
-            })
+        keys.forEach(key => {
+            if(fornecedor[key]) fields.push(key);
         })
+
+        for (let i = 0; i < fields.length; i++){
+
+            const sql = `UPDATE tb_fornecedor SET ${fields[i]} = ($1) WHERE id = ($2)`;
+    
+            if(i === fields.length - 1){
+                return executarQuery(sql,[fornecedor[fields[i]],id]);
+            }else{
+                await executarQuery(sql,[fornecedor[fields[i]],id]);
+            }
+        
+        }
+
     };
     
     excluirPorId(id){
-        return new Promise((resolve, reject) => {
-            pool.query('DELETE FROM tb_fornecedor WHERE id = $1',[id],(err,res)=>{
-                if(err) return reject(err);
-                return resolve();
-            })
-        })
+        const sql = 'DELETE FROM tb_fornecedor WHERE id = $1'
+        return executarQuery(sql,[id]);
     };
 
 }
