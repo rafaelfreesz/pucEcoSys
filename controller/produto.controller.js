@@ -6,62 +6,38 @@ class ProdutoController {
     consultarTodos(request, response, next) {
         ProdutoRepository.consultarTodos()
             .then(retorno => {response.json(retorno)})
-            .catch(erro => {console.log(erro)})
+            .catch(erro => {response.json(erro)})
     }
 
     consultarPorId(request, response, next) {
-        pool.query('SELECT * FROM tb_produto WHERE id = $1',[request.params['id']],(err,res)=>{        
-            if(err) return next(err);
-            response.json(res.rows);
-        })
+        ProdutoRepository.consultarPorId(request.params.id)
+            .then(retorno => {response.json(retorno)})
+            .catch(erro => {response.json(erro)})
     }
 
     incluir(request, response, next) {
 
+        ProdutoRepository.incluir(request.body)
+            .then(() => {response.redirect('/produtos')})
+            .catch(erro => {response.json(erro)})
 
-        const {nome, descricao, preco_venda, qtd_estoque} = request.body;
-    
-        pool.query('INSERT INTO tb_produto(nome, descricao, preco_venda, qtd_estoque) VALUES ($1,$2,$3,0)',
-            [nome, descricao, preco_venda],
-            (err,res)=>{
-                if(err) return next(err);
-    
-                response.redirect('/produtos');
-            }
-        );
     }
 
     alterar(request, response, next) {
 
-        const {id} = request.params;
-    
-        const keys = ['nome', 'descricao', 'preco_venda'];
-    
-        const fields = [];
-    
-        keys.forEach(key => {
-            if(request.body[key]) fields.push(key);
-        })
-    
-        fields.forEach((field,index) => {
-            
-            pool.query(`UPDATE tb_produto SET ${field} = ($1) WHERE id = ($2)`,
-                [request.body[field], id],
-                (err,res)=>{
-                    if(err) return next(err);
+        ProdutoRepository.alterar(request.params.id,request.body)
+            .then(() => response.redirect('/produtos'))
+            .catch((erro) => {response.json(erro)})   
         
-                    if(index === fields.length - 1) response.redirect('/produtos');
-                }
-            );
-            
-        })
     }
 
     excluirPorId(request, response, next) {
-        pool.query('DELETE FROM tb_produto WHERE id = $1',[request.params['id']],(err,res)=>{
-            if(err) return next(err);
-            response.redirect('/produtos');
-        })
+
+        ProdutoRepository.excluirPorId(request.params.id)
+            .then(() => response.redirect('/produtos'))
+            .catch((erro) => {response.json(erro)})  
+
+        
     }
 
 }
