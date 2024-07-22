@@ -1,18 +1,21 @@
-const pool = require('../db');
 const {ProdutoRepository} = require('../repository/produto.repository')
 
 class ProdutoController {
 
     consultarTodos(request, response, next) {
+
         ProdutoRepository.consultarTodos()
             .then(retorno => {response.json(retorno)})
             .catch(erro => {response.json(erro)})
+
     }
 
     consultarPorId(request, response, next) {
+
         ProdutoRepository.consultarPorId(request.params.id)
             .then(retorno => {response.json(retorno)})
             .catch(erro => {response.json(erro)})
+
     }
 
     incluir(request, response, next) {
@@ -36,7 +39,6 @@ class ProdutoController {
         ProdutoRepository.excluirPorId(request.params.id)
             .then(() => response.redirect('/produtos'))
             .catch((erro) => {response.json(erro)})  
-
         
     }
 
