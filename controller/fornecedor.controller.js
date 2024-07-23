@@ -1,4 +1,5 @@
 const {FornecedorRepository} = require('../repository/fornecedor.repository')
+const {EnderecoRepository} = require('../repository/endereco.repository')
 
 class FornecedorController {
 
@@ -8,7 +9,7 @@ class FornecedorController {
             .catch((erro) => {response.json(erro)})
 
     };
-
+    
     consultarPorId(request, response, next){
         FornecedorRepository.consultarPorId(request.params.id)
             .then((retorno) => {response.json(retorno)})
