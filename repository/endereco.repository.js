@@ -11,6 +11,11 @@ class EnderecoRepository{
         return executarQuery(sql,[id]);
     }
 
+    consultarPorFornecedor(fkFornecedor){
+        const sql = 'SELECT * FROM tb_endereco WHERE fk_fornecedor = $1';
+        return executarQuery(sql,[fkFornecedor]);
+    }
+
     incluir(endereco){
         const sql = 'INSERT INTO tb_endereco(logradouro,numero,complemento,fk_fornecedor) VALUES ($1,$2,$3,$4)';
         return executarQuery(sql,

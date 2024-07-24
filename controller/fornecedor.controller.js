@@ -3,17 +3,46 @@ const {EnderecoRepository} = require('../repository/endereco.repository')
 
 class FornecedorController {
 
-    consultarTodos(request, response, next){
-        FornecedorRepository.consultarTodos()
-            .then((retorno) => {response.json(retorno)})
-            .catch((erro) => {response.json(erro)})
+    async consultarTodos(request, response, next){
 
+        try{
+            
+            const fornecedores = await FornecedorRepository.consultarTodos();
+
+            fornecedores.forEach((fornecedor,index) => {
+    
+                EnderecoRepository.consultarPorFornecedor(fornecedor.id)
+                    .then(endereco => {
+                        if(endereco[0]) { fornecedor.endereco = endereco[0]; };
+                        if(index === fornecedores.length-1) { response.json(fornecedores) }
+                    })
+                    
+            })
+
+            
+        }catch(e){
+            e.erro=true;
+            response.json(e);
+        }
+        
     };
     
-    consultarPorId(request, response, next){
-        FornecedorRepository.consultarPorId(request.params.id)
-            .then((retorno) => {response.json(retorno)})
-            .catch((erro) => {response.json(erro)})
+    async consultarPorId(request, response, next){
+
+        try{
+            let fornecedor = (await FornecedorRepository.consultarPorId(request.params.id))[0];
+            
+            if(fornecedor){
+                fornecedor.endereco = (await EnderecoRepository.consultarPorFornecedor(fornecedor.id))[0];
+            }else{ fornecedor={}; }
+
+            response.json(fornecedor)
+
+        }catch(e){
+            e.erro=true;
+            response.json(e);
+        }
+        
     };
 
     incluir(request, response, next) {
