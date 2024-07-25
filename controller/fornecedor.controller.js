@@ -45,10 +45,24 @@ class FornecedorController {
         
     };
 
-    incluir(request, response, next) {
-        FornecedorRepository.incluir(request.body)
-            .then(() => {response.redirect('/fornecedores')})
-            .catch((erro) => {response.json(erro)})
+    async incluir(request, response, next) {
+        try{
+            
+            const fornecedor = await FornecedorRepository.incluir(request.body)
+            
+            //Persistindo endereço
+            if(request.body.endereco){
+                const endereco = request.body.endereco;
+                endereco.fk_fornecedor = fornecedor[0].id;
+                await EnderecoRepository.incluir(endereco);
+            }
+
+            response.redirect('/fornecedores')
+
+            
+        }catch(e){
+            response.json(e)
+        }
     
     };
 
