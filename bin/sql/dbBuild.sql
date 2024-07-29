@@ -19,7 +19,7 @@ CREATE TABLE tb_endereco(
     numero VARCHAR(50),
     complemento VARCHAR(10),
     fk_fornecedor INT,
-    FOREIGN KEY (fk_fornecedor) REFERENCES tb_fornecedor(id)
+    FOREIGN KEY (fk_fornecedor) REFERENCES tb_fornecedor(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tb_contato(

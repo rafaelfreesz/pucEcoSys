@@ -88,10 +88,15 @@ class FornecedorController {
 
     }
 
-    excluirPorId(request, response, next) {
-        FornecedorRepository.excluirPorId(request.params.id)
-            .then(() => {response.redirect('/fornecedores')})
-            .catch((erro) => {response.json(erro)})
+    async excluirPorId(request, response, next) {
+
+        try{
+            await FornecedorRepository.excluirPorId(request.params.id)
+            response.redirect('/fornecedores')
+        }catch(e){
+            response.json(e)
+        }
+
     }
 }
 
