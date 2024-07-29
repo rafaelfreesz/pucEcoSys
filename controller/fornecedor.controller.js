@@ -66,11 +66,25 @@ class FornecedorController {
     
     };
 
-    alterar(request, response, next) {
+    async alterar(request, response, next) {
 
-        FornecedorRepository.alterar(request.params.id, request.body)
-            .then(() => {response.redirect('/fornecedores')})
-            .catch((erro) => {response.json(erro)})
+        
+        try{
+            const id = request.params.id;
+            const fornecedor = request.body;
+
+            await FornecedorRepository.alterar(id,fornecedor); 
+            
+            if(fornecedor['endereco']){
+                await EnderecoRepository.alterar(id, fornecedor['endereco'])
+            }
+
+            response.redirect('/fornecedores')
+
+        
+        }catch(e){
+            response.json(e)
+        }
 
     }
 
