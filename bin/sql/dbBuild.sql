@@ -27,7 +27,7 @@ CREATE TABLE tb_contato(
     tipo CHAR,
     valor VARCHAR(50),
     fk_fornecedor INT,
-    FOREIGN KEY (fk_fornecedor) REFERENCES tb_fornecedor(id)
+    FOREIGN KEY (fk_fornecedor) REFERENCES tb_fornecedor(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tb_entrada(
