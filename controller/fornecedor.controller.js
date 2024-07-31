@@ -107,8 +107,7 @@ class FornecedorController {
 
     //Funções auxiliares
     async getPorId(id){
-
-        const fornecedor = (await FornecedorRepository.consultarPorId(request.params.id))[0];
+        const fornecedor = (await FornecedorRepository.consultarPorId(id))[0];
             
         if(fornecedor){
             
