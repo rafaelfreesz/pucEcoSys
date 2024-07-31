@@ -36,13 +36,27 @@ class EntradaController {
             response.json(entrada)
 
         }catch(e){
+            console.log(e)
             e.erro=true;
             response.json(e);
         }
         
     };
 
-    // async consultarPorFornecedor(request, response, next){
+    async incluir(request, response, next) {
+        try{
+            await EntradaRepository.incluir(request.body)
+            response.redirect('/entradas')
+
+        }catch(e){
+            console.log(e)
+            e.erro=true;
+            response.json(e)
+        }
+    
+    };
+
+    // TODO Implementar async consultarPorFornecedor(request, response, next){
     //     try{
     //         let contatos = (await ContatoRepository.consultarPorFornecedor(request.params['id_fornecedor']));
     //         response.json(contatos)
@@ -54,16 +68,6 @@ class EntradaController {
         
     // };
 
-    // async incluir(request, response, next) {
-    //     try{
-    //         await ContatoRepository.incluir(request.body)
-    //         response.redirect('/contatos')
-
-    //     }catch(e){
-    //         response.json(e)
-    //     }
-    
-    // };
 
     // async alterar(request, response, next) {
 
