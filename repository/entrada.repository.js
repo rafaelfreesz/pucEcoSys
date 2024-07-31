@@ -7,7 +7,7 @@ class EntradaRepository{
         return executarQuery(sql);
     }
     consultarPorId(id){
-        const sql = 'SELECT * FROM tb_contato WHERE id = $1';
+        const sql = 'SELECT * FROM tb_entrada WHERE id = $1';
         return executarQuery(sql,[id]);
     }
 
