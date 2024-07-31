@@ -1,5 +1,6 @@
 const {FornecedorRepository} = require('../repository/fornecedor.repository')
 const {EnderecoRepository} = require('../repository/endereco.repository')
+const {ContatoRepository} = require('../repository/contato.repository')
 
 class FornecedorController {
 
@@ -8,17 +9,16 @@ class FornecedorController {
         try{
             
             const fornecedores = await FornecedorRepository.consultarTodos();
+            
+            for await (const fornecedor of fornecedores){
+                const endereco = (await EnderecoRepository.consultarPorFornecedor(fornecedor.id))[0];
+                const contatos = (await ContatoRepository.consultarPorFornecedor(fornecedor.id));
+                if (endereco){ fornecedor.endereco = endereco}
+                if (contatos){ fornecedor.contatos = contatos}
 
-            fornecedores.forEach((fornecedor,index) => {
-    
-                EnderecoRepository.consultarPorFornecedor(fornecedor.id)
-                    .then(endereco => {
-                        if(endereco[0]) { fornecedor.endereco = endereco[0]; };
-                        if(index === fornecedores.length-1) { response.json(fornecedores) }
-                    })
-                    
-            })
+            }
 
+            response.json(fornecedores)
             
         }catch(e){
             e.erro=true;
@@ -30,10 +30,16 @@ class FornecedorController {
     async consultarPorId(request, response, next){
 
         try{
-            let fornecedor = (await FornecedorRepository.consultarPorId(request.params.id))[0];
+            const fornecedor = (await FornecedorRepository.consultarPorId(request.params.id))[0];
             
             if(fornecedor){
-                fornecedor.endereco = (await EnderecoRepository.consultarPorFornecedor(fornecedor.id))[0];
+                
+                const endereco = (await EnderecoRepository.consultarPorFornecedor(fornecedor.id))[0];
+                const contatos = (await ContatoRepository.consultarPorFornecedor(fornecedor.id));
+                
+                if (endereco) fornecedor.endereco = endereco
+                if (contatos) fornecedor.contatos = contatos
+
             }else{ fornecedor={}; }
 
             response.json(fornecedor)
@@ -98,6 +104,24 @@ class FornecedorController {
         }
 
     }
+
+    //Funções auxiliares
+    async getPorId(id){
+
+        const fornecedor = (await FornecedorRepository.consultarPorId(request.params.id))[0];
+            
+        if(fornecedor){
+            
+            const endereco = (await EnderecoRepository.consultarPorFornecedor(fornecedor.id))[0];
+            const contatos = (await ContatoRepository.consultarPorFornecedor(fornecedor.id));
+            
+            if (endereco) fornecedor.endereco = endereco
+            if (contatos) fornecedor.contatos = contatos
+
+        }else{ fornecedor={}; }
+        
+        return fornecedor;
+    };
 }
 
 //Padrão Singleton
