@@ -35,7 +35,7 @@ CREATE TABLE tb_entrada(
     dt_hr_entrada DATE NOT NULL DEFAULT CURRENT_DATE,
     nu_nota_fiscal VARCHAR(50),
     fk_fornecedor INT,
-    FOREIGN KEY (fk_fornecedor) REFERENCES tb_fornecedor(id)
+    FOREIGN KEY (fk_fornecedor) REFERENCES tb_fornecedor(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tb_item_entrada(

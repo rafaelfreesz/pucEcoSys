@@ -46,15 +46,15 @@ class EntradaRepository{
     
         }
 
+        excluirPorId(id){
+            const sql = 'DELETE FROM tb_entrada WHERE id = $1'
+            return executarQuery(sql,[id]);
+        }
     // TODO Implementar consulta por fornecedor consultarPorFornecedor(fkFornecedor){
     //     const sql = 'SELECT * FROM tb_contato WHERE fk_fornecedor = $1';
     //     return executarQuery(sql,[fkFornecedor]);
     // }
 
-    // excluirPorId(id){
-    //     const sql = 'DELETE FROM tb_contato WHERE id = $1'
-    //     return executarQuery(sql,[id]);
-    // }
 }
 
 module.exports.EntradaRepository = new EntradaRepository();

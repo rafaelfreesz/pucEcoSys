@@ -73,6 +73,17 @@ class EntradaController {
 
     }
 
+    async excluirPorId(request, response, next) {
+
+        try{
+            await EntradaRepository.excluirPorId(request.params.id)
+            response.redirect('/entradas')
+        }catch(e){
+            response.json(e)
+        }
+
+    }
+
     // TODO Implementar async consultarPorFornecedor(request, response, next){
     //     try{
     //         let contatos = (await ContatoRepository.consultarPorFornecedor(request.params['id_fornecedor']));
@@ -85,21 +96,7 @@ class EntradaController {
         
     // };
 
-
-
-
     
-
-    // async excluirPorId(request, response, next) {
-
-    //     try{
-    //         await ContatoRepository.excluirPorId(request.params.id)
-    //         response.redirect('/contatos')
-    //     }catch(e){
-    //         response.json(e)
-    //     }
-
-    // }
 }
 
 //Padrão Singleton
