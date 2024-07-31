@@ -56,6 +56,23 @@ class EntradaController {
     
     };
 
+    async alterar(request, response, next) {
+
+        
+        try{
+            const id = request.params.id;
+            const entrada = request.body;
+            await EntradaRepository.alterar(id,entrada); 
+
+            response.redirect('/entradas')
+
+        
+        }catch(e){
+            response.json(e)
+        }
+
+    }
+
     // TODO Implementar async consultarPorFornecedor(request, response, next){
     //     try{
     //         let contatos = (await ContatoRepository.consultarPorFornecedor(request.params['id_fornecedor']));
@@ -69,22 +86,7 @@ class EntradaController {
     // };
 
 
-    // async alterar(request, response, next) {
 
-        
-    //     try{
-    //         const id = request.params.id;
-    //         const contato = request.body;
-    //         await ContatoRepository.alterar(id,contato); 
-
-    //         response.redirect('/contatos')
-
-        
-    //     }catch(e){
-    //         response.json(e)
-    //     }
-
-    // }
 
     
 

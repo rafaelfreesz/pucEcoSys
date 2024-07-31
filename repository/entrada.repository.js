@@ -23,31 +23,32 @@ class EntradaRepository{
             ])
         }
 
+        async alterar(id,entrada){
+    
+            const keys = ['dt_hr_entrada','nu_nota_fiscal','fk_fornecedor'];
+            const fields = [];
+        
+            keys.forEach(key => {
+                if(entrada[key]) fields.push(key);
+            })
+    
+            for (let i = 0; i < fields.length; i++){
+    
+                const sql = `UPDATE tb_entrada SET ${fields[i]} = ($1) WHERE id = ($2)`;
+        
+                if(i === fields.length - 1){
+                    return executarQuery(sql,[entrada[fields[i]],id]);
+                }else{
+                    await executarQuery(sql,[entrada[fields[i]],id]);
+                }
+            
+            }
+    
+        }
+
     // TODO Implementar consulta por fornecedor consultarPorFornecedor(fkFornecedor){
     //     const sql = 'SELECT * FROM tb_contato WHERE fk_fornecedor = $1';
     //     return executarQuery(sql,[fkFornecedor]);
-    // }
-    // async alterar(id,contato){
-
-    //     const keys = ['tipo','valor'];
-    //     const fields = [];
-    
-    //     keys.forEach(key => {
-    //         if(contato[key]) fields.push(key);
-    //     })
-
-    //     for (let i = 0; i < fields.length; i++){
-
-    //         const sql = `UPDATE tb_contato SET ${fields[i]} = ($1) WHERE id = ($2)`;
-    
-    //         if(i === fields.length - 1){
-    //             return executarQuery(sql,[contato[fields[i]],id]);
-    //         }else{
-    //             await executarQuery(sql,[contato[fields[i]],id]);
-    //         }
-        
-    //     }
-
     // }
 
     // excluirPorId(id){
