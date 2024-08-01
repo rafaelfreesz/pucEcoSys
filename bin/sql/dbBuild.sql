@@ -41,6 +41,8 @@ CREATE TABLE tb_entrada(
 CREATE TABLE tb_item_entrada(
     fk_produto INT,
     fk_entrada INT,
+    quantidade INT,
+    preco_compra DECIMAL,
     FOREIGN KEY (fk_produto) REFERENCES tb_produto(id),
     FOREIGN KEY (fk_entrada) REFERENCES tb_entrada(id)
 );
@@ -93,12 +95,12 @@ VALUES
   ('2024-07-08', '123456', 1),
   ('2024-07-08', '654321', 2);
 
-INSERT INTO tb_item_entrada (fk_produto, fk_entrada)
+INSERT INTO tb_item_entrada (fk_produto, fk_entrada, quantidade, preco_compra)
 VALUES
-  (1, 1),
-  (2, 1),
-  (3, 2),
-  (4, 2);
+  (1, 1, 5, 0.89),
+  (2, 1, 10, 2.00),
+  (3, 2, 18, 5.00),
+  (4, 2, 7, 3.59);
 
 
 -- FOREIGN KEY (cod_produto) REFERENCES produtos(cod_produtos)
