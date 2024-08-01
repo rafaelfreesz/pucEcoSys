@@ -39,8 +39,9 @@ CREATE TABLE tb_entrada(
 );
 
 CREATE TABLE tb_item_entrada(
-    fk_produto INT,
-    fk_entrada INT,
+    id SERIAL PRIMARY KEY,
+    fk_produto INT, --Incluir NOT NULL
+    fk_entrada INT, --Incluir NOT NULL
     quantidade INT,
     preco_compra DECIMAL,
     FOREIGN KEY (fk_produto) REFERENCES tb_produto(id),

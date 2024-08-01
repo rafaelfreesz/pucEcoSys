@@ -1,5 +1,6 @@
 const {EntradaRepository} = require('../repository/entrada.repository')
 const {FornecedorController} = require('./fornecedor.controller');
+const {ItemEntradaController} = require('./item_entrada.controller');
 
 class EntradaController {
 
@@ -10,7 +11,10 @@ class EntradaController {
 
             for await(const entrada of entradas){
                 const fornecedor = await FornecedorController.getPorId(entrada.fk_fornecedor);
+                const items = await ItemEntradaController.getPorEntrada(entrada.id);
+
                 if(fornecedor) {entrada.fornecedor = fornecedor}
+                if(items) {entrada.items = items}
             }
             
             response.json(entradas)

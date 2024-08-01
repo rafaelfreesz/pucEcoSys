@@ -7,6 +7,7 @@ class ProdutoController {
         ProdutoRepository.consultarTodos()
             .then(retorno => {response.json(retorno)})
             .catch(erro => {response.json(erro)})
+            //Todo implementar lógica que traz as entradas
 
     }
 
@@ -15,6 +16,7 @@ class ProdutoController {
         ProdutoRepository.consultarPorId(request.params.id)
             .then(retorno => {response.json(retorno)})
             .catch(erro => {response.json(erro)})
+            //Todo implementar lógica que traz as entradas
 
     }
 
@@ -40,6 +42,14 @@ class ProdutoController {
             .then(() => response.redirect('/produtos'))
             .catch((erro) => {response.json(erro)})  
         
+    }
+
+    //Funções Auxiliares
+    async getPorId(id) {
+
+        const produto = (await ProdutoRepository.consultarPorId(id))[0]
+       
+        return produto
     }
 
 }
