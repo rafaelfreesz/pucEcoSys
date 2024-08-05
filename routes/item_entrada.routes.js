@@ -5,6 +5,8 @@ const router = Router();
 
 router.get('/', ItemEntradaController.consultarTodos);
 router.get('/:id', ItemEntradaController.consultarPorId);
+router.get('/:id', ItemEntradaController.consultarPorId);
+router.get('/por_entrada/:fk_entrada', ItemEntradaController.consultarPorEntrada);
 // router.post('/', ItemEntradaController.incluir)
 // router.put('/:id', ItemEntradaController.alterar);
 // router.delete('/:id',ItemEntradaController.excluirPorId)

@@ -16,10 +16,10 @@ class ItemEntradaRepository{
         return executarQuery(sql,[fk_entrada]);
     }
 
-    consultarPorProduto(fk_produto){
-        const sql = 'SELECT * FROM tb_item_entrada WHERE fk_produto = $1';
-        return executarQuery(sql,[fk_produto]);
-    }
+    // consultarPorProduto(fk_produto){ Ainda nao eh necessario
+    //     const sql = 'SELECT * FROM tb_item_entrada WHERE fk_produto = $1';
+    //     return executarQuery(sql,[fk_produto]);
+    // }
 
     
     incluir(item_entrada){
