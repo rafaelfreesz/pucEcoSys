@@ -96,16 +96,16 @@ class ItemEntradaController {
 
     }
 
-    // async excluirPorId(request, response, next) {
+    async excluirPorId(request, response, next) {
 
-    //     try{
-    //         await EntradaRepository.excluirPorId(request.params.id)
-    //         response.redirect('/entradas')
-    //     }catch(e){
-    //         response.json(e)
-    //     }
+        try{
+            await ItemEntradaRepository.excluirPorId(request.params.id)
+            response.redirect('/item_entrada')
+        }catch(e){
+            response.json(e)
+        }
 
-    // }
+    }
 
     //Funções Auxiliares
     async getPorEntrada(fk_entrada){

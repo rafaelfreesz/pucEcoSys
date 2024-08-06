@@ -52,10 +52,11 @@ class ItemEntradaRepository{
 
     }
 
-    // excluirPorId(id){
-    //     const sql = 'DELETE FROM tb_entrada WHERE id = $1'
-    //     return executarQuery(sql,[id]);
-    // }
+    excluirPorId(id){
+        const sql = 'DELETE FROM tb_item_entrada WHERE id = $1'
+        return executarQuery(sql,[id]);
+    }
+
     // TODO Implementar consulta por fornecedor consultarPorFornecedor(fkFornecedor){
     //     const sql = 'SELECT * FROM tb_contato WHERE fk_fornecedor = $1';
     //     return executarQuery(sql,[fkFornecedor]);

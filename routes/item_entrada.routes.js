@@ -9,7 +9,7 @@ router.get('/:id', ItemEntradaController.consultarPorId);
 router.get('/por_entrada/:fk_entrada', ItemEntradaController.consultarPorEntrada);
 router.post('/', ItemEntradaController.incluir)
 router.put('/:id', ItemEntradaController.alterar);
-// router.delete('/:id',ItemEntradaController.excluirPorId)
+router.delete('/:id',ItemEntradaController.excluirPorId)
 
 //TODO REMOVER ESSAS ROTAS (NÃO PRECISA DELAS)
 module.exports=router;
