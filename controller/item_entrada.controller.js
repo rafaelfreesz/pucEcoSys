@@ -66,18 +66,18 @@ class ItemEntradaController {
         
     };
 
-    // async incluir(request, response, next) {
-    //     try{
-    //         await EntradaRepository.incluir(request.body)
-    //         response.redirect('/entradas')
+    async incluir(request, response, next) {
+        try{
+            await ItemEntradaRepository.incluir(request.body)
+            response.redirect('/item_entrada')
 
-    //     }catch(e){
-    //         console.log(e)
-    //         e.erro=true;
-    //         response.json(e)
-    //     }
+        }catch(e){
+            console.log(e)
+            e.erro=true;
+            response.json(e)
+        }
     
-    // };
+    };
 
     // async alterar(request, response, next) {
 

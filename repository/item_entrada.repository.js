@@ -16,14 +16,9 @@ class ItemEntradaRepository{
         return executarQuery(sql,[fk_entrada]);
     }
 
-    // consultarPorProduto(fk_produto){ Ainda nao eh necessario
-    //     const sql = 'SELECT * FROM tb_item_entrada WHERE fk_produto = $1';
-    //     return executarQuery(sql,[fk_produto]);
-    // }
-
     
     incluir(item_entrada){
-        const sql = 'INSERT INTO tb_item_entrada(fk_produto, fk_entrada, quantidade, preco_compra) VALUES ($1,$2,$3)';
+        const sql = 'INSERT INTO tb_item_entrada(fk_produto, fk_entrada, quantidade, preco_compra) VALUES ($1,$2,$3,$4)';
         
         return executarQuery(sql,
             [
@@ -66,6 +61,11 @@ class ItemEntradaRepository{
     //     return executarQuery(sql,[fkFornecedor]);
     // }
 
+
+    // consultarPorProduto(fk_produto){ Ainda nao eh necessario
+    //     const sql = 'SELECT * FROM tb_item_entrada WHERE fk_produto = $1';
+    //     return executarQuery(sql,[fk_produto]);
+    // }
 }
 
 module.exports.ItemEntradaRepository = new ItemEntradaRepository();
