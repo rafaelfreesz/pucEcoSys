@@ -79,22 +79,22 @@ class ItemEntradaController {
     
     };
 
-    // async alterar(request, response, next) {
+    async alterar(request, response, next) {
 
         
-    //     try{
-    //         const id = request.params.id;
-    //         const entrada = request.body;
-    //         await EntradaRepository.alterar(id,entrada); 
+        try{
+            const id = request.params.id;
+            const item_entrada = request.body;
+            await ItemEntradaRepository.alterar(id,item_entrada); 
 
-    //         response.redirect('/entradas')
+            response.redirect('/item_entrada')
 
         
-    //     }catch(e){
-    //         response.json(e)
-    //     }
+        }catch(e){
+            response.json(e)
+        }
 
-    // }
+    }
 
     // async excluirPorId(request, response, next) {
 
