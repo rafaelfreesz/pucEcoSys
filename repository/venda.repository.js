@@ -7,10 +7,10 @@ class VendaRepository{
         return executarQuery(sql);
     }
 
-    // consultarPorId(id){
-    //     const sql = 'SELECT * FROM tb_contato WHERE id = $1';
-    //     return executarQuery(sql,[id]);
-    // }
+    consultarPorId(id){
+        const sql = 'SELECT * FROM tb_venda WHERE id = $1';
+        return executarQuery(sql,[id]);
+    }
 
     // consultarPorFornecedor(fkFornecedor){
     //     const sql = 'SELECT * FROM tb_contato WHERE fk_fornecedor = $1';

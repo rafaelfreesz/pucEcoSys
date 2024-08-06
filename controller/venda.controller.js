@@ -21,22 +21,21 @@ class VendaController {
         
     };
     
-    // async consultarPorId(request, response, next){
+    async consultarPorId(request, response, next){
 
-    //     try{
-    //         let contato = (await ContatoRepository.consultarPorId(request.params.id))[0];
-    //         if(contato && request.body['preenche_fornecedor']){
-    //             contato.fornecedor= (await FornecedorRepository.consultarPorId(contato.fk_fornecedor))[0];
-    //         }
+        try{
+            let venda = (await VendaRepository.consultarPorId(request.params.id))[0];
+            
+            // TODO incluir items da venda
 
-    //         response.json(contato)
+            response.json(venda)
 
-    //     }catch(e){
-    //         e.erro=true;
-    //         response.json(e);
-    //     }
+        }catch(e){
+            e.erro=true;
+            response.json(e);
+        }
         
-    // };
+    };
 
     // async consultarPorFornecedor(request, response, next){
     //     try{
