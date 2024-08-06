@@ -4,7 +4,7 @@ const router = Router();
 
 
 
-// router.get('/', ContatoController.consultarTodos);
+router.get('/', VendaController.consultarTodos);
 // router.get('/:id', ContatoController.consultarPorId);
 // router.get('/fornecedor/:id_fornecedor', ContatoController.consultarPorFornecedor);
 // router.post('/', ContatoController.incluir)

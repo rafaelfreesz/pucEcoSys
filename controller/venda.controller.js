@@ -4,31 +4,22 @@ const {VendaRepository} = require('../repository/venda.repository')
 
 class VendaController {
 
-    // async consultarTodos(request, response, next){
-    //     try{
+    async consultarTodos(request, response, next){
+        try{
             
-    //         const contatos = await ContatoRepository.consultarTodos();
+            const vendas = await VendaRepository.consultarTodos();
             
-    //         if(request.body['preenche_fornecedor']){
-    //             contatos.forEach((contato,index) => {
-    //                 FornecedorRepository.consultarPorId(contato.fk_fornecedor)
-    //                 .then(fornecedor => {
-    //                         if(fornecedor[0]) {  contato.fornecedor = fornecedor[0]; };
-    //                         if(index === contatos.length-1) { response.json(contatos) }
-    //                     })
-                        
-    //             })
-    //         }else{
-    //             response.json(contatos)
-    //         }
+            // TODO incluir items da venda
+
+            response.json(vendas)
 
             
-    //     }catch(e){
-    //         e.erro=true;
-    //         response.json(e);
-    //     }
+        }catch(e){
+            e.erro=true;
+            response.json(e);
+        }
         
-    // };
+    };
     
     // async consultarPorId(request, response, next){
 

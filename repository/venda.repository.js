@@ -2,10 +2,11 @@ const {pool, executarQuery} = require('../db');
 
 class VendaRepository{
 
-    // consultarTodos(){
-    //     const sql = 'SELECT * FROM tb_contato ORDER BY id ASC';
-    //     return executarQuery(sql);
-    // }
+    consultarTodos(){
+        const sql = 'SELECT * FROM tb_venda ORDER BY id ASC';
+        return executarQuery(sql);
+    }
+
     // consultarPorId(id){
     //     const sql = 'SELECT * FROM tb_contato WHERE id = $1';
     //     return executarQuery(sql,[id]);

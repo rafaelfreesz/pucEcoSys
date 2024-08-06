@@ -103,5 +103,11 @@ VALUES
   (3, 2, 18, 5.00),
   (4, 2, 7, 3.59);
 
+INSERT INTO tb_venda DEFAULT VALUES;
+INSERT INTO tb_venda DEFAULT VALUES;
+INSERT INTO tb_venda DEFAULT VALUES;
+INSERT INTO tb_venda DEFAULT VALUES;
+
+
 
 -- FOREIGN KEY (cod_produto) REFERENCES produtos(cod_produtos)
