@@ -8,6 +8,6 @@ router.get('/', VendaController.consultarTodos);
 router.get('/:id', VendaController.consultarPorId);
 router.post('/', VendaController.incluir)
 router.put('/:id', VendaController.alterar);
-// router.delete('/:id',ContatoController.excluirPorId)
+router.delete('/:id',VendaController.excluirPorId)
 
 module.exports=router;

@@ -44,10 +44,10 @@ class VendaRepository{
 
     }
 
-    // excluirPorId(id){
-    //     const sql = 'DELETE FROM tb_contato WHERE id = $1'
-    //     return executarQuery(sql,[id]);
-    // }
+    excluirPorId(id){
+        const sql = 'DELETE FROM tb_venda WHERE id = $1'
+        return executarQuery(sql,[id]);
+    }
 }
 
 module.exports.VendaRepository = new VendaRepository();

@@ -67,18 +67,16 @@ class VendaController {
 
     }
 
-    
+    async excluirPorId(request, response, next) {
 
-    // async excluirPorId(request, response, next) {
+        try{
+            await VendaRepository.excluirPorId(request.params.id)
+            response.redirect('/vendas')
+        }catch(e){
+            response.json(e)
+        }
 
-    //     try{
-    //         await ContatoRepository.excluirPorId(request.params.id)
-    //         response.redirect('/contatos')
-    //     }catch(e){
-    //         response.json(e)
-    //     }
-
-    // }
+    }
 }
 
 //Padrão Singleton
