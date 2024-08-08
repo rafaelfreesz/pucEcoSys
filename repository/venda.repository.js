@@ -21,28 +21,28 @@ class VendaRepository{
             ])
     }
 
-    // async alterar(id,contato){
+    async alterar(id,contato){
 
-    //     const keys = ['tipo','valor'];
-    //     const fields = [];
+        const keys = ['dt_hr_venda'];
+        const fields = [];
     
-    //     keys.forEach(key => {
-    //         if(contato[key]) fields.push(key);
-    //     })
+        keys.forEach(key => {
+            if(contato[key]) fields.push(key);
+        })
 
-    //     for (let i = 0; i < fields.length; i++){
+        for (let i = 0; i < fields.length; i++){
 
-    //         const sql = `UPDATE tb_contato SET ${fields[i]} = ($1) WHERE id = ($2)`;
+            const sql = `UPDATE tb_venda SET ${fields[i]} = ($1) WHERE id = ($2)`;
     
-    //         if(i === fields.length - 1){
-    //             return executarQuery(sql,[contato[fields[i]],id]);
-    //         }else{
-    //             await executarQuery(sql,[contato[fields[i]],id]);
-    //         }
+            if(i === fields.length - 1){
+                return executarQuery(sql,[contato[fields[i]],id]);
+            }else{
+                await executarQuery(sql,[contato[fields[i]],id]);
+            }
         
-    //     }
+        }
 
-    // }
+    }
 
     // excluirPorId(id){
     //     const sql = 'DELETE FROM tb_contato WHERE id = $1'

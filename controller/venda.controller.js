@@ -38,7 +38,7 @@ class VendaController {
     };
 
     async incluir(request, response, next) {
-        
+
         try{
             await VendaRepository.incluir(request.body)
             console.log(request.body)
@@ -50,22 +50,22 @@ class VendaController {
     
     };
 
-    // async alterar(request, response, next) {
+    async alterar(request, response, next) {
 
         
-    //     try{
-    //         const id = request.params.id;
-    //         const contato = request.body;
-    //         await ContatoRepository.alterar(id,contato); 
+        try{
+            const id = request.params.id;
+            const venda = request.body;
+            await VendaRepository.alterar(id,venda); 
 
-    //         response.redirect('/contatos')
+            response.redirect('/vendas')
 
         
-    //     }catch(e){
-    //         response.json(e)
-    //     }
+        }catch(e){
+            response.json(e)
+        }
 
-    // }
+    }
 
     
 
