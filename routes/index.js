@@ -13,7 +13,7 @@ router.use('/fornecedores',fornecedor);
 router.use('/contatos',contato);
 router.use('/entradas',entrada);
 router.use('/item_entrada',item_entrada);
-router.use('/venda',venda);
+router.use('/vendas',venda);
 
 router.get('/', (request, response) =>{
     console.log("Hello World!")

@@ -37,28 +37,18 @@ class VendaController {
         
     };
 
-    // async consultarPorFornecedor(request, response, next){
-    //     try{
-    //         let contatos = (await ContatoRepository.consultarPorFornecedor(request.params['id_fornecedor']));
-    //         response.json(contatos)
-
-    //     }catch(e){
-    //         e.erro=true;
-    //         response.json(e);
-    //     }
+    async incluir(request, response, next) {
         
-    // };
+        try{
+            await VendaRepository.incluir(request.body)
+            console.log(request.body)
+            response.redirect('/vendas')
 
-    // async incluir(request, response, next) {
-    //     try{
-    //         await ContatoRepository.incluir(request.body)
-    //         response.redirect('/contatos')
-
-    //     }catch(e){
-    //         response.json(e)
-    //     }
+        }catch(e){
+            response.json(e)
+        }
     
-    // };
+    };
 
     // async alterar(request, response, next) {
 

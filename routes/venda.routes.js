@@ -6,8 +6,7 @@ const router = Router();
 
 router.get('/', VendaController.consultarTodos);
 router.get('/:id', VendaController.consultarPorId);
-// router.get('/fornecedor/:id_fornecedor', ContatoController.consultarPorFornecedor);
-// router.post('/', ContatoController.incluir)
+router.post('/', VendaController.incluir)
 // router.put('/:id', ContatoController.alterar);
 // router.delete('/:id',ContatoController.excluirPorId)
 

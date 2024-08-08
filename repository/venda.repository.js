@@ -12,21 +12,14 @@ class VendaRepository{
         return executarQuery(sql,[id]);
     }
 
-    // consultarPorFornecedor(fkFornecedor){
-    //     const sql = 'SELECT * FROM tb_contato WHERE fk_fornecedor = $1';
-    //     return executarQuery(sql,[fkFornecedor]);
-    // }
-
-    // incluir(contato){
-    //     const sql = 'INSERT INTO tb_contato(tipo,valor,fk_fornecedor) VALUES ($1,$2,$3)';
+    incluir(venda){
+        const sql = 'INSERT INTO tb_venda(dt_hr_venda) VALUES ($1)';
         
-    //     return executarQuery(sql,
-    //         [
-    //             contato.tipo,
-    //             contato.valor,
-    //             contato.fk_fornecedor
-    //         ])
-    // }
+        return executarQuery(sql,
+            [
+                venda.dt_hr_venda
+            ])
+    }
 
     // async alterar(id,contato){
 
