@@ -1,49 +1,67 @@
-const {EntradaRepository} = require('../repository/entrada.repository')
-const {ItemEntradaRepository} = require('../repository/item_entrada.repository')
+const {ItemVendaRepository} = require('../repository/item_venda.repository')
 const {ProdutoController} = require('./produto.controller');
 
 class ItemVendaController {
 
-    // async consultarTodos(request, response, next){
-    //     try{
+    async consultarTodos(request, response, next){
+        try{
+            const items_venda = await ItemVendaRepository.consultarTodos();
             
-    //         const items_entrada = await ItemEntradaRepository.consultarTodos();
+            for await(const item_venda of items_venda){
+                const produto = await ProdutoController.getPorId(item_venda.fk_produto);
+                if(produto) {item_venda.produto = produto}
+                //TODO Implementar a lógica para receber a venda (se for o caso)
+            }
             
-    //         for await(const item_entrada of items_entrada){
-    //             const produto = await ProdutoController.getPorId(item_entrada.fk_produto);
-    //             if(produto) {item_entrada.produto = produto}
-    //             //TODO Implementar a lógica para receber a entrada (se for o caso)
-    //         }
+            response.json(items_venda)
             
-    //         response.json(items_entrada)
-            
-    //     }catch(e){
-    //         console.log(e)
-    //         e.erro=true;
-    //         response.json(e);
-    //     }
+        }catch(e){
+            console.log(e)
+            e.erro=true;
+            response.json(e);
+        }
         
-    // };
+    };
        
-    // async consultarPorId(request, response, next){
+    async consultarPorId(request, response, next){
 
-    //     try{
-    //         const item_entrada = (await ItemEntradaRepository.consultarPorId(request.params.id))[0];
+        try{
+            const item_venda = (await ItemVendaRepository.consultarPorId(request.params.id))[0];
 
-    //         if(item_entrada) {
-    //             const produto = await ProdutoController.getPorId(item_entrada.fk_produto);
-    //             if(produto) {item_entrada.produto = produto}
-    //         }
+            if(item_venda) {
+                const produto = await ProdutoController.getPorId(item_venda.fk_produto);
+                if(produto) {item_venda.produto = produto}
+            }
             
-    //         response.json(item_entrada)
+            response.json(item_venda)
 
-    //     }catch(e){
-    //         console.log(e)
-    //         e.erro=true;
-    //         response.json(e);
-    //     }
+        }catch(e){
+            console.log(e)
+            e.erro=true;
+            response.json(e);
+        }
         
-    // };
+    };
+
+    async consultarPorVenda(request, response, next){
+
+        try{
+            const items_venda = await ItemVendaRepository.consultarPorVenda(request.params.fk_venda);
+
+            for await(const item_venda of items_venda){
+                const produto = await ProdutoController.getPorId(item_venda.fk_produto);
+                if(produto) {item_venda.produto = produto}
+            }
+            
+            response.json(items_venda)
+
+        }catch(e){
+            console.log(e)
+            e.erro=true;
+            response.json(e);
+        }
+        
+    };
 
     // async consultarPorEntrada(request, response, next){
 

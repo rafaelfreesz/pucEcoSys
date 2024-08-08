@@ -15,7 +15,7 @@ router.use('/contatos',contato);
 router.use('/entradas',entrada);
 router.use('/vendas',venda);
 router.use('/item_entrada',item_entrada);
-router.use('/venda',item_venda);
+router.use('/item_venda',item_venda);
 
 router.get('/', (request, response) =>{
     console.log("Hello World!")

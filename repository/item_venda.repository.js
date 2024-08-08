@@ -2,19 +2,20 @@ const {pool, executarQuery} = require('../db');
 
 class ItemVendaRepository{
 
-    // consultarTodos(){
-    //     const sql = 'SELECT * FROM tb_item_entrada ORDER BY id ASC';
-    //     return executarQuery(sql);
-    // }
-    // consultarPorId(id){
-    //     const sql = 'SELECT * FROM tb_item_entrada WHERE id = $1';
-    //     return executarQuery(sql,[id]);
-    // }
+    consultarTodos(){
+        const sql = 'SELECT * FROM tb_item_venda ORDER BY id ASC';
+        return executarQuery(sql);
+    }
 
-    // consultarPorEntrada(fk_entrada){
-    //     const sql = 'SELECT * FROM tb_item_entrada WHERE fk_entrada = $1';
-    //     return executarQuery(sql,[fk_entrada]);
-    // }
+    consultarPorId(id){
+        const sql = 'SELECT * FROM tb_item_venda WHERE id = $1';
+        return executarQuery(sql,[id]);
+    }
+
+    consultarPorVenda(fk_venda){
+        const sql = 'SELECT * FROM tb_item_venda WHERE fk_venda = $1';
+        return executarQuery(sql,[fk_venda]);
+    }
 
     
     // incluir(item_entrada){

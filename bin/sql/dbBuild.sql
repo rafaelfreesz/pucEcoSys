@@ -54,8 +54,10 @@ CREATE TABLE tb_venda(
 );
 
 CREATE TABLE tb_item_venda(
-    fk_produto INT,
-    fk_venda INT,
+    id SERIAL PRIMARY KEY,
+    fk_produto INT, --Incluir NOT NULL
+    fk_venda INT, --Incluir NOT NULL
+    quantidade INT,
     FOREIGN KEY (fk_produto) REFERENCES tb_produto(id),
     FOREIGN KEY (fk_venda) REFERENCES tb_venda(id)
 );
@@ -107,6 +109,16 @@ INSERT INTO tb_venda DEFAULT VALUES;
 INSERT INTO tb_venda DEFAULT VALUES;
 INSERT INTO tb_venda DEFAULT VALUES;
 INSERT INTO tb_venda DEFAULT VALUES;
+
+INSERT INTO tb_item_venda (fk_produto, fk_venda, quantidade)
+VALUES
+  (1, 1, 5),
+  (2, 1, 4),
+  (3, 1, 3),
+  (4, 2, 1),
+  (5, 2, 1),
+  (6, 3, 2),
+  (7, 4, 3);
 
 
 
