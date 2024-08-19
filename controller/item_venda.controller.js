@@ -63,39 +63,19 @@ class ItemVendaController {
         
     };
 
-    // async consultarPorEntrada(request, response, next){
-
-    //     try{
-    //         const items_entrada = await ItemEntradaRepository.consultarPorEntrada(request.params.fk_entrada);
-
-    //         for await(const item_entrada of items_entrada){
-    //             const produto = await ProdutoController.getPorId(item_entrada.fk_produto);
-    //             if(produto) {item_entrada.produto = produto}
-    //             //TODO Implementar a lógica para receber a entrada (se for o caso)
-    //         }
+    async incluir(request, response, next) {
+        try{
             
-    //         response.json(items_entrada)
+            await ItemVendaRepository.incluir(request.body)
+            response.redirect('/item_venda')
 
-    //     }catch(e){
-    //         console.log(e)
-    //         e.erro=true;
-    //         response.json(e);
-    //     }
-        
-    // };
-
-    // async incluir(request, response, next) {
-    //     try{
-    //         await ItemEntradaRepository.incluir(request.body)
-    //         response.redirect('/item_entrada')
-
-    //     }catch(e){
-    //         console.log(e)
-    //         e.erro=true;
-    //         response.json(e)
-    //     }
+        }catch(e){
+            console.log(e)
+            e.erro=true;
+            response.json(e)
+        }
     
-    // };
+    };
 
     // async alterar(request, response, next) {
 

@@ -18,17 +18,16 @@ class ItemVendaRepository{
     }
 
     
-    // incluir(item_entrada){
-    //     const sql = 'INSERT INTO tb_item_entrada(fk_produto, fk_entrada, quantidade, preco_compra) VALUES ($1,$2,$3,$4)';
+    incluir(item_venda){
+        const sql = 'INSERT INTO tb_item_venda(fk_produto, fk_venda, quantidade) VALUES ($1,$2,$3)';
         
-    //     return executarQuery(sql,
-    //         [
-    //             item_entrada.fk_produto,
-    //             item_entrada.fk_entrada,
-    //             item_entrada.quantidade,
-    //             item_entrada.preco_compra
-    //         ])
-    // }
+        return executarQuery(sql,
+            [
+                item_venda.fk_produto,
+                item_venda.fk_venda,
+                item_venda.quantidade
+            ])
+    }
 
     // async alterar(id,entrada){
 
