@@ -65,7 +65,7 @@ class ItemVendaController {
 
     async incluir(request, response, next) {
         try{
-            
+
             await ItemVendaRepository.incluir(request.body)
             response.redirect('/item_venda')
 
@@ -77,22 +77,22 @@ class ItemVendaController {
     
     };
 
-    // async alterar(request, response, next) {
+    async alterar(request, response, next) {
 
         
-    //     try{
-    //         const id = request.params.id;
-    //         const item_entrada = request.body;
-    //         await ItemEntradaRepository.alterar(id,item_entrada); 
+        try{
+            const id = request.params.id;
+            const item_venda = request.body;
+            await ItemVendaRepository.alterar(id,item_venda); 
 
-    //         response.redirect('/item_entrada')
+            response.redirect('/item_venda')
 
         
-    //     }catch(e){
-    //         response.json(e)
-    //     }
+        }catch(e){
+            response.json(e)
+        }
 
-    // }
+    }
 
     // async excluirPorId(request, response, next) {
 

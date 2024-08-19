@@ -29,28 +29,28 @@ class ItemVendaRepository{
             ])
     }
 
-    // async alterar(id,entrada){
+    async alterar(id,entrada){
 
-    //     const keys = ['fk_produto', 'fk_entrada', 'quantidade', 'preco_compra'];
-    //     const fields = [];
+        const keys = ['fk_produto', 'fk_venda', 'quantidade'];
+        const fields = [];
     
-    //     keys.forEach(key => {
-    //         if(entrada[key]) fields.push(key);
-    //     })
+        keys.forEach(key => {
+            if(entrada[key]) fields.push(key);
+        })
 
-    //     for (let i = 0; i < fields.length; i++){
+        for (let i = 0; i < fields.length; i++){
 
-    //         const sql = `UPDATE tb_item_entrada SET ${fields[i]} = ($1) WHERE id = ($2)`;
+            const sql = `UPDATE tb_item_venda SET ${fields[i]} = ($1) WHERE id = ($2)`;
     
-    //         if(i === fields.length - 1){
-    //             return executarQuery(sql,[entrada[fields[i]],id]);
-    //         }else{
-    //             await executarQuery(sql,[entrada[fields[i]],id]);
-    //         }
+            if(i === fields.length - 1){
+                return executarQuery(sql,[entrada[fields[i]],id]);
+            }else{
+                await executarQuery(sql,[entrada[fields[i]],id]);
+            }
         
-    //     }
+        }
 
-    // }
+    }
 
     // excluirPorId(id){
     //     const sql = 'DELETE FROM tb_item_entrada WHERE id = $1'
