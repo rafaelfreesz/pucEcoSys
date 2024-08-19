@@ -52,21 +52,11 @@ class ItemVendaRepository{
 
     }
 
-    // excluirPorId(id){
-    //     const sql = 'DELETE FROM tb_item_entrada WHERE id = $1'
-    //     return executarQuery(sql,[id]);
-    // }
-
-    // TODO Implementar consulta por fornecedor consultarPorFornecedor(fkFornecedor){
-    //     const sql = 'SELECT * FROM tb_contato WHERE fk_fornecedor = $1';
-    //     return executarQuery(sql,[fkFornecedor]);
-    // }
-
-
-    // consultarPorProduto(fk_produto){ Ainda nao eh necessario
-    //     const sql = 'SELECT * FROM tb_item_entrada WHERE fk_produto = $1';
-    //     return executarQuery(sql,[fk_produto]);
-    // }
+    excluirPorId(id){
+        const sql = 'DELETE FROM tb_item_venda WHERE id = $1'
+        return executarQuery(sql,[id]);
+    }
+    
 }
 
 module.exports.ItemVendaRepository = new ItemVendaRepository();
