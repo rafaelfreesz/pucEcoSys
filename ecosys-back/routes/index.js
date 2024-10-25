@@ -18,6 +18,7 @@ router.use('/item_entrada',item_entrada);
 router.use('/item_venda',item_venda);
 
 router.get('/', (request, response) =>{
+    response.json()
     console.log("Hello World!")
 })
 
