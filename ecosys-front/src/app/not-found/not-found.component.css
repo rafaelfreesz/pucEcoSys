@@ -1,0 +1,14 @@
+.conteudo{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    margin-top: 10%;
+    
+}
+.imagem{
+    width: 100px;
+}
+.texto{
+    padding-top: 30px;
+    color: #606060
+}
