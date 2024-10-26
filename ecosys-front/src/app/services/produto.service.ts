@@ -10,11 +10,18 @@ export class ProdutoService{
     private todosProdutos: Produto[] = []
 
     constructor(private httpService: HttpService){
-        this.getTodosProdutos();
+        this.buscarTodosProdutos();
     }
 
-    private getTodosProdutos(){
+    buscarTodosProdutos(): void{
         this.httpService.getTodosProdutos().subscribe( todosProdutos => {
+            this.todosProdutos = todosProdutos
+            this.produtosAlterados.next(this.todosProdutos.slice());
+        })
+    }
+
+    deleteProduto(id: number): void{
+        this.httpService.deleteProduto(id).subscribe( todosProdutos => {
             this.todosProdutos = todosProdutos
             this.produtosAlterados.next(this.todosProdutos.slice());
         })

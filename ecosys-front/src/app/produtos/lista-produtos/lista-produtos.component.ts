@@ -28,8 +28,8 @@ export class ListaProdutosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  excluirProduto(i: string): void{
-
+  excluirProduto(id: number): void{
+    this.produtoService.deleteProduto(id)
   }
 
 }
