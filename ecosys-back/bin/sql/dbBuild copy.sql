@@ -44,8 +44,8 @@ CREATE TABLE tb_item_entrada(
     fk_entrada INT, --Incluir NOT NULL
     quantidade INT,
     preco_compra DECIMAL,
-    FOREIGN KEY (fk_produto) REFERENCES tb_produto(id) ON DELETE CASCADE,
-    FOREIGN KEY (fk_entrada) REFERENCES tb_entrada(id) ON DELETE CASCADE
+    FOREIGN KEY (fk_produto) REFERENCES tb_produto(id),
+    FOREIGN KEY (fk_entrada) REFERENCES tb_entrada(id)
 );
 
 CREATE TABLE tb_venda(
@@ -58,8 +58,8 @@ CREATE TABLE tb_item_venda(
     fk_produto INT, --Incluir NOT NULL
     fk_venda INT, --Incluir NOT NULL
     quantidade INT,
-    FOREIGN KEY (fk_produto) REFERENCES tb_produto(id) ON DELETE CASCADE,
-    FOREIGN KEY (fk_venda) REFERENCES tb_venda(id) ON DELETE CASCADE
+    FOREIGN KEY (fk_produto) REFERENCES tb_produto(id),
+    FOREIGN KEY (fk_venda) REFERENCES tb_venda(id)
 );
 
 INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque)
