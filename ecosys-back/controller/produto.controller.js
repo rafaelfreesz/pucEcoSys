@@ -36,11 +36,20 @@ class ProdutoController {
         
     }
 
-    excluirPorId(request, response, next) {
+    async getTodosProdutos(){
+        return 
+    }
 
-        ProdutoRepository.excluirPorId(request.params.id)
-            .then(() => response.redirect('/produtos'))
-            .catch((erro) => {response.json(erro)})  
+    async excluirPorId(request, response, next) {
+        try{
+            const k = await ProdutoRepository.excluirPorId(request.params.id)
+            const produtos = await ProdutoRepository.consultarTodos()
+            response.json(produtos)
+
+        }catch(e){
+            console.log(e)
+            response.json(e)
+        }
         
     }
 
@@ -51,6 +60,8 @@ class ProdutoController {
        
         return produto
     }
+
+    
 
 }
 
