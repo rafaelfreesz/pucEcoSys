@@ -1,1 +1,15 @@
-<p>produtos works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md">
+          <button class="btn btn-success botao-controle" >
+          <!-- (click)="isCriando = true"> -->
+            <i class="bi bi-file-earmark-plus-fill"></i> Novo
+          </button>
+          <!-- <app-editar-produto
+            *ngIf="isCriando"
+            (edicaoFinalizada)="finalizarEdicao($event)"
+          ></app-editar-produto> -->
+        </div>
+      </div>
+    <app-lista-produtos></app-lista-produtos>
+</div>

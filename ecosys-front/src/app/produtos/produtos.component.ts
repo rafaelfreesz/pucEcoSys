@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProdutoService } from '../services/produto.service';
-import { Subject, Subscription } from 'rxjs';
-import { Produto } from '../models/produto.model';
 
 @Component({
   selector: 'app-produtos',
@@ -10,20 +7,13 @@ import { Produto } from '../models/produto.model';
 })
 export class ProdutosComponent implements OnInit {
 
-  private todosProdutos: Produto[] = []
-  private produtosAlterados: Subscription
+  
+  
 
-  constructor(private produtoService: ProdutoService) {
-    this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
-      todosProdutos => {
-        this.todosProdutos = todosProdutos
-        console.log(this.todosProdutos)
-      }
-    )
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
+
+  
 
 }

@@ -9,16 +9,20 @@ import { ProdutosComponent } from './produtos/produtos.component';
 import { ProdutoService } from './services/produto.service';
 import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ListaProdutosComponent } from './produtos/lista-produtos/lista-produtos.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     NotFoundComponent,
-    ProdutosComponent
+    ProdutosComponent,
+    ListaProdutosComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule
   ],
