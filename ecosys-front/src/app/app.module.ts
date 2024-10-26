@@ -6,6 +6,9 @@ import { HeaderComponent } from './header/header.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProdutosComponent } from './produtos/produtos.component';
+import { ProdutoService } from './services/produto.service';
+import { HttpService } from './services/http.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,9 +19,10 @@ import { ProdutosComponent } from './produtos/produtos.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ProdutoService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
