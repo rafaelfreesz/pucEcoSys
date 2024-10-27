@@ -11,6 +11,8 @@ import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaProdutosComponent } from './produtos/lista-produtos/lista-produtos.component';
 import { FormsModule } from '@angular/forms';
+import { EncurtarPipe } from './pipes/encurtar.pipe';
+import { InsereZerosPipe } from './pipes/insere-zeros.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     NotFoundComponent,
     ProdutosComponent,
-    ListaProdutosComponent
+    ListaProdutosComponent,
+    EncurtarPipe,
+    InsereZerosPipe
   ],
   imports: [
     BrowserModule,
