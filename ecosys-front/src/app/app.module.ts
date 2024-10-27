@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { EncurtarPipe } from './pipes/encurtar.pipe';
 import { InsereZerosPipe } from './pipes/insere-zeros.pipe';
 import { ModalProdutoComponent } from './produtos/modal-produto/modal-produto.component';
+import { FiltroProdutoPipe } from './pipes/filtro-produto.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ModalProdutoComponent } from './produtos/modal-produto/modal-produto.co
     ListaProdutosComponent,
     EncurtarPipe,
     InsereZerosPipe,
-    ModalProdutoComponent
+    ModalProdutoComponent,
+    FiltroProdutoPipe
   ],
   imports: [
     BrowserModule,
