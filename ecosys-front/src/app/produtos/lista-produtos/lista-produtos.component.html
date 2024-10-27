@@ -41,7 +41,9 @@
                     <th>Imagem</th>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let produto of todosProdutos | filtroProduto:valorFiltro:criterioFiltro;" (click)="mostrarProduto(produto)">
+                    <tr 
+                    *ngFor="let produto of todosProdutos | filtroProduto:valorFiltro:criterioFiltro;"
+                    (click)="selecionarProduto(produto)">
                       <td>{{ produto.id | insereZeros:4}}</td>
                       <td>{{ produto.nome | encurtar:25}}</td>
                       <td>{{ produto.descricao | encurtar:50 }}</td>
@@ -68,8 +70,13 @@
                     </tr>
                   </tbody>
             </table>
+            <app-modal-produto
+              *ngIf="produtoSelecionado"
+              [produto] = "produtoSelecionado"
+              (onFechar) = "fecharModal()"
+              ></app-modal-produto>
+
         </div>
       </div>
-
-
-</div>
+      
+    </div>

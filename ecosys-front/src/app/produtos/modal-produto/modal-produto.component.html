@@ -1,1 +1,24 @@
-<p>modal-produto works!</p>
+<div class="blackdrop"></div>
+
+<div class="alert-box">
+    <div class="fechar" (click)="fechar()">x</div>
+    <div class="conteudo">
+        <img src="https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" alt="">
+        <div class="dados">
+            <p class="nome">{{produto.nome}}</p>
+            <p class="label">Descricao:</p>
+            <p class="descricao">{{produto.descricao}}</p>
+            <div class="valores">
+                <div>
+                    <p class="label">Quantidade em Estoque:</p>
+                    <div class="qtd_estoque">{{produto.qtd_estoque}}</div>
+                </div>
+                <div>
+                    <p class="label">Preço de venda:</p>
+                    <div class="preco_venda">R${{produto.preco_venda}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="botoes"></div>
+    </div>
+</div>

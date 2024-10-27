@@ -11,7 +11,7 @@ import { ProdutoService } from 'src/app/services/produto.service';
 export class ListaProdutosComponent implements OnInit {
 
   todosProdutos: Produto[] = []
-  private produtoSelecionado: Produto | null = null;
+  produtoSelecionado: Produto | null = null;
   private produtosAlterados: Subscription
   criterioFiltro: string = "nome";
   valorFiltro: string = "";
@@ -21,7 +21,7 @@ export class ListaProdutosComponent implements OnInit {
     this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
       todosProdutos => {
         this.todosProdutos = todosProdutos
-        console.log("teste",this.todosProdutos)
+        // this.produtoSelecionado = this.todosProdutos[0]
       }
     )
   }
@@ -33,8 +33,13 @@ export class ListaProdutosComponent implements OnInit {
     this.produtoService.deleteProduto(id)
   }
 
-  mostrarProduto(produto: Produto):void{
-    console.log("OLA",produto)
+  selecionarProduto(produto: Produto){
+    this.produtoSelecionado = produto;
+    console.log(this.produtoSelecionado)
+  }
+
+  fecharModal(){
+    this.produtoSelecionado = null;
   }
 
 }
