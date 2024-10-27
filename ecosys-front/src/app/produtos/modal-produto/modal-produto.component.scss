@@ -25,6 +25,11 @@
 
 img{
     height: 300px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #198754;
+    border-width: 1px;
+    margin-right: 10px;
 }
 .conteudo,.visualizar,.editar{
     display: flex;
@@ -51,9 +56,28 @@ img{
 }
 .botoes{
     display: flex;
+    justify-content: space-between;
     .botao{
         margin-top: 10px;
         margin-right: 10px;
         width:200px;
     }
+    .botao-editar{
+        margin-top: 10px;
+        // margin-right: 10px;
+        width:130px;
+    }
+}
+.valores{
+    display: flex;
+}
+.campo-preco{
+    margin-right: 10px;
+}
+.url-imagem{
+    display:flex;
+    justify-content: space-between;
+}
+.botao-alterar-imagem{
+    margin-left: 10px;
 }

@@ -56,7 +56,7 @@
             <app-modal-produto
               *ngIf="produtoSelecionado"
               [produto] = "produtoSelecionado"
-              (onFechar) = "fecharModal()"
+              (onComando) = "fecharModal($event)"
               ></app-modal-produto>
 
         </div>

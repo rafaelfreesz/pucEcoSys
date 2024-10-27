@@ -1,7 +1,7 @@
 <div class="blackdrop"></div>
 
 <div class="alert-box">
-  <div class="fechar" (click)="fechar()">x</div>
+  <div class="fechar" (click)="comando('fechar')">x</div>
   <div class="conteudo">
     <!-- VISUALIZAÇÃO -->
     <div class="visualizar" *ngIf="!inEdicao">
@@ -24,10 +24,10 @@
           </div>
         </div>
         <div class="botoes">
-          <button class="btn btn-primary botao" (click)="editar()">
+          <button class="btn btn-primary botao" (click)="comando('editar')">
             <i class="bi bi-pencil-square"></i> Editar
           </button>
-          <button class="btn btn-danger botao" (click)="fechar()">
+          <button class="btn btn-danger botao" (click)="comando('fechar')">
             <i class="bi bi-x-circle"></i> Fechar
           </button>
         </div>
@@ -39,7 +39,55 @@
         src="https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg"
         alt=""
       />
-      OLA
+      <form [formGroup]="conteudoFormulario">
+        <label for="nome" class="form-label">Nome do Produto</label>
+        <input
+            type="text"
+            id="nome"
+            formControlName="nome"
+            class="form-control"
+            required>
+
+        <div class="valores">
+            <div class="campo-preco">
+                <label for="nome" class="form-label">Preço de venda:</label>
+                <input
+                    type="text"
+                    id="nome"
+                    formControlName="nome"
+                    class="form-control"
+                    required>
+            </div>
+            <div>
+            <label for="nome" class="form-label">Quantidade em estoque:</label>
+            <input
+                type="text"
+                id="nome"
+                formControlName="nome"
+                class="form-control"
+                [value]="produto.qtd_estoque"
+                readonly>
+            </div>
+        </div>
+        <label for="nome" class="form-label">URL imagem:</label>
+        <div class="url-imagem">
+            {{url_teste}}
+            <button class="btn btn-primary btn-sm botao-alterar-imagem" (click)="editar()">
+                <i class="bi bi-pencil-square"></i> Alterar imagem
+            </button>
+        </div>
+            <div class="botoes">
+          <button class="btn btn-primary botao-editar" (click)="comando('salvar')">
+            <i class="bi bi-floppy-fill"></i> Salvar
+        </button>
+        <button class="btn btn-danger botao-editar" (click)="comando('excluir')">
+          <i class="bi bi-trash-fill"></i> Excluir
+        </button>
+        <button class="btn btn-danger botao-editar" (click)="comando('fechar')">
+          <i class="bi bi-x-circle"></i> Cancelar
+        </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -38,7 +38,16 @@ export class ListaProdutosComponent implements OnInit {
     console.log(this.produtoSelecionado)
   }
 
-  fecharModal(){
+  fecharModal(evento: string){
+    console.log(evento)
+    if(evento === 'excluir'){
+      if(this.produtoSelecionado!=null){
+        this.produtoService.deleteProduto(this.produtoSelecionado.id);
+      }
+    }else if(evento === 'salvar'){
+
+    }
+
     this.produtoSelecionado = null;
   }
 

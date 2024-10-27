@@ -5,21 +5,23 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-modal-produto',
   templateUrl: './modal-produto.component.html',
-  styleUrls: ['./modal-produto.component.css']
+  styleUrls: ['./modal-produto.component.scss']
 })
 export class ModalProdutoComponent implements OnInit {
 
   @Input() produto: any;
-  @Output() onFechar: EventEmitter<any> = new EventEmitter<any>();
-  formularioSubmetido: FormGroup;
+  @Output() onComando: EventEmitter<string> = new EventEmitter<string>();
+  conteudoFormulario: FormGroup;
   inEdicao: boolean = true;
+  url_teste: string = 'http://............'
 
   constructor() {
-    this.formularioSubmetido = new FormGroup({
+    this.conteudoFormulario = new FormGroup({
       'nome': new FormControl(null),
       'descricao': new FormControl(null),
       'preco_venda': new FormControl(null),
       'qtd_estoque': new FormControl(null),
+      'url_imagem': new FormControl(null)
 
     })
   }
@@ -28,8 +30,8 @@ export class ModalProdutoComponent implements OnInit {
     
   }
 
-  fechar(){
-    this.onFechar.emit();
+  comando(comando: string){
+    this.onComando.emit(comando);
   }
 
   editar(){
