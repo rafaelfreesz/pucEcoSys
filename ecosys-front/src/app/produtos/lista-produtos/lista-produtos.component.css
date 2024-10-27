@@ -1,5 +1,13 @@
-.filtro{
-    /* padding: 10px 10px 10px 0px; */
+
+tr:hover{
+    background-color: #198754;
+    td{
+        color:white
+    }
+}
+.imagem:hover{
+    height: 200px;
+    transition: height 0.5s ;
 }
 .botao-limpar{
     margin-top: 5px;
@@ -16,6 +24,16 @@ th{
 thead{
     background-color: #198754;
 }
-.table{
+table{
     margin-top: 10px;
+}
+tr{
+    cursor:pointer;
+}
+td{
+    vertical-align: middle;
+    background: transparent;
+}
+.imagem{
+    height:50px;
 }

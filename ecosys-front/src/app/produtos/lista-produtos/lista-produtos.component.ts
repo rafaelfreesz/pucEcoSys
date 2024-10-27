@@ -32,4 +32,8 @@ export class ListaProdutosComponent implements OnInit {
     this.produtoService.deleteProduto(id)
   }
 
+  mostrarProduto(produto: Produto):void{
+    console.log("OLA",produto)
+  }
+
 }

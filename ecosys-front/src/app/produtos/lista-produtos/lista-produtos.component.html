@@ -43,14 +43,16 @@
                     <th>Descrição</th>
                     <th>Preço Venda</th>
                     <th>Estoque</th>
+                    <th>Imagem</th>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let produto of todosProdutos;">
+                    <tr *ngFor="let produto of todosProdutos;" (click)="mostrarProduto(produto)">
                       <td>{{ produto.id | insereZeros:4}}</td>
                       <td>{{ produto.nome | encurtar:25}}</td>
                       <td>{{ produto.descricao | encurtar:50 }}</td>
                       <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
                       <td>{{ produto.qtd_estoque }}</td>
+                      <td><img src = "https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" class = "imagem"></td>
                       <!-- <td>
                         <button class="btn btn-primary btn-sm botao-acao">
                           <i class="bi bi-eye"></i>
