@@ -49,3 +49,11 @@ img{
     cursor: pointer;
     margin-right: 5px;
 }
+.botoes{
+    display: flex;
+    .botao{
+        margin-top: 10px;
+        margin-right: 10px;
+        width:200px;
+    }
+}
