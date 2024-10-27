@@ -18,6 +18,7 @@ tr:hover{
     margin-right: 2px;
 }
 th{
+    vertical-align: middle;
     padding-left: 7px;
     color: white;
 }
@@ -36,4 +37,9 @@ td{
 }
 .imagem{
     height:50px;
+}
+.total{
+    margin-top: 6px;
+    font-weight: 600;
+    vertical-align: middle;
 }

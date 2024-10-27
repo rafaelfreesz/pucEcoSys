@@ -6,14 +6,14 @@
           id="selecionar-filtro"
           [(ngModel)]="criterioFiltro"
           >
-          <!-- (change)="filtrarTabela()" -->
           <option value="nome">Nome</option>
+          <option value="id">Código</option>
           <option value="descricao">Descricao</option>
-          <option value="quantidade">Quantidade</option>
-          <option value="precoVenda">Preço de Venda (R$)</option>
+          <option value="qtd_estoque">Quantidade</option>
+          <option value="preco_venda">Preço de Venda (R$)</option>
         </select>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
         <input
           type="search"
           class="form-control"
@@ -23,13 +23,8 @@
         />
           <!-- (input)="filtrarTabela()" -->
       </div>
-      <div class="col-sm-1">
-        <button
-          class="btn btn-sm btn-danger botao-limpar"
-         >
-          <!-- (click)="limparFiltro()" -->
-          <i class="bi bi-x-circle-fill"></i>
-        </button>
+      <div class="col-sm-2">
+        <div class="total">Total: {{totalFiltrado |contadorFiltroProduto:todosProdutos:valorFiltro:criterioFiltro}}</div>
       </div>
 
       <!-- TABELA -->
@@ -46,7 +41,7 @@
                     <th>Imagem</th>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let produto of todosProdutos;" (click)="mostrarProduto(produto)">
+                    <tr *ngFor="let produto of todosProdutos | filtroProduto:valorFiltro:criterioFiltro;" (click)="mostrarProduto(produto)">
                       <td>{{ produto.id | insereZeros:4}}</td>
                       <td>{{ produto.nome | encurtar:25}}</td>
                       <td>{{ produto.descricao | encurtar:50 }}</td>

@@ -13,8 +13,9 @@ export class ListaProdutosComponent implements OnInit {
   todosProdutos: Produto[] = []
   private produtoSelecionado: Produto | null = null;
   private produtosAlterados: Subscription
-  criterioFiltro: string = "";
+  criterioFiltro: string = "nome";
   valorFiltro: string = "";
+  totalFiltrado:number = 0;
 
   constructor(private produtoService: ProdutoService) {
     this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
