@@ -13,6 +13,7 @@ import { ListaProdutosComponent } from './produtos/lista-produtos/lista-produtos
 import { FormsModule } from '@angular/forms';
 import { EncurtarPipe } from './pipes/encurtar.pipe';
 import { InsereZerosPipe } from './pipes/insere-zeros.pipe';
+import { ModalProdutoComponent } from './produtos/modal-produto/modal-produto.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { InsereZerosPipe } from './pipes/insere-zeros.pipe';
     ProdutosComponent,
     ListaProdutosComponent,
     EncurtarPipe,
-    InsereZerosPipe
+    InsereZerosPipe,
+    ModalProdutoComponent
   ],
   imports: [
     BrowserModule,
