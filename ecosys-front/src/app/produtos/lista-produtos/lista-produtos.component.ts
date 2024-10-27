@@ -21,7 +21,7 @@ export class ListaProdutosComponent implements OnInit {
     this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
       todosProdutos => {
         this.todosProdutos = todosProdutos
-        // this.produtoSelecionado = this.todosProdutos[0]
+        this.produtoSelecionado = this.todosProdutos[0]
       }
     )
   }

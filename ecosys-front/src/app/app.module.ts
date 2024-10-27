@@ -10,7 +10,7 @@ import { ProdutoService } from './services/produto.service';
 import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaProdutosComponent } from './produtos/lista-produtos/lista-produtos.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EncurtarPipe } from './pipes/encurtar.pipe';
 import { InsereZerosPipe } from './pipes/insere-zeros.pipe';
 import { ModalProdutoComponent } from './produtos/modal-produto/modal-produto.component';
@@ -34,7 +34,8 @@ import { ContadorFiltroProdutoPipe } from './pipes/contador-filtro-produto.pipe'
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [ProdutoService, HttpService],
   bootstrap: [AppComponent]

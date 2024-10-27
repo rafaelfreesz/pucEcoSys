@@ -26,7 +26,7 @@
 img{
     height: 300px;
 }
-.conteudo{
+.conteudo,.visualizar,.editar{
     display: flex;
 }
 .dados{
