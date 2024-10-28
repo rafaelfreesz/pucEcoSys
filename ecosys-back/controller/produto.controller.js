@@ -20,11 +20,17 @@ class ProdutoController {
 
     }
 
-    incluir(request, response, next) {
+    async incluir(request, response, next) {
 
-        ProdutoRepository.incluir(request.body)
-            .then(() => {response.redirect('/produtos')})
-            .catch(erro => {response.json(erro)})
+        try{
+            const k = await ProdutoRepository.incluir(request.body);
+            const produtos = await ProdutoRepository.consultarTodos()
+            response.json(produtos)
+
+        }catch(e){
+            console.log(e)
+            response.json(e)
+        }
 
     }
 
