@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -17,9 +17,9 @@ export class ModalProdutoComponent implements OnInit {
 
   constructor() {
     this.conteudoFormulario = new FormGroup({
-      'nome': new FormControl(null),
+      'nome': new FormControl(null,Validators.required),
       'descricao': new FormControl(null),
-      'preco_venda': new FormControl(null),
+      'preco_venda': new FormControl(null,[Validators.required,Validators.min(0.01)]),
       'qtd_estoque': new FormControl(null),
       'url_imagem': new FormControl(null)
 

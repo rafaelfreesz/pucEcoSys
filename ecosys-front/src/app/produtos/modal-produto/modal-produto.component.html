@@ -45,8 +45,7 @@
             type="text"
             id="nome"
             formControlName="nome"
-            class="form-control"
-            required>
+            class="form-control">
         <label for="descricao" class="form-label">Descrição:</label>
         <input
             type="text"
@@ -58,11 +57,12 @@
             <div class="campo-preco">
                 <label for="nome" class="form-label">Preço de venda:</label>
                 <input
-                    type="text"
+                    type="number"
+                    inputmode="numeric"
+                    step="0.01"
                     id="nome"
                     formControlName="nome"
-                    class="form-control"
-                    required>
+                    class="form-control">
             </div>
             <div>
             <label for="nome" class="form-label">Quantidade em estoque:</label>
