@@ -12,6 +12,7 @@ export class ProdutoService{
     constructor(private httpService: HttpService){
         this.buscarTodosProdutos();
     }
+    
 
     buscarTodosProdutos(): void{
         this.httpService.getTodosProdutos().subscribe( todosProdutos => {
@@ -20,10 +21,17 @@ export class ProdutoService{
         })
     }
 
-    deleteProduto(id: number): void{
+    deletarProduto(id: number): void{
         this.httpService.deleteProduto(id).subscribe( todosProdutos => {
             this.todosProdutos = todosProdutos
             this.produtosAlterados.next(this.todosProdutos.slice());
         })
+    }
+
+    salvarProduto(produto: Produto): void{
+        this.httpService.updateProduto(produto).subscribe( todosProdutos => {
+            this.todosProdutos = todosProdutos
+            this.produtosAlterados.next(this.todosProdutos.slice());
+        });
     }
 }

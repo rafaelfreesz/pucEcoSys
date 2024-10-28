@@ -37,17 +37,17 @@ export class ListaProdutosComponent implements OnInit {
 
   selecionarProduto(produto: Produto){
     this.produtoSelecionado = produto;
-    console.log(this.produtoSelecionado)
   }
 
   fecharModal(evento: string){
-    console.log(evento)
     if(evento === 'excluir'){
-      if(this.produtoSelecionado!=null){
-        this.produtoService.deleteProduto(this.produtoSelecionado.id);
+      if(this.produtoSelecionado!=null && this.produtoSelecionado.id){
+        this.produtoService.deletarProduto(this.produtoSelecionado.id);
       }
     }else if(evento === 'salvar'){
-
+      if(this.produtoSelecionado != null){
+        this.produtoService.salvarProduto(this.produtoSelecionado);
+      }
     }
 
     this.isNovoProduto = false;
