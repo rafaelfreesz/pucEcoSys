@@ -1,3 +1,10 @@
+<div class="row">
+  <div class="col-md">
+    <button class="btn btn-success botao-novo" (click) = "prepararCadastro()" >
+      <i class="bi bi-file-earmark-plus-fill"></i> Novo
+    </button>
+  </div>
+</div>
 <div class="row filtro">
     <div class="col-sm-3">
         <select
@@ -54,8 +61,9 @@
                   </tbody>
             </table>
             <app-modal-produto
-              *ngIf="produtoSelecionado"
+              *ngIf="produtoSelecionado || isNovoProduto"
               [produto] = "produtoSelecionado"
+              [inEdicao] = "isNovoProduto"
               (onComando) = "fecharModal($event)"
               ></app-modal-produto>
 

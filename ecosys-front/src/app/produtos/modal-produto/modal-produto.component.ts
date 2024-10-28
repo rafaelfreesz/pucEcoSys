@@ -12,7 +12,7 @@ export class ModalProdutoComponent implements OnInit {
   @Input() produto: any;
   @Output() onComando: EventEmitter<string> = new EventEmitter<string>();
   conteudoFormulario: FormGroup;
-  inEdicao: boolean = true;
+  @Input() inEdicao: boolean = false;
   url_teste: string = 'http://............'
 
   constructor() {
@@ -34,7 +34,7 @@ export class ModalProdutoComponent implements OnInit {
     this.onComando.emit(comando);
   }
 
-  editar(){
+  iniciarEdicao(){
     this.inEdicao = true
   }
 

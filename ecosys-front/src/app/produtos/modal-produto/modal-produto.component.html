@@ -1,4 +1,4 @@
-<div class="blackdrop"></div>
+<div class="blackdrop" (click)="comando('fechar')"></div>
 
 <div class="alert-box">
   <div class="fechar" (click)="comando('fechar')">x</div>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="botoes">
-          <button class="btn btn-primary botao" (click)="comando('editar')">
+          <button class="btn btn-primary botao" (click)="iniciarEdicao()">
             <i class="bi bi-pencil-square"></i> Editar
           </button>
           <button class="btn btn-danger botao" (click)="comando('fechar')">
@@ -47,8 +47,14 @@
             formControlName="nome"
             class="form-control"
             required>
+        <label for="descricao" class="form-label">Descrição:</label>
+        <input
+            type="text"
+            id="descricao"
+            formControlName="descricao"
+            class="form-control">
 
-        <div class="valores">
+        <div class="valores-formulario">
             <div class="campo-preco">
                 <label for="nome" class="form-label">Preço de venda:</label>
                 <input
@@ -72,7 +78,7 @@
         <label for="nome" class="form-label">URL imagem:</label>
         <div class="url-imagem">
             {{url_teste}}
-            <button class="btn btn-primary btn-sm botao-alterar-imagem" (click)="editar()">
+            <button class="btn btn-primary btn-sm botao-alterar-imagem" >
                 <i class="bi bi-pencil-square"></i> Alterar imagem
             </button>
         </div>

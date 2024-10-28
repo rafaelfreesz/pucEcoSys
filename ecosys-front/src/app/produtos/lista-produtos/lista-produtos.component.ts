@@ -16,12 +16,13 @@ export class ListaProdutosComponent implements OnInit {
   criterioFiltro: string = "nome";
   valorFiltro: string = "";
   totalFiltrado:number = 0;
+  isNovoProduto: boolean = false;
 
   constructor(private produtoService: ProdutoService) {
     this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
       todosProdutos => {
         this.todosProdutos = todosProdutos
-        this.produtoSelecionado = this.todosProdutos[0]
+        // this.produtoSelecionado = this.todosProdutos[0]
       }
     )
   }
@@ -29,8 +30,9 @@ export class ListaProdutosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  excluirProduto(id: number): void{
-    this.produtoService.deleteProduto(id)
+  prepararCadastro(){
+    this.produtoSelecionado = new Produto();
+    this.isNovoProduto = true;
   }
 
   selecionarProduto(produto: Produto){
@@ -48,6 +50,7 @@ export class ListaProdutosComponent implements OnInit {
 
     }
 
+    this.isNovoProduto = false;
     this.produtoSelecionado = null;
   }
 

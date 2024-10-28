@@ -17,6 +17,9 @@ tr:hover{
 .botao-acao{
     margin-right: 2px;
 }
+.botao-novo{
+    margin-bottom: 5px;
+}
 th{
     vertical-align: middle;
     padding-left: 7px;
