@@ -51,4 +51,11 @@ export class HttpService{
         )
     }
 
+    insertProduto(produto: Produto){
+        return this.http.post(`http://localhost:3000/produtos/`,produto)
+        .pipe(
+            map( this.buildListaProduto )
+        )
+    }
+
 }

@@ -29,9 +29,16 @@ export class ProdutoService{
     }
 
     salvarProduto(produto: Produto): void{
-        this.httpService.updateProduto(produto).subscribe( todosProdutos => {
-            this.todosProdutos = todosProdutos
-            this.produtosAlterados.next(this.todosProdutos.slice());
-        });
+        if(produto.id && produto.id !== -1){
+            this.httpService.updateProduto(produto).subscribe( todosProdutos => {
+                this.todosProdutos = todosProdutos
+                this.produtosAlterados.next(this.todosProdutos.slice());
+            });
+        }else{
+            this.httpService.insertProduto(produto).subscribe( todosProdutos => {
+                this.todosProdutos = todosProdutos
+                this.produtosAlterados.next(this.todosProdutos.slice());
+            });
+        }
     }
 }
