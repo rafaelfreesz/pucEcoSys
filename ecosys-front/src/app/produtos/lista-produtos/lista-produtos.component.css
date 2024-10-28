@@ -1,13 +1,21 @@
 
 tr:hover{
-    background-color: #198754;
+    background-color: rgba(25, 135, 84,0.75);
     td{
         color:white
     }
 }
-.imagem:hover{
+/* .imagem:hover{
     height: 200px;
+    
+} */
+.celula-imagem:hover{
+    height: 200x;
     transition: height 0.5s ;
+    .imagem{
+        height: 200px;
+        transition: height 0.5s ;
+    }
 }
 .botao-limpar{
     margin-top: 5px;
@@ -40,6 +48,12 @@ td{
 }
 .imagem{
     height:50px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: rgba(25, 135, 84,0.2);
+    border-width: 1px;
+    margin-right: 10px;
+    /* height:auto */
 }
 .total{
     margin-top: 6px;
