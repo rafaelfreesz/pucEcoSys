@@ -28,16 +28,16 @@ class ProdutoController {
 
     }
 
-    alterar(request, response, next) {
-
-        ProdutoRepository.alterar(request.params.id,request.body)
-            .then(() => response.redirect('/produtos'))
-            .catch((erro) => {response.json(erro)})   
+    async alterar(request, response, next) {
+        try{
+            const k = await ProdutoRepository.alterar(request.params.id,request.body)
+            const produtos = await ProdutoRepository.consultarTodos()
+            response.json(produtos)
+        }catch(e){
+            console.log(e)
+            response.json(e)
+        }
         
-    }
-
-    async getTodosProdutos(){
-        return 
     }
 
     async excluirPorId(request, response, next) {

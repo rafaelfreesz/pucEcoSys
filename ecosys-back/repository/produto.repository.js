@@ -25,7 +25,7 @@ class ProdutoRepository{
 
     async alterar(id, produto){
         
-        const keys = ['nome', 'descricao', 'preco_venda'];
+        const keys = ['nome', 'descricao', 'preco_venda','qtd_estoque'];
         const fields = [];
     
         keys.forEach(key => {
@@ -35,7 +35,8 @@ class ProdutoRepository{
         for (let i = 0; i < fields.length; i++){
 
             const sql = `UPDATE tb_produto SET ${fields[i]} = ($1) WHERE id = ($2)`;
-    
+            console.log(sql)
+            console.log(produto[fields[i]])
             if(i === fields.length - 1){
                 return executarQuery(sql,[produto[fields[i]],id]);
             }else{
