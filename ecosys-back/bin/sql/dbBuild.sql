@@ -19,6 +19,9 @@ CREATE TABLE tb_endereco(
     numero VARCHAR(50),
     complemento VARCHAR(10),
     cep VARCHAR(8),
+    bairro VARCHAR(100),
+    cidade VARCHAR(32),
+    estado VARCHAR(18),
     fk_fornecedor INT,
     FOREIGN KEY (fk_fornecedor) REFERENCES tb_fornecedor(id) ON DELETE CASCADE
 );
@@ -82,10 +85,10 @@ VALUES
   ('12345678000112', 'Material Escolar Ltda', 'Papelaria Legal'),
   ('54789123000145', 'Comércio de Artigos para Escritório Ltda', 'Casa do Escritório');
 
-INSERT INTO tb_endereco (logradouro, numero, complemento, cep, fk_fornecedor)
+INSERT INTO tb_endereco (logradouro, numero, complemento, cep, bairro, cidade, estado, fk_fornecedor)
 VALUES
-  ('Rua Lino Morganti', '100', NULL, '14804176',1),
-  ('Travessa Soichi Tokai', '8', '6', '02977230',2);
+  ('Rua Nove', '100', NULL, '07920090','Jardim Gennari','Francisco Morato','São Paulo',1),
+  ('Travessa Soichi Tokai', '8', '6','02977230','Vila Zat','São Paulo','São Paulo',2);
 
 INSERT INTO tb_contato (tipo, valor, fk_fornecedor)
 VALUES
