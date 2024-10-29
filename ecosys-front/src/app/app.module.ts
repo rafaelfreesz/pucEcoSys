@@ -16,6 +16,7 @@ import { InsereZerosPipe } from './pipes/insere-zeros.pipe';
 import { ModalProdutoComponent } from './produtos/modal-produto/modal-produto.component';
 import { FiltroProdutoPipe } from './pipes/filtro-produto.pipe';
 import { ContadorFiltroProdutoPipe } from './pipes/contador-filtro-produto.pipe';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ContadorFiltroProdutoPipe } from './pipes/contador-filtro-produto.pipe'
     InsereZerosPipe,
     ModalProdutoComponent,
     FiltroProdutoPipe,
-    ContadorFiltroProdutoPipe
+    ContadorFiltroProdutoPipe,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
