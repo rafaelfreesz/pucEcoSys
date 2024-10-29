@@ -17,6 +17,7 @@ import { ModalProdutoComponent } from './produtos/modal-produto/modal-produto.co
 import { FiltroProdutoPipe } from './pipes/filtro-produto.pipe';
 import { ContadorFiltroProdutoPipe } from './pipes/contador-filtro-produto.pipe';
 import { HomeComponent } from './home/home.component';
+import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HomeComponent } from './home/home.component';
     ModalProdutoComponent,
     FiltroProdutoPipe,
     ContadorFiltroProdutoPipe,
-    HomeComponent
+    HomeComponent,
+    FornecedoresComponent
   ],
   imports: [
     BrowserModule,
