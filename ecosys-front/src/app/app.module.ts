@@ -18,6 +18,7 @@ import { FiltroListaPipe } from './pipes/filtro-lista.pipe';
 import { ContadorFiltroPipe } from './pipes/contador-filtro.pipe';
 import { HomeComponent } from './home/home.component';
 import { FornecedoresComponent } from './fornecedores/fornecedores.component';
+import { ListaFornecedoresComponent } from './fornecedores/lista-fornecedores/lista-fornecedores.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FornecedoresComponent } from './fornecedores/fornecedores.component';
     FiltroListaPipe,
     ContadorFiltroPipe,
     HomeComponent,
-    FornecedoresComponent
+    FornecedoresComponent,
+    ListaFornecedoresComponent
   ],
   imports: [
     BrowserModule,
