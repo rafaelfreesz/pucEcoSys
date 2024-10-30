@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Fornecedor } from 'src/app/models/fornecedor.model';
+import { FornecedorService } from 'src/app/services/fornecedor.service';
 
 @Component({
   selector: 'app-lista-fornecedores',
@@ -10,17 +12,18 @@ export class ListaFornecedoresComponent implements OnInit {
 
   todosFornecedores: Fornecedor[] = [];
   fornecedorSelecionado: Fornecedor | null = null;
+  private fornecedoresAlterados: Subscription
   criterioFiltro: string = "razao_social";
   valorFiltro: string = "";
   isNovoFornecedor: boolean = false;
   totalFiltrado: number = 0;
 
-  constructor() {
-    for(let i=0; i<10; i++){
-      
-      const forn = new Fornecedor()
-      this.todosFornecedores.push(forn)
-    }
+  constructor(private fornecedorService: FornecedorService) {
+    this.fornecedoresAlterados = this.fornecedorService.fornecedoresAlterados.subscribe(
+      todosFornecedores => {
+        this.todosFornecedores = todosFornecedores
+      }
+    )
   }
 
   ngOnInit(): void {

@@ -2,12 +2,16 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
 import { Produto } from "../models/produto.model";
+import { Fornecedor } from "../models/fornecedor.model";
+import { Endereco } from "../models/endereco.model";
+import { Contato } from "../models/contato.model";
 
 @Injectable()
 export class HttpService{
 
     constructor(private http: HttpClient){}
 
+    //PRODUTOS
     private buildListaProduto(resposta: any){
         const produtos: Produto[] = []
 
@@ -57,5 +61,77 @@ export class HttpService{
             map( this.buildListaProduto )
         )
     }
+
+    //FORNECEDORES
+    private buildListaFornecedor(resposta: any){
+        const fornecedores: Fornecedor[] = []
+
+        for (const i in resposta){
+            const fornecedor:Fornecedor = new Fornecedor();
+
+            fornecedor.id = resposta[i].id;
+            fornecedor.cnpj = resposta[i].cnpj;
+            fornecedor.razao_social = resposta[i].razao_social;
+            fornecedor.nome_empresarial= resposta[i].nome_empresarial
+
+            const endereco = new Endereco();
+
+            endereco.id = resposta[i].endereco.id;
+            endereco.logradouro = resposta[i].endereco.logradouro;
+            endereco.numero = resposta[i].endereco.numero;
+            endereco.complemento = resposta[i].endereco.complemento;
+            endereco.cep = resposta[i].endereco.cep;
+            endereco.bairro = resposta[i].endereco.bairro;
+            endereco.cidade = resposta[i].endereco.cidade;
+            endereco.estado = resposta[i].endereco.estado;
+
+            fornecedor.endereco = endereco;
+
+            for(let contato of resposta[i].contatos){
+                const cont = new Contato();
+                cont.id = contato.id;
+                cont.tipo = contato.tipo;
+                cont.valor = contato.valor;
+
+                fornecedor.contatos.push(cont)
+            }
+
+            fornecedores.push(fornecedor);
+        }
+
+        return fornecedores
+    }
+
+    getTodosFornecedores() {
+
+        return this.http.get<any>('http://localhost:3000/fornecedores')
+        .pipe(
+            map( this.buildListaFornecedor )
+        )
+
+    }
+
+    // deleteFornecedorProduto(id: number){
+    //     return this.http.delete<any>(`http://localhost:3000/produtos/${id}`)
+    //     .pipe(
+    //         map( this.buildListaProduto )
+    //     )
+    // }
+
+    // updateFornecedorProduto(produto: Produto){
+    //     const id = produto.id;
+    //     delete produto.id
+    //     return this.http.put(`http://localhost:3000/produtos/${id}`,produto)
+    //     .pipe(
+    //         map( this.buildListaProduto )
+    //     )
+    // }
+
+    // insertFornecedorProduto(produto: Produto){
+    //     return this.http.post(`http://localhost:3000/produtos/`,produto)
+    //     .pipe(
+    //         map( this.buildListaProduto )
+    //     )
+    // }
 
 }

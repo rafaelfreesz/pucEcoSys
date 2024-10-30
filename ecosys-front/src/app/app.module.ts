@@ -19,6 +19,7 @@ import { ContadorFiltroPipe } from './pipes/contador-filtro.pipe';
 import { HomeComponent } from './home/home.component';
 import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 import { ListaFornecedoresComponent } from './fornecedores/lista-fornecedores/lista-fornecedores.component';
+import { FornecedorService } from './services/fornecedor.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { ListaFornecedoresComponent } from './fornecedores/lista-fornecedores/li
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [ProdutoService, HttpService],
+  providers: [ProdutoService, FornecedorService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
