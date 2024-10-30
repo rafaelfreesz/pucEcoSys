@@ -31,7 +31,7 @@
           <!-- (input)="filtrarTabela()" -->
       </div>
       <div class="col-sm-2">
-        <div class="total">Total: {{totalFiltrado |contadorFiltroProduto:todosProdutos:valorFiltro:criterioFiltro}}</div>
+        <div class="total">Total: {{totalFiltrado |contadorFiltro:todosProdutos:valorFiltro:criterioFiltro}}</div>
       </div>
 
       <!-- TABELA -->
@@ -49,7 +49,7 @@
                   </thead>
                   <tbody>
                     <tr 
-                    *ngFor="let produto of todosProdutos | filtroProduto:valorFiltro:criterioFiltro;"
+                    *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
                     (click)="selecionarProduto(produto)">
                       <td>{{ produto.id | insereZeros:4}}</td>
                       <td>{{ produto.nome | encurtar:25}}</td>

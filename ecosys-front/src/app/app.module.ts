@@ -14,8 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EncurtarPipe } from './pipes/encurtar.pipe';
 import { InsereZerosPipe } from './pipes/insere-zeros.pipe';
 import { ModalProdutoComponent } from './produtos/modal-produto/modal-produto.component';
-import { FiltroProdutoPipe } from './pipes/filtro-produto.pipe';
-import { ContadorFiltroProdutoPipe } from './pipes/contador-filtro-produto.pipe';
+import { FiltroListaPipe } from './pipes/filtro-lista.pipe';
+import { ContadorFiltroPipe } from './pipes/contador-filtro.pipe';
 import { HomeComponent } from './home/home.component';
 import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 
@@ -29,8 +29,8 @@ import { FornecedoresComponent } from './fornecedores/fornecedores.component';
     EncurtarPipe,
     InsereZerosPipe,
     ModalProdutoComponent,
-    FiltroProdutoPipe,
-    ContadorFiltroProdutoPipe,
+    FiltroListaPipe,
+    ContadorFiltroPipe,
     HomeComponent,
     FornecedoresComponent
   ],
