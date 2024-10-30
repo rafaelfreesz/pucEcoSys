@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 import { ListaFornecedoresComponent } from './fornecedores/lista-fornecedores/lista-fornecedores.component';
 import { FornecedorService } from './services/fornecedor.service';
+import { ModalFornecedorComponent } from './fornecedores/modal-fornecedor/modal-fornecedor.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FornecedorService } from './services/fornecedor.service';
     ContadorFiltroPipe,
     HomeComponent,
     FornecedoresComponent,
-    ListaFornecedoresComponent
+    ListaFornecedoresComponent,
+    ModalFornecedorComponent
   ],
   imports: [
     BrowserModule,

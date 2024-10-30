@@ -60,12 +60,12 @@
                       </tr>
                     </tbody>
               </table>
-              <!-- <app-modal-produto
-                *ngIf="produtoSelecionado || isNovoProduto"
-                [produto] = "produtoSelecionado"
-                [inEdicao] = "isNovoProduto"
-                (onComando) = "fecharModal($event)"
-                ></app-modal-produto> -->
+              <app-modal-fornecedor>
+                *ngIf = "fornecedorSelecionado || isNovoFornecedor"
+                [inEdicao] = "isNovoFornecedor"
+                (onComando) = "fecharModal('event')"
+                ></app-modal-fornecedor>
+              <!-- [produto] = "fornecedorSelecionado" -->
   
           </div>
         </div>

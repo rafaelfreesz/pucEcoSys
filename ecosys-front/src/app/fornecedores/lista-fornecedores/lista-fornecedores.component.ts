@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Fornecedor } from 'src/app/models/fornecedor.model';
 import { FornecedorService } from 'src/app/services/fornecedor.service';
@@ -8,7 +8,7 @@ import { FornecedorService } from 'src/app/services/fornecedor.service';
   templateUrl: './lista-fornecedores.component.html',
   styleUrls: ['./lista-fornecedores.component.scss']
 })
-export class ListaFornecedoresComponent implements OnInit {
+export class ListaFornecedoresComponent implements OnInit, OnDestroy {
 
   todosFornecedores: Fornecedor[] = [];
   fornecedorSelecionado: Fornecedor | null = null;
@@ -27,7 +27,11 @@ export class ListaFornecedoresComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("OLAAAA")
+  
+  }
+
+  ngOnDestroy(): void {
+    this.fornecedoresAlterados.unsubscribe();
   }
 
   selecionarFornecedor(fornecedor: Fornecedor){
@@ -37,6 +41,21 @@ export class ListaFornecedoresComponent implements OnInit {
   prepararCadastro(){
     this.fornecedorSelecionado = new Fornecedor();
     this.isNovoFornecedor = true;
+  }
+
+  fecharModal(evento: string){
+    if(evento === 'excluir'){
+      if(this.fornecedorSelecionado!=null && this.fornecedorSelecionado.id){
+        // this.fornecedorService.deletarProduto(this.fornecedorSelecionado.id);
+      }
+    }else if(evento === 'salvar'){
+      if(this.fornecedorSelecionado != null){
+        // this.fornecedorService.salvarProduto(this.fornecedorSelecionado);
+      }
+    }
+
+    this.isNovoFornecedor = false;
+    this.fornecedorSelecionado = null;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Produto } from 'src/app/models/produto.model';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -8,7 +8,7 @@ import { ProdutoService } from 'src/app/services/produto.service';
   templateUrl: './lista-produtos.component.html',
   styleUrls: ['./lista-produtos.component.css']
 })
-export class ListaProdutosComponent implements OnInit {
+export class ListaProdutosComponent implements OnInit, OnDestroy {
 
   todosProdutos: Produto[] = []
   produtoSelecionado: Produto | null = null;
@@ -22,12 +22,15 @@ export class ListaProdutosComponent implements OnInit {
     this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
       todosProdutos => {
         this.todosProdutos = todosProdutos
-        // this.produtoSelecionado = this.todosProdutos[0]
       }
     )
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.produtosAlterados.unsubscribe()
   }
 
   prepararCadastro(){
