@@ -92,10 +92,10 @@ VALUES
 
 INSERT INTO tb_contato (tipo, valor, fk_fornecedor)
 VALUES
-  ('F', '(32) 3333-4444', 1),
-  ('E', '[endereço de e-mail removido]', 1),
-  ('F', '(32) 98877-6543', 2),
-  ('E', '[endereço de e-mail removido]', 2);
+  ('F', '3233334444', 1),
+  ('E', 'aaaa@bb.com', 1),
+  ('F', '32988776543', 2),
+  ('E', 'xxxxx@cc.com', 2);
 
 INSERT INTO tb_entrada (dt_hr_entrada, nu_nota_fiscal, fk_fornecedor)
 VALUES
