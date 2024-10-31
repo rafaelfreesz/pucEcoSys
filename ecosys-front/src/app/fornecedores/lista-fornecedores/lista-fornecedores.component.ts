@@ -22,6 +22,7 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
     this.fornecedoresAlterados = this.fornecedorService.fornecedoresAlterados.subscribe(
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
+        this.fornecedorSelecionado = this.todosFornecedores[0]
       }
     )
   }

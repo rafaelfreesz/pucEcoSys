@@ -21,6 +21,8 @@ import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 import { ListaFornecedoresComponent } from './fornecedores/lista-fornecedores/lista-fornecedores.component';
 import { FornecedorService } from './services/fornecedor.service';
 import { ModalFornecedorComponent } from './fornecedores/modal-fornecedor/modal-fornecedor.component';
+import { EnderecoCorridoPipe } from './pipes/endereco-corrido.pipe';
+import { TelefoneCorridoPipe } from './pipes/telefone-corrido.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ModalFornecedorComponent } from './fornecedores/modal-fornecedor/modal-
     HomeComponent,
     FornecedoresComponent,
     ListaFornecedoresComponent,
-    ModalFornecedorComponent
+    ModalFornecedorComponent,
+    EnderecoCorridoPipe,
+    TelefoneCorridoPipe
   ],
   imports: [
     BrowserModule,

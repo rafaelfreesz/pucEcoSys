@@ -1,0 +1,93 @@
+.blackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0,0.6);
+    z-index: 0;
+}
+.alert-box {
+    position: fixed;
+    top: 15vh;
+    left: 20vw;
+    width: 60vw;
+    height: fit-content;
+    padding: 10px;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.razao_social{
+    font-weight: 600;
+    font-size:  x-large;
+    align-content: center;
+    margin-bottom: 3px;
+}
+
+.informacao{
+    align-content: center;
+    margin-bottom: 1px;
+}
+
+.subsecao{
+    font-weight: 600;
+    align-content: center;
+    margin-bottom: 2px;
+}
+.item-contato{
+    margin-bottom: 0px;
+}
+.tipo-contato{
+    font-weight: 600;
+}
+.alert-box-actions {
+    text-align: justify;
+}
+
+.conteudo,.visualizar,.editar{
+    display: flex;
+}
+.dados{
+    margin-left: 10px;
+}
+.label{
+    font-weight: 600;
+    font-size:  large;
+    align-content: center;
+    margin-bottom: 0px;
+}
+.fechar{
+    text-align: right;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.botoes{
+    display: flex;
+    justify-content: space-between;
+    .botao{
+        margin-top: 10px;
+        margin-right: 10px;
+        width:200px;
+    }
+    .botao-editar{
+        margin-top: 10px;
+        // margin-right: 10px;
+        width:130px;
+    }
+}
+.valores-formulario{
+    display: flex;
+}
+.campo-preco{
+    margin-right: 10px;
+}
+.url-imagem{
+    display:flex;
+    justify-content: space-between;
+}
+.botao-alterar-imagem{
+    margin-left: 10px;
+}

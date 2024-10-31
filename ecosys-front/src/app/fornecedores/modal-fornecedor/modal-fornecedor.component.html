@@ -1,1 +1,101 @@
-<p>modal-fornecedor works!</p>
+<div class="blackdrop" (click)="comando('fechar')"></div>
+
+<div class="alert-box">
+  <div class="fechar" (click)="comando('fechar')">x</div>
+  <div class="conteudo">
+    <!-- VISUALIZAÇÃO -->
+    <div class="visualizar" *ngIf="!inEdicao">
+      <div class="dados">
+        <p class="razao_social">{{ fornecedor.razao_social }}</p>
+        <p class="informacao"><span class="label">CNPJ:</span> {{fornecedor.cnpj}}</p>
+        <p class="informacao"><span class="label">Nome Empresarial:</span> {{ fornecedor.nome_empresarial}}</p>
+        <hr>
+        <div class="subsecao">Endereço:</div>
+        <div class="">
+          {{fornecedor.endereco | enderecoCorrido}}
+        </div>
+        <hr>
+        <div class="">
+            <div class="subsecao">Contatos:</div>
+            <div class="" *ngFor="let contato of fornecedor.contatos">    
+          <ul>
+            <li *ngIf="contato.tipo == 'F'" class="item-contato"><span class="tipo-contato">Telefone: </span>{{contato | telefoneCorrido}}</li>
+            <li *ngIf="contato.tipo == 'E'" class="item-contato"><span class="tipo-contato">Email: </span>{{contato.valor}}</li>
+          </ul>
+            </div>
+        </div>
+        <div class="botoes">
+          <button class="btn btn-primary botao" (click)="iniciarEdicao()">
+            <i class="bi bi-pencil-square"></i> Editar
+          </button>
+          <button class="btn btn-danger botao" (click)="comando('fechar')">
+            <i class="bi bi-x-circle"></i> Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- EDIÇÃO -->
+    <!-- <div class="editar" *ngIf="inEdicao">
+      <img
+        src="https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg"
+        alt=""
+      />
+      <form [formGroup]="conteudoFormulario" (ngSubmit)="submeterFormulario()">
+        <label for="nome" class="form-label">Nome do Produto</label>
+        <input
+            type="text"
+            id="nome"
+            formControlName="nome"
+            class="form-control">
+        <label for="descricao" class="form-label">Descrição:</label>
+        <input
+            type="text"
+            id="descricao"
+            formControlName="descricao"
+            class="form-control">
+
+        <div class="valores-formulario">
+            <div class="campo-preco">
+                <label for="nome" class="form-label">Preço de venda:</label>
+                <input
+                    type="number"
+                    inputmode="numeric"
+                    step="0.05"
+                    id="nome"
+                    formControlName="preco_venda"
+                    class="form-control"
+                    min="0.00">
+            </div>
+            <div>
+            <label for="qtd_estoque" class="form-label">Quantidade em estoque:</label>
+            <input
+                type="text"
+                id="qtd_estoque"
+                formControlName="qtd_estoque"
+                class="form-control"
+                [value]="produto.qtd_estoque"
+                readonly>
+            </div>
+        </div>
+        <label for="nome" class="form-label">URL imagem:</label>
+        <div class="url-imagem">
+            {{url_teste}}
+            <button class="btn btn-primary btn-sm botao-alterar-imagem" (click)="comando('fechar')">
+                <i class="bi bi-pencil-square" ></i> Alterar imagem
+            </button>
+        </div>
+            <div class="botoes">
+          <button type="submit" class="btn btn-primary botao-editar" [disabled]="!conteudoFormulario.valid">
+            <i class="bi bi-floppy-fill"></i> Salvar
+        </button>
+        <button class="btn btn-danger botao-editar" (click)="comando('excluir')">
+          <i class="bi bi-trash-fill"></i> Excluir
+        </button>
+        <button class="btn btn-danger botao-editar" (click)="comando('fechar')">
+          <i class="bi bi-x-circle"></i> Cancelar
+        </button>
+        </div>
+      </form>
+    </div> -->
+  </div>
+</div>

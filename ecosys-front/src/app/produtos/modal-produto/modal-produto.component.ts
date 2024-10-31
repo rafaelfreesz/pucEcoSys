@@ -19,7 +19,6 @@ export class ModalProdutoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.produto)
     this.conteudoFormulario = new FormGroup({
       'nome': new FormControl(this.produto.nome,Validators.required),
       'descricao': new FormControl(this.produto.descricao),
