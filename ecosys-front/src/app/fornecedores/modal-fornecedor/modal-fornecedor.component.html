@@ -17,12 +17,12 @@
         <hr>
         <div class="">
             <div class="subsecao">Contatos:</div>
-            <div class="" *ngFor="let contato of fornecedor.contatos">    
-          <ul>
-            <li *ngIf="contato.tipo == 'F'" class="item-contato"><span class="tipo-contato">Telefone: </span>{{contato | telefoneCorrido}}</li>
-            <li *ngIf="contato.tipo == 'E'" class="item-contato"><span class="tipo-contato">Email: </span>{{contato.valor}}</li>
-          </ul>
-            </div>
+            <ul class="list-group" >
+              <li *ngFor="let contato of fornecedor.contatos" class="list-group-item" >
+                <span *ngIf="contato.tipo == 'F'"><span class="tipo-contato">Telefone: </span>{{contato | telefoneCorrido}}</span>
+                <span *ngIf="contato.tipo == 'E'"><span class="tipo-contato">Email: </span>{{contato.valor}}</span>
+              </li>
+            </ul>
         </div>
         <div class="botoes">
           <button class="btn btn-primary botao" (click)="iniciarEdicao()">
