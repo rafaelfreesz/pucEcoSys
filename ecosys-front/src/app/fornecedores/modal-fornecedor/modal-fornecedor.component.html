@@ -6,17 +6,17 @@
     <!-- VISUALIZAÇÃO -->
     <div class="visualizar" *ngIf="!inEdicao">
       <div class="dados">
-        <p class="razao_social">{{ fornecedor.razao_social }}</p>
+        <p class="fs-2 fw-semibold nome-empresarial">{{ fornecedor.nome_empresarial}}</p>
         <p class="informacao"><span class="label">CNPJ:</span> {{fornecedor.cnpj}}</p>
-        <p class="informacao"><span class="label">Nome Empresarial:</span> {{ fornecedor.nome_empresarial}}</p>
+        <p class="informacao"><span class="label">Razão Social: </span>{{ fornecedor.razao_social }}</p>
         <hr>
-        <div class="subsecao">Endereço:</div>
+        <div class="fs-4 fw-semibold">Endereço</div>
         <div class="">
           {{fornecedor.endereco | enderecoCorrido}}
         </div>
         <hr>
-        <div class="">
-            <div class="subsecao">Contatos:</div>
+        <div >
+            <div class="fs-4 fw-semibold">Contatos</div>
             <ul class="list-group" >
               <li *ngFor="let contato of fornecedor.contatos" class="list-group-item" >
                 <span *ngIf="contato.tipo == 'F'"><span class="tipo-contato">Telefone: </span>{{contato | telefoneCorrido}}</span>

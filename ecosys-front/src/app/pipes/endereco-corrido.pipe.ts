@@ -34,7 +34,7 @@ export class EnderecoCorridoPipe implements PipeTransform {
     }
 
     if (value.cep){
-      endereco+="CEP "+ String(value.cep).substring(0,5)+'-'+String(value.cep).substring(5,8)
+      endereco+=" CEP "+ String(value.cep).substring(0,5)+'-'+String(value.cep).substring(5,8)
     }
     
     return endereco;
