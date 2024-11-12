@@ -7,7 +7,7 @@
     <div class="visualizar" *ngIf="!inEdicao">
       <div class="dados">
         <p class="fs-2 fw-semibold nome-empresarial">{{ fornecedor.nome_empresarial}}</p>
-        <p class="informacao"><span class="label">CNPJ:</span> {{fornecedor.cnpj}}</p>
+        <p class="informacao"><span class="label">CNPJ:</span> {{fornecedor.cnpj | cnpj}}</p>
         <p class="informacao"><span class="label">Razão Social: </span>{{ fornecedor.razao_social }}</p>
         <hr>
         <div class="fs-4 fw-semibold">Endereço</div>

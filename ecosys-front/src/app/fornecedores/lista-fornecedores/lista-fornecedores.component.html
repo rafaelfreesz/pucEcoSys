@@ -53,7 +53,7 @@
                       (click)="selecionarFornecedor(fornecedor)">
                         <td>{{ fornecedor.id | insereZeros:4}}</td>
                         <td>{{ fornecedor.razao_social | encurtar:25}}</td>
-                        <td>{{ fornecedor.cnpj}}</td>
+                        <td>{{ fornecedor.cnpj | cnpj}}</td>
                         <td>{{ fornecedor.nome_empresarial | encurtar:50 }}</td>
                         <td>{{ fornecedor.endereco.cidade }}</td>
                         <td>{{ fornecedor.endereco.estado }}</td>
