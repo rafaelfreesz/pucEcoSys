@@ -32,9 +32,11 @@ export class ModalFornecedorComponent implements OnInit {
         'cidade': new FormControl(this.fornecedor.endereco.cidade),
         'estado': new FormControl(this.fornecedor.endereco.estado),
       }),
-      'contatos': new FormArray([])
+      'contatos': new FormArray(this.buildContatosArray())
 
     })
+
+    
   }
 
   comando(comando: string){
@@ -47,6 +49,26 @@ export class ModalFornecedorComponent implements OnInit {
 
   submeterFormulario(){
     console.log(this.conteudoFormulario.value)
+  }
+
+  getContatos(){
+    console.log(this.conteudoFormulario.get('contatos'))
+    return this.conteudoFormulario.get('contatos').controls
+  }
+
+  private buildContatosArray(){
+    let contatosArray: FormGroup[] = []
+
+    this.fornecedor.contatos.forEach( (contato: {'tipo': String, 'valor': String}) => {
+      contatosArray.push(new FormGroup({
+        'tipo': new FormControl(contato.tipo),
+        'valor': new FormControl(contato.valor),
+        
+      }))
+    })
+
+    return contatosArray;
+
   }
 
 }

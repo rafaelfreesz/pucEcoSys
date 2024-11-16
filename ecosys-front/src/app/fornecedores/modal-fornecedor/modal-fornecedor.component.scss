@@ -159,6 +159,24 @@
                     }
                 }
             }
+
+            .contatos{
+                .linha-de-contato{
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: 10px;
+                    
+                    .tipo{
+                        appearance: listbox;
+                        width: 150px;
+                    }
+                    .valor{
+                        margin-left: 10px;
+                        width: 250px;
+                    }
+
+                }
+            }
         }
     }
     
