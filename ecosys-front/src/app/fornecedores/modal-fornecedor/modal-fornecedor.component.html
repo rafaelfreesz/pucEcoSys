@@ -90,7 +90,7 @@
             </div>
             
           </div>
-          <div class="numero-complemento-bairro">
+          <div class="detalhes-endereco-container">
             <div>
               <label for="numero" class="form-label">Número:</label>
               <input
@@ -116,10 +116,7 @@
                   formControlName="bairro"
                   class="form-control bairro">
             </div>
-          </div>
 
-          <div class="cidade-estado">
-            
             <div class="container-cidade">
 
               <label for="cidade" class="form-label">Cidade:</label>
@@ -147,7 +144,13 @@
       <hr>
 
       <div formArrayName="contatos" class="contatos">
-        <div class="fs-4 fw-semibold">Contatos</div> 
+        <div class="fs-4 fw-semibold titulo">Contatos 
+          <div class="icone-mais-background">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus icone" viewBox="0 0 16 16">
+              <path id="path-mais" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>
+          </div>
+        </div> 
         <div class="" *ngFor="let contatoControl of getContatos(); let i = index">
           <div class="linha-de-contato" [formGroupName]="i">
             <select
@@ -160,10 +163,28 @@
             </select>
             
             <input type="text" class="form-control valor" formControlName="valor" >
+            <div class="icone-mais-background">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-trash-fill icone" viewBox="0 0 16 16">
+                <path id="path-trash" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
-    
+      
+      <hr>
+
+      <div class="botoes">
+        <button type="submit" class="btn btn-primary botao-editar" [disabled]="!conteudoFormulario.valid">
+          <i class="bi bi-floppy-fill"></i> Salvar
+        </button>
+        <button class="btn btn-danger botao-editar" (click)="comando('excluir')">
+          <i class="bi bi-trash-fill"></i> Excluir
+        </button>
+        <button class="btn btn-danger botao-editar" (click)="comando('fechar')">
+          <i class="bi bi-x-circle"></i> Cancelar
+        </button>
+      </div>
     </form>
     </div>
   </div>

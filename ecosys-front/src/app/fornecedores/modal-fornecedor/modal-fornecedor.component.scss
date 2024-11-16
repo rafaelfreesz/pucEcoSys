@@ -13,7 +13,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80vw;
+    width: 70vw;
     height: 89vh;
     padding: 10px;
     z-index: 100;
@@ -30,7 +30,7 @@
 
     .conteudo{
         // display: flex;
-        width: 75vw;
+        width: 65vw;
         .visualizar{
 
             .dados{
@@ -80,14 +80,10 @@
         }
 
         .editar{
-            // display: flex;
             width: inherit;
             
             .dados-basicos{
                 width: inherit;
-                // display: flex;
-                // flex-direction: row;
-                // flex-wrap: wrap;
 
 
                 .form-label{
@@ -110,25 +106,26 @@
                     
                     .container-cep{
                         .cep{
-                            width: 110px;
+                            width: 15vw;
                         }
                         margin-right: 10px;
                     }
                     .logradouro{
-                        width:60vw;
+                        width:50vw;
                     }
                 }
-                .numero-complemento-bairro{
+                .detalhes-endereco-container{
                     display: flex;
                     flex-direction: row;
+                    flex-wrap: wrap;
                     .numero{
-                        width: 100px;
+                        width: 10vw;
                     }
 
                     .container-complemento{
                         margin-left: 10px;
                         .complemento{
-                            width: 100px;
+                            width: 10vw;
                         }
                     }
                     .container-bairro{
@@ -137,12 +134,11 @@
                             width: 250px;
                         }
                     }
-                }
-                .cidade-estado{
-                    display: flex;
-                    flex-direction: row;
-                    .cidade{
-                        width: 200px;
+                    .container-cidade{
+                        margin-left: 10px;
+                        .cidade{
+                            width: 200px;
+                        }
                     }
 
                     .container-estado{
@@ -158,9 +154,30 @@
                         }
                     }
                 }
+                
             }
 
             .contatos{
+                .titulo{
+                    display: flex;
+                    .icone-mais-background{
+                        cursor: pointer;
+                        width: 20px;
+                        height: 20px;
+                        background-color: #198754;
+                        border-radius: 50px;
+                        margin-left:10px;
+                        margin-top: 10px;
+                        .icone{
+                            // margin-bottom: 20px;
+                            vertical-align: top;
+                            #path-mais{
+                                fill: #ffffff;
+                            }
+    
+                        }
+                    }
+                }
                 .linha-de-contato{
                     display: flex;
                     flex-direction: row;
@@ -175,6 +192,41 @@
                         width: 250px;
                     }
 
+                    .icone-mais-background{
+                        cursor: pointer;
+                        width: 22px;
+                        height: 22px;
+                        background-color: #dc3545;
+                        border-radius: 50px;
+                        margin-left:10px;
+                        margin-top: 8px;
+                        .icone{
+                            margin-top: 3px;
+                            margin-left: 2.5px;
+                            vertical-align: top;
+                            #path-trash{
+                                fill: #ffffff;
+                            }
+    
+                        }
+                    }
+
+                }
+            }
+
+            .botoes{
+                display: flex;
+                // justify-content: space-between;
+                width: inherit;
+                .botao{
+                    margin-top: 10px;
+                    margin-right: 10px;
+                    width:20vw;
+                }
+                .botao-editar{
+                    margin-top: 10px;
+                    margin-right: 10px;
+                    width:100%;
                 }
             }
         }
