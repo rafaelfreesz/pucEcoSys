@@ -35,67 +35,115 @@
       </div>
     </div>
     <!-- EDIÇÃO -->
-    <!-- <div class="editar" *ngIf="inEdicao">
-      <img
-        src="https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg"
-        alt=""
-      />
+    <div class="editar" *ngIf="inEdicao">
       <form [formGroup]="conteudoFormulario" (ngSubmit)="submeterFormulario()">
-        <label for="nome" class="form-label">Nome do Produto</label>
-        <input
-            type="text"
-            id="nome"
-            formControlName="nome"
-            class="form-control">
-        <label for="descricao" class="form-label">Descrição:</label>
-        <input
-            type="text"
-            id="descricao"
-            formControlName="descricao"
-            class="form-control">
+        <div class="fs-4 fw-semibold">Dados Básicos</div>
+        <div class="dados-basicos">
 
-        <div class="valores-formulario">
-            <div class="campo-preco">
-                <label for="nome" class="form-label">Preço de venda:</label>
-                <input
-                    type="number"
-                    inputmode="numeric"
-                    step="0.05"
-                    id="nome"
-                    formControlName="preco_venda"
-                    class="form-control"
-                    min="0.00">
-            </div>
-            <div>
-            <label for="qtd_estoque" class="form-label">Quantidade em estoque:</label>
+            <label for="nome_empresarial" class="form-label label">Nome Empresarial:</label>
+            <input
+            type="text"
+                id="nome_empresarial"
+                formControlName="nome_empresarial"
+                class="form-control campo-basico">
+            <label for="razao_social" class="form-label label">Razão Social:</label>
+            <input
+            type="text"
+            id="razao_social"
+            formControlName="razao_social"
+            class="form-control campo-basico">
+            
+            <label for="cnpj" class="form-label">CNPJ:</label>
             <input
                 type="text"
-                id="qtd_estoque"
-                formControlName="qtd_estoque"
-                class="form-control"
-                [value]="produto.qtd_estoque"
-                readonly>
+                id="cnpj"
+                formControlName="cnpj"
+                class="form-control cnpj">
+        </div>
+
+        <hr>
+         
+        <div class="endereco">
+
+        
+        <div class="fs-4 fw-semibold">Endereço</div>
+        <div class="dados-basicos" formGroupName="endereco">
+
+          <div class="cep-logradouro">
+            
+            <div class="container-cep">
+              <label for="cep" class="form-label">CEP:</label>
+              <input
+              type="text"
+              id="cep"
+              formControlName="cep"
+              class="form-control cep">
             </div>
+
+            <div >
+              <label for="logradouro" class="form-label">Logradouro:</label>
+              <input
+              type="text"
+              id="logradouro"
+              formControlName="logradouro"
+              class="form-control logradouro">
+            </div>
+            
+          </div>
+          <div class="numero-complemento-bairro">
+            <div>
+              <label for="numero" class="form-label">Número:</label>
+              <input
+                  type="text"
+                  id="numero"
+                  formControlName="numero"
+                  class="form-control numero">
+            </div>
+            
+            <div class="container-complemento">
+              <label for="complemento" class="form-label">Compl.:</label>
+              <input
+                  type="text"
+                  id="complemento"
+                  formControlName="complemento"
+                  class="form-control complemento">
+            </div>
+            <div class="container-bairro">
+              <label for="bairro" class="form-label">Bairro:</label>
+              <input
+                  type="text"
+                  id="bairro"
+                  formControlName="bairro"
+                  class="form-control bairro">
+            </div>
+          </div>
+
+          <div class="cidade-estado">
+            
+            <div class="container-cidade">
+
+              <label for="cidade" class="form-label">Cidade:</label>
+              <input
+              type="text"
+              id="cidade"
+              formControlName="cidade"
+              class="form-control cidade">
+              
+            </div>
+            <div class="container-estado">
+
+              <label for="estado" class="form-label">Estado:</label>
+              <input
+              type="text"
+              id="estado"
+              formControlName="estado"
+              class="form-control estado">
+              
+            </div>
+          </div>
         </div>
-        <label for="nome" class="form-label">URL imagem:</label>
-        <div class="url-imagem">
-            {{url_teste}}
-            <button class="btn btn-primary btn-sm botao-alterar-imagem" (click)="comando('fechar')">
-                <i class="bi bi-pencil-square" ></i> Alterar imagem
-            </button>
-        </div>
-            <div class="botoes">
-          <button type="submit" class="btn btn-primary botao-editar" [disabled]="!conteudoFormulario.valid">
-            <i class="bi bi-floppy-fill"></i> Salvar
-        </button>
-        <button class="btn btn-danger botao-editar" (click)="comando('excluir')">
-          <i class="bi bi-trash-fill"></i> Excluir
-        </button>
-        <button class="btn btn-danger botao-editar" (click)="comando('fechar')">
-          <i class="bi bi-x-circle"></i> Cancelar
-        </button>
-        </div>
+      </div>
       </form>
-    </div> -->
+    </div>
   </div>
 </div>

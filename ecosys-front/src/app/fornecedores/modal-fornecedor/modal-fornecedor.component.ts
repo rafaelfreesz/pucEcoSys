@@ -18,22 +18,23 @@ export class ModalFornecedorComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("OOOOOOO",this.fornecedor)
-    // this.conteudoFormulario = new FormGroup({
-    //   'cnpj': new FormControl(),
-    //   'razao_social': new FormControl(),
-    //   'nome_empresarial': new FormControl(),
-    //   'endereco': new FormGroup({
-    //     'logradouro': new FormControl(),
-    //     'numero': new FormControl(),
-    //     'complemento': new FormControl(),
-    //     'cep': new FormControl(),
-    //     'bairro': new FormControl(),
-    //     'cidade': new FormControl(),
-    //     'estado': new FormControl(),
-    //   }),
-    //   'contatos': new FormArray([])
+    this.inEdicao = true
+    this.conteudoFormulario = new FormGroup({
+      'cnpj': new FormControl(this.fornecedor.cnpj),
+      'razao_social': new FormControl(this.fornecedor.razao_social),
+      'nome_empresarial': new FormControl(this.fornecedor.nome_empresarial),
+      'endereco': new FormGroup({
+        'logradouro': new FormControl(this.fornecedor.endereco.logradouro),
+        'numero': new FormControl(this.fornecedor.endereco.numero),
+        'complemento': new FormControl(this.fornecedor.endereco.complemento),
+        'cep': new FormControl(this.fornecedor.endereco.cep),
+        'bairro': new FormControl(this.fornecedor.endereco.bairro),
+        'cidade': new FormControl(this.fornecedor.endereco.cidade),
+        'estado': new FormControl(this.fornecedor.endereco.estado),
+      }),
+      'contatos': new FormArray([])
 
-    // })
+    })
   }
 
   comando(comando: string){
@@ -42,6 +43,10 @@ export class ModalFornecedorComponent implements OnInit {
 
   iniciarEdicao(){
     this.inEdicao = true
+  }
+
+  submeterFormulario(){
+    console.log(this.conteudoFormulario.value)
   }
 
 }
