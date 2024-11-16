@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Form, FormArray, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-fornecedor',
@@ -12,6 +12,7 @@ export class ModalFornecedorComponent implements OnInit {
   @Output() onComando: EventEmitter<string> = new EventEmitter<string>();
   conteudoFormulario: FormGroup | any;
   @Input() inEdicao: boolean = false;
+  private temContatoSemDados: boolean = false;
 
 
   constructor() { }
@@ -69,6 +70,14 @@ export class ModalFornecedorComponent implements OnInit {
 
     return contatosArray;
 
+  }
+
+  criarContato(): void{
+    if(!this.temContatoSemDados){
+      const control = new FormControl(null);
+      (<FormArray>this.conteudoFormulario.get('contatos').push(control));
+      this.temContatoSemDados = true;
+    }
   }
 
 }
