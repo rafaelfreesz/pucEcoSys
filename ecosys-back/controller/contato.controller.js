@@ -67,7 +67,7 @@ class ContatoController {
                 fk_fornecedor: request.body.fk_fornecedor
             }
 
-            let ret = await ContatoRepository.incluir(body)
+            let ret = (await ContatoRepository.incluir(body))[0]
             response.json(ret)
 
         }catch(e){
