@@ -91,8 +91,10 @@ class ContatoController {
     async excluirPorId(request, response, next) {
 
         try{
+
             await ContatoRepository.excluirPorId(request.params.id)
-            response.redirect('/contatos')
+            resp.json({'status': 'ok'})
+            
         }catch(e){
             response.json(e)
         }
