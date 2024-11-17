@@ -17,7 +17,7 @@ class ContatoRepository{
     }
 
     incluir(contato){
-        const sql = 'INSERT INTO tb_contato(tipo,valor,fk_fornecedor) VALUES ($1,$2,$3)';
+        const sql = 'INSERT INTO tb_contato(tipo,valor,fk_fornecedor) VALUES ($1,$2,$3) returning *';
         
         return executarQuery(sql,
             [

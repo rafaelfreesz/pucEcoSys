@@ -60,8 +60,15 @@ class ContatoController {
 
     async incluir(request, response, next) {
         try{
-            await ContatoRepository.incluir(request.body)
-            response.redirect('/contatos')
+            
+            let body = {
+                tipo: request.body.contato.tipo,
+                valor: request.body.contato.valor,
+                fk_fornecedor: request.body.fk_fornecedor
+            }
+
+            let ret = await ContatoRepository.incluir(body)
+            response.json(ret)
 
         }catch(e){
             response.json(e)
@@ -94,7 +101,7 @@ class ContatoController {
 
             await ContatoRepository.excluirPorId(request.params.id)
             resp.json({'status': 'ok'})
-            
+
         }catch(e){
             response.json(e)
         }
