@@ -21,6 +21,10 @@ export class FornecedorService{
         })
     }
 
+    excluirContato(idContato: number):void{
+        this.httpService.deleteContato(idContato).subscribe()
+    }
+
     // deletarFornecedor(id: number): void{
     //     this.httpService.deleteFornecedor(id).subscribe( todosFornecedores => {
     //         this.todosFornecedores = todosFornecedores

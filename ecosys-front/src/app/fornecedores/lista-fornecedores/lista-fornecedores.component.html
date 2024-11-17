@@ -64,7 +64,7 @@
                 *ngIf = "fornecedorSelecionado || isNovoFornecedor"
                 [fornecedor] = "fornecedorSelecionado"
                 [inEdicao] = "isNovoFornecedor"
-                (onComando) = "fecharModal('event')"
+                (onComando) = "fecharModal($event)"
                 ></app-modal-fornecedor>
   
           </div>

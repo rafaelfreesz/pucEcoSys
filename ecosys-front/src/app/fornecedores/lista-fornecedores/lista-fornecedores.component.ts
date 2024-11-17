@@ -22,7 +22,7 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
     this.fornecedoresAlterados = this.fornecedorService.fornecedoresAlterados.subscribe(
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
-        this.fornecedorSelecionado = this.todosFornecedores[0]
+        // this.fornecedorSelecionado = this.todosFornecedores[0]
       }
     )
   }
@@ -45,7 +45,10 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
   }
 
   fecharModal(evento: string){
-    if(evento === 'excluir'){
+
+    if(evento === "fecharComAlteracao"){
+      this.fornecedorService.buscarTodosFornecedores();
+    }else if(evento === 'excluir'){
       if(this.fornecedorSelecionado!=null && this.fornecedorSelecionado.id){
         // this.fornecedorService.deletarProduto(this.fornecedorSelecionado.id);
       }
@@ -58,5 +61,6 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
     this.isNovoFornecedor = false;
     this.fornecedorSelecionado = null;
   }
+
 
 }
