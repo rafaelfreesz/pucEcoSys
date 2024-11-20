@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Fornecedor } from "../models/fornecedor.model";
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { HttpService } from "./http.service";
 
 @Injectable()
@@ -9,16 +9,34 @@ export class FornecedorService{
     fornecedoresAlterados: Subject<Fornecedor[]> = new Subject<Fornecedor[]>()
     private todosFornecedores: Fornecedor[] = []
 
+    private fornecedorSelecionado: Fornecedor | null = null;
+    fornecedorFoiSeleciontado: Subject<Fornecedor | null> = new Subject<Fornecedor | null>();
+
+    
     constructor(private httpService: HttpService){
         this.buscarTodosFornecedores();
     }
     
-
     buscarTodosFornecedores(): void{
         this.httpService.getTodosFornecedores().subscribe( todosFornecedores => {
             this.todosFornecedores = todosFornecedores
             this.fornecedoresAlterados.next(this.todosFornecedores.slice());
         })
+    }
+    
+    temFornecedorSelecionado(): boolean {
+        return this.fornecedorSelecionado !== null
+    }
+
+    selecionarFornecedor(fornecedor: Fornecedor){
+        this.fornecedorSelecionado = fornecedor;
+        this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
+    }
+
+    liberarFornecedorSelecionado(comando: string){
+        this.fornecedorSelecionado = null;
+        this.fornecedorFoiSeleciontado.next(null)
+        
     }
 
     excluirContato(idContato: number):void{

@@ -60,12 +60,8 @@
                       </tr>
                     </tbody>
               </table>
-              <app-modal-fornecedor
-                *ngIf = "fornecedorSelecionado || isNovoFornecedor"
-                [fornecedor] = "fornecedorSelecionado"
-                [inEdicao] = "isNovoFornecedor"
-                (onComando) = "fecharModal($event)"
-                ></app-modal-fornecedor>
+
+              <app-modal-fornecedor></app-modal-fornecedor>
   
           </div>
         </div>

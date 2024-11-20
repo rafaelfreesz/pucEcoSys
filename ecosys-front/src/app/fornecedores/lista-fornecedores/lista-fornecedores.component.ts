@@ -11,11 +11,9 @@ import { FornecedorService } from 'src/app/services/fornecedor.service';
 export class ListaFornecedoresComponent implements OnInit, OnDestroy {
 
   todosFornecedores: Fornecedor[] = [];
-  fornecedorSelecionado: Fornecedor | null = null;
   private fornecedoresAlterados: Subscription
   criterioFiltro: string = "razao_social";
   valorFiltro: string = "";
-  isNovoFornecedor: boolean = false;
   totalFiltrado: number = 0;
 
   constructor(private fornecedorService: FornecedorService) {
@@ -36,30 +34,29 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
   }
 
   selecionarFornecedor(fornecedor: Fornecedor){
-    this.fornecedorSelecionado = fornecedor;
+    this.fornecedorService.selecionarFornecedor(fornecedor)
   }
 
   prepararCadastro(){
-    this.fornecedorSelecionado = new Fornecedor();
-    this.isNovoFornecedor = true;
+    this.fornecedorService.selecionarFornecedor(new Fornecedor());
   }
 
   fecharModal(evento: string){
 
-    if(evento === "fecharComAlteracao"){
-      this.fornecedorService.buscarTodosFornecedores();
-    }else if(evento === 'excluir'){
-      if(this.fornecedorSelecionado!=null && this.fornecedorSelecionado.id){
-        // this.fornecedorService.deletarProduto(this.fornecedorSelecionado.id);
-      }
-    }else if(evento === 'salvar'){
-      if(this.fornecedorSelecionado != null){
-        // this.fornecedorService.salvarProduto(this.fornecedorSelecionado);
-      }
-    }
+    // if(evento === "fecharComAlteracao"){
+    //   this.fornecedorService.buscarTodosFornecedores();
+    // }else if(evento === 'excluir'){
+    //   if(this.fornecedorSelecionado!=null && this.fornecedorSelecionado.id){
+    //     // this.fornecedorService.deletarProduto(this.fornecedorSelecionado.id);
+    //   }
+    // }else if(evento === 'salvar'){
+    //   if(this.fornecedorSelecionado != null){
+    //     // this.fornecedorService.salvarProduto(this.fornecedorSelecionado);
+    //   }
+    // }
 
-    this.isNovoFornecedor = false;
-    this.fornecedorSelecionado = null;
+    // this.isNovoFornecedor = false;
+    // this.fornecedorSelecionado = null;
   }
 
 

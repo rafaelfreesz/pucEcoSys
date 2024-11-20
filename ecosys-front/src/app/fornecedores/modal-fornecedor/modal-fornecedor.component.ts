@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Fornecedor } from 'src/app/models/fornecedor.model';
 import { FornecedorService } from 'src/app/services/fornecedor.service';
 
 @Component({
@@ -7,20 +9,64 @@ import { FornecedorService } from 'src/app/services/fornecedor.service';
   templateUrl: './modal-fornecedor.component.html',
   styleUrls: ['./modal-fornecedor.component.scss']
 })
-export class ModalFornecedorComponent implements OnInit {
+export class ModalFornecedorComponent implements OnInit, OnDestroy {
 
-  @Input() fornecedor: any;
-  @Output() onComando: EventEmitter<string> = new EventEmitter<string>();
+  fornecedor: any = null;
+  fornecedorFoiSelecionado: Subscription;
+  
   conteudoFormulario: FormGroup | any;
   @Input() inEdicao: boolean = false;
   inHouveAlteracao: boolean = false;
   private temContatoSemDados: boolean = false;
 
 
-  constructor(private fornecedorService: FornecedorService) { }
+  constructor(private fornecedorService: FornecedorService) {
+    this.fornecedorFoiSelecionado = this.fornecedorService.fornecedorFoiSeleciontado.subscribe(
+      fornecedorSelecionado =>
+        {
+          this.fornecedor = fornecedorSelecionado
+          if(this.fornecedor){
+            this.popularCampos();
+          }
+        }
+    )
+  }
 
   ngOnInit(): void {
+    this.inEdicao = true    
+  }
+
+  ngOnDestroy(): void {
+    this.fornecedorService.fornecedorFoiSeleciontado.unsubscribe()
+  }
+
+  temFornecedorSelecionado(): boolean{
+    return this.fornecedor !== null;
+  }
+
+  comando(comando: string){
+    if(comando === 'fechar' && this.inHouveAlteracao){
+      comando = "fecharComAlteracao"
+    }
+    this.fornecedorService.liberarFornecedorSelecionado('fechar')
+    // this.onComando.emit(comando);
+  }
+
+  iniciarEdicao(){
     this.inEdicao = true
+  }
+
+  submeterFormulario(){
+    console.log(this.conteudoFormulario.value)
+  }
+
+
+  getContatos(){
+    return this.conteudoFormulario.get('contatos').controls
+  }
+
+  
+  private popularCampos(){
     if(this.fornecedor){
 
       this.conteudoFormulario = new FormGroup({
@@ -43,36 +89,19 @@ export class ModalFornecedorComponent implements OnInit {
     }
   }
 
-  comando(comando: string){
-    if(comando === 'fechar' && this.inHouveAlteracao){
-      comando = "fecharComAlteracao"
-    }
-    this.onComando.emit(comando);
-  }
-
-  iniciarEdicao(){
-    this.inEdicao = true
-  }
-
-  submeterFormulario(){
-    console.log(this.conteudoFormulario.value)
-  }
-
-  getContatos(){
-    return this.conteudoFormulario.get('contatos').controls
-  }
-
   private buildContatosArray(){
     let contatosArray: FormGroup[] = []
 
-    this.fornecedor.contatos.forEach( (contato: {'id': Number, 'tipo': String, 'valor': String}) => {
-      contatosArray.push(new FormGroup({
-        'id': new FormControl(contato.id),
-        'tipo': new FormControl(contato.tipo),
-        'valor': new FormControl(contato.valor),
-        
-      }))
-    })
+    if(this.fornecedor !== null){
+      this.fornecedor.contatos.forEach( (contato: {'id': Number, 'tipo': String, 'valor': String}) => {
+        contatosArray.push(new FormGroup({
+          'id': new FormControl(contato.id),
+          'tipo': new FormControl(contato.tipo),
+          'valor': new FormControl(contato.valor),
+          
+        }))
+      })
+    }
 
     return contatosArray;
 

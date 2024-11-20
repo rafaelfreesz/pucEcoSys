@@ -1,6 +1,6 @@
-<div class="blackdrop" (click)="comando('fechar')"></div>
+<div class="blackdrop" (click)="comando('fechar')" *ngIf="this.temFornecedorSelecionado()"></div>
 
-<div class="alert-box">
+<div class="alert-box" *ngIf="this.temFornecedorSelecionado()">
   <div class="fechar" (click)="comando('fechar')">x</div>
   <div class="conteudo">
     <!-- VISUALIZAÇÃO -->
