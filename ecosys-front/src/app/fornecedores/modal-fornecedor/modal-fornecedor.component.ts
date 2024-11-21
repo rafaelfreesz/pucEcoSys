@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Contato } from 'src/app/models/contato.model';
 import { Fornecedor } from 'src/app/models/fornecedor.model';
 import { FornecedorService } from 'src/app/services/fornecedor.service';
 
@@ -17,7 +18,6 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   conteudoFormulario: FormGroup | any;
   @Input() inEdicao: boolean = false;
   inHouveAlteracao: boolean = false;
-  private temContatoSemDados: boolean = false;
 
 
   constructor(private fornecedorService: FornecedorService) {
@@ -82,6 +82,10 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
           'cidade': new FormControl(this.fornecedor.endereco.cidade),
           'estado': new FormControl(this.fornecedor.endereco.estado),
         }),
+        'contato-novo': new FormGroup({
+          'tipo-novo': new FormControl(),      
+          'valor-novo': new FormControl(),      
+      }),
         'contatos': new FormArray(this.buildContatosArray())
         
       })
@@ -107,26 +111,40 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
 
   }
 
-  criarContato(): void{
-    if(!this.temContatoSemDados){
-      const control = new FormGroup({
-        'id': new FormControl(null),
-        'tipo': new FormControl(''),
-        'valor': new FormControl('')
-      });
-      (<FormArray>this.conteudoFormulario.get('contatos').push(control));
-      this.temContatoSemDados = true;
-    }
+  incluirContato(): void{
+
+    let novoContato = new Contato();
+
+    novoContato.tipo = this.conteudoFormulario.value['contato-novo']['tipo-novo']
+    novoContato.valor = this.conteudoFormulario.value['contato-novo']['valor-novo']
+
+    console.log(novoContato)
+
+    this.fornecedorService.salvarContato(novoContato,this.fornecedor.id).then(
+      (resp: any) => {
+        novoContato.id = resp.id;
+        this.fornecedor.contatos.push(novoContato);
+        const control = new FormGroup({
+          'id': new FormControl(novoContato.id),
+          'tipo': new FormControl(novoContato.tipo),
+          'valor': new FormControl(novoContato.valor)
+        });
+        (<FormArray>this.conteudoFormulario.get('contatos').push(control));
+      }
+    )
+
+  
   }
 
   excluirContato(i: number): void{
 
     let contato = this.conteudoFormulario.value.contatos[i]
-
+    console.log(contato)
     if(contato.id){
       this.fornecedorService.excluirContato(contato.id)
       this.conteudoFormulario.controls.contatos.removeAt(i)
       this.inHouveAlteracao = true;
+      
     }
     
   }

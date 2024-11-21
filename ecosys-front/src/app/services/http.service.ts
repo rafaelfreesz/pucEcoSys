@@ -115,11 +115,11 @@ export class HttpService{
         return this.http.delete<any>(`http://localhost:3000/contatos/${idContato}`)
     }
 
-    salvarContato(contato: Contato, fkFornecedor: number){
+    salvarContato(contato: Contato, idFornecedor: number){
         return this.http.post<any>(`http://localhost:3000/contatos/`,
             {
                 'contato': contato,
-                'fk_fornecedor': fkFornecedor
+                'fk_fornecedor': idFornecedor
             }
         )
     }

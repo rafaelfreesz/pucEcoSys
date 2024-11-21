@@ -158,8 +158,21 @@
             }
 
             .contatos{
-                .titulo{
+                
+                .cabecalho{
                     display: flex;
+                }
+                .container-adicionar-contato{
+                    display: flex;
+                    margin-left: 15px;
+                    .tipo-novo{
+                        appearance: listbox;
+                        width: 150px;
+                    }
+                    .valor-novo{
+                        margin-left: 10px;
+                        width: 250px;
+                    }
                     .icone-mais-background{
                         cursor: pointer;
                         width: 20px;
@@ -178,6 +191,7 @@
                         }
                     }
                 }
+
                 .linha-de-contato{
                     display: flex;
                     flex-direction: row;

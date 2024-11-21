@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Fornecedor } from "../models/fornecedor.model";
 import { Subject } from "rxjs";
 import { HttpService } from "./http.service";
+import { Contato } from "../models/contato.model";
 
 @Injectable()
 export class FornecedorService{
@@ -41,6 +42,15 @@ export class FornecedorService{
 
     excluirContato(idContato: number):void{
         this.httpService.deleteContato(idContato).subscribe()
+    }
+
+    salvarContato(contato: Contato, idFornecedor: number){
+        return new Promise((resolve) => {
+            this.httpService.salvarContato(contato,idFornecedor).subscribe(
+                (ret) => {resolve(ret)}
+            );
+
+        })
     }
 
     // deletarFornecedor(id: number): void{
