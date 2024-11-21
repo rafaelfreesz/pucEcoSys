@@ -40,11 +40,16 @@ export class FornecedorService{
         
     }
 
-    excluirContato(idContato: number):void{
-        this.httpService.deleteContato(idContato).subscribe()
+    excluirContato(idContato: number): Promise<any>{
+        return new Promise((resolve) => {
+            
+            this.httpService.deleteContato(idContato).subscribe(
+                (resp) => {resolve(resp)}
+            )
+        })
     }
 
-    salvarContato(contato: Contato, idFornecedor: number){
+    salvarContato(contato: Contato, idFornecedor: number): Promise<any>{
         return new Promise((resolve) => {
             this.httpService.salvarContato(contato,idFornecedor).subscribe(
                 (ret) => {resolve(ret)}

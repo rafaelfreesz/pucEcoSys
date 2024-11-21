@@ -118,8 +118,7 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
     novoContato.tipo = this.conteudoFormulario.value['contato-novo']['tipo-novo']
     novoContato.valor = this.conteudoFormulario.value['contato-novo']['valor-novo']
 
-    console.log(novoContato)
-
+    
     this.fornecedorService.salvarContato(novoContato,this.fornecedor.id).then(
       (resp: any) => {
         novoContato.id = resp.id;
@@ -130,6 +129,7 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
           'valor': new FormControl(novoContato.valor)
         });
         (<FormArray>this.conteudoFormulario.get('contatos').push(control));
+        this.inHouveAlteracao = true
       }
     )
 
@@ -139,13 +139,13 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   excluirContato(i: number): void{
 
     let contato = this.conteudoFormulario.value.contatos[i]
-    console.log(contato)
-    if(contato.id){
-      this.fornecedorService.excluirContato(contato.id)
-      this.conteudoFormulario.controls.contatos.removeAt(i)
-      this.inHouveAlteracao = true;
-      
-    }
+    
+    this.fornecedorService.excluirContato(contato.id).then(
+      () => {
+        this.conteudoFormulario.controls.contatos.removeAt(i)
+        this.inHouveAlteracao = true;
+      }
+    )
     
   }
 
