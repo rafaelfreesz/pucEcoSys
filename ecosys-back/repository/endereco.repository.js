@@ -17,19 +17,23 @@ class EnderecoRepository{
     }
 
     incluir(endereco){
-        const sql = 'INSERT INTO tb_endereco(logradouro,numero,complemento,fk_fornecedor) VALUES ($1,$2,$3,$4)';
+        const sql = 'INSERT INTO tb_endereco(logradouro,numero,complemento,cep,bairro,cidade,estado,fk_fornecedor) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
         return executarQuery(sql,
             [
                 endereco.logradouro,
                 endereco.numero,
                 endereco.complemento,
+                endereco.cep,
+                endereco.bairro,
+                endereco.cidade,
+                endereco.estado,
                 endereco.fk_fornecedor
             ])
     }
 
     async alterar(id,endereco){
 
-        const keys = ['logradouro','numero','complemento','fk_fornecedor'];
+        const keys = ['logradouro','numero','complemento','cep','bairro','cidade','estado','fk_fornecedor'];
         const fields = [];
     
         keys.forEach(key => {

@@ -15,7 +15,7 @@ class FornecedorRepository{
     };
 
     incluir(fornecedor){
-        const sql = 'INSERT INTO tb_fornecedor(cnpj, razao_social, nome_empresarial) VALUES ($1,$2,$3) RETURNING *'
+        const sql = 'INSERT INTO tb_fornecedor(cnpj, razao_social, nome_empresarial) VALUES ($1,$2,$3) RETURNING id'
         return executarQuery(sql,
             [
                 fornecedor.cnpj, 
