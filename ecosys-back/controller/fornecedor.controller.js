@@ -85,7 +85,7 @@ class FornecedorController {
                 await EnderecoRepository.alterar(id, fornecedor['endereco'])
             }
 
-            response.redirect('/fornecedores')
+            response.json({})
 
         
         }catch(e){
