@@ -53,6 +53,7 @@ class FornecedorController {
 
     async incluir(request, response, next) {
         try{
+            
             const fornecedor = request.body
             fornecedor._id = (await FornecedorRepository.incluir(request.body))[0].id
             //Persistindo endereço
@@ -61,6 +62,15 @@ class FornecedorController {
                 endereco.fk_fornecedor = fornecedor._id;
                 await EnderecoRepository.incluir(endereco);
             }
+
+            const contatos = fornecedor.contatos;
+            
+            contatos.forEach(
+                async contato => {
+                    contato.fk_fornecedor=fornecedor._id
+                    await ContatoRepository.incluir(contato)
+                }
+            )
             
 
             response.json({})
