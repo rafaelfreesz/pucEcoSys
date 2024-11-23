@@ -4,11 +4,7 @@ import { Subject } from "rxjs";
 import { HttpService } from "./http.service";
 import { Contato } from "../models/contato.model";
 
-@Injectable(
-    {
-        providedIn: Fornecedor
-    }
-)
+@Injectable({providedIn: Fornecedor})
 export class FornecedorService{
     
     fornecedoresAlterados: Subject<Fornecedor[]> = new Subject<Fornecedor[]>()
@@ -26,7 +22,23 @@ export class FornecedorService{
         this.httpService.getTodosFornecedores().subscribe( todosFornecedores => {
             this.todosFornecedores = todosFornecedores
             this.fornecedoresAlterados.next(this.todosFornecedores.slice());
+            // this.selecionarFornecedor(this.todosFornecedores[0])
         })
+    }
+
+    salvarFornecedor(fornecedor: Fornecedor){
+        if(fornecedor.id === -1){ //alteração
+            
+        }else{ //cadastro
+            this.httpService.updateFornecedor(fornecedor).subscribe(
+                () => {
+                    this.buscarTodosFornecedores()
+                    this.fornecedorSelecionado = null;
+                    this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
+                }
+            )
+
+        }
     }
     
     temFornecedorSelecionado(): boolean {

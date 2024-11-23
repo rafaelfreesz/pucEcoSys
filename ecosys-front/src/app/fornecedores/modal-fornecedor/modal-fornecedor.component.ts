@@ -45,11 +45,12 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   }
 
   comando(comando: string){
-    if(comando === 'fechar' && this.inHouveAlteracao){
+    if(comando === 'salvar' && this.inHouveAlteracao){
       comando = "fecharComAlteracao"
     }
+
     this.fornecedorService.liberarFornecedorSelecionado('fechar')
-    // this.onComando.emit(comando);
+
   }
 
   iniciarEdicao(){
@@ -57,7 +58,8 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   }
 
   submeterFormulario(){
-    console.log(this.conteudoFormulario.value)
+    this.atribuirFormularioAoFornecedor();
+    this.fornecedorService.salvarFornecedor(this.fornecedor)
   }
 
 
@@ -91,6 +93,19 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
       })
     
     }
+  }
+
+  private atribuirFormularioAoFornecedor(){
+    this.fornecedor.cnpj = this.conteudoFormulario.value.cnpj
+    this.fornecedor.razao_social = this.conteudoFormulario.value.razao_social
+    this.fornecedor.nome_empresarial = this.conteudoFormulario.value.nome_empresarial
+    this.fornecedor.endereco.logradouro = this.conteudoFormulario.value.endereco.logradouro
+    this.fornecedor.endereco.numero = this.conteudoFormulario.value.endereco.numero
+    this.fornecedor.endereco.complemento = this.conteudoFormulario.value.endereco.complemento
+    this.fornecedor.endereco.cep = this.conteudoFormulario.value.endereco.cep
+    this.fornecedor.endereco.bairro = this.conteudoFormulario.value.endereco.bairro
+    this.fornecedor.endereco.cidade = this.conteudoFormulario.value.endereco.cidade
+    this.fornecedor.endereco.estado = this.conteudoFormulario.value.endereco.estado
   }
 
   private buildContatosArray(){
