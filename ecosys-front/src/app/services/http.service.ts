@@ -65,17 +65,15 @@ export class HttpService{
     //FORNECEDORES
     private buildListaFornecedor(resposta: any){
         const fornecedores: Fornecedor[] = []
-
         for (const i in resposta){
             const fornecedor:Fornecedor = new Fornecedor();
-
             fornecedor.id = resposta[i].id;
             fornecedor.cnpj = resposta[i].cnpj;
             fornecedor.razao_social = resposta[i].razao_social;
             fornecedor.nome_empresarial= resposta[i].nome_empresarial
-
+            
             const endereco = new Endereco();
-
+            
             endereco.id = resposta[i].endereco.id;
             endereco.logradouro = resposta[i].endereco.logradouro;
             endereco.numero = resposta[i].endereco.numero;
@@ -109,6 +107,10 @@ export class HttpService{
             map( this.buildListaFornecedor )
         )
 
+    }
+
+    insertFornecedor(fornecedor: Fornecedor){
+        return this.http.post('http://localhost:3000/fornecedores',fornecedor)
     }
 
     updateFornecedor(fornecedor: Fornecedor){

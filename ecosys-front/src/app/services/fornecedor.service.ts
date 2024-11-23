@@ -28,7 +28,13 @@ export class FornecedorService{
 
     salvarFornecedor(fornecedor: Fornecedor){
         if(fornecedor.id === -1){ //alteração
-            
+            this.httpService.insertFornecedor(fornecedor).subscribe(
+                () => {
+                    this.buscarTodosFornecedores()
+                    this.fornecedorSelecionado = null;
+                    this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
+                }
+            )
         }else{ //cadastro
             this.httpService.updateFornecedor(fornecedor).subscribe(
                 () => {
