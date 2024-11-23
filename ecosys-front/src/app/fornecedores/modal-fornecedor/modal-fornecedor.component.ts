@@ -44,6 +44,10 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
     return this.fornecedor !== null;
   }
 
+  fechar(){
+    
+  }
+
   comando(comando: string){
     if(comando === 'salvar' && this.inHouveAlteracao){
       comando = "fecharComAlteracao"
@@ -133,21 +137,34 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
     novoContato.tipo = this.conteudoFormulario.value['contato-novo']['tipo-novo']
     novoContato.valor = this.conteudoFormulario.value['contato-novo']['valor-novo']
 
-    
-    this.fornecedorService.salvarContato(novoContato,this.fornecedor.id).then(
-      (resp: any) => {
-        novoContato.id = resp.id;
-        this.fornecedor.contatos.push(novoContato);
-        const control = new FormGroup({
-          'id': new FormControl(novoContato.id),
-          'tipo': new FormControl(novoContato.tipo),
-          'valor': new FormControl(novoContato.valor)
-        });
-        (<FormArray>this.conteudoFormulario.get('contatos').push(control));
-        this.inHouveAlteracao = true
-      }
-    )
+    if(this.fornecedor.id === -1){ //fornecedor novo
 
+      this.fornecedor.contatos.push(novoContato)
+      const control = new FormGroup({
+        'id': new FormControl(novoContato.id),
+        'tipo': new FormControl(novoContato.tipo),
+        'valor': new FormControl(novoContato.valor)
+      });
+
+      (<FormArray>this.conteudoFormulario.get('contatos').push(control));
+
+    }else{ //fornecedorJaExistente
+
+      this.fornecedorService.salvarContato(novoContato,this.fornecedor.id).then(
+        (resp: any) => {
+          novoContato.id = resp.id;
+          this.fornecedor.contatos.push(novoContato);
+          const control = new FormGroup({
+            'id': new FormControl(novoContato.id),
+            'tipo': new FormControl(novoContato.tipo),
+            'valor': new FormControl(novoContato.valor)
+          });
+          (<FormArray>this.conteudoFormulario.get('contatos').push(control));
+          this.inHouveAlteracao = true
+        }
+      )
+      
+    }
   
   }
 
@@ -155,12 +172,22 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
 
     let contato = this.conteudoFormulario.value.contatos[i]
     
-    this.fornecedorService.excluirContato(contato.id).then(
-      () => {
-        this.conteudoFormulario.controls.contatos.removeAt(i)
-        this.inHouveAlteracao = true;
-      }
-    )
+    if(this.fornecedor.id === -1){
+
+      this.fornecedor.contatos.splice(i,0)
+      this.conteudoFormulario.controls.contatos.removeAt(i)
+
+    }else{
+
+      this.fornecedorService.excluirContato(contato.id).then(
+        () => {
+          this.conteudoFormulario.controls.contatos.removeAt(i)
+          this.inHouveAlteracao = true;
+        }
+      )
+
+    }
+
     
   }
 
