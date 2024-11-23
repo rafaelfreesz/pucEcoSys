@@ -4,7 +4,11 @@ import { Subject } from "rxjs";
 import { HttpService } from "./http.service";
 import { Contato } from "../models/contato.model";
 
-@Injectable()
+@Injectable(
+    {
+        providedIn: Fornecedor
+    }
+)
 export class FornecedorService{
     
     fornecedoresAlterados: Subject<Fornecedor[]> = new Subject<Fornecedor[]>()
