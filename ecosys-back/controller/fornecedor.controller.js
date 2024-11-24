@@ -108,7 +108,7 @@ class FornecedorController {
 
         try{
             await FornecedorRepository.excluirPorId(request.params.id)
-            response.redirect('/fornecedores')
+            response.json({})
         }catch(e){
             response.json(e)
         }
