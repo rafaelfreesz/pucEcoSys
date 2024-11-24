@@ -24,6 +24,7 @@ import { ModalFornecedorComponent } from './fornecedores/modal-fornecedor/modal-
 import { EnderecoCorridoPipe } from './pipes/endereco-corrido.pipe';
 import { TelefoneCorridoPipe } from './pipes/telefone-corrido.pipe';
 import { CnpjPipe } from './pipes/cnpj.pipe';
+import { EntradasComponent } from './secoes/entradas/entradas.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CnpjPipe } from './pipes/cnpj.pipe';
     ModalFornecedorComponent,
     EnderecoCorridoPipe,
     TelefoneCorridoPipe,
-    CnpjPipe
+    CnpjPipe,
+    EntradasComponent
   ],
   imports: [
     BrowserModule,
