@@ -46,6 +46,19 @@ export class FornecedorService{
 
         }
     }
+
+    excluirFornecedor(){
+        if(this.fornecedorSelecionado){
+            this.httpService.deleteFornecedor(this.fornecedorSelecionado.id).subscribe(
+                () => {
+                    this.buscarTodosFornecedores()
+                    this.fornecedorSelecionado = null;
+                    this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
+                }
+            )
+            
+        }
+    }
     
     temFornecedorSelecionado(): boolean {
         return this.fornecedorSelecionado !== null

@@ -45,7 +45,7 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   }
 
   fechar(){
-    
+
   }
 
   comando(comando: string){
@@ -55,6 +55,10 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
 
     this.fornecedorService.liberarFornecedorSelecionado('fechar')
 
+  }
+
+  excluir(){
+    this.fornecedorService.excluirFornecedor();
   }
 
   iniciarEdicao(){
