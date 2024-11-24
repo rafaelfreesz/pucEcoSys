@@ -25,6 +25,7 @@ import { EnderecoCorridoPipe } from './pipes/endereco-corrido.pipe';
 import { TelefoneCorridoPipe } from './pipes/telefone-corrido.pipe';
 import { CnpjPipe } from './pipes/cnpj.pipe';
 import { EntradasComponent } from './secoes/entradas/entradas.component';
+import { ListaEntradasComponent } from './secoes/entradas/lista-entradas/lista-entradas.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { EntradasComponent } from './secoes/entradas/entradas.component';
     EnderecoCorridoPipe,
     TelefoneCorridoPipe,
     CnpjPipe,
-    EntradasComponent
+    EntradasComponent,
+    ListaEntradasComponent
   ],
   imports: [
     BrowserModule,
