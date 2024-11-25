@@ -55,14 +55,14 @@
                       <td>{{ entrada.id | insereZeros:4}}</td>
                       <td>{{ entrada.dt_hr_entrada | data}}</td>
                       <td>{{ entrada.nu_nota_fiscal}}</td>
-                      <td>{{ entrada.fornecedor.razao_social | encurtar:25 }}</td>
+                      <td>{{ entrada.fornecedor.razao_social | encurtar:45 }}</td>
                       <td>{{ entrada.items_entrada.length }}</td>
                       <td>R$ {{ entrada.valor_total_nota() }}</td>
                     </tr>
                   </tbody>
             </table>
 
-            <!-- <app-modal-fornecedor></app-modal-fornecedor> -->
+            <app-modal-entrada></app-modal-entrada>
 
         </div>
       </div>

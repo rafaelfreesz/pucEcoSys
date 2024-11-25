@@ -6,8 +6,11 @@ import { HttpService } from './http.service';
 @Injectable()
 export class EntradaService {
 
-  entradasAlteradas: Subject<Entrada[]> = new Subject<Entrada[]>()
-  private todasEntradas: Entrada[] = []
+  entradasAlteradas: Subject<Entrada[]> = new Subject<Entrada[]>();
+  private todasEntradas: Entrada[] = [];
+
+  entradaFoiSelecionada: Subject<Entrada | null> = new Subject<Entrada | null>();
+  private entradaSelecionada: Entrada | null = null;
 
   constructor(private httpService: HttpService) {
     this.buscarTodasEntradas();
@@ -21,5 +24,10 @@ export class EntradaService {
         this.entradasAlteradas.next(this.todasEntradas.slice())
       }
     )
+  }
+
+  selecionarEntrada(entrada: Entrada){
+    this.entradaSelecionada = entrada;
+    this.entradaFoiSelecionada.next(this.entradaSelecionada)
   }
 }

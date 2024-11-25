@@ -27,6 +27,7 @@ import { CnpjPipe } from './pipes/cnpj.pipe';
 import { EntradasComponent } from './secoes/entradas/entradas.component';
 import { ListaEntradasComponent } from './secoes/entradas/lista-entradas/lista-entradas.component';
 import { DataPipe } from './pipes/data.pipe';
+import { ModalEntradaComponent } from './secoes/entradas/modal-entrada/modal-entrada.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { DataPipe } from './pipes/data.pipe';
     CnpjPipe,
     EntradasComponent,
     ListaEntradasComponent,
-    DataPipe
+    DataPipe,
+    ModalEntradaComponent
   ],
   imports: [
     BrowserModule,
