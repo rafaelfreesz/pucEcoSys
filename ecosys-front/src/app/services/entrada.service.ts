@@ -9,7 +9,9 @@ export class EntradaService {
   entradasAlteradas: Subject<Entrada[]> = new Subject<Entrada[]>()
   private todasEntradas: Entrada[] = []
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+    this.buscarTodasEntradas();
+  }
 
 
   buscarTodasEntradas(): void{

@@ -11,13 +11,18 @@ import { EntradaService } from 'src/app/services/entrada.service';
 export class ListaEntradasComponent implements OnInit {
 
   todasEntradas: Entrada[] = []
-  // private todasEntradasAlteradas: Subscription;
+  private entradasAlteradas: Subscription;
   criterioFiltro: string = "nu_nota_fiscal"
   valorFiltro: string = "";
   totalFiltrado: number = 0;
 
   constructor(private entradaService: EntradaService) {
-    this.entradaService.buscarTodasEntradas();
+    this.entradasAlteradas = this.entradaService.entradasAlteradas.subscribe(
+      todasEntradas => {
+        this.todasEntradas = todasEntradas;
+        console.log(this.todasEntradas)
+      }
+    )
   }
 
   ngOnInit(): void {
@@ -25,6 +30,10 @@ export class ListaEntradasComponent implements OnInit {
 
   prepararCadastro(){
 
+  }
+
+  selecionarEntrada(entrada: any){
+    console.log(entrada)
   }
 
 }
