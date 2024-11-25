@@ -14,7 +14,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 70vw;
-    height: 89vh;
+    height: fit-content;
     z-index: 100;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -41,9 +41,11 @@
         margin-top:10px;
         margin-left:10px;
         width: 68vw;
-        overflow-y: scroll;
         .visualizar{
             .dados{
+                height: fit-content;
+                max-height: 80vh;
+                overflow-y: scroll;
                 .subsecao{
                     margin-bottom: 10px;
                     .subtitulo{
@@ -76,14 +78,17 @@
                                 color: white;
                             }
                         }
-                        tr{
-                            td{
-                                vertical-align: middle;
-                                background: transparent;
+                        tbody{
+                            tr{
+                                //TODO reduzir o tamanho da linha do modal
+                                td{
+                                    vertical-align: middle;
+                                    background: transparent;
+                                }
                             }
-                        }
-                        tr:hover{
-                            background-color: rgb(211, 211, 211);
+                            tr:hover{
+                                background-color: rgb(211, 211, 211);
+                            }
                         }
                         
                     }
@@ -97,6 +102,7 @@
         display: flex;
         justify-content: space-between;
         margin-left: 10px;
+        margin-bottom: 10px;
         .botao{
             margin-top: 10px;
             margin-right: 10px;

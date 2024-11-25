@@ -33,6 +33,8 @@ export class ModalEntradaComponent implements OnInit {
     return this.entrada != null;
   }
 
-  iniciarEdicao(){}
+  iniciarEdicao(){
+    this.inEdicao = true; 
+  }
 
 }
