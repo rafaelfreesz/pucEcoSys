@@ -8,7 +8,8 @@ import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 import { EntradasComponent } from './secoes/entradas/entradas.component';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
+  {path:'', component: EntradasComponent},
+  // {path:'', redirectTo: 'entradas'},
   {path:'produtos', component: ProdutosComponent},
   {path:'fornecedores', component: FornecedoresComponent},
   {path:'entradas', component: EntradasComponent},
