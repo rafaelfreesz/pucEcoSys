@@ -30,4 +30,9 @@ export class EntradaService {
     this.entradaSelecionada = entrada;
     this.entradaFoiSelecionada.next(this.entradaSelecionada)
   }
+
+  liberaEntradaSelecionada(comando: string){
+    this.entradaSelecionada = null;
+    this.entradaFoiSelecionada.next(null);
+  }
 }

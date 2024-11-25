@@ -1,0 +1,111 @@
+.blackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0,0.6);
+    z-index: 0;
+}
+
+.alert-box{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vw;
+    height: 89vh;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    
+    .cabecalho{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #198754;
+        color: #fff;
+        .titulo{
+            margin-left:10px
+        }
+        .fechar{
+            text-align: right;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-top: 5px
+        }
+    }
+
+    .conteudo{
+        margin-top:10px;
+        margin-left:10px;
+        width: 68vw;
+        overflow-y: scroll;
+        .visualizar{
+            .dados{
+                .subsecao{
+                    margin-bottom: 10px;
+                    .subtitulo{
+                        background-color: rgb(211, 211, 211);
+                        padding-left: 10px;
+                        margin-bottom: 10px;
+                    }
+                    .subtitulo.produtos_recebidos{
+                        margin-bottom: 0px;
+                    }
+                    .informacao{
+                        padding-left: 10px;
+                        align-content: center;
+                        margin-bottom: 1px;
+                        .label{
+                            font-weight: 600;
+                            font-size:  large;
+                            align-content: center;
+                            margin-bottom: 0px;
+                        }
+                    }
+                    table{
+                        margin-top: 10px;
+                        thead, tfoot{
+                            background-color: rgba(25, 135, 84,0.75);
+                            th{
+                                border-radius: 4px;
+                                vertical-align: middle;
+                                padding-left: 7px;
+                                color: white;
+                            }
+                        }
+                        tr{
+                            td{
+                                vertical-align: middle;
+                                background: transparent;
+                            }
+                        }
+                        tr:hover{
+                            background-color: rgb(211, 211, 211);
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+}
+    .botoes{
+        display: flex;
+        justify-content: space-between;
+        margin-left: 10px;
+        .botao{
+            margin-top: 10px;
+            margin-right: 10px;
+            width:200px;
+        }
+        .botao-editar{
+            margin-top: 10px;
+            // margin-right: 10px;
+            width:130px;
+        }
+
+}
