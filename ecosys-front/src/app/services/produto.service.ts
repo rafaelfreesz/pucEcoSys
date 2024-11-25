@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Produto } from "../models/produto.model";
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { HttpService } from "./http.service";
 
 @Injectable()

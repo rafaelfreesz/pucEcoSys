@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Entrada } from 'src/app/models/entrada.model';
 
 @Component({
   selector: 'app-lista-entradas',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaEntradasComponent implements OnInit {
 
-  todasEntradas: any[] = []
-  criterioFiltro: string = "razao_social"
+  todasEntradas: Entrada[] = []
+  criterioFiltro: string = "nu_nota_fiscal"
   valorFiltro: string = "";
   totalFiltrado: number = 0;
 
