@@ -13,6 +13,11 @@ export class EntradaService {
 
 
   buscarTodasEntradas(): void{
-    
+    this.httpService.getTodasEntradas().subscribe(
+      todasEntradas => {
+        this.todasEntradas = todasEntradas;
+        this.entradasAlteradas.next(this.todasEntradas.slice())
+      }
+    )
   }
 }
