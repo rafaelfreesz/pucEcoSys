@@ -63,5 +63,99 @@
                     </button>
                 </div>
             </div>
+            <!-- EDIÇÃO -->
+            <div class="editar" *ngIf="inEdicao">
+
+                <form [formGroup]="conteudoFormulario" (ngSubmit)="submeterFormulario()">
+                
+                    <div class="dados">
+                        <div class="subsecao">
+                            <div class="fs-4 fw-semibold subtitulo">Dados Básicos</div>
+                            <div class="campo">
+                                <label for="dt_hr_entrada" class="label">Data/Hora de Entrada:</label>
+                                <input type="text"
+                                    class="form-control campo-basico campo-dt-hr"    
+                                    name="dt_hr_entrada"
+                                    id="dt_hr_entrada"
+                                    formControlName="dt_hr_entrada">
+                            </div>
+
+                            <div class="campo">
+                                <label for="nu_nota_fiscal" class="label">Número da Nota Fiscal:</label>
+                                <input type="text"
+                                    class="form-control campo-basico"    
+                                    name="nu_nota_fiscal"
+                                    id="nu_nota_fiscal"
+                                    formControlName="nu_nota_fiscal">
+                            </div>
+
+                        </div>
+                        
+                        <div class="subsecao">
+                            <div class="fs-4 fw-semibold subtitulo"><p>Fornecedor</p> 
+                                <button class="btn btn-primary botao" (click)="iniciarEdicao()">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                            </div>
+
+                            <p class="informacao"><span class="label">Nome empresarial: </span>{{ entrada.fornecedor.nome_empresarial}}</p>
+                            <p class="informacao"><span class="label">CNPJ:</span> {{entrada.fornecedor.cnpj | cnpj}}</p>
+                            <p class="informacao"><span class="label">Razão Social: </span>{{ entrada.fornecedor.razao_social }}</p>
+                        </div>
+                        
+                        <div class="subsecao">
+                            <div class="fs-4 fw-semibold subtitulo produtos_recebidos">Produtos</div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <th> </th>
+                                    <th>Produto</th>
+                                    <th>Qtd</th>
+                                    <th>Pço. un.</th>
+                                    <th>Pço. total</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item_entrada of entrada.items_entrada; let i = index">
+                                        <td class="text-center">{{i}}</td>
+                                        <td>{{item_entrada.produto.nome}}</td>
+                                        <td class="text-center">{{item_entrada.quantidade}}</td>
+                                        <td class="text-center">R$ {{item_entrada.preco_compra| number : "1.2-2"}}</td>
+                                        <td class="text-center">R$ {{item_entrada.valor_total_item() | number : "1.2-2"}}
+                                            
+                                        </td>
+                                        <td class="text-center botao-tabela-excluir">
+                                            <div class="icone-mais-background" (click)="excluirContato(i)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-trash-fill icone" viewBox="0 0 16 16">
+                                                  <path id="path-trash" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                                </svg>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <th> </th>
+                                    <th> </th>
+                                    <th> </th>
+                                    <th class="text-center">Total:</th>
+                                    <th class="text-center">R$ {{entrada.valor_total_nota()| number : "1.2-2"}}</th>
+                                    <th> </th>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="botoes">
+                        <button type="submit" class="btn btn-primary botao" [disabled]="!conteudoFormulario.valid">
+                            <i class="bi bi-floppy-fill"></i> Salvar
+                        </button>
+                        <button class="btn btn-danger botao" (click)="excluir()">
+                            <i class="bi bi-trash-fill"></i> Excluir
+                        </button>
+                        <button class="btn btn-danger botao" (click)="fechar()">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
 </div>

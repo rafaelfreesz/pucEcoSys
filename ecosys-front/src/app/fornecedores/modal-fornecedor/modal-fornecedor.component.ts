@@ -16,7 +16,7 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   fornecedorFoiSelecionado: Subscription;
   
   conteudoFormulario: FormGroup | any;
-  @Input() inEdicao: boolean = false;
+  inEdicao: boolean = false;
   inHouveAlteracao: boolean = false;
 
 
@@ -32,8 +32,7 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
     )
   }
 
-  ngOnInit(): void {
-    this.inEdicao = true    
+  ngOnInit(): void {    
   }
 
   ngOnDestroy(): void {
@@ -116,7 +115,7 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
     this.fornecedor.endereco.estado = this.conteudoFormulario.value.endereco.estado
   }
 
-  private buildContatosArray(){
+  private buildContatosArray(): FormGroup[]{
     let contatosArray: FormGroup[] = []
 
     if(this.fornecedor !== null){
