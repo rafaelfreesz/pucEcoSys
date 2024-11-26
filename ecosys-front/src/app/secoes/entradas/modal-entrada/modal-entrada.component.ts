@@ -49,18 +49,18 @@ export class ModalEntradaComponent implements OnInit {
 
   private popularCampos(){
     this.conteudoFormulario = new FormGroup({
-      'dt_hr_entrada': new FormControl(this.entrada.dt_hr_entrada),
+      'dt_hr_entrada': new FormControl(this.entrada.dt_hr_entrada.slice(0,16)),
       'nu_nota_fiscal': new FormControl(this.entrada.nu_nota_fiscal)
     })
   }
 
   submeterFormulario(){
     console.log('submetido')
+    console.log(this.conteudoFormulario.value.dt_hr_entrada)
   }
 
   excluirContato(i: number){
     console.log(i)
   }
-
 
 }
