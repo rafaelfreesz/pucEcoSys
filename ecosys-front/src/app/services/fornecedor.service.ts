@@ -69,9 +69,12 @@ export class FornecedorService{
         this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
     }
 
-    liberarFornecedorSelecionado(comando: string){
+    liberarFornecedorSelecionado(in_alteracao: boolean){
         this.fornecedorSelecionado = null;
         this.fornecedorFoiSeleciontado.next(null)
+        if(in_alteracao){
+            this.buscarTodosFornecedores();
+        }
         
     }
 

@@ -25,6 +25,9 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
       fornecedorSelecionado =>
         {
           this.fornecedor = fornecedorSelecionado
+          if(this.fornecedor && this.fornecedor.id === -1){
+            this.inEdicao = true;
+          }
           if(this.fornecedor){
             this.popularCampos();
           }
@@ -45,14 +48,8 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
 
   fechar(){
 
-  }
-
-  comando(comando: string){
-    if(comando === 'salvar' && this.inHouveAlteracao){
-      comando = "fecharComAlteracao"
-    }
-
-    this.fornecedorService.liberarFornecedorSelecionado('fechar')
+    this.fornecedorService.liberarFornecedorSelecionado(this.inHouveAlteracao)
+    this.inEdicao = false;
 
   }
 

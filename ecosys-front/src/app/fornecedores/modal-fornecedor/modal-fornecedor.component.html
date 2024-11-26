@@ -1,7 +1,7 @@
-<div class="blackdrop" (click)="comando('fechar')" *ngIf="this.temFornecedorSelecionado()"></div>
+<div class="blackdrop" (click)="fechar()" *ngIf="this.temFornecedorSelecionado()"></div>
 
 <div class="alert-box" *ngIf="this.temFornecedorSelecionado()">
-  <div class="fechar" (click)="comando('fechar')">x</div>
+  <div class="fechar" (click)="fechar()">x</div>
   <div class="conteudo">
     <!-- VISUALIZAÇÃO -->
     <div class="visualizar" *ngIf="!inEdicao">
@@ -28,7 +28,7 @@
           <button class="btn btn-primary botao" (click)="iniciarEdicao()">
             <i class="bi bi-pencil-square"></i> Editar
           </button>
-          <button class="btn btn-danger botao" (click)="comando('fechar')">
+          <button class="btn btn-danger botao" (click)="fechar()">
             <i class="bi bi-x-circle"></i> Fechar
           </button>
         </div>
@@ -199,7 +199,7 @@
         <button class="btn btn-danger botao-editar" (click)="excluir()">
           <i class="bi bi-trash-fill"></i> Excluir
         </button>
-        <button class="btn btn-danger botao-editar" (click)="comando('fechar')">
+        <button class="btn btn-danger botao-editar" (click)="fechar()">
           <i class="bi bi-x-circle"></i> Cancelar
         </button>
       </div>
