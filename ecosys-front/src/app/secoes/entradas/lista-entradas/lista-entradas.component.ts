@@ -17,9 +17,10 @@ export class ListaEntradasComponent implements OnInit {
   totalFiltrado: number = 0;
 
   constructor(private entradaService: EntradaService) {
-    this.entradasAlteradas = this.entradaService.entradasAlteradas.subscribe(
+    this.entradasAlteradas = this.entradaService.listaEntradasAlterada.subscribe(
       todasEntradas => {
         this.todasEntradas = todasEntradas;
+        this.selecionarEntrada(todasEntradas[0])
       }
     )
   }

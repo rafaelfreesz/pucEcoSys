@@ -6,7 +6,7 @@ import { HttpService } from './http.service';
 @Injectable()
 export class EntradaService {
 
-  entradasAlteradas: Subject<Entrada[]> = new Subject<Entrada[]>();
+  listaEntradasAlterada: Subject<Entrada[]> = new Subject<Entrada[]>();
   private todasEntradas: Entrada[] = [];
 
   entradaFoiSelecionada: Subject<Entrada | null> = new Subject<Entrada | null>();
@@ -21,7 +21,7 @@ export class EntradaService {
     this.httpService.getTodasEntradas().subscribe(
       todasEntradas => {
         this.todasEntradas = todasEntradas;
-        this.entradasAlteradas.next(this.todasEntradas.slice())
+        this.listaEntradasAlterada.next(this.todasEntradas.slice())
       }
     )
   }

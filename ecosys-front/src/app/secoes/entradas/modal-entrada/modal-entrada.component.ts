@@ -14,7 +14,7 @@ export class ModalEntradaComponent implements OnInit {
   entradaFoiSelecionada: Subscription
 
   conteudoFormulario: FormGroup | any;
-  inEdicao: boolean = false;
+  inEdicao: boolean = true;
 
   constructor(private entradaService: EntradaService) {
     this.entradaFoiSelecionada = this.entradaService.entradaFoiSelecionada.subscribe(
