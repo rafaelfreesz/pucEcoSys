@@ -29,6 +29,7 @@ import { ListaEntradasComponent } from './secoes/entradas/lista-entradas/lista-e
 import { DataPipe } from './pipes/data.pipe';
 import { ModalEntradaComponent } from './secoes/entradas/modal-entrada/modal-entrada.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalAlterarFornecedorComponent } from './secoes/entradas/modal-alterar-fornecedor/modal-alterar-fornecedor.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EntradasComponent,
     ListaEntradasComponent,
     DataPipe,
-    ModalEntradaComponent
+    ModalEntradaComponent,
+    ModalAlterarFornecedorComponent
   ],
   imports: [
     BrowserModule,
