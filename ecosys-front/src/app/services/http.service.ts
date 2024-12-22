@@ -94,6 +94,13 @@ export class HttpService{
 
     }
 
+    deleteEntrada(idEntrada: number){
+        return this.http.delete<any>(`http://localhost:3000/entradas/${idEntrada}`)
+        .pipe(
+            map( HTTPResponseParser.buildListaEntradas )
+        )
+    }
+
 
     
 

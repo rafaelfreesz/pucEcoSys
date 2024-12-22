@@ -35,4 +35,16 @@ export class EntradaService {
     this.entradaSelecionada = null;
     this.entradaFoiSelecionada.next(null);
   }
+
+  excluirEntrada(entrada: Entrada){
+    if(entrada.id){
+      this.httpService.deleteEntrada(entrada.id).subscribe(
+        todasEntradas =>{
+          this.todasEntradas = todasEntradas
+          this.listaEntradasAlterada.next(this.todasEntradas.slice())
+          //TODO Tratar depois a regra de negocio para descontar do estoque entradas que foram computadas
+        }
+      );
+    }
+  }
 }

@@ -12,7 +12,7 @@ export class ModalEntradaComponent implements OnInit{
 
   entrada: any = null;
   entradaFoiSelecionada: Subscription
-  mostrarModalTrocaFornecedor:boolean = false
+  mostrarModalTrocaFornecedor: boolean = false
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;
@@ -37,7 +37,8 @@ export class ModalEntradaComponent implements OnInit{
   }
   
   excluir(){
-
+    this.entradaService.excluirEntrada(this.entrada);
+    this.entrada = null;
   }
 
   temEntradaSelecionada(){
@@ -60,7 +61,7 @@ export class ModalEntradaComponent implements OnInit{
     console.log(this.conteudoFormulario.value.dt_hr_entrada)
   }
 
-  excluirContato(i: number){
+  excluirItem(i: number){
     console.log(i)
   }
 
