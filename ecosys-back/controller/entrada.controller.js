@@ -81,7 +81,18 @@ class EntradaController {
 
         try{
             await EntradaRepository.excluirPorId(request.params.id)
-            response.redirect('/entradas')
+
+            const entradas = await EntradaRepository.consultarTodos();
+
+            for await(const entrada of entradas){
+                const fornecedor = await FornecedorController.getPorId(entrada.fk_fornecedor);
+                const items = await ItemEntradaController.getPorEntrada(entrada.id);
+
+                if(fornecedor) {entrada.fornecedor = fornecedor}
+                if(items) {entrada.items = items}
+            }
+            
+            response.json(entradas)
         }catch(e){
             response.json(e)
         }
