@@ -1,0 +1,89 @@
+tr:hover{
+    background-color: rgba(25, 135, 84,0.75);
+    td{
+        color:white
+    }
+}
+
+.blackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0,0.6);
+    z-index: 0;
+}
+
+.alert-box{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: fit-content;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+
+    .cabecalho{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #198754;
+        color: #fff;
+        .titulo{
+            margin-left:10px;
+            font-weight: 600;
+        }
+        .fechar{
+            text-align: right;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-top: 5px
+        }
+    }
+
+    .conteudo{
+        margin:10px;
+        
+        .filtro{
+            width: 65vw;
+            max-width: 65vw;
+        }
+
+        .tabela{
+            margin-top: 10px;
+            border-top: 1px solid #e2e2e2;
+            max-height: 50vh;
+            height: 50vh;
+        }
+
+    }
+}
+
+
+table{
+    margin-top: 10px;
+}
+
+thead{
+    background-color: #198754;
+}
+
+th{
+    vertical-align: middle;
+    padding-left: 7px;
+    color: white;
+}
+
+tr{
+    cursor:pointer;
+}
+
+td{
+    vertical-align: middle;
+    background: transparent;
+}
+

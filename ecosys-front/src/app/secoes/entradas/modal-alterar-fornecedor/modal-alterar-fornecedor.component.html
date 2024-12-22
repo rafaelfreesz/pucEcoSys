@@ -1,1 +1,77 @@
-<p>modal-alterar-fornecedor works!</p>
+<div class="blackdrop">
+    <div class="alert-box">
+        <div class="cabecalho">
+            <div class="titulo">
+                Alterar Fornecedor
+            </div>
+            <div class="fechar" (click) = "cancelar()"> X </div>
+        </div>
+        <div class="conteudo">
+            <div class="row filtro">
+                <div class="col-sm-3">
+                    <select
+                      class="form-select"
+                      name="selecionar-filtro"
+                      id="selecionar-filtro"
+                      [(ngModel)]="criterioFiltro"
+                      >
+                      <option value="id">Código</option>
+                      <option value="razao_social">Razão Social</option>
+                      <option value="cnpj">CNPJ</option>
+                      <option value="nome_empresarial">Nome Empresarial</option>
+                      <option value="cidade">Cidade</option>
+                      <option value="estado">Estado</option>
+                    </select>
+                  </div>
+                  <div class="col-md-8">
+                    <input
+                      type="search"
+                      class="form-control"
+                      name="filtro-valor"
+                      id="filtro-valor"
+                      [(ngModel)]="valorFiltro"
+                    />
+                  </div>
+            </div>
+
+            <!-- ---TABELA -->
+            <div class="tabela">
+                <div class="row">
+                    <div class="col-md">
+                        <table class="table table-striped">
+                            <thead>
+                                <th>Cód.</th>
+                                <th>Razão Social</th>
+                                <th>CNPJ</th>
+                                <th>Nome Empresarial</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                              </thead>
+                              <tbody>
+                                <tr 
+                                *ngFor="let fornecedor of todosFornecedores | filtroLista:valorFiltro:criterioFiltro;"
+                                (click)="selecionar(fornecedor)">
+                                  <td>{{ fornecedor.id | insereZeros:4}}</td>
+                                  <td>{{ fornecedor.razao_social | encurtar:25}}</td>
+                                  <td>{{ fornecedor.cnpj | cnpj}}</td>
+                                  <td>{{ fornecedor.nome_empresarial | encurtar:50 }}</td>
+                                  <td>{{ fornecedor.endereco.cidade }}</td>
+                                  <td>{{ fornecedor.endereco.estado }}</td>
+                                </tr>
+                              </tbody>
+                        </table>
+            
+                    </div>
+                  </div>
+            </div>
+
+            <div class="botoes">
+                <button class="btn btn-danger botao" (click)="cancelar()">
+                    <i class="bi bi-x-circle"></i> Cancelar
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
