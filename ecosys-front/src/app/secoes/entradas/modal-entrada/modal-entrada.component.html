@@ -91,16 +91,16 @@
 
                         </div>
                         
-                        <div class="subsecao">
+                        <div class="subsecao" formGroupName="fornecedor">
                             <div class="fs-4 fw-semibold subtitulo"><p>Fornecedor</p> 
                                 <button class="btn btn-primary botao" (click)="mostrarModalAlterarFornecedor()">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                             </div>
 
-                            <p class="informacao"><span class="label">Nome empresarial: </span>{{ entrada.fornecedor.nome_empresarial}}</p>
-                            <p class="informacao"><span class="label">CNPJ:</span> {{entrada.fornecedor.cnpj | cnpj}}</p>
-                            <p class="informacao"><span class="label">Razão Social: </span>{{ entrada.fornecedor.razao_social }}</p>
+                            <p class="informacao"><span class="label">Nome empresarial: </span>{{ conteudoFormulario.value.fornecedor.nome_empresarial }}</p>
+                            <p class="informacao"><span class="label">CNPJ:</span> {{conteudoFormulario.value.fornecedor.cnpj | cnpj}}</p>
+                            <p class="informacao"><span class="label">Razão Social: </span>{{ conteudoFormulario.value.fornecedor.razao_social }}</p>
                         </div>
                         
                         <div class="subsecao">

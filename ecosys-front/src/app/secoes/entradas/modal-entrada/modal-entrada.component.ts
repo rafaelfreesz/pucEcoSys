@@ -16,7 +16,6 @@ export class ModalEntradaComponent implements OnInit{
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;
-  inFornecedorFoiAlterado: boolean = false;
 
   constructor(private entradaService: EntradaService) {
     this.entradaFoiSelecionada = this.entradaService.entradaFoiSelecionada.subscribe(
@@ -35,13 +34,11 @@ export class ModalEntradaComponent implements OnInit{
 
   fechar(){
     this.entradaService.liberaEntradaSelecionada();
-    this.inFornecedorFoiAlterado = false;
   }
   
   excluir(){
     this.entradaService.excluirEntrada(this.entrada);
     this.entrada = null;
-    this.inFornecedorFoiAlterado = false;
   }
 
   temEntradaSelecionada(){
@@ -55,7 +52,13 @@ export class ModalEntradaComponent implements OnInit{
   private popularCampos(){
     this.conteudoFormulario = new FormGroup({
       'dt_hr_entrada': new FormControl(this.entrada.dt_hr_entrada.slice(0,16)),
-      'nu_nota_fiscal': new FormControl(this.entrada.nu_nota_fiscal)
+      'nu_nota_fiscal': new FormControl(this.entrada.nu_nota_fiscal),
+      'fornecedor': new FormGroup({
+        'id': new FormControl(this.entrada.fornecedor.id),
+        'nome_empresarial': new FormControl(this.entrada.fornecedor.nome_empresarial),
+        'cnpj': new FormControl(this.entrada.fornecedor.cnpj),
+        'razao_social': new FormControl(this.entrada.fornecedor.razao_social)
+      })
     })
   }
 
@@ -73,16 +76,24 @@ export class ModalEntradaComponent implements OnInit{
     this.mostrarModalTrocaFornecedor = true;
   }
 
-  fecharModalAlterarFornecedor(dados: any){
-    if(dados){
-      this.entrada.fornecedor = dados
-      this.inFornecedorFoiAlterado = true
+  fecharModalAlterarFornecedor(fornecedor: any){
+    if(fornecedor){
+      this.entrada.fornecedor = fornecedor
+      this.conteudoFormulario.get('fornecedor')?.patchValue(
+        {
+          'id': fornecedor.id,
+          'nome_empresarial': fornecedor.nome_empresarial,
+          'cnpj': fornecedor.cnpj,
+          'razao_social': fornecedor.razao_social
+        }
+      )
+      this.conteudoFormulario.get('fornecedor')?.markAsDirty()
     }
     this.mostrarModalTrocaFornecedor = false;
   }
 
   inFoiAlterado(): boolean{
-    return this.inFornecedorFoiAlterado || this.conteudoFormulario.dirty
+    return this.conteudoFormulario.dirty
   }
 
 }
