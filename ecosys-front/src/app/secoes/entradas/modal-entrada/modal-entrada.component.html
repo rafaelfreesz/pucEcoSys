@@ -93,7 +93,7 @@
                         
                         <div class="subsecao">
                             <div class="fs-4 fw-semibold subtitulo"><p>Fornecedor</p> 
-                                <button class="btn btn-primary botao" (click)="toggleModalFornecedor()">
+                                <button class="btn btn-primary botao" (click)="mostrarModalAlterarFornecedor()">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                             </div>
@@ -145,7 +145,7 @@
                     </div>
                     
                     <div class="botoes">
-                        <button type="submit" class="btn btn-primary botao" [disabled]="!conteudoFormulario.valid">
+                        <button type="submit" class="btn btn-primary botao" [disabled]="!inFoiAlterado()">
                             <i class="bi bi-floppy-fill"></i> Salvar
                         </button>
                         <button class="btn btn-danger botao" (click)="excluir()">
@@ -161,7 +161,7 @@
 
         <app-modal-alterar-fornecedor
             *ngIf = "this.mostrarModalTrocaFornecedor"
-            (fecharModal) = "tratarFechamentoModal($event)"
+            (fecharModal) = "fecharModalAlterarFornecedor($event)"
             ></app-modal-alterar-fornecedor>
         
 </div>

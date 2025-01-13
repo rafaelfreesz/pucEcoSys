@@ -16,6 +16,7 @@ export class ModalEntradaComponent implements OnInit{
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;
+  inFornecedorFoiAlterado: boolean = false;
 
   constructor(private entradaService: EntradaService) {
     this.entradaFoiSelecionada = this.entradaService.entradaFoiSelecionada.subscribe(
@@ -33,12 +34,14 @@ export class ModalEntradaComponent implements OnInit{
   }
 
   fechar(){
-    this.entradaService.liberaEntradaSelecionada('fechar')
+    this.entradaService.liberaEntradaSelecionada();
+    this.inFornecedorFoiAlterado = false;
   }
   
   excluir(){
     this.entradaService.excluirEntrada(this.entrada);
     this.entrada = null;
+    this.inFornecedorFoiAlterado = false;
   }
 
   temEntradaSelecionada(){
@@ -57,6 +60,7 @@ export class ModalEntradaComponent implements OnInit{
   }
 
   submeterFormulario(){
+    console.log(this.conteudoFormulario)
     console.log('submetido')
     console.log(this.conteudoFormulario.value.dt_hr_entrada)
   }
@@ -65,15 +69,20 @@ export class ModalEntradaComponent implements OnInit{
     console.log(i)
   }
 
-  toggleModalFornecedor(){
-    this.mostrarModalTrocaFornecedor = ! this.mostrarModalTrocaFornecedor;
+  mostrarModalAlterarFornecedor(){
+    this.mostrarModalTrocaFornecedor = true;
   }
 
-  tratarFechamentoModal(dados: any){
+  fecharModalAlterarFornecedor(dados: any){
     if(dados){
       this.entrada.fornecedor = dados
+      this.inFornecedorFoiAlterado = true
     }
-    this.toggleModalFornecedor()
+    this.mostrarModalTrocaFornecedor = false;
+  }
+
+  inFoiAlterado(): boolean{
+    return this.inFornecedorFoiAlterado || this.conteudoFormulario.dirty
   }
 
 }

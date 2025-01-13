@@ -28,10 +28,10 @@ export class EntradaService {
 
   selecionarEntrada(entrada: Entrada){
     this.entradaSelecionada = entrada;
-    this.entradaFoiSelecionada.next(this.entradaSelecionada)
+    this.entradaFoiSelecionada.next({...entrada})
   }
 
-  liberaEntradaSelecionada(comando: string){
+  liberaEntradaSelecionada(){
     this.entradaSelecionada = null;
     this.entradaFoiSelecionada.next(null);
   }
