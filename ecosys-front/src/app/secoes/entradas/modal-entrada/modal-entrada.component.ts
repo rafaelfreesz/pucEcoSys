@@ -57,9 +57,34 @@ export class ModalEntradaComponent implements OnInit{
         'id': new FormControl(this.entrada.fornecedor.id),
         'nome_empresarial': new FormControl(this.entrada.fornecedor.nome_empresarial),
         'cnpj': new FormControl(this.entrada.fornecedor.cnpj),
-        'razao_social': new FormControl(this.entrada.fornecedor.razao_social)
-      })
+        'razao_social': new FormControl(this.entrada.fornecedor.razao_social),
+      }),
+      'items_entrada': new FormArray(this.buildItemsEntradaArray())
     })
+
+  }
+
+  private buildItemsEntradaArray(): FormGroup[]{
+    let itemsArray: FormGroup[] = []
+
+    if(this.entrada !== null){
+      this.entrada.items_entrada.forEach(
+        (item: any) => {
+          itemsArray.push( new FormGroup({
+            'id': new FormControl(item.id),
+            'quantidade': new FormControl(item.quantidade),
+            'preco_compra': new FormControl(item.preco_compra),
+            'valor_total': new FormControl(item.valor_total_item()),
+            'nome_produto': new FormControl(item.produto.nome),
+            'in_excluir': new FormControl(false)
+          })
+
+          )
+        }
+      )
+    }
+
+    return itemsArray;
   }
 
   submeterFormulario(){
@@ -70,6 +95,7 @@ export class ModalEntradaComponent implements OnInit{
 
   excluirItem(i: number){
     console.log(i)
+    console.log(this.conteudoFormulario.value.items_entrada[i])
   }
 
   mostrarModalAlterarFornecedor(){

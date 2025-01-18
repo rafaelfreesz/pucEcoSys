@@ -114,13 +114,13 @@
                                     <th>Pço. total</th>
                                     <th></th>
                                 </thead>
-                                <tbody>
+                                <tbody formArrayName="items_entrada">
                                     <tr *ngFor="let item_entrada of entrada.items_entrada; let i = index">
                                         <td class="text-center">{{i}}</td>
-                                        <td>{{item_entrada.produto.nome}}</td>
-                                        <td class="text-center">{{item_entrada.quantidade}}</td>
-                                        <td class="text-center">R$ {{item_entrada.preco_compra| number : "1.2-2"}}</td>
-                                        <td class="text-center">R$ {{item_entrada.valor_total_item() | number : "1.2-2"}}
+                                        <td>{{conteudoFormulario.value.items_entrada[i].nome_produto}}</td>
+                                        <td class="text-center">{{conteudoFormulario.value.items_entrada[i].quantidade}}</td>
+                                        <td class="text-center">R$ {{conteudoFormulario.value.items_entrada[i].preco_compra| number : "1.2-2"}}</td>
+                                        <td class="text-center">R$ {{conteudoFormulario.value.items_entrada[i].valor_total | number : "1.2-2"}}
                                             
                                         </td>
                                         <td class="text-center botao-tabela-excluir">
