@@ -115,16 +115,16 @@
                                     <th></th>
                                 </thead>
                                 <tbody formArrayName="items_entrada">
-                                    <tr *ngFor="let item_entrada of entrada.items_entrada; let i = index">
+                                    <tr *ngFor="let item_entrada of entrada.items_entrada | escondeExcluidos: idsItemsPraExcluir; let i = index">
                                         <td class="text-center">{{i}}</td>
-                                        <td>{{conteudoFormulario.value.items_entrada[i].nome_produto}}</td>
-                                        <td class="text-center">{{conteudoFormulario.value.items_entrada[i].quantidade}}</td>
-                                        <td class="text-center">R$ {{conteudoFormulario.value.items_entrada[i].preco_compra| number : "1.2-2"}}</td>
-                                        <td class="text-center">R$ {{conteudoFormulario.value.items_entrada[i].valor_total | number : "1.2-2"}}
+                                        <td>{{item_entrada.produto.nome}}</td>
+                                        <td class="text-center">{{item_entrada.quantidade}}</td>
+                                        <td class="text-center">R$ {{item_entrada.preco_compra| number : "1.2-2"}}</td>
+                                        <td class="text-center">R$ {{item_entrada.valor_total_item() | number : "1.2-2"}}
                                             
                                         </td>
                                         <td class="text-center botao-tabela-excluir">
-                                            <div class="icone-mais-background" (click)="excluirItem(i)">
+                                            <div class="icone-mais-background" (click)="excluirItem(item_entrada.id)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-trash-fill icone" viewBox="0 0 16 16">
                                                   <path id="path-trash" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                                 </svg>
@@ -137,7 +137,7 @@
                                     <th> </th>
                                     <th> </th>
                                     <th class="text-center">Total:</th>
-                                    <th class="text-center">R$ {{entrada.valor_total_nota()| number : "1.2-2"}}</th>
+                                    <th class="text-center">R$ {{valor_total_nota()| number : "1.2-2"}}</th>
                                     <th> </th>
                                 </tfoot>
                             </table>

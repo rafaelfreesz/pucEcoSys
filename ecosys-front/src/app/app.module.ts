@@ -19,11 +19,11 @@ import { ContadorFiltroPipe } from './pipes/contador-filtro.pipe';
 import { HomeComponent } from './home/home.component';
 import { FornecedoresComponent } from './secoes/fornecedores/fornecedores.component';
 import { ListaFornecedoresComponent } from './secoes/fornecedores/lista-fornecedores/lista-fornecedores.component';
-import { FornecedorService } from './services/fornecedor.service';
 import { ModalFornecedorComponent } from './secoes/fornecedores/modal-fornecedor/modal-fornecedor.component';
 import { EnderecoCorridoPipe } from './pipes/endereco-corrido.pipe';
 import { TelefoneCorridoPipe } from './pipes/telefone-corrido.pipe';
 import { CnpjPipe } from './pipes/cnpj.pipe';
+import { EscondeExcluidosPipe } from './pipes/esconde-excluidos.pipe';
 import { EntradasComponent } from './secoes/entradas/entradas.component';
 import { ListaEntradasComponent } from './secoes/entradas/lista-entradas/lista-entradas.component';
 import { DataPipe } from './pipes/data.pipe';
@@ -53,6 +53,7 @@ import { ModalAlterarFornecedorComponent } from './secoes/entradas/modal-alterar
     EntradasComponent,
     ListaEntradasComponent,
     DataPipe,
+    EscondeExcluidosPipe,
     ModalEntradaComponent,
     ModalAlterarFornecedorComponent
   ],

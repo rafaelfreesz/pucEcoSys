@@ -16,6 +16,7 @@ export class ModalEntradaComponent implements OnInit{
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;
+  idsItemsPraExcluir: string[] = []
 
   constructor(private entradaService: EntradaService) {
     this.entradaFoiSelecionada = this.entradaService.entradaFoiSelecionada.subscribe(
@@ -93,9 +94,11 @@ export class ModalEntradaComponent implements OnInit{
     console.log(this.conteudoFormulario.value.dt_hr_entrada)
   }
 
-  excluirItem(i: number){
-    console.log(i)
-    console.log(this.conteudoFormulario.value.items_entrada[i])
+  excluirItem(idItem: string){
+    this.idsItemsPraExcluir.push(idItem)
+    //Recriando o vetor para disparar o pipe
+    this.idsItemsPraExcluir = this.idsItemsPraExcluir.filter(elemento => true)
+    this.conteudoFormulario.markAsDirty();
   }
 
   mostrarModalAlterarFornecedor(){
@@ -120,6 +123,14 @@ export class ModalEntradaComponent implements OnInit{
 
   inFoiAlterado(): boolean{
     return this.conteudoFormulario.dirty
+  }
+
+  valor_total_nota(){
+    let total = 0
+    for (let item of this.entrada.items_entrada){
+      total+= this.idsItemsPraExcluir.includes(item.id)? 0 : item.valor_total_item()
+    }
+    return total;
   }
 
 }

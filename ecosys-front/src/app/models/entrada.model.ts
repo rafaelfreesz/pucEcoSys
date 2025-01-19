@@ -10,8 +10,8 @@ export class Entrada{
     
     valor_total_nota = () => {
         let total = 0
-        for(const entrada of this.items_entrada){
-            total+=entrada.valor_total_item();
+        for(const item of this.items_entrada){
+            total+= item.in_excluir? 0: item.valor_total_item();
         }
         return total;
     }

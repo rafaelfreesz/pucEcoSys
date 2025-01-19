@@ -7,6 +7,7 @@ export class ItemEntrada{
     preco_compra: number = -1;
     produto: Produto | null = null;
     fk_entrada: number = -1;
+    in_excluir = false;
     valor_total_item = (): number => {return this.preco_compra*this.quantidade}
     
 }
