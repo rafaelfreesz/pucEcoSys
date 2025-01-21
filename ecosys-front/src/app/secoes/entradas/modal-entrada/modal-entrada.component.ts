@@ -126,7 +126,13 @@ export class ModalEntradaComponent implements OnInit{
     this.mostrarModalTrocaFornecedor = false;
   }
 
-  fecharModalIncluirProduto(produto: any){
+  fecharModalIncluirProduto(item: any){
+    console.log(item)
+    if(item){
+      this.entrada.items_entrada.push(item)
+      this.entrada.items_entrada = this.entrada.items_entrada.filter((el: any) => true)
+      this.conteudoFormulario.markAsDirty()
+    }
     this.mostrarModalProduto = false
   }
 
