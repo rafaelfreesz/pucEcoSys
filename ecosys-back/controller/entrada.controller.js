@@ -1,4 +1,5 @@
-const {EntradaRepository} = require('../repository/entrada.repository')
+const {EntradaRepository} = require('../repository/entrada.repository');
+const { ItemEntradaRepository } = require('../repository/item_entrada.repository');
 const {FornecedorController} = require('./fornecedor.controller');
 const {ItemEntradaController} = require('./item_entrada.controller');
 
@@ -65,11 +66,39 @@ class EntradaController {
         
         try{
             const id = request.params.id;
-            const entrada = request.body;
+
+            //Alterando dados gerais da Entrada
+            const entrada = request.body.entrada;
             await EntradaRepository.alterar(id,entrada); 
+            
+            //Cadastrando items incluidos, se houver
+            const novosItems = request.body.novos_items
+            await novosItems.forEach(
+                async itemNovo => {
+                    await ItemEntradaRepository.incluir(itemNovo);
+                }
+            )
+            
+            
+            //Excluindo items, se houver
+            const idsItemsPraExcluir = request.body.ids_items_pra_excluir
+            await idsItemsPraExcluir.forEach(
+                async elemento => {
+                    await ItemEntradaRepository.excluirPorId(elemento);
+                })
 
-            response.redirect('/entradas')
+            //Retornando a lista de todas as entradas atualizada
+            const entradas = await EntradaRepository.consultarTodos();
 
+            for await(const entrada of entradas){
+                const fornecedor = await FornecedorController.getPorId(entrada.fk_fornecedor);
+                const items = await ItemEntradaController.getPorEntrada(entrada.id);
+
+                if(fornecedor) {entrada.fornecedor = fornecedor}
+                if(items) {entrada.items = items}
+            }
+            
+            response.json(entradas)
         
         }catch(e){
             response.json(e)
@@ -98,18 +127,6 @@ class EntradaController {
         }
 
     }
-
-    // TODO Implementar async consultarPorFornecedor(request, response, next){
-    //     try{
-    //         let contatos = (await ContatoRepository.consultarPorFornecedor(request.params['id_fornecedor']));
-    //         response.json(contatos)
-
-    //     }catch(e){
-    //         e.erro=true;
-    //         response.json(e);
-    //     }
-        
-    // };
 
     
 }
