@@ -51,8 +51,32 @@ class EntradaController {
 
     async incluir(request, response, next) {
         try{
-            await EntradaRepository.incluir(request.body)
-            response.redirect('/entradas')
+            let entrada = request.body.entrada;
+            entrada = (await EntradaRepository.incluir(entrada))[0]
+            //Cadastrando items incluidos, se houver
+            const novosItems = request.body.novos_items
+            await novosItems.forEach(
+                async itemNovo => {
+                    itemNovo.fk_entrada = entrada.id
+                    await ItemEntradaRepository.incluir(itemNovo);
+                    let produto = (await ProdutoRepository.consultarPorId(itemNovo.fk_produto))[0]
+                    produto.qtd_estoque+=itemNovo.quantidade
+                    await ProdutoRepository.alterar(produto.id,produto)
+                }
+            )
+
+            //Retornando a lista de todas as entradas atualizada
+            const entradas = await EntradaRepository.consultarTodos();
+
+            for await(const entrada of entradas){
+                const fornecedor = await FornecedorController.getPorId(entrada.fk_fornecedor);
+                const items = await ItemEntradaController.getPorEntrada(entrada.id);
+
+                if(fornecedor) {entrada.fornecedor = fornecedor}
+                if(items) {entrada.items = items}
+            }
+            
+            response.json(entradas)
 
         }catch(e){
             console.log(e)

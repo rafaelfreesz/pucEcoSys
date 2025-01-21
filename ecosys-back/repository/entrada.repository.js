@@ -13,7 +13,7 @@ class EntradaRepository{
 
     
     incluir(entrada){
-        const sql = 'INSERT INTO tb_entrada(dt_hr_entrada,nu_nota_fiscal, fk_fornecedor) VALUES ($1,$2,$3)';
+        const sql = 'INSERT INTO tb_entrada(dt_hr_entrada,nu_nota_fiscal, fk_fornecedor) VALUES ($1,$2,$3) returning *';
         
         return executarQuery(sql,
             [
