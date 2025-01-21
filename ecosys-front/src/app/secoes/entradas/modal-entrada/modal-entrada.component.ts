@@ -11,8 +11,9 @@ import { EntradaService } from 'src/app/services/entrada.service';
 export class ModalEntradaComponent implements OnInit{
 
   entrada: any = null;
-  entradaFoiSelecionada: Subscription
-  mostrarModalTrocaFornecedor: boolean = false
+  entradaFoiSelecionada: Subscription;
+  mostrarModalTrocaFornecedor: boolean = false;
+  mostrarModalProduto: boolean = false;
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;
@@ -103,6 +104,10 @@ export class ModalEntradaComponent implements OnInit{
 
   mostrarModalAlterarFornecedor(){
     this.mostrarModalTrocaFornecedor = true;
+  }
+
+  mostrarModalIncluirProduto(){
+    this.mostrarModalProduto = true;
   }
 
   fecharModalAlterarFornecedor(fornecedor: any){
