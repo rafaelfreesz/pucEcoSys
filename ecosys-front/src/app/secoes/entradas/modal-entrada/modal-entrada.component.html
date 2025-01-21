@@ -151,7 +151,7 @@
                         <button type="submit" class="btn btn-primary botao" [disabled]="!inFoiAlterado()">
                             <i class="bi bi-floppy-fill"></i> Salvar
                         </button>
-                        <button class="btn btn-danger botao" (click)="excluir()">
+                        <button class="btn btn-danger botao" *ngIf="!ehNovo()" (click)="excluir()">
                             <i class="bi bi-trash-fill"></i> Excluir
                         </button>
                         <button class="btn btn-danger botao" (click)="fechar()">

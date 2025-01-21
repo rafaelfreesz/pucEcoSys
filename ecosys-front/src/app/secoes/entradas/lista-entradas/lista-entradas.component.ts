@@ -28,7 +28,7 @@ export class ListaEntradasComponent implements OnInit {
   }
 
   prepararCadastro(){
-
+    this.entradaService.selecionarEntrada(new Entrada())
   }
 
   selecionarEntrada(entrada: any){

@@ -19,7 +19,7 @@ export class ModalEntradaComponent implements OnInit{
   mostrarModalItem: boolean = false;
 
   conteudoFormulario: FormGroup | any;
-  inEdicao: boolean = true;
+  inEdicao: boolean = false;
   itemsPraExcluir: any[] = []
 
   constructor(private entradaService: EntradaService) {
@@ -27,7 +27,12 @@ export class ModalEntradaComponent implements OnInit{
       entrada => {
         this.entrada = entrada;
         if(this.entrada){
-          this.popularCampos();
+          if(this.entrada.id == -1){
+            this.inEdicao = true;
+            this.popularCamposCadastro();
+          }else{
+            this.popularCamposEdicao();
+          }
         }
         
       }
@@ -35,6 +40,7 @@ export class ModalEntradaComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
   }
 
   fechar(){
@@ -54,7 +60,21 @@ export class ModalEntradaComponent implements OnInit{
     this.inEdicao = true; 
   }
 
-  private popularCampos(){
+  private popularCamposCadastro(){
+    this.conteudoFormulario = new FormGroup({
+      'dt_hr_entrada': new FormControl(""),
+      'nu_nota_fiscal': new FormControl(""),
+      'fornecedor': new FormGroup({
+        'id': new FormControl(""),
+        'nome_empresarial': new FormControl(""),
+        'cnpj': new FormControl(""),
+        'razao_social': new FormControl("")
+      })
+    })
+
+  }
+
+  private popularCamposEdicao(){
     this.conteudoFormulario = new FormGroup({
       'dt_hr_entrada': new FormControl(this.entrada.dt_hr_entrada.slice(0,16)),
       'nu_nota_fiscal': new FormControl(this.entrada.nu_nota_fiscal),
@@ -141,6 +161,13 @@ export class ModalEntradaComponent implements OnInit{
     this.entrada.dt_hr_entrada = this.conteudoFormulario.value.dt_hr_entrada;
     this.entrada.nu_nota_fiscal = this.conteudoFormulario.value.nu_nota_fiscal;
     this.entrada.fornecedor.id = (this.conteudoFormulario.value.fornecedor.id);
+  }
+
+  ehNovo():boolean{
+    if(this.entrada){
+      return this.entrada.id == -1
+    }
+    return false
   }
 
 }
