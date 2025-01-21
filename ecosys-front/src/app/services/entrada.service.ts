@@ -61,6 +61,17 @@ export class EntradaService {
           //TODO Tratar depois a regra de negocio para descontar do estoque entradas que foram computadas
         }
       )
+    }else{
+      this.httpService.insertEntrada(entrada).subscribe(
+        todasEntradas =>{
+          this.todasEntradas = todasEntradas
+          this.entradaSelecionada = null;
+          this.listaEntradasAlterada.next(this.todasEntradas.slice());
+          this.entradaFoiSelecionada.next(null);
+          //TODO Tratar depois a regra de negocio para descontar do estoque entradas que foram computadas
+        }
+      )
+
     }
   }
 }

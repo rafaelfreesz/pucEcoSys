@@ -129,6 +129,29 @@ export class HttpService{
 
     }
 
+    insertEntrada(entrada: Entrada){
+        console.log(entrada)
+        let entradaBody = {
+            'entrada':{
+                'dt_hr_entrada': entrada.dt_hr_entrada,
+                'nu_nota_fiscal': entrada.nu_nota_fiscal,
+                'fk_fornecedor': entrada.fornecedor?.id
+            },
+            'novos_items': entrada.items_entrada.map((elemento: ItemEntrada) => {
+                return {
+                    'quantidade': elemento.quantidade,
+                    'preco_compra': elemento.preco_compra,
+                    'fk_produto': elemento.produto?.id,
+
+                }
+            })
+
+        }
+        return this.http.post(`http://localhost:3000/entradas`,entradaBody).pipe(
+            map( HTTPResponseParser.buildListaEntradas )
+        )
+    }
+
 
     
 
