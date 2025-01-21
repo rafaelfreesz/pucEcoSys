@@ -13,7 +13,7 @@ export class ModalEntradaComponent implements OnInit{
   entrada: any = null;
   entradaFoiSelecionada: Subscription;
   mostrarModalTrocaFornecedor: boolean = false;
-  mostrarModalProduto: boolean = false;
+  mostrarModalProduto: boolean = true;
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;

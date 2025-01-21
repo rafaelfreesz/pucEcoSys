@@ -1,10 +1,75 @@
 <div class="blackdrop">
-    <div class="alert-box">
-        <div class="cabecalho">
-            <div class="titulo">
-                Incluir Produto
-            </div>
-            <div class="fechar" (click) = "cancelar()"> X </div>
-        </div>
+  <div class="alert-box">
+    <div class="cabecalho">
+      <div class="titulo">Incluir Produto</div>
+      <div class="fechar" (click)="cancelar()">X</div>
     </div>
+
+    <div class="conteudo">
+        <div class="busca">
+            
+            <div class="row filtro">
+              <div class="col-sm-3">
+                <select
+                  class="form-select"
+                  name="selecionar-filtro"
+                  id="selecionar-filtro"
+                  [(ngModel)]="criterioFiltro"
+                >
+                  <option value="nome">Nome</option>
+                  <option value="id">Código</option>
+                  <option value="descricao">Descricao</option>
+                  <option value="qtd_estoque">Quantidade</option>
+                  <option value="preco_venda">Preço de Venda (R$)</option>
+                </select>
+              </div>
+              <div class="col-md-8">
+                <input
+                  type="search"
+                  class="form-control"
+                  name="filtro-valor"
+                  id="filtro-valor"
+                  [(ngModel)]="valorFiltro"
+                />
+              </div>
+            </div>
+      
+            <!-- ---TABELA -->
+            <div class="tabela">
+              <div class="row">
+                <div class="col-md">
+                  <table class="table table-striped">
+                      <thead>
+                          <th>Cód.</th>
+                          <th>Nome</th>
+                          <th>Descrição</th>
+                          <th>Preço Venda</th>
+                          <th>Estoque</th>
+                          <th>Imagem</th>
+                      </thead>
+                    <tbody>
+                      <tr 
+                          *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
+                          (click)="selecionar(produto)">
+                            <td>{{ produto.id | insereZeros:4}}</td>
+                            <td>{{ produto.nome | encurtar:25}}</td>
+                            <td>{{ produto.descricao | encurtar:50 }}</td>
+                            <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
+                            <td>{{ produto.qtd_estoque }}</td>
+                            <td class="celula-imagem"><img src = "https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" class = "imagem"></td>
+                          </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+      <div class="botoes">
+        <button class="btn btn-danger botao" (click)="cancelar()">
+          <i class="bi bi-x-circle"></i> Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

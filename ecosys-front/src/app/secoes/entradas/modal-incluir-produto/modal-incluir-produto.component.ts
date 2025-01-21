@@ -13,7 +13,8 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   @Output() fecharModal: EventEmitter<any> = new EventEmitter<any>();
   todosProdutos: any[] = []
   produtosAlterados: Subscription;
-
+  valorFiltro: string = "";
+  criterioFiltro: string = "nome";
   constructor(private produtoService: ProdutoService) {
     this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
         todosProdutos => {
