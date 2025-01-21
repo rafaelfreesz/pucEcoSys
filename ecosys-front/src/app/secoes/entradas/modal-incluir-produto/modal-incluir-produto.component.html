@@ -64,12 +64,60 @@
               </div>
             </div>
         </div>
-        
-      <div class="botoes">
-        <button class="btn btn-danger botao" (click)="cancelar()">
-          <i class="bi bi-x-circle"></i> Cancelar
-        </button>
-      </div>
+        <div class="linha-vertical"></div>
+        <div class="amostra desativado" *ngIf = "!this.produtoSelecionado">
+            <p class="informacao">
+                Selecione um produto
+            </p>
+            <p class="icone-desativado">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="rgba(200,200,200)" class="bi bi-x-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                  </svg>
+            </p>
+        </div>
+        <div class="amostra" *ngIf = "this.produtoSelecionado">
+            <div class="cabecalho">
+                <div class="titulo">Produto Selecionado</div>
+            </div>
+            <div class="container-imagem">
+                <img src = "https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" class = "imagem">
+            </div>
+            <div class="descricao">
+                <p class="informacao"><span class="label">Nome: </span>{{produtoSelecionado.nome}}</p>
+                <p class="informacao"><span class="label">Descrição: </span>{{produtoSelecionado.descricao}}</p>
+                <div class="valores">
+                    <div class="campo">
+                        <label for="preco_compra" class="label">Pço. de compra (R$):</label>
+                        <input
+                            type="number"
+                            inputmode="numeric"
+                            step="0.01"
+                            id="preco-compra"
+                            class="form-control"
+                            min="0.01"
+                            [(ngModel)]="precoCompra">
+                    </div>
+                    <div class="campo">
+                        <label for="quantidade" class="label">Quantidade:</label>
+                        <input
+                            type="number"
+                            inputmode="numeric"
+                            step="1"
+                            id="quantidade"
+                            class="form-control"
+                            min="1"
+                            [(ngModel)]="quantidade">
+                    </div>
+                </div>
+            </div>
+
+            <div class="botoes">
+              <button class="btn btn-danger botao" (click)="cancelar()">
+                <i class="bi bi-x-circle"></i> Cancelar
+              </button>
+            </div>
+        </div>
     </div>
   </div>
 </div>

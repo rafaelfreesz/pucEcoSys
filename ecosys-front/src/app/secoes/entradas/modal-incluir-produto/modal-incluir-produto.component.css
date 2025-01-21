@@ -12,7 +12,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60vw;
+    width: 90vw;
     height: fit-content;
     z-index: 100;
     background: white;
@@ -43,6 +43,8 @@
         flex-wrap: wrap;
         
         .busca{
+            width: 58vw;
+
             .filtro{
                 width: 65vw;
                 max-width: 65vw;
@@ -82,12 +84,71 @@
                 
             }
         }
-
-        .botoes{
-            margin-top: 10px;
+        .linha-vertical{
+            width: 4px;
+            height: 100px;
+            background-color: rgb(25, 135, 84);
+            border-radius: 8px;
+            height: 58vh;
+            margin-left: 10px;
+        }
+        .amostra{
+            display: block;
+            width: 27vw;
+            margin-left: 10px;
+            .container-imagem{
+                display: flex;
+                justify-content: center;
+                .imagem{
+                    height:20vh;
+                    border-style: solid;
+                    border-radius: 10px;
+                    border-color: rgba(25, 135, 84,0.2);
+                    border-width: 1px;
+                    margin-right: 10px;
+                    margin-top: 10px;
+                }
+            }
+            .descricao{
+                .informacao{
+                    font-size: small;
+                }
+                .label{
+                    font-size: small;
+                    font-weight: 600;
+                    align-content: center;
+                    margin-bottom: 0px;
+                }
+                .valores{
+                    display: flex;
+                    justify-content: space-between;
+                    .campo{
+                        width: 13vw;
+                    }
+                }
+            }
+            .botoes{
+                margin-top: 10px;
+            }
+        }
+        .amostra.desativado{
+            display: block;
+            width: 27vw;
+            .informacao{
+                width: 27vw;
+                text-align: center;
+                font-weight: 600;
+            }
+            .icone-desativado{
+                width: 27vw;
+                text-align: center;
+                vertical-align: middle;
+            }
         }
 
+        
     }
+
 }
 
 
