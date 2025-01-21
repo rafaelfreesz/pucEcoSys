@@ -1,5 +1,6 @@
 const {EntradaRepository} = require('../repository/entrada.repository');
 const { ItemEntradaRepository } = require('../repository/item_entrada.repository');
+const { ProdutoRepository } = require('../repository/produto.repository');
 const {FornecedorController} = require('./fornecedor.controller');
 const {ItemEntradaController} = require('./item_entrada.controller');
 
@@ -76,15 +77,21 @@ class EntradaController {
             await novosItems.forEach(
                 async itemNovo => {
                     await ItemEntradaRepository.incluir(itemNovo);
+                    let produto = (await ProdutoRepository.consultarPorId(itemNovo.fk_produto))[0]
+                    produto.qtd_estoque+=itemNovo.quantidade
+                    await ProdutoRepository.alterar(produto.id,produto)
                 }
             )
             
             
             //Excluindo items, se houver
-            const idsItemsPraExcluir = request.body.ids_items_pra_excluir
-            await idsItemsPraExcluir.forEach(
-                async elemento => {
-                    await ItemEntradaRepository.excluirPorId(elemento);
+            const itemsPraExcluir = request.body.items_pra_excluir
+            await itemsPraExcluir.forEach(
+                async itemPraExcluir => {
+                    await ItemEntradaRepository.excluirPorId(itemPraExcluir.id);
+                    let produto = (await ProdutoRepository.consultarPorId(itemPraExcluir.produto.id))[0]
+                    produto.qtd_estoque-=itemPraExcluir.quantidade
+                    await ProdutoRepository.alterar(produto.id,produto)
                 })
 
             //Retornando a lista de todas as entradas atualizada
