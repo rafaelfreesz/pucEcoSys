@@ -7,6 +7,7 @@ import { Endereco } from "../models/endereco.model";
 import { Contato } from "../models/contato.model";
 import { Entrada } from "../models/entrada.model";
 import { HTTPResponseParser } from "../utils/http_response_parser";
+import { ItemEntrada } from "../models/item_entrada.model";
 
 @Injectable()
 export class HttpService{
@@ -99,6 +100,33 @@ export class HttpService{
         .pipe(
             map( HTTPResponseParser.buildListaEntradas )
         )
+    }
+
+    updateEntrada(entrada: Entrada, novosItems: ItemEntrada[], idsItemsPraExcluir: any[]){
+
+        let entradaBody = {
+            'entrada':{
+                'dt_hr_entrada': entrada.dt_hr_entrada,
+                'nu_nota_fiscal': entrada.nu_nota_fiscal,
+                'fk_fornecedor': entrada.fornecedor?.id
+            },
+            'novos_items': novosItems.map((elemento: ItemEntrada) => {
+                return {
+                    'quantidade': elemento.quantidade,
+                    'preco_compra': elemento.preco_compra,
+                    'fk_produto': elemento.produto?.id,
+                    'fk_entrada': entrada.id,
+
+                }
+            }),
+            'ids_items_pra_excluir': idsItemsPraExcluir
+
+        }
+        
+       return this.http.put(`http://localhost:3000/entradas/${entrada.id}`,entradaBody).pipe(
+            map( HTTPResponseParser.buildListaEntradas )
+        )
+
     }
 
 

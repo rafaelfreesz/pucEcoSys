@@ -117,7 +117,7 @@
                                     <th>Pço. total</th>
                                     <th></th>
                                 </thead>
-                                <tbody formArrayName="items_entrada">
+                                <tbody>
                                     <tr *ngFor="let item_entrada of entrada.items_entrada | escondeExcluidos: idsItemsPraExcluir; let i = index">
                                         <td class="text-center">{{i}}</td>
                                         <td>{{item_entrada.produto.nome}}</td>

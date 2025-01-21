@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Entrada } from 'src/app/models/entrada.model';
+import { Fornecedor } from 'src/app/models/fornecedor.model';
 import { ItemEntrada } from 'src/app/models/item_entrada.model';
 import { EntradaService } from 'src/app/services/entrada.service';
 
@@ -14,7 +16,7 @@ export class ModalEntradaComponent implements OnInit{
   entrada: any = null;
   entradaFoiSelecionada: Subscription;
   mostrarModalTrocaFornecedor: boolean = false;
-  mostrarModalItem: boolean = true;
+  mostrarModalItem: boolean = false;
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;
@@ -60,39 +62,17 @@ export class ModalEntradaComponent implements OnInit{
         'id': new FormControl(this.entrada.fornecedor.id),
         'nome_empresarial': new FormControl(this.entrada.fornecedor.nome_empresarial),
         'cnpj': new FormControl(this.entrada.fornecedor.cnpj),
-        'razao_social': new FormControl(this.entrada.fornecedor.razao_social),
-      }),
-      'items_entrada': new FormArray(this.buildItemsEntradaArray())
+        'razao_social': new FormControl(this.entrada.fornecedor.razao_social)
+      })
     })
 
   }
 
-  private buildItemsEntradaArray(): FormGroup[]{
-    let itemsArray: FormGroup[] = []
-
-    if(this.entrada !== null){
-      this.entrada.items_entrada.forEach(
-        (item: any) => {
-          itemsArray.push( new FormGroup({
-            'id': new FormControl(item.id),
-            'quantidade': new FormControl(item.quantidade),
-            'preco_compra': new FormControl(item.preco_compra),
-            'valor_total': new FormControl(item.valor_total_item()),
-            'nome_produto': new FormControl(item.produto.nome)
-          })
-
-          )
-        }
-      )
-    }
-
-    return itemsArray;
-  }
 
   submeterFormulario(){
-    console.log(this.conteudoFormulario)
-    console.log('submetido')
-    console.log(this.conteudoFormulario.value.dt_hr_entrada)
+    console.log("Antes",this.entrada)
+    this.formularioPraEntrada();
+    this.entradaService.salvarEntrada(this.entrada, this.idsItemsPraExcluir)
   }
 
   excluirItem(item: any){
@@ -156,6 +136,13 @@ export class ModalEntradaComponent implements OnInit{
       total+= this.idsItemsPraExcluir.includes(item.id)? 0 : item.valor_total_item()
     }
     return total;
+  }
+
+
+  formularioPraEntrada(){
+    this.entrada.dt_hr_entrada = this.conteudoFormulario.value.dt_hr_entrada;
+    this.entrada.nu_nota_fiscal = this.conteudoFormulario.value.nu_nota_fiscal;
+    this.entrada.fornecedor.id = (this.conteudoFormulario.value.fornecedor.id);
   }
 
 }

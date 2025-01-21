@@ -47,4 +47,20 @@ export class EntradaService {
       );
     }
   }
+
+  salvarEntrada(entrada: Entrada, idsItemsPraExcluir: any[]){
+    let novosItems = entrada.items_entrada.filter( elemento => elemento.id === -1)
+
+    if(entrada.id !== -1){
+      this.httpService.updateEntrada(entrada, novosItems, idsItemsPraExcluir).subscribe(
+        todasEntradas =>{
+          this.todasEntradas = todasEntradas
+          this.entradaSelecionada = null;
+          this.listaEntradasAlterada.next(this.todasEntradas.slice());
+          this.entradaFoiSelecionada.next(null);
+          //TODO Tratar depois a regra de negocio para descontar do estoque entradas que foram computadas
+        }
+      )
+    }
+  }
 }

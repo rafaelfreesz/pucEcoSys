@@ -20,7 +20,6 @@ export class ListaEntradasComponent implements OnInit {
     this.entradasAlteradas = this.entradaService.listaEntradasAlterada.subscribe(
       todasEntradas => {
         this.todasEntradas = todasEntradas;
-        this.selecionarEntrada(todasEntradas[0])
       }
     )
   }
