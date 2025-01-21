@@ -30,6 +30,7 @@ import { DataPipe } from './pipes/data.pipe';
 import { ModalEntradaComponent } from './secoes/entradas/modal-entrada/modal-entrada.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalAlterarFornecedorComponent } from './secoes/entradas/modal-alterar-fornecedor/modal-alterar-fornecedor.component';
+import { ModalIncluirProdutoComponent } from './secoes/entradas/modal-incluir-produto/modal-incluir-produto.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ModalAlterarFornecedorComponent } from './secoes/entradas/modal-alterar
     DataPipe,
     EscondeExcluidosPipe,
     ModalEntradaComponent,
-    ModalAlterarFornecedorComponent
+    ModalAlterarFornecedorComponent,
+    ModalIncluirProdutoComponent
   ],
   imports: [
     BrowserModule,
