@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ItemEntrada } from 'src/app/models/item_entrada.model';
 import { Produto } from 'src/app/models/produto.model';
 import { ProdutoService } from 'src/app/services/produto.service';
 
@@ -19,6 +20,7 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   criterioFiltro: string = "nome";
   precoCompra: number = 0.01;
   quantidade: number = 1;
+
   constructor(private produtoService: ProdutoService) {
     this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
         todosProdutos => {
@@ -36,6 +38,7 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   }
 
   cancelar(){
+    this.produtoSelecionado = null;
     this.fecharModal.emit(null);
   }
 
@@ -47,6 +50,15 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
       this.produtoSelecionado = produto;
     }
     //this.fecharModal.emit(produto);
+  }
+
+  adicionar(){
+    let novoItem = new ItemEntrada();
+    novoItem.preco_compra = this.precoCompra;
+    novoItem.quantidade = this.quantidade;
+    novoItem.produto = this.produtoSelecionado;
+  
+    this.fecharModal.emit(novoItem);
   }
 
 }

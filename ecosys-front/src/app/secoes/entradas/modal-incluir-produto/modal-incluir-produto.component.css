@@ -129,6 +129,11 @@
             }
             .botoes{
                 margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                .botao{
+                    width: 13vw;
+                }
             }
         }
         .amostra.desativado{
@@ -143,6 +148,14 @@
                 width: 27vw;
                 text-align: center;
                 vertical-align: middle;
+            }
+            .container-botao{
+                width: 27vw;
+                text-align: center;
+                .botao{
+                    margin-top: 32vh;
+                    width: 20vw;
+                }
             }
         }
 
