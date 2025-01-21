@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ItemEntrada } from 'src/app/models/item_entrada.model';
 import { EntradaService } from 'src/app/services/entrada.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class ModalEntradaComponent implements OnInit{
   entrada: any = null;
   entradaFoiSelecionada: Subscription;
   mostrarModalTrocaFornecedor: boolean = false;
-  mostrarModalProduto: boolean = true;
+  mostrarModalItem: boolean = true;
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;
@@ -77,8 +78,7 @@ export class ModalEntradaComponent implements OnInit{
             'quantidade': new FormControl(item.quantidade),
             'preco_compra': new FormControl(item.preco_compra),
             'valor_total': new FormControl(item.valor_total_item()),
-            'nome_produto': new FormControl(item.produto.nome),
-            'in_excluir': new FormControl(false)
+            'nome_produto': new FormControl(item.produto.nome)
           })
 
           )
@@ -95,19 +95,29 @@ export class ModalEntradaComponent implements OnInit{
     console.log(this.conteudoFormulario.value.dt_hr_entrada)
   }
 
-  excluirItem(idItem: string){
-    this.idsItemsPraExcluir.push(idItem)
-    //Recriando o vetor para disparar o pipe
-    this.idsItemsPraExcluir = this.idsItemsPraExcluir.filter(elemento => true)
-    this.conteudoFormulario.markAsDirty();
+  excluirItem(item: any){
+    
+    //Quando o elemento ainda não ta persistido no sistema
+    if (item.id === -1){
+      this.entrada.items_entrada = this.entrada.items_entrada.filter(
+        (elemento: any) => {
+          return elemento!=item
+        })
+      
+    }else{
+      this.idsItemsPraExcluir.push(item.id)
+      //Recriando o vetor para disparar o pipe
+      this.idsItemsPraExcluir = this.idsItemsPraExcluir.filter(elemento => true)
+      this.conteudoFormulario.markAsDirty();
+    }
   }
 
   mostrarModalAlterarFornecedor(){
     this.mostrarModalTrocaFornecedor = true;
   }
 
-  mostrarModalIncluirProduto(){
-    this.mostrarModalProduto = true;
+  mostrarModalIncluirItem(){
+    this.mostrarModalItem = true;
   }
 
   fecharModalAlterarFornecedor(fornecedor: any){
@@ -126,14 +136,14 @@ export class ModalEntradaComponent implements OnInit{
     this.mostrarModalTrocaFornecedor = false;
   }
 
-  fecharModalIncluirProduto(item: any){
+  fecharModalIncluirItem(item: any){
     console.log(item)
     if(item){
       this.entrada.items_entrada.push(item)
-      this.entrada.items_entrada = this.entrada.items_entrada.filter((el: any) => true)
+      this.entrada.items_entrada = this.entrada.items_entrada.filter((elemento: any) => true)
       this.conteudoFormulario.markAsDirty()
     }
-    this.mostrarModalProduto = false
+    this.mostrarModalItem = false
   }
 
   inFoiAlterado(): boolean{
