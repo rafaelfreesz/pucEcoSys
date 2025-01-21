@@ -126,6 +126,10 @@ export class ModalEntradaComponent implements OnInit{
     this.mostrarModalTrocaFornecedor = false;
   }
 
+  fecharModalIncluirProduto(produto: any){
+    this.mostrarModalProduto = false
+  }
+
   inFoiAlterado(): boolean{
     return this.conteudoFormulario.dirty
   }
