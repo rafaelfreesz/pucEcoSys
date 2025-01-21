@@ -20,7 +20,7 @@ export class ModalEntradaComponent implements OnInit{
 
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = true;
-  idsItemsPraExcluir: string[] = []
+  itemsPraExcluir: any[] = []
 
   constructor(private entradaService: EntradaService) {
     this.entradaFoiSelecionada = this.entradaService.entradaFoiSelecionada.subscribe(
@@ -70,9 +70,8 @@ export class ModalEntradaComponent implements OnInit{
 
 
   submeterFormulario(){
-    console.log("Antes",this.entrada)
     this.formularioPraEntrada();
-    this.entradaService.salvarEntrada(this.entrada, this.idsItemsPraExcluir)
+    this.entradaService.salvarEntrada(this.entrada, this.itemsPraExcluir)
   }
 
   excluirItem(item: any){
@@ -85,9 +84,9 @@ export class ModalEntradaComponent implements OnInit{
         })
       
     }else{
-      this.idsItemsPraExcluir.push(item.id)
+      this.itemsPraExcluir.push(item)
       //Recriando o vetor para disparar o pipe
-      this.idsItemsPraExcluir = this.idsItemsPraExcluir.filter(elemento => true)
+      this.itemsPraExcluir = this.itemsPraExcluir.filter(() => true)
       this.conteudoFormulario.markAsDirty();
     }
   }
@@ -117,7 +116,6 @@ export class ModalEntradaComponent implements OnInit{
   }
 
   fecharModalIncluirItem(item: any){
-    console.log(item)
     if(item){
       this.entrada.items_entrada.push(item)
       this.entrada.items_entrada = this.entrada.items_entrada.filter((elemento: any) => true)
@@ -133,7 +131,7 @@ export class ModalEntradaComponent implements OnInit{
   valor_total_nota(){
     let total = 0
     for (let item of this.entrada.items_entrada){
-      total+= this.idsItemsPraExcluir.includes(item.id)? 0 : item.valor_total_item()
+      total+= this.itemsPraExcluir.includes(item)? 0 : item.valor_total_item()
     }
     return total;
   }

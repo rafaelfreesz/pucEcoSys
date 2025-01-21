@@ -5,11 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class EscondeExcluidosPipe implements PipeTransform {
 
-  transform(values: any[], idsPraExclusao: string[]): any[] {
+  transform(values: any[], itemsPraExclusao: any[]): any[] {
 
     var lista_filtrada =values.filter((elemento) =>  {
       
-      return !idsPraExclusao.includes(elemento.id)
+      return !itemsPraExclusao.includes(elemento)
 
     } );
 

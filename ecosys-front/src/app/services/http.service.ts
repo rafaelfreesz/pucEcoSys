@@ -102,7 +102,7 @@ export class HttpService{
         )
     }
 
-    updateEntrada(entrada: Entrada, novosItems: ItemEntrada[], idsItemsPraExcluir: any[]){
+    updateEntrada(entrada: Entrada, novosItems: ItemEntrada[], itemsPraExcluir: any[]){
 
         let entradaBody = {
             'entrada':{
@@ -119,7 +119,7 @@ export class HttpService{
 
                 }
             }),
-            'ids_items_pra_excluir': idsItemsPraExcluir
+            'items_pra_excluir': itemsPraExcluir
 
         }
         

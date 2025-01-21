@@ -118,7 +118,7 @@
                                     <th></th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item_entrada of entrada.items_entrada | escondeExcluidos: idsItemsPraExcluir; let i = index">
+                                    <tr *ngFor="let item_entrada of entrada.items_entrada | escondeExcluidos: itemsPraExcluir; let i = index">
                                         <td class="text-center">{{i}}</td>
                                         <td>{{item_entrada.produto.nome}}</td>
                                         <td class="text-center">{{item_entrada.quantidade}}</td>
