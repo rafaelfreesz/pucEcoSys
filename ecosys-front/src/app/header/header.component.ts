@@ -9,9 +9,13 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
   
-  secaoAtiva = "home"
+  modoAtivo = "administracao"
 
   ngOnInit(): void {
+  }
+
+  trocarModo(modo:string){
+    this.modoAtivo = modo
   }
 
 }
