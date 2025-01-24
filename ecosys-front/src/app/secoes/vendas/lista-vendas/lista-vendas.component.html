@@ -72,6 +72,29 @@
                 <div class="informacao"><span class="label">Data/hora: </span>{{vendaSelecionada.dt_hr_venda | data}}</div>
             </div>
             <div class="cabecalho pagamento">
+                <div class="titulo">Ítems</div>
+            </div>
+            <div class="descricao items">
+                <table class="table table-striped">
+                    <thead>
+                        <th> </th>
+                        <th>Produto</th>
+                        <th>Qtd</th>
+                        <th>Pço. un.</th>
+                        <th>Pço. total</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item_venda of vendaSelecionada.items_venda; let i = index">
+                            <td>{{i}}</td>
+                            <td class = "nome-produto">{{item_venda.produto? item_venda.produto.nome: ""}}</td>
+                            <td>{{item_venda.quantidade}}</td>
+                            <td>R$ {{item_venda.produto? item_venda.produto.preco_venda: 0 | number : "1.2-2"}}</td>
+                            <td>R$ {{item_venda.valor_total_item() | number : "1.2-2"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="cabecalho pagamento">
                 <div class="titulo">Valores e Pagamento</div>
             </div>
             <div class="descricao">

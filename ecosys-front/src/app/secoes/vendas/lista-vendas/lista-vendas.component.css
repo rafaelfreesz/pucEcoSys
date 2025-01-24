@@ -83,6 +83,17 @@ td{
                     margin-bottom: 0px;
                 }
             }
+
+            .descricao.items{
+                max-height: 50vh;
+                overflow-y: scroll;
+                .nome-produto{
+                    max-width: 10vw;
+                }
+                tr{
+                    cursor:default;
+                }
+            }
             
         }
     }
