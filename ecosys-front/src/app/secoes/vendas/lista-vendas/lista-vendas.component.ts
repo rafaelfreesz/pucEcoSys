@@ -33,10 +33,16 @@ export class ListaVendasComponent implements OnInit, OnDestroy {
     this.vendasAlteradas.unsubscribe();
   }
 
-  prepararCadastro(){}
-
   selecionarVenda(venda: any): void{
-    this.vendaSelecionada = venda
+    if(this.vendaSelecionada === venda){
+      this.vendaSelecionada = null
+    }else{
+      this.vendaSelecionada = venda
+    }
+  }
+
+  prepararCadastro():void{
+    this.vendaService.prepararCadastro();
   }
 
 }

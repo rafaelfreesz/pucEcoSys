@@ -33,6 +33,7 @@ import { ModalIncluirProdutoComponent } from './secoes/entradas/modal-incluir-pr
 import { VendasComponent } from './secoes/vendas/vendas.component';
 import { ListaVendasComponent } from './secoes/vendas/lista-vendas/lista-vendas.component';
 import { TraduzFormaPagamentoPipe } from './pipes/traduz-forma-pagamento.pipe';
+import { ModalVendaComponent } from './secoes/vendas/modal-venda/modal-venda.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { TraduzFormaPagamentoPipe } from './pipes/traduz-forma-pagamento.pipe';
     ModalIncluirProdutoComponent,
     VendasComponent,
     ListaVendasComponent,
-    TraduzFormaPagamentoPipe
+    TraduzFormaPagamentoPipe,
+    ModalVendaComponent
   ],
   imports: [
     BrowserModule,

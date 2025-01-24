@@ -7,7 +7,9 @@ import { HttpService } from './http.service';
 export class VendaService {
   
   listaVendasAlterada: Subject<Venda[]> = new Subject<Venda[]>();
-  todasVendas: Venda[] = [];
+  private todasVendas: Venda[] = [];
+
+  vendaFoiCriada: Subject<Venda | null> = new Subject<Venda | null>();
 
   constructor(private httpService: HttpService) {
     this.buscarTodasVendas();
@@ -21,6 +23,12 @@ export class VendaService {
       }
     )
   }
+
+  prepararCadastro(){
+    this.vendaFoiCriada.next();
+  }
+
+
 
   
 }

@@ -96,6 +96,21 @@ td{
             }
             
         }
+
+        .venda-selecionada,desativado{
+            display: block;
+            width: 27vw;
+            .informacao-desativado{
+                width: 27vw;
+                text-align: center;
+                font-weight: 600;
+            }
+            .icone-desativado{
+                width: 27vw;
+                text-align: center;
+                vertical-align: middle;
+            }
+        }
     }
     
 }
