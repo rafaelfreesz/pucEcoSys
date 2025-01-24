@@ -9,7 +9,6 @@ class VendaController {
             const vendas = await VendaRepository.consultarTodos();
             
             for await(const venda of vendas){
-                console.log(venda)
                 const items = await ItemVendaController.getPorVenda(venda.id)
                 if(items){venda.items = items}
             }
@@ -44,7 +43,6 @@ class VendaController {
 
         try{
             await VendaRepository.incluir(request.body)
-            console.log(request.body)
             response.redirect('/vendas')
 
         }catch(e){
