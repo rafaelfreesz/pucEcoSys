@@ -9,7 +9,7 @@ import { EntradasComponent } from './secoes/entradas/entradas.component';
 import { BalcaoComponent } from './secoes/balcao/balcao.component';
 
 const routes: Routes = [
-  {path:'', component: BalcaoComponent},
+  {path:'', component: HomeComponent},
   {path:'produtos', component: ProdutosComponent},
   {path:'fornecedores', component: FornecedoresComponent},
   {path:'entradas', component: EntradasComponent},
