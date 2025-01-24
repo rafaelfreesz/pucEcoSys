@@ -6,7 +6,6 @@ import { HeaderComponent } from './header/header.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProdutosComponent } from './secoes/produtos/produtos.component';
-import { ProdutoService } from './services/produto.service';
 import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaProdutosComponent } from './secoes/produtos/lista-produtos/lista-produtos.component';
@@ -31,7 +30,6 @@ import { ModalEntradaComponent } from './secoes/entradas/modal-entrada/modal-ent
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalAlterarFornecedorComponent } from './secoes/entradas/modal-alterar-fornecedor/modal-alterar-fornecedor.component';
 import { ModalIncluirProdutoComponent } from './secoes/entradas/modal-incluir-produto/modal-incluir-produto.component';
-import { BalcaoComponent } from './secoes/balcao/balcao.component';
 import { VendasComponent } from './secoes/vendas/vendas.component';
 import { ListaVendasComponent } from './secoes/vendas/lista-vendas/lista-vendas.component';
 import { TraduzFormaPagamentoPipe } from './pipes/traduz-forma-pagamento.pipe';
@@ -62,7 +60,6 @@ import { TraduzFormaPagamentoPipe } from './pipes/traduz-forma-pagamento.pipe';
     ModalEntradaComponent,
     ModalAlterarFornecedorComponent,
     ModalIncluirProdutoComponent,
-    BalcaoComponent,
     VendasComponent,
     ListaVendasComponent,
     TraduzFormaPagamentoPipe
