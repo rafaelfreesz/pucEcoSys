@@ -1,0 +1,39 @@
+tr:hover{
+    background-color: rgba(25, 135, 84,0.75);
+    td{
+        color:white
+    }
+}
+
+.botao-nova{
+    margin-bottom: 5px;
+}
+
+table{
+    margin-top: 10px;
+}
+
+thead{
+    background-color: #198754;
+}
+
+th{
+    vertical-align: middle;
+    padding-left: 7px;
+    color: white;
+}
+
+tr{
+    cursor:pointer;
+}
+
+td{
+    vertical-align: middle;
+    background: transparent;
+}
+
+.total{
+    margin-top: 6px;
+    font-weight: 600;
+    vertical-align: middle;
+}

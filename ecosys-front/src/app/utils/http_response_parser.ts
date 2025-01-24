@@ -141,6 +141,7 @@ export abstract class HTTPResponseParser{
 
         venda.id = resposta.id;
         venda.dt_hr_venda = resposta.dt_hr_venda;
+        venda.forma_pagamento = resposta.forma_pagamento;
         
         for(const resp of resposta.items){
             venda.items_venda.push(HTTPResponseParser.buildItemVendaFromResposta(resp))

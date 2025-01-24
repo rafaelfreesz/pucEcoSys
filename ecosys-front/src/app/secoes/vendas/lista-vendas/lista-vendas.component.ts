@@ -12,6 +12,9 @@ export class ListaVendasComponent implements OnInit, OnDestroy {
 
   todasVendas: Venda[] = []
   private vendasAlteradas: Subscription;
+  criterioFiltro: string="";
+  valorFiltro: string="";
+  totalFiltrado: number = 0;
 
   constructor(private vendaService: VendaService) {
     this.vendasAlteradas = this.vendaService.listaVendasAlterada.subscribe(
@@ -27,5 +30,9 @@ export class ListaVendasComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.vendasAlteradas.unsubscribe();
   }
+
+  prepararCadastro(){}
+
+  selecionarVenda(venda: any): void{}
 
 }

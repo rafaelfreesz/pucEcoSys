@@ -1,1 +1,62 @@
-<p>lista-vendas works!</p>
+<div class="row">
+    <div class="col-md">
+      <button class="btn btn-success botao-nova" (click) = "prepararCadastro()" >
+        <i class="bi bi-file-earmark-plus-fill"></i> Nova
+      </button>
+    </div>
+</div>
+
+<div class="row filtro">
+    <div class="col-sm-3">
+        <select
+          class="form-select"
+          name="selecionar-filtro"
+          id="selecionar-filtro"
+          [(ngModel)]="criterioFiltro"
+          >
+          <option value="id">Código</option>
+          <option value="dt_ht_venda">Data/Hora</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+      <input
+        type="search"
+        class="form-control"
+        name="filtro-valor"
+        id="filtro-valor"
+        [(ngModel)]="valorFiltro"
+      />
+    </div>
+    <div class="col-sm-2">
+      <div class="total">Total: {{totalFiltrado |contadorFiltro:todasVendas:valorFiltro:criterioFiltro}}</div>
+    </div>
+
+    <!-- TABELA -->
+      
+    <div class="row">
+        <div class="col-md">
+            <table class="table table-striped">
+                <thead>
+                    <th>Cód.</th>
+                    <th>Data/Hora</th>
+                    <th>Forma de Pagamento</th>
+                    <th>Valor Total</th>
+                  </thead>
+                  <tbody>
+                    <tr 
+                    *ngFor="let venda of todasVendas | filtroLista:valorFiltro:criterioFiltro;"
+                    (click)="selecionarVenda(venda)">
+                      <td>{{ venda.id | insereZeros:4}}</td>
+                      <td>{{ venda.dt_hr_venda | data}}</td>
+                      <td>{{ venda.forma_pagamento | traduzFormaPagamento}}</td>
+                      <td>R$ {{ venda.valor_total_nota() | number : "1.2-2"}}</td>
+                    </tr>
+                  </tbody>
+            </table>
+
+            <!-- <app-modal-entrada></app-modal-entrada> -->
+
+        </div>
+      </div>
+      
+</div>

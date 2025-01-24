@@ -34,6 +34,7 @@ import { ModalIncluirProdutoComponent } from './secoes/entradas/modal-incluir-pr
 import { BalcaoComponent } from './secoes/balcao/balcao.component';
 import { VendasComponent } from './secoes/vendas/vendas.component';
 import { ListaVendasComponent } from './secoes/vendas/lista-vendas/lista-vendas.component';
+import { TraduzFormaPagamentoPipe } from './pipes/traduz-forma-pagamento.pipe';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ListaVendasComponent } from './secoes/vendas/lista-vendas/lista-vendas.
     ModalIncluirProdutoComponent,
     BalcaoComponent,
     VendasComponent,
-    ListaVendasComponent
+    ListaVendasComponent,
+    TraduzFormaPagamentoPipe
   ],
   imports: [
     BrowserModule,
