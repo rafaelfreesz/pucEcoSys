@@ -31,9 +31,60 @@ td{
     vertical-align: middle;
     background: transparent;
 }
+.conteudo{
+    display: flex;
+    .tabela{
+        width: 42vw;
+        .filtro{
+            display: flex;
+           .criterio-filtro{
+                width: 14vw;
+            } 
+            .valor-filtro{
+                    margin-left: 10px;
+                    width: 19vw;
+            } 
+            .total{
+                margin-left: 6px;
+                width: 5vw;
+                margin-top: 6px;
+                font-weight: 600;
+                vertical-align: middle;
+            }
+        }
+    }
 
-.total{
-    margin-top: 6px;
-    font-weight: 600;
-    vertical-align: middle;
+    .venda{
+        width: 42vw;
+        margin-left: 10px;
+        .venda-selecionada{
+            .cabecalho{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                background-color: #198754;
+                color: #fff;
+                .titulo{
+                    margin-left:10px;
+                    font-weight: 600;
+                }
+            }
+            .cabecalho.pagamento{
+                margin-top: 10px
+            }
+            .descricao{
+                display: flex;
+                justify-content: space-between;
+                margin-top: 10px;
+                margin-left: 10px;
+                .label{
+                    font-weight: 600;
+                    align-content: center;
+                    margin-bottom: 0px;
+                }
+            }
+            
+        }
+    }
+    
 }

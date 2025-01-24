@@ -14,7 +14,7 @@ export class Venda{
         this._id = value
     }
 
-    valor_total_nota = () => {
+    valor_total_venda = () => {
         let total = 0
         for(const item of this.items_venda){
             total+= item.valor_total_item();

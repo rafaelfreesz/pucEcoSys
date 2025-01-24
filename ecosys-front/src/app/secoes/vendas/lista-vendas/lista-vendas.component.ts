@@ -12,14 +12,16 @@ export class ListaVendasComponent implements OnInit, OnDestroy {
 
   todasVendas: Venda[] = []
   private vendasAlteradas: Subscription;
-  criterioFiltro: string="";
+  criterioFiltro: string="id";
   valorFiltro: string="";
   totalFiltrado: number = 0;
+  vendaSelecionada: Venda | null = null;
 
   constructor(private vendaService: VendaService) {
     this.vendasAlteradas = this.vendaService.listaVendasAlterada.subscribe(
       todasVendas => {
         this.todasVendas = todasVendas;
+        this.vendaSelecionada = this.todasVendas[0];
       }
     )
   }
@@ -33,6 +35,8 @@ export class ListaVendasComponent implements OnInit, OnDestroy {
 
   prepararCadastro(){}
 
-  selecionarVenda(venda: any): void{}
+  selecionarVenda(venda: any): void{
+    this.vendaSelecionada = venda
+  }
 
 }
