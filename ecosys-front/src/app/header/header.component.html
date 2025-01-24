@@ -5,7 +5,7 @@
           ><img src="assets/leaf_white.svg" alt="logo" class="icone"
         ><span class="texto-icone">EcoSys</span></a> 
         
-        <div class="container-fluid" *ngIf="this.modoAtivo != 'balcao'">
+        <div class="container-fluid" *ngIf="this.modoAtivo === 'administracao'">
           <ul class="navbar-nav" >
             <li class="nav-item item-secao" routerLinkActive="item-ativo" [routerLinkActiveOptions]="{exact: true}">
               <a routerLink="/" class="nav-link item-secao-nome">Home</a>
@@ -25,17 +25,27 @@
             </li>
           </ul>
         </div>
+        <div class="container-fluid" *ngIf="this.modoAtivo === 'balcao'">
+          <ul class="navbar-nav" >
+            <li class="nav-item item-secao" routerLinkActive="item-ativo" [routerLinkActiveOptions]="{exact: true}">
+              <a routerLink="/vendas" class="nav-link item-secao-nome">Vendas</a>
+            </li>
+            <li class="nav-item item-secao" routerLinkActive="item-ativo" [routerLinkActiveOptions]="{exact: true}">
+              <a routerLink="/produtos" class="nav-link item-secao-nome">Produtos</a>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="menu-direito">
 
         <div class="container-fluid">  
 
           <ul class="navbar-nav">
-            <li class="nav-item item-secao">
-              <a routerLink="/balcao" class="nav-link item-secao-nome" *ngIf="this.modoAtivo === 'administracao'" (click)="trocarModo('balcao')">Balcão</a>
+            <li class="nav-item item-secao" (click)="trocarModo('balcao')">
+              <a routerLink="/vendas" class="nav-link item-secao-nome" *ngIf="this.modoAtivo === 'administracao'" >Balcão</a>
             </li>
-            <li class="nav-item item-secao">
-              <a routerLink="/" class="nav-link item-secao-nome" *ngIf="this.modoAtivo === 'balcao'" (click)="trocarModo('administracao')">Administração</a>
+            <li class="nav-item item-secao" (click)="trocarModo('administracao')">
+              <a routerLink="/" class="nav-link item-secao-nome" *ngIf="this.modoAtivo === 'balcao'">Administração</a>
             </li>
           </ul>
 
