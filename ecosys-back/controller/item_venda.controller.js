@@ -105,27 +105,25 @@ class ItemVendaController {
 
     }
 
-    // //Funções Auxiliares
-    // async getPorEntrada(fk_entrada){
-    //     try{
-            
-    //         const items_entrada = await ItemEntradaRepository.consultarPorEntrada(fk_entrada);
-            
-    //         for await(const item_entrada of items_entrada){
-    //             const produto = await ProdutoController.getPorId(item_entrada.fk_produto);
-    //             if(produto) {item_entrada.produto = produto}
-    //             //TODO Implementar a lógica para receber a entrada (se for o caso)
-    //         }
-            
-    //         return items_entrada
-            
-    //     }catch(e){
-    //         console.log(e)
-    //         e.erro=true;
-    //     }
-        
-    // };
+    //Funções Auxiliares
+    async getPorVenda(fk_venda){
 
+        try{
+            const items_venda = await ItemVendaRepository.consultarPorVenda(fk_venda);
+
+            for await(const item_venda of items_venda){
+                const produto = await ProdutoController.getPorId(item_venda.fk_produto);
+                if(produto) {item_venda.produto = produto}
+            }
+            
+            return items_venda
+
+        }catch(e){
+            console.log(e)
+            e.erro=true;
+        }
+        
+    };
     
 }
 

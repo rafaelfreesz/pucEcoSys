@@ -1,5 +1,4 @@
-const {ContatoRepository} = require('../repository/contato.repository')
-const {FornecedorRepository} = require('../repository/fornecedor.repository')
+const {ItemVendaController} = require('../controller/item_venda.controller')
 const {VendaRepository} = require('../repository/venda.repository')
 
 class VendaController {
@@ -9,7 +8,11 @@ class VendaController {
             
             const vendas = await VendaRepository.consultarTodos();
             
-            // TODO incluir items da venda
+            for await(const venda of vendas){
+                console.log(venda)
+                const items = await ItemVendaController.getPorVenda(venda.id)
+                if(items){venda.items = items}
+            }
 
             response.json(vendas)
 
