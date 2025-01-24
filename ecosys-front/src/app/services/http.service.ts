@@ -152,7 +152,14 @@ export class HttpService{
         )
     }
 
+    //VENDAS
+    getTodasVendas() {
 
-    
+        return this.http.get<any>('http://localhost:3000/vendas')
+        .pipe(
+            map( HTTPResponseParser.buildListaVendas )
+        )
+
+    }
 
 }

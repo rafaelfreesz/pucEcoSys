@@ -3,7 +3,9 @@ import { Endereco } from "../models/endereco.model";
 import { Entrada } from "../models/entrada.model";
 import { Fornecedor } from "../models/fornecedor.model";
 import { ItemEntrada } from "../models/item_entrada.model";
+import { ItemVenda } from "../models/item_venda.model";
 import { Produto } from "../models/produto.model";
+import { Venda } from "../models/venda.model";
 
 export abstract class HTTPResponseParser{
     
@@ -36,6 +38,17 @@ export abstract class HTTPResponseParser{
         }
 
         return entradas
+    }
+
+    static buildListaVendas(resposta: any){
+        const vendas: Venda[] = []
+
+        for (const resp of resposta){
+            vendas.push(HTTPResponseParser.buildVendaFromResposta(resp))
+            
+        }
+
+        return vendas
     }
     
     //Conversores Resposta - Objeto
@@ -121,5 +134,28 @@ export abstract class HTTPResponseParser{
         item_entrada.produto = HTTPResponseParser.buildProdutoFromResposta(resposta.produto)
 
         return item_entrada
+    }
+
+    static buildVendaFromResposta(resposta: any): Venda{
+        const venda: Venda = new Venda();
+
+        venda.id = resposta.id;
+        venda.dt_hr_venda = resposta.dt_hr_venda;
+        
+        for(const resp of resposta.items){
+            venda.items_venda.push(HTTPResponseParser.buildItemVendaFromResposta(resp))
+        }
+
+        return venda
+    }
+
+    static buildItemVendaFromResposta(resposta: any): ItemVenda{
+        const item_venda: ItemVenda = new ItemVenda();
+
+        item_venda.id = resposta.id;
+        item_venda.quantidade = resposta.quantidade;        
+        item_venda.produto = HTTPResponseParser.buildProdutoFromResposta(resposta.produto)
+
+        return item_venda
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Entrada } from 'src/app/models/entrada.model';
 import { EntradaService } from 'src/app/services/entrada.service';
@@ -8,7 +8,7 @@ import { EntradaService } from 'src/app/services/entrada.service';
   templateUrl: './lista-entradas.component.html',
   styleUrls: ['./lista-entradas.component.css']
 })
-export class ListaEntradasComponent implements OnInit {
+export class ListaEntradasComponent implements OnInit, OnDestroy {
 
   todasEntradas: Entrada[] = []
   private entradasAlteradas: Subscription;
@@ -23,8 +23,12 @@ export class ListaEntradasComponent implements OnInit {
       }
     )
   }
-
+  
   ngOnInit(): void {
+  }
+  
+  ngOnDestroy(): void {
+    this.entradasAlteradas.unsubscribe();
   }
 
   prepararCadastro(){
