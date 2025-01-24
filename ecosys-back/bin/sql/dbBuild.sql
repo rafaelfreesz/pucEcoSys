@@ -54,7 +54,8 @@ CREATE TABLE tb_item_entrada(
 
 CREATE TABLE tb_venda(
     id SERIAL PRIMARY KEY,
-    dt_hr_venda DATE NOT NULL DEFAULT CURRENT_DATE
+    dt_hr_venda DATE NOT NULL DEFAULT CURRENT_DATE,
+    forma_pagamento VARCHAR(2)
 );
 
 CREATE TABLE tb_item_venda(
@@ -109,10 +110,16 @@ VALUES
   (3, 2, 18, 5.00),
   (4, 2, 7, 3.59);
 
-INSERT INTO tb_venda DEFAULT VALUES;
-INSERT INTO tb_venda DEFAULT VALUES;
-INSERT INTO tb_venda DEFAULT VALUES;
-INSERT INTO tb_venda DEFAULT VALUES;
+INSERT INTO tb_venda (dt_hr_venda,forma_pagamento)
+VALUES
+  ('2024-12-20T03:00:00.000Z','d'),
+  ('2024-12-10T03:00:00.000Z','p'),
+  ('2025-01-5T03:00:00.000Z','cd'),
+  ('2025-01-10T03:00:00.000Z','cc'),
+  ('2025-01-12T03:00:00.000Z','p');
+-- INSERT INTO tb_venda DEFAULT VALUES;
+-- INSERT INTO tb_venda DEFAULT VALUES;
+-- INSERT INTO tb_venda DEFAULT VALUES;
 
 INSERT INTO tb_item_venda (fk_produto, fk_venda, quantidade)
 VALUES
