@@ -32,6 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalAlterarFornecedorComponent } from './secoes/entradas/modal-alterar-fornecedor/modal-alterar-fornecedor.component';
 import { ModalIncluirProdutoComponent } from './secoes/entradas/modal-incluir-produto/modal-incluir-produto.component';
 import { BalcaoComponent } from './secoes/balcao/balcao.component';
+import { VendasComponent } from './secoes/vendas/vendas.component';
+import { ListaVendasComponent } from './secoes/vendas/lista-vendas/lista-vendas.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { BalcaoComponent } from './secoes/balcao/balcao.component';
     ModalEntradaComponent,
     ModalAlterarFornecedorComponent,
     ModalIncluirProdutoComponent,
-    BalcaoComponent
+    BalcaoComponent,
+    VendasComponent,
+    ListaVendasComponent
   ],
   imports: [
     BrowserModule,
