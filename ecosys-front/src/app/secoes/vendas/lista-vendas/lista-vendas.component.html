@@ -1,36 +1,35 @@
-<div class="row">
-    <div class="col-md">
-      <button class="btn btn-success botao-nova" (click) = "prepararCadastro()" >
-        <i class="bi bi-file-earmark-plus-fill"></i> Nova
-      </button>
-    </div>
-</div>
 
 <div class="conteudo">
     
     <div class="tabela">
-        <div class="filtro">
-            <div class="criterio-filtro">
-                <select
-                  class="form-select"
-                  name="selecionar-filtro"
-                  id="selecionar-filtro"
-                  [(ngModel)]="criterioFiltro"
-                  >
-                  <option value="id">Código</option>
-                  <option value="dt_ht_venda">Data/Hora</option>
-                </select>
+        <div class="filtro-botao">
+            <button class="btn btn-success botao-nova" (click) = "prepararCadastro()" >
+              <i class="bi bi-file-earmark-plus-fill"></i><div class="">Nova</div>
+            </button>
+
+            <div class="filtro">
+                <div class="criterio-filtro">
+                    <select
+                      class="form-select"
+                      name="selecionar-filtro"
+                      id="selecionar-filtro"
+                      [(ngModel)]="criterioFiltro"
+                      >
+                      <option value="id">Código</option>
+                      <option value="dt_ht_venda">Data/Hora</option>
+                    </select>
+                </div>
+                <div class="valor-filtro">
+                  <input
+                    type="search"
+                    class="form-control"
+                    name="filtro-valor"
+                    id="filtro-valor"
+                    [(ngModel)]="valorFiltro"
+                  />
+                </div>
+                <div class="total">Total: {{totalFiltrado |contadorFiltro:todasVendas:valorFiltro:criterioFiltro}}</div>
             </div>
-            <div class="valor-filtro">
-              <input
-                type="search"
-                class="form-control"
-                name="filtro-valor"
-                id="filtro-valor"
-                [(ngModel)]="valorFiltro"
-              />
-            </div>
-            <div class="total">Total: {{totalFiltrado |contadorFiltro:todasVendas:valorFiltro:criterioFiltro}}</div>
         </div>
         
     
@@ -40,7 +39,7 @@
             <thead>
                 <th>Cód.</th>
                 <th>Data/Hora</th>
-                <th>Forma de Pagamento</th>
+                <th>Pagamento</th>
                 <th>Valor Total</th>
               </thead>
               <tbody>
@@ -73,7 +72,10 @@
                 <div class="titulo">Ítems</div>
             </div>
             <div class="descricao items">
-                <table class="table table-striped">
+                <div class="" *ngIf="(vendaSelecionada.items_venda.length <= 0)">
+                    Não há produtos
+                </div>
+                <table class="table table-striped" *ngIf="vendaSelecionada.items_venda.length > 0">
                     <thead>
                         <th> </th>
                         <th>Produto</th>
@@ -81,7 +83,7 @@
                         <th>Pço. un.</th>
                         <th>Pço. total</th>
                     </thead>
-                    <tbody>
+                    <tbody class="tabela-body">
                         <tr *ngFor="let item_venda of vendaSelecionada.items_venda; let i = index">
                             <td>{{i}}</td>
                             <td class = "nome-produto">{{item_venda.produto? item_venda.produto.nome: ""}}</td>

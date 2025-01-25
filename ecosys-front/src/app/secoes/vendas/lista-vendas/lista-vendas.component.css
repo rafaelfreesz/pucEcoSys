@@ -7,6 +7,7 @@ tr:hover{
 
 .botao-nova{
     margin-bottom: 5px;
+    width: 20vw;
 }
 
 table{
@@ -15,7 +16,9 @@ table{
 
 thead{
     background-color: #198754;
+    margin-top: 0px;
 }
+
 
 th{
     vertical-align: middle;
@@ -34,22 +37,26 @@ td{
 .conteudo{
     display: flex;
     .tabela{
-        width: 42vw;
-        .filtro{
+        width: 29vw;
+        .filtro-botao{
             display: flex;
-           .criterio-filtro{
-                width: 14vw;
-            } 
-            .valor-filtro{
-                    margin-left: 10px;
-                    width: 19vw;
-            } 
-            .total{
-                margin-left: 6px;
-                width: 5vw;
-                margin-top: 6px;
-                font-weight: 600;
-                vertical-align: middle;
+            .filtro{
+                margin-left: 10px;
+               .criterio-filtro{
+                    width: 14vw;
+                } 
+                .valor-filtro{
+                    display: flex;
+                    margin-top: 10px;
+                    width: 14vw;
+                } 
+                .total{
+                    margin-left: 6px;
+                    width: 7vw;
+                    margin-top: 6px;
+                    font-weight: 600;
+                    vertical-align: middle;
+                }
             }
         }
     }
@@ -86,12 +93,21 @@ td{
 
             .descricao.items{
                 max-height: 50vh;
+                min-height: 10vh;
                 overflow-y: scroll;
+                margin: 0px;
                 .nome-produto{
                     max-width: 10vw;
                 }
+                thead{
+                    background-color: #5ab68b;
+                    margin-top: 0px;
+                }
                 tr{
                     cursor:default;
+                }
+                table{
+                    margin: 0;
                 }
             }
             
@@ -99,14 +115,14 @@ td{
 
         .venda-selecionada,desativado{
             display: block;
-            width: 27vw;
+            width: 100%;
             .informacao-desativado{
-                width: 27vw;
+                width: 100%;
                 text-align: center;
                 font-weight: 600;
             }
             .icone-desativado{
-                width: 27vw;
+                width: 100%;
                 text-align: center;
                 vertical-align: middle;
             }
