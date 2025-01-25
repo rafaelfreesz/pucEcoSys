@@ -53,9 +53,6 @@
                 </tr>
               </tbody>
         </table>
-        <div class="valores-tabela">
-
-        </div>
           
     </div>
 
@@ -65,7 +62,7 @@
                 <div class="titulo">Venda Selecionada</div>
             </div>
             <div class="descricao">
-                <div class="informacao"><span class="label">Código: </span>{{vendaSelecionada.id}}</div>
+                <div class="informacao"><span class="label">Código: </span>{{vendaSelecionada.id | insereZeros:4}}</div>
                 <div class="informacao"><span class="label">Data/hora: </span>{{vendaSelecionada.dt_hr_venda | data}}</div>
             </div>
             <div class="cabecalho pagamento">
