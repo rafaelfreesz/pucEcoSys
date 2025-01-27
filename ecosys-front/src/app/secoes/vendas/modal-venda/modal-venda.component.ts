@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ItemVenda } from 'src/app/models/item_venda.model';
 import { Venda } from 'src/app/models/venda.model';
 import { VendaService } from 'src/app/services/venda.service';
 
@@ -12,6 +13,7 @@ export class ModalVendaComponent implements OnInit {
 
   vendaNova: Venda | null = null
   vendaFoiCriada: Subscription;
+  mostrarModalItem: boolean = false;
   constructor(private vendaService: VendaService) {
     this.vendaFoiCriada = vendaService.vendaFoiCriada.subscribe(
       () => {
@@ -27,8 +29,20 @@ export class ModalVendaComponent implements OnInit {
     this.vendaNova = null;
   }
 
+  temItem(): boolean{
+    return this.vendaNova?.items_venda.length !== 0;
+  }
+
   //TODO implementar funções
-  mostrarModalIncluirItem(){}
+  mostrarModalIncluirItem(){
+    this.mostrarModalItem = true;
+  }
   excluirItem(item: any){}
+  fecharModalIncluirItem(item: ItemVenda){
+    if(item){
+      this.vendaNova?.items_venda.push(item)
+    }
+    this.mostrarModalItem = false;
+  }
 
 }
