@@ -168,6 +168,7 @@
             ></app-modal-alterar-fornecedor>
         <app-modal-incluir-produto
             *ngIf = "this.mostrarModalItem"
+            finalidade="compra"
             (fecharModal) = "fecharModalIncluirItem($event)"
             ></app-modal-incluir-produto>
         

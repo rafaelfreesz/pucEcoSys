@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemEntrada } from 'src/app/models/item_entrada.model';
+import { ItemVenda } from 'src/app/models/item_venda.model';
 import { Produto } from 'src/app/models/produto.model';
 import { ProdutoService } from 'src/app/services/produto.service';
 
@@ -13,6 +14,7 @@ import { ProdutoService } from 'src/app/services/produto.service';
 export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
 
   @Output() fecharModal: EventEmitter<any> = new EventEmitter<any>();
+  @Input() finalidade: string = "compra"
   todosProdutos: any[] = []
   produtoSelecionado: any;
   produtosAlterados: Subscription;
@@ -53,10 +55,18 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   }
 
   adicionar(){
-    let novoItem = new ItemEntrada();
-    novoItem.preco_compra = this.precoCompra;
-    novoItem.quantidade = this.quantidade;
-    novoItem.produto = this.produtoSelecionado;
+    let novoItem = null;
+    if(this.finalidade === "compra"){
+      let novoItem = new ItemEntrada();
+      novoItem.preco_compra = this.precoCompra;
+      novoItem.quantidade = this.quantidade;
+      novoItem.produto = this.produtoSelecionado;
+    }else{
+      let novoItem = new ItemVenda();
+      novoItem.quantidade = this.quantidade;
+      novoItem.produto = this.produtoSelecionado;
+
+    }
   
     this.fecharModal.emit(novoItem);
   }

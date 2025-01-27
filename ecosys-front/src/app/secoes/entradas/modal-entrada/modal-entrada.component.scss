@@ -141,21 +141,21 @@
         
     }
 }
-    .botoes{
-        display: flex;
-        justify-content: space-between;
-        margin-left: 10px;
-        margin-bottom: 10px;
-        .botao{
-            margin-top: 10px;
-            margin-right: 10px;
-            width:200px;
-        }
-        .botao-editar{
-            margin-top: 10px;
-            // margin-right: 10px;
-            width:130px;
-        }
+.botoes{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    .botao{
+        margin-top: 10px;
+        margin-right: 10px;
+        width:200px;
+    }
+    .botao-editar{
+        margin-top: 10px;
+        // margin-right: 10px;
+        width:130px;
+    }
 
 }
 
