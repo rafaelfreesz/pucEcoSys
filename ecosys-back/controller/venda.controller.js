@@ -1,5 +1,7 @@
 const {ItemVendaController} = require('../controller/item_venda.controller')
+const {ItemVendaRepository} = require('../repository/item_venda.repository')
 const {VendaRepository} = require('../repository/venda.repository')
+const {ProdutoRepository} = require('../repository/produto.repository')
 
 class VendaController {
 
@@ -42,8 +44,30 @@ class VendaController {
     async incluir(request, response, next) {
 
         try{
-            await VendaRepository.incluir(request.body)
-            response.redirect('/vendas')
+            let venda = (await VendaRepository.incluir(request.body.venda))[0];
+            console.log(venda)
+            await request.body.items.forEach(
+                async itemNovo => {
+                    itemNovo.fk_venda = venda.id;
+                    let ventinha = await ItemVendaRepository.incluir(itemNovo);
+                    
+                    //Abatendo estoque
+                    console.log(itemNovo)
+                    let produto = (await ProdutoRepository.consultarPorId(itemNovo.fk_produto))[0]
+                    produto.qtd_estoque-=itemNovo.quantidade
+                    await ProdutoRepository.alterar(produto.id,produto)
+                }
+            )
+            //Retornando a lista de todas as entradas atualizada
+            const vendas = await VendaRepository.consultarTodos();
+            
+            for await(const venda of vendas){
+                const items = await ItemVendaController.getPorVenda(venda.id);
+            
+                if(items) {venda.items = items}
+            }
+                        
+            response.json(vendas)
 
         }catch(e){
             response.json(e)

@@ -35,8 +35,7 @@ class ProdutoRepository{
         for (let i = 0; i < fields.length; i++){
 
             const sql = `UPDATE tb_produto SET ${fields[i]} = ($1) WHERE id = ($2)`;
-            console.log(sql)
-            console.log(produto[fields[i]])
+            
             if(i === fields.length - 1){
                 return executarQuery(sql,[produto[fields[i]],id]);
             }else{

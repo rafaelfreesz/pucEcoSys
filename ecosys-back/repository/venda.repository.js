@@ -13,11 +13,12 @@ class VendaRepository{
     }
 
     incluir(venda){
-        const sql = 'INSERT INTO tb_venda(dt_hr_venda) VALUES ($1)';
+        const sql = 'INSERT INTO tb_venda(dt_hr_venda, forma_pagamento) VALUES ($1, $2) returning *';
         
         return executarQuery(sql,
             [
-                venda.dt_hr_venda
+                venda.dt_hr_venda,
+                venda.forma_pagamento
             ])
     }
 
