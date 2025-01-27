@@ -4,7 +4,7 @@ export class Venda{
     private _id?: number = -1; 
     public dt_hr_venda: string = "";
     public items_venda: ItemVenda [] = [];
-    public forma_pagamento: string = "";
+    public forma_pagamento: string = "d";
 
     get id(): number{
         return this._id? this._id : -1;

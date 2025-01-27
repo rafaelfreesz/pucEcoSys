@@ -43,6 +43,11 @@
         width: 68vw;
         .subsecao{
             margin-bottom: 10px;
+            .label{
+                font-weight: 600;
+                align-content: center;
+                margin-bottom: 0px;
+            }
             .subtitulo{
                 display: flex;
                 background-color: rgb(211, 211, 211);
@@ -63,6 +68,23 @@
                     }
                 }
 
+            }
+
+            .campos-pagamento{
+                width: 100%;
+                margin-top: 10px;
+                .forma-pagamento{
+                    display: flex;
+                    .select-pagamento{
+                        margin-left: 10px;
+                        width: 20vw;
+                    }
+
+                }
+
+            }
+            .valores{
+                display: flex;
             }
 
         }

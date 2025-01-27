@@ -33,14 +33,12 @@ export class ModalVendaComponent implements OnInit {
     return this.vendaNova?.items_venda.length !== 0;
   }
 
-  //TODO implementar funções
   mostrarModalIncluirItem(){
     this.mostrarModalItem = true;
   }
 
   excluirItem(item: ItemVenda){
     if(this.vendaNova){
-
       this.vendaNova.items_venda = this.vendaNova.items_venda.filter(
         elemento => elemento != item 
       )
