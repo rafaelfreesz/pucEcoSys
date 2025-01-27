@@ -55,20 +55,20 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   }
 
   adicionar(){
-    let novoItem = null;
+    let novoItem: ItemEntrada | ItemVenda | null = null;
     if(this.finalidade === "compra"){
-      let novoItem = new ItemEntrada();
+      novoItem = new ItemEntrada();
       novoItem.preco_compra = this.precoCompra;
       novoItem.quantidade = this.quantidade;
       novoItem.produto = this.produtoSelecionado;
     }else{
-      let novoItem = new ItemVenda();
+      novoItem = new ItemVenda();
       novoItem.quantidade = this.quantidade;
       novoItem.produto = this.produtoSelecionado;
 
     }
-  
     this.fecharModal.emit(novoItem);
+  
   }
 
 }
