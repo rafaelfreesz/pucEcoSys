@@ -20,6 +20,7 @@ export class VendaService {
       todasVendas => {
         this.todasVendas = todasVendas;
         this.listaVendasAlterada.next(this.todasVendas.slice());
+        this.vendaFoiCriada.next();
       }
     )
   }

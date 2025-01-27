@@ -50,6 +50,7 @@ export class ModalEntradaComponent implements OnInit{
   excluir(){
     this.entradaService.excluirEntrada(this.entrada);
     this.entrada = null;
+    this.inEdicao = false;
   }
 
   temEntradaSelecionada(){
@@ -92,6 +93,7 @@ export class ModalEntradaComponent implements OnInit{
   submeterFormulario(){
     this.formularioPraEntrada();
     this.entradaService.salvarEntrada(this.entrada, this.itemsPraExcluir)
+    this.inEdicao = false;
   }
 
   excluirItem(item: any){

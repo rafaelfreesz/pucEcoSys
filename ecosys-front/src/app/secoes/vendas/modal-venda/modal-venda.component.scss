@@ -1,0 +1,100 @@
+.blackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0,0.6);
+    z-index: 0;
+}
+
+.alert-box{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vw;
+    height: fit-content;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    
+    .cabecalho{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #198754;
+        color: #fff;
+        .titulo{
+            margin-left:10px
+        }
+        .fechar{
+            text-align: right;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-top: 5px
+        }
+    }
+
+    .conteudo{
+        margin-top:10px;
+        margin-left:10px;
+        width: 68vw;
+        .subsecao{
+            margin-bottom: 10px;
+            .subtitulo{
+                display: flex;
+                background-color: rgb(211, 211, 211);
+                padding-left: 10px;
+                padding-bottom: 3px;
+                margin-bottom: 5px;
+                height: 36px;
+                .botao{
+                    margin-top: 3px;
+                    margin-left: 10px;
+                    height: 30px;
+                    width: 30px;
+                    display: flex;
+                    i{
+                        margin-top: -4px;
+                        margin-left: -6px;
+                        vertical-align: middle;
+                    }
+                }
+
+            }
+
+        }
+
+    }
+}
+
+table{
+    margin-top: 10px;
+    thead, tfoot{
+        background-color: rgba(25, 135, 84,0.75);
+        th{
+            border-radius: 4px;
+            vertical-align: middle;
+            padding-left: 7px;
+            color: white;
+        }
+    }
+    tbody{
+        tr{
+            //TODO reduzir o tamanho da linha do modal
+            td{
+                vertical-align: middle;
+                background: transparent;
+            }
+            .botao-tabela-excluir{
+                cursor: pointer;
+            }
+        }
+        tr:hover{
+            background-color: rgb(211, 211, 211);
+        }
+    }
+    
+}

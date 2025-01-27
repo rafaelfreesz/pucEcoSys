@@ -6,7 +6,7 @@ import { VendaService } from 'src/app/services/venda.service';
 @Component({
   selector: 'app-modal-venda',
   templateUrl: './modal-venda.component.html',
-  styleUrls: ['./modal-venda.component.css']
+  styleUrls: ['./modal-venda.component.scss']
 })
 export class ModalVendaComponent implements OnInit {
 
@@ -26,5 +26,9 @@ export class ModalVendaComponent implements OnInit {
   fechar():void {
     this.vendaNova = null;
   }
+
+  //TODO implementar funções
+  mostrarModalIncluirItem(){}
+  excluirItem(item: any){}
 
 }
