@@ -19,19 +19,20 @@ class ItemVendaRepository{
 
     
     incluir(item_venda){
-        const sql = 'INSERT INTO tb_item_venda(fk_produto, fk_venda, quantidade) VALUES ($1,$2,$3)';
+        const sql = 'INSERT INTO tb_item_venda(fk_produto, fk_venda, quantidade, preco_unitario) VALUES ($1,$2,$3,$4)';
         
         return executarQuery(sql,
             [
                 item_venda.fk_produto,
                 item_venda.fk_venda,
-                item_venda.quantidade
+                item_venda.quantidade,
+                item_venda.preco_unitario
             ])
     }
 
     async alterar(id,entrada){
 
-        const keys = ['fk_produto', 'fk_venda', 'quantidade'];
+        const keys = ['fk_produto', 'fk_venda', 'quantidade','preco_unitario'];
         const fields = [];
     
         keys.forEach(key => {

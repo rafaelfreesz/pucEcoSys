@@ -63,6 +63,7 @@ CREATE TABLE tb_item_venda(
     fk_produto INT, --Incluir NOT NULL
     fk_venda INT, --Incluir NOT NULL
     quantidade INT,
+    preco_unitario DECIMAL,
     FOREIGN KEY (fk_produto) REFERENCES tb_produto(id) ON DELETE CASCADE,
     FOREIGN KEY (fk_venda) REFERENCES tb_venda(id) ON DELETE CASCADE
 );
@@ -121,22 +122,22 @@ VALUES
 -- INSERT INTO tb_venda DEFAULT VALUES;
 -- INSERT INTO tb_venda DEFAULT VALUES;
 
-INSERT INTO tb_item_venda (fk_produto, fk_venda, quantidade)
+INSERT INTO tb_item_venda (fk_produto, fk_venda, quantidade, preco_unitario)
 VALUES
-  (1, 1, 5),
-  (2, 1, 4),
-  (3, 1, 3),
-  (4, 2, 1),
-  (5, 2, 1),
-  (6, 3, 2),
-  (7, 4, 3),
-  (8, 4, 3),
-  (9, 4, 3),
-  (10, 4, 3),
-  (3, 4, 3),
-  (4, 4, 3),
-  (5, 4, 3),
-  (6, 4, 3);
+  (1, 1, 5, 1.0),
+  (2, 1, 4, 1.0),
+  (3, 1, 3, 1.0),
+  (4, 2, 1, 1.0),
+  (5, 2, 1, 1.0),
+  (6, 3, 2, 1.0),
+  (7, 4, 3, 1.0),
+  (8, 4, 3, 1.0),
+  (9, 4, 3, 1.0),
+  (10, 4, 3, 1.0),
+  (3, 4, 3, 1.0),
+  (4, 4, 3, 1.0),
+  (5, 4, 3, 1.0),
+  (6, 4, 3, 1.0);
 
 
 

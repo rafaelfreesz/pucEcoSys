@@ -4,6 +4,7 @@ export class ItemVenda{
     private _id?: number = -1; 
     public produto: Produto | null = null;
     public quantidade: number = 0;
+    public preco_unitario: number = 0;
     public fk_venda: number = -1;
 
     get id(): number{
@@ -15,6 +16,6 @@ export class ItemVenda{
     }
 
     valor_total_item(): number{
-        return this.produto? this.produto.preco_venda*this.quantidade : 0;
+        return this.produto? this.preco_unitario*this.quantidade : 0;
     }
 }
