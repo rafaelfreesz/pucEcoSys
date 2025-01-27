@@ -152,7 +152,6 @@ export abstract class HTTPResponseParser{
 
     static buildItemVendaFromResposta(resposta: any): ItemVenda{
         const item_venda: ItemVenda = new ItemVenda();
-        console.log('RESPOSTAAA',resposta)
         item_venda.id = resposta.id;
         item_venda.quantidade = resposta.quantidade;        
         item_venda.preco_unitario = resposta.preco_unitario;        

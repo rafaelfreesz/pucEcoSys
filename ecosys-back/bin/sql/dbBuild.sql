@@ -54,10 +54,9 @@ CREATE TABLE tb_item_entrada(
 
 CREATE TABLE tb_venda(
     id SERIAL PRIMARY KEY,
-    dt_hr_venda DATE NOT NULL DEFAULT CURRENT_DATE,
+    dt_hr_venda TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
     forma_pagamento VARCHAR(2)
 );
-
 CREATE TABLE tb_item_venda(
     id SERIAL PRIMARY KEY,
     fk_produto INT, --Incluir NOT NULL
