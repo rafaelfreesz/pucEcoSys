@@ -16,12 +16,12 @@
                       [(ngModel)]="criterioFiltro"
                       >
                       <option value="id">Código</option>
-                      <option value="dt_ht_venda">Data/Hora</option>
+                      <option value="dt_hr_venda">Data</option>
                     </select>
                 </div>
                 <div class="valor-filtro">
                   <input
-                    type="search"
+                    [type]="criterioFiltro === 'dt_hr_venda'?'date': 'search'"
                     class="form-control"
                     name="filtro-valor"
                     id="filtro-valor"
