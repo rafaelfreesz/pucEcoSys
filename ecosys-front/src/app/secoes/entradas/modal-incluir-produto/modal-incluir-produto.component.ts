@@ -65,6 +65,7 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
       novoItem = new ItemVenda();
       novoItem.quantidade = this.quantidade;
       novoItem.produto = this.produtoSelecionado;
+      novoItem.preco_unitario = this.produtoSelecionado.preco_venda;
 
     }
     this.fecharModal.emit(novoItem);

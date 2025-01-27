@@ -173,6 +173,7 @@ export class HttpService{
                 return {
                     'quantidade': elemento.quantidade,
                     'fk_produto': elemento.produto?.id,
+                    'preco_unitario': elemento.preco_unitario,
 
                 }
             })
