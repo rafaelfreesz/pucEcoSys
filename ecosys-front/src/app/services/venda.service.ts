@@ -10,6 +10,7 @@ export class VendaService {
   private todasVendas: Venda[] = [];
 
   vendaFoiCriada: Subject<Venda | null> = new Subject<Venda | null>();
+  vendaFoiFinalizada: Subject<null> = new Subject<null>();
 
   constructor(private httpService: HttpService) {
     this.buscarTodasVendas();
@@ -20,13 +21,22 @@ export class VendaService {
       todasVendas => {
         this.todasVendas = todasVendas;
         this.listaVendasAlterada.next(this.todasVendas.slice());
-        this.vendaFoiCriada.next();
       }
     )
   }
 
   prepararCadastro(){
     this.vendaFoiCriada.next();
+  }
+
+  salvarVenda(venda: Venda){
+    this.httpService.insertVenda(venda).subscribe(
+      todasVendas => {
+        this.todasVendas = todasVendas;
+        this.listaVendasAlterada.next(this.todasVendas.slice());
+        this.vendaFoiFinalizada.next();
+      }
+    )
   }
 
 

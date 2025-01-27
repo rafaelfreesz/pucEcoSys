@@ -8,6 +8,8 @@ import { Contato } from "../models/contato.model";
 import { Entrada } from "../models/entrada.model";
 import { HTTPResponseParser } from "../utils/http_response_parser";
 import { ItemEntrada } from "../models/item_entrada.model";
+import { Venda } from "../models/venda.model";
+import { ItemVenda } from "../models/item_venda.model";
 
 @Injectable()
 export class HttpService{
@@ -130,7 +132,6 @@ export class HttpService{
     }
 
     insertEntrada(entrada: Entrada){
-        console.log(entrada)
         let entradaBody = {
             'entrada':{
                 'dt_hr_entrada': entrada.dt_hr_entrada,
@@ -160,6 +161,26 @@ export class HttpService{
             map( HTTPResponseParser.buildListaVendas )
         )
 
+    }
+
+    insertVenda(venda: Venda){
+        let vendaBody = {
+            'venda': {
+                'dt_hr_venda': venda.dt_hr_venda,
+                'forma_pagamento': venda.forma_pagamento
+            },
+            'items': venda.items_venda.map((elemento: ItemVenda) => {
+                return {
+                    'quantidade': elemento.quantidade,
+                    'fk_produto': elemento.produto?.id,
+
+                }
+            })
+
+        }
+        return this.http.post(`http://localhost:3000/vendas`,vendaBody).pipe(
+            map( HTTPResponseParser.buildListaVendas )
+        )
     }
 
 }

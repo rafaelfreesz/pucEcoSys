@@ -92,7 +92,7 @@
                 <p class="informacao"><span class="label">Nome: </span>{{produtoSelecionado.nome}}</p>
                 <p class="informacao"><span class="label">Descrição: </span>{{produtoSelecionado.descricao}}</p>
                 <div class="valores">
-                    <div class="campo">
+                    <div class="campo" *ngIf="finalidade === 'compra'">
                         <label for="preco_compra" class="label">Pço. de compra (R$):</label>
                         <input
                             type="number"
@@ -102,6 +102,11 @@
                             class="form-control"
                             min="0.01"
                             [(ngModel)]="precoCompra">
+                    </div>
+                    <div class="campo" *ngIf="finalidade === 'venda'">
+                        <span class="label">Pço. unitário:</span>
+                        <p for="preco_compra" > R${{produtoSelecionado.preco_venda}}</p>
+                        
                     </div>
                     <div class="campo">
                         <label for="quantidade" class="label">Quantidade:</label>

@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="botoes">
-            <button class="btn btn-primary botao" [disabled]="!temItem()">
+            <button class="btn btn-primary botao" [disabled]="!temItem()" (click)="submeterVenda()">
                 <i class="bi bi-floppy-fill"></i> Finalizar
             </button>
             <button class="btn btn-danger botao" (click)="fechar()">
@@ -83,7 +83,7 @@
     </div>
 </div>
 <app-modal-incluir-produto
-*ngIf = "this.mostrarModalItem"
-finalidade="venda"
-(fecharModal) = "fecharModalIncluirItem($event)"
+    *ngIf = "this.mostrarModalItem"
+    finalidade="venda"
+    (fecharModal) = "fecharModalIncluirItem($event)"
 ></app-modal-incluir-produto>
