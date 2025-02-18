@@ -9,7 +9,7 @@ import { EntradasComponent } from './secoes/entradas/entradas.component';
 import { VendasComponent } from './secoes/vendas/vendas.component';
 
 const routes: Routes = [
-  {path:'', component: VendasComponent},
+  {path:'', component: HomeComponent},
   {path:'vendas', component: VendasComponent},
   {path:'produtos', component: ProdutosComponent},
   {path:'fornecedores', component: FornecedoresComponent},
