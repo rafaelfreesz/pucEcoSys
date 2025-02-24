@@ -1,0 +1,7 @@
+.container-superior{
+    width: 100%;
+    height: 400px;
+    background-color: rgb(151, 235, 235);
+    display: flex;
+    justify-content: space-between;
+}
