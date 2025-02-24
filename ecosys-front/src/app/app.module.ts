@@ -34,6 +34,7 @@ import { VendasComponent } from './secoes/vendas/vendas.component';
 import { ListaVendasComponent } from './secoes/vendas/lista-vendas/lista-vendas.component';
 import { TraduzFormaPagamentoPipe } from './pipes/traduz-forma-pagamento.pipe';
 import { ModalVendaComponent } from './secoes/vendas/modal-venda/modal-venda.component';
+import { NotificacoesComponent } from './home/notificacoes/notificacoes.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ModalVendaComponent } from './secoes/vendas/modal-venda/modal-venda.com
     VendasComponent,
     ListaVendasComponent,
     TraduzFormaPagamentoPipe,
-    ModalVendaComponent
+    ModalVendaComponent,
+    NotificacoesComponent
   ],
   imports: [
     BrowserModule,
