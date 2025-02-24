@@ -7,7 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificacoesComponent implements OnInit {
 
-  constructor() { }
+  dados: any = [
+    {
+      produto: "ABCD",
+      status: "Estoque baixo",
+      qtd_estoque: 100
+    }
+  ]
+
+  constructor() {
+    for(let i=0; i<10;i++){
+      this.dados.push(
+        {
+          produto: "ABCD",
+          status: "Estoque baixo",
+          qtd_estoque: 100
+        }
+      )
+    }
+  }
 
   ngOnInit(): void {
   }
