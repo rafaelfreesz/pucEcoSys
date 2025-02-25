@@ -88,6 +88,14 @@ CREATE VIEW vw_produtos_vendidos_dia AS
 		p.id = iv.fk_produto
 		where DATE(v.dt_hr_venda) = '2025-02-02' GROUP BY p.id ORDER BY valor_total_vendido desc;
 
+-- View para contar as vendas do dia
+CREATE VIEW vw_conta_vendas_dia AS
+	SELECT COUNT(v.id) FROM tb_venda as v where DATE(v.dt_hr_venda) = '2025-02-02';
+  
+-- View para somar o vendido do dia
+CREATE VIEW vw_soma_vendas_dia AS
+	SELECT SUM(p.valor_total_vendido) as valor_total_vendido from vw_produtos_vendidos_dia as p;
+
 INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque)
 VALUES 
   ('PAPEL CHAMEX A4','PAPEL CHAMEX A4',38.00,777),
