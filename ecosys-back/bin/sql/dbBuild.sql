@@ -90,10 +90,10 @@ CREATE VIEW vw_produtos_vendidos_dia AS
 
 -- View para contar as vendas do dia
 CREATE VIEW vw_conta_vendas_dia AS
-	SELECT COUNT(v.id) FROM tb_venda as v where DATE(v.dt_hr_venda) = '2025-02-02';
+	SELECT COUNT(v.id) as vendas_dia FROM tb_venda as v where DATE(v.dt_hr_venda) = '2025-02-02';
   
 -- View para somar o vendido do dia
-CREATE VIEW vw_soma_vendas_dia AS
+CREATE VIEW vw_soma_valor_vendas_dia AS
 	SELECT SUM(p.valor_total_vendido) as valor_total_vendido from vw_produtos_vendidos_dia as p;
 
 INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque)
