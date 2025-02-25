@@ -68,8 +68,25 @@ CREATE TABLE tb_item_venda(
 );
 
 -- Views
+-- View para produtos com estoque baixo
 CREATE VIEW vw_estoque_baixo AS
 	SELECT nome, qtd_estoque FROM tb_produto WHERE qtd_estoque < 50;
+
+-- View para produtos vendidos no dia
+CREATE VIEW vw_produtos_vendidos_dia AS
+	SELECT 
+			p.nome,
+			SUM(iv.quantidade) as total_vendido,
+			SUM(iv.quantidade*iv.preco_unitario) as valor_total_vendido
+		FROM tb_venda as v 
+		INNER JOIN 
+		tb_item_venda as iv
+		ON 
+		iv.fk_venda = v.id
+		INNER JOIN tb_produto as p
+		ON
+		p.id = iv.fk_produto
+		where DATE(v.dt_hr_venda) = '2025-02-02' GROUP BY p.id ORDER BY valor_total_vendido desc;
 
 INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque)
 VALUES 
