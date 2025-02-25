@@ -12,11 +12,13 @@ export class NotificacoesComponent implements OnInit, OnDestroy {
 
   dados: Notificacao[] = [];
   private dadosAlterados: Subscription;
+  isCarregando = true;
 
   constructor(private homeService: HomeService) {
     this.dadosAlterados = this.homeService.notificacoesAlteradas.subscribe(
       dados => {
         this.dados = dados;
+        this.isCarregando = false;
       }
     )
   }

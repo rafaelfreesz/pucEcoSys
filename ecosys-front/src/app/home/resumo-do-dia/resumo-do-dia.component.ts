@@ -12,11 +12,13 @@ export class ResumoDoDiaComponent implements OnInit, OnDestroy {
 
   dados: ResumoDiario = new ResumoDiario();
   private dadosAlterados: Subscription;
+  isCarregando = true;
 
   constructor(private homeService: HomeService) {
     this.dadosAlterados = this.homeService.dadosDiariosAlterados.subscribe(
       dados => {
         this.dados = dados
+        this.isCarregando = false;
       }
     )
   }

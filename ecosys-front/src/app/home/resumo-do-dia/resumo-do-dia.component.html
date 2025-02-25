@@ -1,10 +1,18 @@
 <div class="background">
+    
     <div class="cabecalho">
         <div class="icone"><i class="bi bi-sticky-fill"></i></div>
         <div class="fs-5 fw-semibold titulo"> Resumo diário
         </div>
     </div>
-    <div class="conteudo">
+
+    <div class="box-spinner" *ngIf="this.isCarregando">
+        <div class="spinner-border text-success spinner" role="status" >
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="conteudo" *ngIf="!this.isCarregando">
         <div class="resumo-superior">
             <div class="secao-totais">
                 <div class="campo">
