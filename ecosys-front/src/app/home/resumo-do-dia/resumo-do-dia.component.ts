@@ -1,32 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ResumoDiario } from 'src/app/models/resumo_diario';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-resumo-do-dia',
   templateUrl: './resumo-do-dia.component.html',
   styleUrls: ['./resumo-do-dia.component.css']
 })
-export class ResumoDoDiaComponent implements OnInit {
+export class ResumoDoDiaComponent implements OnInit, OnDestroy {
 
-  dados: any = {
-    total_valor_vendas: 10,
-    total_vendas: 50,
-    valor_medio_vendas: 50/10,
-    produtos_vendidos: []
+  dados: ResumoDiario = new ResumoDiario();
+  private dadosAlterados: Subscription;
+
+  constructor(private homeService: HomeService) {
+    this.dadosAlterados = this.homeService.dadosDiariosAlterados.subscribe(
+      dados => {
+        this.dados = dados
+      }
+    )
   }
-
-  constructor() {
-    for(let i = 0; i<15; i++){
-      this.dados.produtos_vendidos.push(
-        {
-          nome: "ABC",
-          quantidade: 10,
-          valor_total: 10
-        }
-      )
-    }
-  }
-
+  
   ngOnInit(): void {
+  }
+  
+  ngOnDestroy(): void {
+    this.dadosAlterados.unsubscribe();
   }
 
 }

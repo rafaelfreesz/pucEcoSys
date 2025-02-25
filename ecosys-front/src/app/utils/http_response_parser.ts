@@ -8,11 +8,12 @@ import { ItemVenda } from "../models/item_venda.model";
 import { Notificacao } from "../models/notificacao.model";
 import { Produto } from "../models/produto.model";
 import { Venda } from "../models/venda.model";
+import { ResumoDiario } from "../models/resumo_diario";
 
 export abstract class HTTPResponseParser{
     
     //Builders de lista
-    static buildListaNotificacoes(resposta: any){
+    static buildListaNotificacoes(resposta: any): Notificacao[]{
         const notificacoes: Notificacao[] = []
 
         for (const resp of resposta){
@@ -70,6 +71,16 @@ export abstract class HTTPResponseParser{
         notificacao.qtd_estoque = resposta.qtd_estoque;
 
         return notificacao;
+    }
+
+    static buildResumoDiarioFromResposta(resposta: any): ResumoDiario{
+        const resumo_diario = new ResumoDiario();
+        resumo_diario.total_vendas = resposta.vendas_dia;
+        resumo_diario.valor_total_vendas = resposta.valor_vendas_dia;
+        resumo_diario.venda_media = resposta.media_por_venda;
+        resumo_diario.produtos = resposta.produtos;
+
+        return resumo_diario;
     }
 
     static buildFornecedorFromResposta(resposta: any):Fornecedor{

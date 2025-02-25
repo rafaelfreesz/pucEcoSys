@@ -47,17 +47,21 @@
 table{
     thead{
         position: sticky;
-        top:0;
+        top: 0;
         background-color: rgba(25, 135, 84);
         th{
             border: 1px solid #fff;
             vertical-align: middle;
             padding-left: 7px;
+            padding-right: 7px;
             color: white;
         }
     }
 }
 
+.qtd{
+    text-align: center;
+}
 td{
     vertical-align: middle;
     background: transparent;

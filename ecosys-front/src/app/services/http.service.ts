@@ -10,6 +10,8 @@ import { HTTPResponseParser } from "../utils/http_response_parser";
 import { ItemEntrada } from "../models/item_entrada.model";
 import { Venda } from "../models/venda.model";
 import { ItemVenda } from "../models/item_venda.model";
+import { Notificacao } from "../models/notificacao.model";
+import { ResumoDiario } from "../models/resumo_diario";
 
 @Injectable()
 export class HttpService{
@@ -17,10 +19,31 @@ export class HttpService{
     constructor(private http: HttpClient){}
 
     //HOME
-    getStats(referenciaCard: string){
-        return this.http.get<any>(`http://localhost:3000/stats/${referenciaCard}`)
+    getNotificacoes(): any{
+
+        // const selecionaFuncao = (card: string) => {
+        //     switch (card){
+        //         case "notificacoes":
+        //             break;
+        //         default:
+        //             return HTTPResponseParser.buildResumoDiarioFromResposta
+        //     }
+        // }
+
+        return this.http.get<any>(`http://localhost:3000/stats/notificacoes`)
         .pipe(
-            map( HTTPResponseParser.buildListaNotificacoes)
+            map( 
+                HTTPResponseParser.buildListaNotificacoes
+            )
+        )
+    }
+    getResumoDiario(): any{
+
+        return this.http.get<any>(`http://localhost:3000/stats/resumo_diario`)
+        .pipe(
+            map( 
+                HTTPResponseParser.buildResumoDiarioFromResposta
+            )
         )
     }
 

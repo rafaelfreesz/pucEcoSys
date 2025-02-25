@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Notificacao } from 'src/app/models/notificacao.model';
 import { HomeService } from 'src/app/services/home.service';
@@ -8,9 +8,9 @@ import { HomeService } from 'src/app/services/home.service';
   templateUrl: './notificacoes.component.html',
   styleUrls: ['./notificacoes.component.css']
 })
-export class NotificacoesComponent implements OnInit {
+export class NotificacoesComponent implements OnInit, OnDestroy {
 
-  dados: Notificacao[] = []
+  dados: Notificacao[] = [];
   private dadosAlterados: Subscription;
 
   constructor(private homeService: HomeService) {
@@ -20,8 +20,12 @@ export class NotificacoesComponent implements OnInit {
       }
     )
   }
-
+  
   ngOnInit(): void {
+  }
+  
+  ngOnDestroy(): void {
+    this.dadosAlterados.unsubscribe()
   }
 
 }

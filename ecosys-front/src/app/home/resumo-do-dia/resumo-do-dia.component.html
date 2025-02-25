@@ -13,13 +13,13 @@
                 </div>
                 <div class="campo">
                     <span class="fs4 fw-semibold label"> Valor total das vendas: </span>&nbsp;
-                    <span class="valor"> R$ {{this.dados.total_valor_vendas | number : "1.2-2"}}</span>
+                    <span class="valor"> R$ {{this.dados.valor_total_vendas | number : "1.2-2"}}</span>
                 </div>
             </div>
             <div class="secao-medias">
                 <div class="campo">
                     <span class="fs4 fw-semibold label"> Venda média: </span>&nbsp;
-                    <span class="valor"> R$ {{this.dados.valor_medio_vendas | number : "1.2-2"}}</span>
+                    <span class="valor"> R$ {{this.dados.venda_media | number : "1.2-2"}}</span>
                 </div>
             </div>
         </div>
@@ -27,14 +27,14 @@
             <table class="table table-striped">
                 <thead>
                     <th>Produto</th>
-                    <th>Quantidade</th>
+                    <th>Qtd</th>
                     <th>Valor total</th>
                 </thead>
                 <tbody>
-                    <tr *ngFor = "let produto of dados.produtos_vendidos">
-                        <td>{{produto.nome}}</td>
-                        <td>{{produto.quantidade}}</td>
-                        <td>R$ {{produto.valor_total | number : "1.2-2"}}</td>
+                    <tr *ngFor = "let produto of dados.produtos">
+                        <td>{{produto.nome | encurtar:35}}</td>
+                        <td class="qtd">{{produto.total_vendido}}</td>
+                        <td>R$ {{produto.valor_total_vendido | number : "1.2-2"}}</td>
                     </tr>
                 </tbody>
             </table>
