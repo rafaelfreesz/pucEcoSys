@@ -67,6 +67,10 @@ CREATE TABLE tb_item_venda(
     FOREIGN KEY (fk_venda) REFERENCES tb_venda(id) ON DELETE CASCADE
 );
 
+-- Views
+CREATE VIEW vw_estoque_baixo AS
+	SELECT nome, qtd_estoque FROM tb_produto WHERE qtd_estoque < 50;
+
 INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque)
 VALUES 
   ('PAPEL CHAMEX A4','PAPEL CHAMEX A4',38.00,777),
