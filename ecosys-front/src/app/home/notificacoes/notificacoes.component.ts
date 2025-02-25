@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Notificacao } from 'src/app/models/notificacao.model';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-notificacoes',
@@ -7,24 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificacoesComponent implements OnInit {
 
-  dados: any = [
-    {
-      produto: "ABCD",
-      status: "Estoque baixo",
-      qtd_estoque: 100
-    }
-  ]
+  dados: Notificacao[] = []
+  private dadosAlterados: Subscription;
 
-  constructor() {
-    for(let i=0; i<10;i++){
-      this.dados.push(
-        {
-          produto: "ABCD",
-          status: "Estoque baixo",
-          qtd_estoque: 100
-        }
-      )
-    }
+  constructor(private homeService: HomeService) {
+    this.dadosAlterados = this.homeService.notificacoesAlteradas.subscribe(
+      dados => {
+        this.dados = dados;
+      }
+    )
   }
 
   ngOnInit(): void {

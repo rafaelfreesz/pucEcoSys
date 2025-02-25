@@ -1,7 +1,7 @@
 <div class="background">
     <div class="cabecalho">
         <div class="icone"><i class="bi bi-bell-fill"></i></div>
-        <div class="fs-5 fw-semibold titulo"> Notificações
+        <div class="fs-5 fw-semibold titulo"> Notificações ({{dados.length}})
         </div>
     </div>
     <div class="conteudo">
@@ -10,13 +10,13 @@
                 <thead>
                     <th>Produto</th>
                     <th>Status</th>
-                    <th>Qtd. Estoque</th>
+                    <th>Qtd.</th>
                 </thead>
                 <tbody>
                     <tr *ngFor = "let dado of dados">
-                        <td>{{dado.produto}}</td>
-                        <td>{{dado.status}}</td>
-                        <td>{{dado.qtd_estoque}}</td>
+                        <td>{{dado.nome_produto | encurtar:35}}</td>
+                        <td [ngClass]="{baixo: dado.status() === 'Baixo', vazio: dado.status() === 'Vazio'}">{{dado.status()}}</td>
+                        <td class = "qtd_estoque">{{dado.qtd_estoque}}</td>
                     </tr>
                 </tbody>
             </table>

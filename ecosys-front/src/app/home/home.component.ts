@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart, registerables} from 'chart.js'
+import { HomeService } from '../services/home.service';
 
 Chart.register(...registerables)
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [HomeService]
 })
 export class HomeComponent implements OnInit {
 
@@ -29,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
   chart: any;
 
-  constructor() { }
+  constructor(private homeService: HomeService) { }
 
   ngOnInit(): void {
     this.chart = new Chart('chart',this.config)

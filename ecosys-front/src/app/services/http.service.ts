@@ -16,6 +16,14 @@ export class HttpService{
 
     constructor(private http: HttpClient){}
 
+    //HOME
+    getStats(referenciaCard: string){
+        return this.http.get<any>(`http://localhost:3000/stats/${referenciaCard}`)
+        .pipe(
+            map( HTTPResponseParser.buildListaNotificacoes)
+        )
+    }
+
     //PRODUTOS
     getTodosProdutos() {
 

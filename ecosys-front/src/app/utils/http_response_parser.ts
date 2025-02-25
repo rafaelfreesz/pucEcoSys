@@ -1,15 +1,27 @@
+import { not } from "@angular/compiler/src/output/output_ast";
 import { Contato } from "../models/contato.model";
 import { Endereco } from "../models/endereco.model";
 import { Entrada } from "../models/entrada.model";
 import { Fornecedor } from "../models/fornecedor.model";
 import { ItemEntrada } from "../models/item_entrada.model";
 import { ItemVenda } from "../models/item_venda.model";
+import { Notificacao } from "../models/notificacao.model";
 import { Produto } from "../models/produto.model";
 import { Venda } from "../models/venda.model";
 
 export abstract class HTTPResponseParser{
     
     //Builders de lista
+    static buildListaNotificacoes(resposta: any){
+        const notificacoes: Notificacao[] = []
+
+        for (const resp of resposta){
+            notificacoes.push(HTTPResponseParser.buildNotificacaoFromResposta(resp))
+        }
+
+        return notificacoes
+    }
+
     static buildListaProduto(resposta: any){
         const produtos: Produto[] = []
 
@@ -52,6 +64,14 @@ export abstract class HTTPResponseParser{
     }
     
     //Conversores Resposta - Objeto
+    static buildNotificacaoFromResposta(resposta: any): Notificacao{
+        const notificacao = new Notificacao();
+        notificacao.nome_produto = resposta.nome;
+        notificacao.qtd_estoque = resposta.qtd_estoque;
+
+        return notificacao;
+    }
+
     static buildFornecedorFromResposta(resposta: any):Fornecedor{
         const fornecedor = new Fornecedor();
         fornecedor.id = resposta.id;

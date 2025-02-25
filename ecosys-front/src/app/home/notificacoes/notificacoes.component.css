@@ -22,7 +22,7 @@
         height: 361px;
         background-color: #fff;
         .tabela{
-            margin-top: 5px;
+            /* margin-top: 5px; */
             overflow-y: scroll;
             height: 100%;
         
@@ -30,15 +30,26 @@
                 thead{
                     position: sticky;
                     top:0;
-                    background-color: rgba(25, 135, 84,0.75);
+                    background-color: rgba(25, 135, 84);
                     th{
-                        border-radius: 4px;
                         vertical-align: middle;
                         padding-left: 7px;
                         color: white;
                     }
                 }
             }
+            .baixo{
+                font-weight: bold;
+                color: #FFAE00;
+            }
+            .vazio{
+                font-weight: bold;
+                color: #FF0000;
+            }
+            .qtd_estoque{
+                text-align: right;
+            }
         }
     }
 }
+
