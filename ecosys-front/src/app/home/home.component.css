@@ -1,13 +1,19 @@
+
 .container-superior{
-    width: 100%;
     height: 400px;
-    background-color: rgb(151, 235, 235);
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    .card-superior{
+        width: 50%;
+    }
+    .notificacoes{
+        margin-left: 10px;
+    }
 }
 
 .container-estatistica{
     margin-top: 10px;
+    border: 2px solid #198754;
     .cabecalho{
         display: flex;
         flex-direction: row;
@@ -22,3 +28,4 @@
         }
     }
 }
+

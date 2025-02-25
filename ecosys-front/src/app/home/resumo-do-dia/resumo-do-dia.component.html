@@ -1,1 +1,43 @@
-<p>resumo-do-dia works!</p>
+<div class="background">
+    <div class="cabecalho">
+        <div class="icone"><i class="bi bi-sticky-fill"></i></div>
+        <div class="fs-5 fw-semibold titulo"> Resumo diário
+        </div>
+    </div>
+    <div class="conteudo">
+        <div class="resumo-superior">
+            <div class="secao-totais">
+                <div class="campo">
+                    <span class="fs4 fw-semibold label"> Total de vendas: </span>&nbsp;
+                    <span class="valor"> {{this.dados.total_vendas}}</span>
+                </div>
+                <div class="campo">
+                    <span class="fs4 fw-semibold label"> Valor total das vendas: </span>&nbsp;
+                    <span class="valor"> R$ {{this.dados.total_valor_vendas | number : "1.2-2"}}</span>
+                </div>
+            </div>
+            <div class="secao-medias">
+                <div class="campo">
+                    <span class="fs4 fw-semibold label"> Venda média: </span>&nbsp;
+                    <span class="valor"> R$ {{this.dados.valor_medio_vendas | number : "1.2-2"}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="tabela">
+            <table class="table table-striped">
+                <thead>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor total</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let produto of dados.produtos_vendidos">
+                        <td>{{produto.nome}}</td>
+                        <td>{{produto.quantidade}}</td>
+                        <td>R$ {{produto.valor_total | number : "1.2-2"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

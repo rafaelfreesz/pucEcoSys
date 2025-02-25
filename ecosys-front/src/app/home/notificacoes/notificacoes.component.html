@@ -5,19 +5,21 @@
         </div>
     </div>
     <div class="conteudo">
-        <table class="table table-striped">
-            <thead>
-                <th>Produto</th>
-                <th>Status</th>
-                <th>Qtd. Estoque</th>
-            </thead>
-            <tbody>
-                <tr *ngFor = "let dado of dados">
-                    <td>{{dado.produto}}</td>
-                    <td>{{dado.status}}</td>
-                    <td>{{dado.qtd_estoque}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="tabela">
+            <table class="table table-striped">
+                <thead>
+                    <th>Produto</th>
+                    <th>Status</th>
+                    <th>Qtd. Estoque</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let dado of dados">
+                        <td>{{dado.produto}}</td>
+                        <td>{{dado.status}}</td>
+                        <td>{{dado.qtd_estoque}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

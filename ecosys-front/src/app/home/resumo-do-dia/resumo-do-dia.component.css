@@ -1,0 +1,58 @@
+.background{
+    border: 2px solid #198754;
+    height: 400px;
+    width: 100%;
+    .cabecalho{
+        display: flex;
+        flex-direction: row;
+        background-color: #198754;
+        color: #fff;
+        .icone,.titulo{
+            margin-left: 10px;
+        }
+        .icone{
+            margin-top: 3px;
+        }
+    }
+
+    .conteudo{
+        margin: 10px;
+        .resumo-superior{
+            display: flex;
+            justify-content: space-between;
+            .secao-totais{
+                width: fit-content;
+                .campo{
+                    justify-content: space-between;
+                    .valor{
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+
+        .tabela{
+            height: 290px;
+            margin-top: 10px;
+            overflow-y: scroll;
+        }
+    }
+}
+
+.campo{
+    display: flex;
+}
+
+table{
+    thead{
+        position: sticky;
+        top:0;
+        background-color: rgba(25, 135, 84,0.75);
+        th{
+            border-radius: 4px;
+            vertical-align: middle;
+            padding-left: 7px;
+            color: white;
+        }
+    }
+}
