@@ -17,6 +17,11 @@
                         <td>{{dado.nome_produto | encurtar:35}}</td>
                         <td [ngClass]="{baixo: dado.status() === 'Baixo', vazio: dado.status() === 'Vazio'}">{{dado.status()}}</td>
                         <td class = "qtd_estoque">{{dado.qtd_estoque}}</td>
+                        <div class="tooltip">
+                            <div class="tooltip-text">
+                              {{dado.nome_produto}}
+                            </div>
+                        </div>
                     </tr>
                 </tbody>
             </table>
