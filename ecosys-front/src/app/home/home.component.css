@@ -5,3 +5,20 @@
     display: flex;
     justify-content: space-between;
 }
+
+.container-estatistica{
+    margin-top: 10px;
+    .cabecalho{
+        display: flex;
+        flex-direction: row;
+        /* justify-content: space-between; */
+        background-color: #198754;
+        color: #fff;
+        .icone,.titulo{
+            margin-left: 10px;
+        }
+        .icone{
+            margin-top: 3px;
+        }
+    }
+}
