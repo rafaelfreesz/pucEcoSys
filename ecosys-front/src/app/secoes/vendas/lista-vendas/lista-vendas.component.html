@@ -1,5 +1,10 @@
+<div class="box-spinner" *ngIf="this.isCarregando">
+    <div class="spinner-border text-success spinner" role="status" >
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
-<div class="conteudo">
+<div class="conteudo" *ngIf="!this.isCarregando">
     
     <div class="tabela">
         <div class="filtro-botao">
@@ -69,7 +74,7 @@
                 <div class="titulo">Ítems</div>
             </div>
             <div class="descricao items">
-                <div class="" *ngIf="(vendaSelecionada.items_venda.length <= 0)">
+                <div *ngIf="(vendaSelecionada.items_venda.length <= 0)">
                     Não há produtos
                 </div>
                 <table class="table table-striped" *ngIf="vendaSelecionada.items_venda.length > 0">

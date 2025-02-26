@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor = "let produto of dados.produtos">
-                        <td>{{produto.nome | encurtar:35}}</td>
+                        <td>{{produto.nome | encurtar:35 | uppercase}}</td>
                         <td class="qtd">{{produto.total_vendido}}</td>
                         <td>R$ {{produto.valor_total_vendido | number : "1.2-2"}}</td>
                     </tr>

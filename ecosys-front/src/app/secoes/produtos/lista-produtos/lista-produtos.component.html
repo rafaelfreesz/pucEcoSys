@@ -1,73 +1,82 @@
-<div class="row">
-  <div class="col-md">
-    <button class="btn btn-success botao-novo" (click) = "prepararCadastro()" >
-      <i class="bi bi-file-earmark-plus-fill"></i> Novo
-    </button>
+<div class="box-spinner" *ngIf="this.isCarregando">
+  <div class="spinner-border text-success spinner" role="status" >
+      <span class="visually-hidden">Loading...</span>
   </div>
 </div>
-<div class="row filtro">
-    <div class="col-sm-3">
-        <select
-          class="form-select"
-          name="selecionar-filtro"
-          id="selecionar-filtro"
-          [(ngModel)]="criterioFiltro"
-          >
-          <option value="nome">Nome</option>
-          <option value="id">Código</option>
-          <option value="descricao">Descricao</option>
-          <option value="qtd_estoque">Quantidade</option>
-          <option value="preco_venda">Preço de Venda (R$)</option>
-        </select>
-      </div>
-      <div class="col-md-6">
-        <input
-          type="search"
-          class="form-control"
-          name="filtro-valor"
-          id="filtro-valor"
-          [(ngModel)]="valorFiltro"
-        />
-          <!-- (input)="filtrarTabela()" -->
-      </div>
-      <div class="col-sm-2">
-        <div class="total">Total: {{totalFiltrado |contadorFiltro:todosProdutos:valorFiltro:criterioFiltro}}</div>
-      </div>
 
-      <!-- TABELA -->
-      
-      <div class="row">
-        <div class="col-md">
-            <table class="table table-striped">
-                <thead>
-                    <th>Cód.</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Preço Venda</th>
-                    <th>Estoque</th>
-                    <th>Imagem</th>
-                  </thead>
-                  <tbody>
-                    <tr 
-                    *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
-                    (click)="selecionarProduto(produto)">
-                      <td>{{ produto.id | insereZeros:4}}</td>
-                      <td>{{ produto.nome | encurtar:25}}</td>
-                      <td>{{ produto.descricao | encurtar:50 }}</td>
-                      <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
-                      <td>{{ produto.qtd_estoque }}</td>
-                      <td class="celula-imagem"><img src = "https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" class = "imagem"></td>
-                    </tr>
-                  </tbody>
-            </table>
-            <app-modal-produto
-              *ngIf="produtoSelecionado || isNovoProduto"
-              [produto] = "produtoSelecionado"
-              [inEdicao] = "isNovoProduto"
-              (onComando) = "fecharModal($event)"
-              ></app-modal-produto>
-
-        </div>
-      </div>
-      
+<div *ngIf="!this.isCarregando">
+  <div class="row">
+    <div class="col-md">
+      <button class="btn btn-success botao-novo" (click) = "prepararCadastro()" >
+        <i class="bi bi-file-earmark-plus-fill"></i> Novo
+      </button>
     </div>
+  </div>
+  <div class="row filtro">
+      <div class="col-sm-3">
+          <select
+            class="form-select"
+            name="selecionar-filtro"
+            id="selecionar-filtro"
+            [(ngModel)]="criterioFiltro"
+            >
+            <option value="nome">Nome</option>
+            <option value="id">Código</option>
+            <option value="descricao">Descricao</option>
+            <option value="qtd_estoque">Quantidade</option>
+            <option value="preco_venda">Preço de Venda (R$)</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <input
+            type="search"
+            class="form-control"
+            name="filtro-valor"
+            id="filtro-valor"
+            [(ngModel)]="valorFiltro"
+          />
+            <!-- (input)="filtrarTabela()" -->
+        </div>
+        <div class="col-sm-2">
+          <div class="total">Total: {{totalFiltrado |contadorFiltro:todosProdutos:valorFiltro:criterioFiltro}}</div>
+        </div>
+  
+        <!-- TABELA -->
+        
+        <div class="row">
+          <div class="col-md">
+              
+              <table class="table table-striped">
+                  <thead>
+                      <th>Cód.</th>
+                      <th>Nome</th>
+                      <th>Descrição</th>
+                      <th>Preço Venda</th>
+                      <th>Estoque</th>
+                      <th>Imagem</th>
+                    </thead>
+                    <tbody>
+                      <tr 
+                      *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
+                      (click)="selecionarProduto(produto)">
+                        <td>{{ produto.id | insereZeros:4}}</td>
+                        <td>{{ produto.nome | encurtar:25}}</td>
+                        <td>{{ produto.descricao | encurtar:50 }}</td>
+                        <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
+                        <td>{{ produto.qtd_estoque }}</td>
+                        <td class="celula-imagem"><img src = "https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" class = "imagem"></td>
+                      </tr>
+                    </tbody>
+              </table>
+              <app-modal-produto
+                *ngIf="produtoSelecionado || isNovoProduto"
+                [produto] = "produtoSelecionado"
+                [inEdicao] = "isNovoProduto"
+                (onComando) = "fecharModal($event)"
+                ></app-modal-produto>
+  
+          </div>
+        </div>
+        
+      </div>
+</div>

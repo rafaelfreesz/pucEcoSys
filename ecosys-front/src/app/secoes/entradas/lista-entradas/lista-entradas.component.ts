@@ -15,11 +15,13 @@ export class ListaEntradasComponent implements OnInit, OnDestroy {
   criterioFiltro: string = "nu_nota_fiscal"
   valorFiltro: string = "";
   totalFiltrado: number = 0;
-
+  isCarregando = true;
+  
   constructor(private entradaService: EntradaService) {
     this.entradasAlteradas = this.entradaService.listaEntradasAlterada.subscribe(
       todasEntradas => {
         this.todasEntradas = todasEntradas;
+        this.isCarregando = false;
       }
     )
   }

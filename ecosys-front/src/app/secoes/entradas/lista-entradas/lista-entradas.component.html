@@ -1,69 +1,77 @@
-<div class="row">
-    <div class="col-md">
-      <button class="btn btn-success botao-nova" (click) = "prepararCadastro()" >
-        <i class="bi bi-file-earmark-plus-fill"></i> Nova
-      </button>
-    </div>
+<div class="box-spinner" *ngIf="this.isCarregando">
+  <div class="spinner-border text-success spinner" role="status" >
+      <span class="visually-hidden">Loading...</span>
+  </div>
 </div>
 
-<div class="row filtro">
-    <div class="col-sm-3">
-        <select
-          class="form-select"
-          name="selecionar-filtro"
-          id="selecionar-filtro"
-          [(ngModel)]="criterioFiltro"
-          >
-          <option value="id">Código</option>
-          <option value="nu_nota_fiscal">Número da Nota Fiscal</option>
-          <option value="dt_hr_entrada">Data/Hora de Entrada</option>
-          <option value="fornecedor">Fornecedor</option>
-          <option value="valor_nota">Valor da nota</option>
-        </select>
+<div *ngIf="!this.isCarregando">
+  <div class="row">
+      <div class="col-md">
+        <button class="btn btn-success botao-nova" (click) = "prepararCadastro()" >
+          <i class="bi bi-file-earmark-plus-fill"></i> Nova
+        </button>
       </div>
-      <div class="col-md-6">
-        <input
-          type="search"
-          class="form-control"
-          name="filtro-valor"
-          id="filtro-valor"
-          [(ngModel)]="valorFiltro"
-        />
-      </div>
-      <div class="col-sm-2">
-        <div class="total">Total: {{totalFiltrado |contadorFiltro:todasEntradas:valorFiltro:criterioFiltro}}</div>
-      </div>
-
-      <!-- TABELA -->
-      
-      <div class="row">
-        <div class="col-md">
-            <table class="table table-striped">
-                <thead>
-                    <th>Cód.</th>
-                    <th>Data/Hora Entrada</th>
-                    <th>Nº Nota</th>
-                    <th>Fornecedor</th>
-                    <th>Qtd. Produtos</th>
-                    <th>Valor Nota</th>
-                  </thead>
-                  <tbody>
-                    <tr 
-                    *ngFor="let entrada of todasEntradas | filtroLista:valorFiltro:criterioFiltro;"
-                    (click)="selecionarEntrada(entrada)">
-                      <td>{{ entrada.id | insereZeros:4}}</td>
-                      <td>{{ entrada.dt_hr_entrada | data}}</td>
-                      <td>{{ entrada.nu_nota_fiscal}}</td>
-                      <td>{{ entrada.fornecedor.razao_social | encurtar:45 }}</td>
-                      <td>{{ entrada.items_entrada.length }}</td>
-                      <td>R$ {{ entrada.valor_total_nota() | number : "1.2-2" }}</td>
-                    </tr>
-                  </tbody>
-            </table>
-
-            <app-modal-entrada></app-modal-entrada>
-
+  </div>
+  
+  <div class="row filtro">
+      <div class="col-sm-3">
+          <select
+            class="form-select"
+            name="selecionar-filtro"
+            id="selecionar-filtro"
+            [(ngModel)]="criterioFiltro"
+            >
+            <option value="id">Código</option>
+            <option value="nu_nota_fiscal">Número da Nota Fiscal</option>
+            <option value="dt_hr_entrada">Data/Hora de Entrada</option>
+            <option value="fornecedor">Fornecedor</option>
+            <option value="valor_nota">Valor da nota</option>
+          </select>
         </div>
+        <div class="col-md-6">
+          <input
+            type="search"
+            class="form-control"
+            name="filtro-valor"
+            id="filtro-valor"
+            [(ngModel)]="valorFiltro"
+          />
+        </div>
+        <div class="col-sm-2">
+          <div class="total">Total: {{totalFiltrado |contadorFiltro:todasEntradas:valorFiltro:criterioFiltro}}</div>
+        </div>
+  
+        <!-- TABELA -->
+        
+        <div class="row">
+          <div class="col-md">
+              <table class="table table-striped">
+                  <thead>
+                      <th>Cód.</th>
+                      <th>Data/Hora Entrada</th>
+                      <th>Nº Nota</th>
+                      <th>Fornecedor</th>
+                      <th>Qtd. Produtos</th>
+                      <th>Valor Nota</th>
+                    </thead>
+                    <tbody>
+                      <tr 
+                      *ngFor="let entrada of todasEntradas | filtroLista:valorFiltro:criterioFiltro;"
+                      (click)="selecionarEntrada(entrada)">
+                        <td>{{ entrada.id | insereZeros:4}}</td>
+                        <td>{{ entrada.dt_hr_entrada | data}}</td>
+                        <td>{{ entrada.nu_nota_fiscal}}</td>
+                        <td>{{ entrada.fornecedor.razao_social | encurtar:45 }}</td>
+                        <td>{{ entrada.items_entrada.length }}</td>
+                        <td>R$ {{ entrada.valor_total_nota() | number : "1.2-2" }}</td>
+                      </tr>
+                    </tbody>
+              </table>
+  
+              <app-modal-entrada></app-modal-entrada>
+  
+          </div>
+        </div>
+        
       </div>
-      
-    </div>
+</div>

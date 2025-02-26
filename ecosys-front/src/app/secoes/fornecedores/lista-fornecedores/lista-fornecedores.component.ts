@@ -15,12 +15,13 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
   criterioFiltro: string = "razao_social";
   valorFiltro: string = "";
   totalFiltrado: number = 0;
+  isCarregando = true;
 
   constructor(private fornecedorService: FornecedorService) {
     this.fornecedoresAlterados = this.fornecedorService.fornecedoresAlterados.subscribe(
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
-        // this.fornecedorSelecionado = this.todosFornecedores[0]
+        this.isCarregando = false;
       }
     )
   }

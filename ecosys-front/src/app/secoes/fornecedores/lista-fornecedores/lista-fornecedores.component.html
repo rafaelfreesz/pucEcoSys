@@ -1,70 +1,78 @@
-<div class="row">
-    <div class="col-md">
-      <button class="btn btn-success botao-novo" (click) = "prepararCadastro()" >
-        <i class="bi bi-file-earmark-plus-fill"></i> Novo
-      </button>
-    </div>
+<div class="box-spinner" *ngIf="this.isCarregando">
+  <div class="spinner-border text-success spinner" role="status" >
+      <span class="visually-hidden">Loading...</span>
   </div>
-  <div class="row filtro">
-      <div class="col-sm-3">
-          <select
-            class="form-select"
-            name="selecionar-filtro"
-            id="selecionar-filtro"
-            [(ngModel)]="criterioFiltro"
-            >
-            <option value="id">Código</option>
-            <option value="razao_social">Razão Social</option>
-            <option value="cnpj">CNPJ</option>
-            <option value="nome_empresarial">Nome Empresarial</option>
-            <option value="cidade">Cidade</option>
-            <option value="estado">Estado</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <input
-            type="search"
-            class="form-control"
-            name="filtro-valor"
-            id="filtro-valor"
-            [(ngModel)]="valorFiltro"
-          />
-        </div>
-        <div class="col-sm-2">
-          <div class="total">Total: {{totalFiltrado |contadorFiltro:todosFornecedores:valorFiltro:criterioFiltro}}</div>
-        </div>
-  
-        <!-- TABELA -->
-        
-        <div class="row">
-          <div class="col-md">
-              <table class="table table-striped">
-                  <thead>
-                      <th>Cód.</th>
-                      <th>Razão Social</th>
-                      <th>CNPJ</th>
-                      <th>Nome Empresarial</th>
-                      <th>Cidade</th>
-                      <th>Estado</th>
-                    </thead>
-                    <tbody>
-                      <tr 
-                      *ngFor="let fornecedor of todosFornecedores | filtroLista:valorFiltro:criterioFiltro;"
-                      (click)="selecionarFornecedor(fornecedor)">
-                        <td>{{ fornecedor.id | insereZeros:4}}</td>
-                        <td>{{ fornecedor.razao_social | encurtar:25}}</td>
-                        <td>{{ fornecedor.cnpj | cnpj}}</td>
-                        <td>{{ fornecedor.nome_empresarial | encurtar:50 }}</td>
-                        <td>{{ fornecedor.endereco.cidade }}</td>
-                        <td>{{ fornecedor.endereco.estado }}</td>
-                      </tr>
-                    </tbody>
-              </table>
+</div>
 
-              <app-modal-fornecedor></app-modal-fornecedor>
-  
-          </div>
-        </div>
-        
+<div *ngIf="!this.isCarregando">
+  <div class="row">
+      <div class="col-md">
+        <button class="btn btn-success botao-novo" (click) = "prepararCadastro()" >
+          <i class="bi bi-file-earmark-plus-fill"></i> Novo
+        </button>
       </div>
+    </div>
+    <div class="row filtro">
+        <div class="col-sm-3">
+            <select
+              class="form-select"
+              name="selecionar-filtro"
+              id="selecionar-filtro"
+              [(ngModel)]="criterioFiltro"
+              >
+              <option value="id">Código</option>
+              <option value="razao_social">Razão Social</option>
+              <option value="cnpj">CNPJ</option>
+              <option value="nome_empresarial">Nome Empresarial</option>
+              <option value="cidade">Cidade</option>
+              <option value="estado">Estado</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="search"
+              class="form-control"
+              name="filtro-valor"
+              id="filtro-valor"
+              [(ngModel)]="valorFiltro"
+            />
+          </div>
+          <div class="col-sm-2">
+            <div class="total">Total: {{totalFiltrado |contadorFiltro:todosFornecedores:valorFiltro:criterioFiltro}}</div>
+          </div>
+    
+          <!-- TABELA -->
+          
+          <div class="row">
+            <div class="col-md">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Cód.</th>
+                        <th>Razão Social</th>
+                        <th>CNPJ</th>
+                        <th>Nome Empresarial</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                      </thead>
+                      <tbody>
+                        <tr 
+                        *ngFor="let fornecedor of todosFornecedores | filtroLista:valorFiltro:criterioFiltro;"
+                        (click)="selecionarFornecedor(fornecedor)">
+                          <td>{{ fornecedor.id | insereZeros:4}}</td>
+                          <td>{{ fornecedor.razao_social | encurtar:25}}</td>
+                          <td>{{ fornecedor.cnpj | cnpj}}</td>
+                          <td>{{ fornecedor.nome_empresarial | encurtar:50 }}</td>
+                          <td>{{ fornecedor.endereco.cidade }}</td>
+                          <td>{{ fornecedor.endereco.estado }}</td>
+                        </tr>
+                      </tbody>
+                </table>
   
+                <app-modal-fornecedor></app-modal-fornecedor>
+    
+            </div>
+          </div>
+          
+        </div>
+    
+</div>

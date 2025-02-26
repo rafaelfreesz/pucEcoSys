@@ -17,11 +17,13 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
   valorFiltro: string = "";
   totalFiltrado:number = 0;
   isNovoProduto: boolean = false;
+  isCarregando: boolean = true;
 
   constructor(private produtoService: ProdutoService) {
     this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
       todosProdutos => {
         this.todosProdutos = todosProdutos
+        this.isCarregando = false
       }
     )
   }
