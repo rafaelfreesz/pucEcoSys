@@ -22,8 +22,6 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
         this.isCarregando = false;
-        setTimeout(()=>{this.selecionarFornecedor(todosFornecedores[0])},500)
-        //TODO remover
       }
     )
   }
