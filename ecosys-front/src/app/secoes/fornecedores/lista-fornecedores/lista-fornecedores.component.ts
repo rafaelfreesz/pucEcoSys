@@ -22,11 +22,14 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
         this.isCarregando = false;
+        setTimeout(()=>{this.selecionarFornecedor(todosFornecedores[0])},500)
+        //TODO remover
       }
     )
   }
 
   ngOnInit(): void {
+    
   
   }
 
@@ -35,6 +38,7 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
   }
 
   selecionarFornecedor(fornecedor: Fornecedor){
+    
     this.fornecedorService.selecionarFornecedor(fornecedor)
   }
 

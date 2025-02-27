@@ -15,31 +15,46 @@
     transform: translate(-50%, -50%);
     width: 70vw;
     height: 89vh;
-    padding: 10px;
     z-index: 100;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    overflow-y: scroll;
-
-    .fechar{
-        text-align: right;
-        font-weight: 600;
-        cursor: pointer;
-        margin-right: 5px;
+    
+    .cabecalho{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #198754;
+        color: #fff;
+        height: 40px;
+        .titulo{
+            margin-top:3px;
+            margin-left:10px
+        }
+        .fechar{
+            text-align: right;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px
+        }
     }
 
     .conteudo{
-        // display: flex;
-        width: 65vw;
+        margin:10px;
+        width: 68vw;
+        max-height: 75vh;
+        overflow-y: auto;
+
+        
         .visualizar{
-
-            .dados{
-                margin-left: 10px;
-
-                .nome-empresarial{
-                    background-color: #198754;
-                    color: #fff;
-                    padding-left: 10px;
+            .dados{            
+                .subsecao{
+                    margin-bottom: 10px;
+                    .subtitulo{
+                        background-color: rgb(211, 211, 211);
+                        padding-left: 10px;
+                        padding-bottom: 3px;
+                        margin-bottom: 5px;
+                    }
                 }
 
                 .razao_social{
@@ -50,6 +65,7 @@
                 }
 
                 .informacao{
+                    padding-left: 10px;
                     align-content: center;
                     margin-bottom: 1px;
                     .label{
@@ -57,20 +73,6 @@
                         font-size:  large;
                         align-content: center;
                         margin-bottom: 0px;
-                    }
-                }
-                .botoes{
-                    display: flex;
-                    justify-content: space-between;
-                    .botao{
-                        margin-top: 10px;
-                        margin-right: 10px;
-                        width:200px;
-                    }
-                    .botao-editar{
-                        margin-top: 10px;
-                        // margin-right: 10px;
-                        width:130px;
                     }
                 }
             }
@@ -246,6 +248,22 @@
         }
     }
     
-
+    .botoes{
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+        .botao{
+            margin: 10px;
+            width:200px;
+        }
+        .botao-editar{
+            margin-top: 10px;
+            // margin-right: 10px;
+            width:130px;
+        }
+    
+    }
 }
 

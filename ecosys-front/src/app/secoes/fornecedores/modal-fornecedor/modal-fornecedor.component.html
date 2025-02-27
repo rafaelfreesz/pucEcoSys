@@ -1,37 +1,42 @@
 <div class="blackdrop" (click)="fechar()" *ngIf="this.temFornecedorSelecionado()"></div>
 
 <div class="alert-box" *ngIf="this.temFornecedorSelecionado()">
-  <div class="fechar" (click)="fechar()">x</div>
+
+  <div class="cabecalho">
+    <p class="titulo fs-4 fw-semibold" *ngIf="!inEdicao">{{ fornecedor.nome_empresarial}}</p>
+    <p class="titulo fs-4 fw-semibold" *ngIf="inEdicao">Editar Fornecedor</p>
+    <div class="fechar" (click)="fechar()">x</div>
+  </div>
+
   <div class="conteudo">
     <!-- VISUALIZAÇÃO -->
     <div class="visualizar" *ngIf="!inEdicao">
       <div class="dados">
-        <p class="fs-2 fw-semibold nome-empresarial">{{ fornecedor.nome_empresarial}}</p>
-        <p class="informacao"><span class="label">CNPJ:</span> {{fornecedor.cnpj | cnpj}}</p>
-        <p class="informacao"><span class="label">Razão Social: </span>{{ fornecedor.razao_social }}</p>
-        <hr>
-        <div class="fs-4 fw-semibold">Endereço</div>
-        <div class="">
-          {{fornecedor.endereco | enderecoCorrido}}
+        <div class="subsecao">
+          <div class="fs-4 fw-semibold subtitulo">Dados Básicos</div>
+          <p class="informacao"><span class="label">CNPJ:</span> {{fornecedor.cnpj | cnpj}}</p>
+          <p class="informacao"><span class="label">Razão Social: </span>{{ fornecedor.razao_social }}</p>
         </div>
-        <hr>
-        <div >
-            <div class="fs-4 fw-semibold">Contatos</div>
-            <ul class="list-group" >
-              <li *ngFor="let contato of fornecedor.contatos" class="list-group-item" >
-                <span *ngIf="contato.tipo == 'F'"><span class="tipo-contato">Telefone: </span>{{contato | telefoneCorrido}}</span>
-                <span *ngIf="contato.tipo == 'E'"><span class="tipo-contato">Email: </span>{{contato.valor}}</span>
-              </li>
-            </ul>
+        
+        <div class="subsecao">
+          <div class="fs-4 fw-semibold subtitulo">Endereço</div>
+          <div class="informacao">
+            {{fornecedor.endereco | enderecoCorrido}}
+          </div>
         </div>
-        <div class="botoes">
-          <button class="btn btn-primary botao" (click)="iniciarEdicao()">
-            <i class="bi bi-pencil-square"></i> Editar
-          </button>
-          <button class="btn btn-danger botao" (click)="fechar()">
-            <i class="bi bi-x-circle"></i> Fechar
-          </button>
+
+        <div class="subsecao">
+            <div class="fs-4 fw-semibold subtitulo">Contatos</div>
+            <div class="contatos">
+              <ul class="list-group" >
+                <li *ngFor="let contato of fornecedor.contatos" class="list-group-item" >
+                  <span *ngIf="contato.tipo == 'F'"><span class="tipo-contato">Telefone: </span>{{contato | telefoneCorrido}}</span>
+                  <span *ngIf="contato.tipo == 'E'"><span class="tipo-contato">Email: </span>{{contato.valor}}</span>
+                </li>
+              </ul>
+            </div>
         </div>
+        
       </div>
     </div>
     <!-- EDIÇÃO -->
@@ -192,18 +197,30 @@
 
       <hr>
 
-      <div class="botoes">
-        <button type="submit" class="btn btn-primary botao-editar" [disabled]="!conteudoFormulario.valid">
-          <i class="bi bi-floppy-fill"></i> Salvar
-        </button>
-        <button class="btn btn-danger botao-editar" (click)="excluir()">
-          <i class="bi bi-trash-fill"></i> Excluir
-        </button>
-        <button class="btn btn-danger botao-editar" (click)="fechar()">
-          <i class="bi bi-x-circle"></i> Cancelar
-        </button>
-      </div>
+      
     </form>
     </div>
   </div>
+
+  <div class="botoes" *ngIf="!inEdicao">
+    <button class="btn btn-primary botao" (click)="iniciarEdicao()">
+      <i class="bi bi-pencil-square"></i> Editar
+    </button>
+    <button class="btn btn-danger botao" (click)="fechar()">
+      <i class="bi bi-x-circle"></i> Fechar
+    </button>
+  </div>
+
+  <div class="botoes" *ngIf="inEdicao">
+    <button type="submit" class="btn btn-primary botao" [disabled]="!conteudoFormulario.valid">
+      <i class="bi bi-floppy-fill"></i> Salvar
+    </button>
+    <button class="btn btn-danger botao" (click)="excluir()">
+      <i class="bi bi-trash-fill"></i> Excluir
+    </button>
+    <button class="btn btn-danger botao" (click)="fechar()">
+      <i class="bi bi-x-circle"></i> Cancelar
+    </button>
+  </div>
+
 </div>

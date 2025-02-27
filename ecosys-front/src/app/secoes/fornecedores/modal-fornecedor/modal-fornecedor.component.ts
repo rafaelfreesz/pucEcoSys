@@ -21,7 +21,7 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
 
 
   constructor(private fornecedorService: FornecedorService) {
-    this.fornecedorFoiSelecionado = this.fornecedorService.fornecedorFoiSeleciontado.subscribe(
+    this.fornecedorFoiSelecionado = this.fornecedorService.fornecedorFoiSelecionado.subscribe(
       fornecedorSelecionado =>
         {
           this.fornecedor = fornecedorSelecionado
@@ -39,7 +39,7 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.fornecedorService.fornecedorFoiSeleciontado.unsubscribe()
+    this.fornecedorService.fornecedorFoiSelecionado.unsubscribe()
   }
 
   temFornecedorSelecionado(): boolean{

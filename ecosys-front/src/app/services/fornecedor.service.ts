@@ -11,7 +11,7 @@ export class FornecedorService{
     private todosFornecedores: Fornecedor[] = []
 
     private fornecedorSelecionado: Fornecedor | null = null;
-    fornecedorFoiSeleciontado: Subject<Fornecedor | null> = new Subject<Fornecedor | null>();
+    fornecedorFoiSelecionado: Subject<Fornecedor | null> = new Subject<Fornecedor | null>();
 
     
     constructor(private httpService: HttpService){
@@ -32,7 +32,7 @@ export class FornecedorService{
                 () => {
                     this.buscarTodosFornecedores()
                     this.fornecedorSelecionado = null;
-                    this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
+                    this.fornecedorFoiSelecionado.next(this.fornecedorSelecionado)
                 }
             )
         }else{ //cadastro
@@ -40,7 +40,7 @@ export class FornecedorService{
                 () => {
                     this.buscarTodosFornecedores()
                     this.fornecedorSelecionado = null;
-                    this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
+                    this.fornecedorFoiSelecionado.next(this.fornecedorSelecionado)
                 }
             )
 
@@ -53,7 +53,7 @@ export class FornecedorService{
                 () => {
                     this.buscarTodosFornecedores()
                     this.fornecedorSelecionado = null;
-                    this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
+                    this.fornecedorFoiSelecionado.next(this.fornecedorSelecionado)
                 }
             )
             
@@ -66,12 +66,12 @@ export class FornecedorService{
 
     selecionarFornecedor(fornecedor: Fornecedor){
         this.fornecedorSelecionado = fornecedor;
-        this.fornecedorFoiSeleciontado.next(this.fornecedorSelecionado)
+        this.fornecedorFoiSelecionado.next(this.fornecedorSelecionado)
     }
 
     liberarFornecedorSelecionado(in_alteracao: boolean){
         this.fornecedorSelecionado = null;
-        this.fornecedorFoiSeleciontado.next(null)
+        this.fornecedorFoiSelecionado.next(null)
         if(in_alteracao){
             this.buscarTodosFornecedores();
         }
