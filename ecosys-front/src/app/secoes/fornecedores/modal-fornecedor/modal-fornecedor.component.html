@@ -1,6 +1,6 @@
 <div class="blackdrop" (click)="fechar()" *ngIf="this.temFornecedorSelecionado()"></div>
 
-<div class="alert-box" *ngIf="this.temFornecedorSelecionado()">
+<form class="alert-box" *ngIf="this.temFornecedorSelecionado()" [formGroup]="conteudoFormulario" (ngSubmit)="submeterFormulario()">
 
   <div class="cabecalho">
     <p class="titulo fs-4 fw-semibold" *ngIf="!inEdicao">{{ fornecedor.nome_empresarial}}</p>
@@ -41,139 +41,140 @@
     </div>
     <!-- EDIÇÃO -->
     <div class="editar" *ngIf="inEdicao">
-      <form [formGroup]="conteudoFormulario" (ngSubmit)="submeterFormulario()">
-        <div class="fs-4 fw-semibold">Dados Básicos</div>
-        <div class="dados-basicos">
-
+      <div class="dados">
+        <div class="subsecao">
+          <div class="fs-4 fw-semibold subtitulo">Dados Básicos</div>
+          <div class="informacao">
             <label for="nome_empresarial" class="form-label label">Nome Empresarial:</label>
+
             <input
             type="text"
                 id="nome_empresarial"
                 formControlName="nome_empresarial"
                 class="form-control campo-basico">
+          </div>
+          <div class="informacao">
             <label for="razao_social" class="form-label label">Razão Social:</label>
             <input
             type="text"
             id="razao_social"
             formControlName="razao_social"
             class="form-control campo-basico">
-            
-            <label for="cnpj" class="form-label">CNPJ:</label>
+          </div>
+
+          <div class="informacao">
+            <label for="cnpj" class="form-label label">CNPJ:</label>
             <input
                 type="text"
                 id="cnpj"
                 formControlName="cnpj"
                 class="form-control cnpj">
-        </div>
 
-        <hr>
-         
-      <div class="endereco">
-
-        
-        <div class="fs-4 fw-semibold">Endereço</div>
-        <div class="dados-basicos" formGroupName="endereco">
-
-          <div class="cep-logradouro">
-            
-            <div class="container-cep">
-              <label for="cep" class="form-label">CEP:</label>
-              <input
-              type="text"
-              id="cep"
-              formControlName="cep"
-              class="form-control cep">
-            </div>
-
-            <div >
-              <label for="logradouro" class="form-label">Logradouro:</label>
-              <input
-              type="text"
-              id="logradouro"
-              formControlName="logradouro"
-              class="form-control logradouro">
-            </div>
-            
           </div>
-          <div class="detalhes-endereco-container">
-            <div>
-              <label for="numero" class="form-label">Número:</label>
+
+        </div>
+        
+          
+        <div class="subsecao"  formGroupName="endereco">
+          <div class="fs-4 fw-semibold subtitulo">Endereço</div>
+          <div class="informacao">
+            <label for="cep" class="form-label label">CEP:</label>
+            <input
+            type="text"
+            id="cep"
+            formControlName="cep"
+            class="form-control cep">
+
+          </div>
+          <div class="informacao">
+            <label for="logradouro" class="form-label label">Logradouro:</label>
+            <input
+            type="text"
+            id="logradouro"
+            formControlName="logradouro"
+            class="form-control logradouro">
+
+          </div>
+          <div class="numero-complemento-bairro">
+
+            <div class="informacao">
+              <label for="numero" class="form-label label">Número:</label>
               <input
                   type="text"
                   id="numero"
                   formControlName="numero"
                   class="form-control numero">
+
             </div>
-            
-            <div class="container-complemento">
-              <label for="complemento" class="form-label">Compl.:</label>
+            <div class="informacao">
+              <label for="complemento" class="form-label label">Compl.:</label>
               <input
                   type="text"
                   id="complemento"
                   formControlName="complemento"
                   class="form-control complemento">
+
             </div>
-            <div class="container-bairro">
-              <label for="bairro" class="form-label">Bairro:</label>
+            <div class="informacao">
+              <label for="bairro" class="form-label label">Bairro:</label>
               <input
                   type="text"
                   id="bairro"
                   formControlName="bairro"
                   class="form-control bairro">
+
             </div>
+          </div>
+          <div class="cidade-estado">
 
-            <div class="container-cidade">
-
-              <label for="cidade" class="form-label">Cidade:</label>
+            <div class="informacao">
+              <label for="cidade" class="form-label label">Cidade:</label>
               <input
-              type="text"
-              id="cidade"
-              formControlName="cidade"
-              class="form-control cidade">
-              
+                type="text"
+                id="cidade"
+                formControlName="cidade"
+                class="form-control cidade">
+
             </div>
-            <div class="container-estado">
-
-              <label for="estado" class="form-label">Estado:</label>
+            <div class="informacao">
+              <label for="estado" class="form-label label">Estado:</label>
               <input
-              type="text"
-              id="estado"
-              formControlName="estado"
-              class="form-control estado">
-              
+                type="text"
+                id="estado"
+                formControlName="estado"
+                class="form-control estado">
+
             </div>
           </div>
         </div>
-      </div>
-      
-      <hr>
 
-      <div  class="contatos">
-        <div class="cabecalho" formGroupName="contato-novo">
+        <div class="subsecao"  formGroupName="contato-novo">
+          <div class="fs-4 fw-semibold subtitulo">Contatos
 
-          <div class="fs-4 fw-semibold">Contatos</div> 
+            <div class="add-contato">
 
-          <div class="container-adicionar-contato">
-            <select
-              name="tipo-novo"
-              class="form-control tipo-novo"
-              formControlName="tipo-novo"
-              id="tipo-novo">
-              <option value="F">Telefone</option>
-              <option value="E">Email</option>
-            </select>
-            <input type="text" class="form-control valor-novo" formControlName="valor-novo" >
-  
-            <div class="icone-mais-background" (click)="incluirContato()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus icone" viewBox="0 0 16 16">
-                <path id="path-mais" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
+              <select
+                name="tipo-novo"
+                class="form-control tipo-novo"
+                formControlName="tipo-novo"
+                id="tipo-novo">
+                  <option value="F">Telefone</option>
+                  <option value="E">Email</option>
+              </select>
+
+              <input type="text" class="form-control valor-novo" formControlName="valor-novo" >
+
+              <div class="icone-mais-background" (click)="incluirContato()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus icone" viewBox="0 0 16 16">
+                  <path id="path-mais" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                </svg>
+              </div>
+
             </div>
-            
-          </div>
-        </div>
-        
 
+          </div>
+          
+        </div>
         <div formArrayName="contatos" *ngFor="let contatoControl of getContatos(); let i = index">
           <div class="linha-de-contato" [formGroupName]="i">
             <select
@@ -193,12 +194,8 @@
             </div>
           </div>
         </div>
+
       </div>
-
-      <hr>
-
-      
-    </form>
     </div>
   </div>
 
@@ -223,4 +220,4 @@
     </button>
   </div>
 
-</div>
+</form>

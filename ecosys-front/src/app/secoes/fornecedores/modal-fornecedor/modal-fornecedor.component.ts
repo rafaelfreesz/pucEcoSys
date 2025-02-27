@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Contato } from 'src/app/models/contato.model';
 import { Fornecedor } from 'src/app/models/fornecedor.model';
@@ -76,9 +76,9 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
     if(this.fornecedor){
 
       this.conteudoFormulario = new FormGroup({
-        'cnpj': new FormControl(this.fornecedor.cnpj),
-        'razao_social': new FormControl(this.fornecedor.razao_social),
-        'nome_empresarial': new FormControl(this.fornecedor.nome_empresarial),
+        'cnpj': new FormControl(this.fornecedor.cnpj,[Validators.required, Validators.minLength(14), Validators.maxLength(14)]),
+        'razao_social': new FormControl(this.fornecedor.razao_social, Validators.required),
+        'nome_empresarial': new FormControl(this.fornecedor.nome_empresarial, Validators.required),
         'endereco': new FormGroup({
           'logradouro': new FormControl(this.fornecedor.endereco.logradouro),
           'numero': new FormControl(this.fornecedor.endereco.numero),

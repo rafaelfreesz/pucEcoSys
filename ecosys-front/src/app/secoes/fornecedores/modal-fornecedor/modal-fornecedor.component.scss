@@ -48,6 +48,7 @@
         .visualizar{
             .dados{            
                 .subsecao{
+                    padding-right: 10px;
                     margin-bottom: 10px;
                     .subtitulo{
                         background-color: rgb(211, 211, 211);
@@ -55,13 +56,6 @@
                         padding-bottom: 3px;
                         margin-bottom: 5px;
                     }
-                }
-
-                .razao_social{
-                    font-weight: 600;
-                    font-size:  x-large;
-                    align-content: center;
-                    margin-bottom: 3px;
                 }
 
                 .informacao{
@@ -82,122 +76,54 @@
         }
 
         .editar{
-            width: inherit;
-            
-            .dados-basicos{
-                width: inherit;
-
-
-                .form-label{
-                    margin-top: 10px;
-                }
-
-                .campo-basico{
-                    width: 100%;
-                }
-                
-                .cnpj{
-                    width: 28%;
-                }
-
-            }
-            
-            .endereco{
-                .cep-logradouro{
-                    display: flex;
-                    
-                    .container-cep{
-                        .cep{
-                            width: 15vw;
-                        }
-                        margin-right: 10px;
-                    }
-                    .logradouro{
-                        width:50vw;
-                    }
-                }
-                .detalhes-endereco-container{
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                    .numero{
-                        width: 10vw;
-                    }
-
-                    .container-complemento{
-                        margin-left: 10px;
-                        .complemento{
-                            width: 10vw;
-                        }
-                    }
-                    .container-bairro{
-                        margin-left: 10px;
-                        .bairro{
-                            width: 250px;
-                        }
-                    }
-                    .container-cidade{
-                        margin-left: 10px;
-                        .cidade{
-                            width: 200px;
-                        }
-                    }
-
-                    .container-estado{
-                        margin-left: 10px;
-                        .complemento{
-                            width: 100px;
-                        }
-                    }
-                    .container-bairro{
-                        margin-left: 10px;
-                        .bairro{
-                            width: 250px;
-                        }
-                    }
-                }
-                
-            }
-
-            .contatos{
-                
-                .cabecalho{
-                    display: flex;
-                }
-                .container-adicionar-contato{
-                    display: flex;
-                    margin-left: 15px;
-                    .tipo-novo{
-                        appearance: listbox;
-                        width: 150px;
-                    }
-                    .valor-novo{
-                        margin-left: 10px;
-                        width: 250px;
-                    }
-                    .icone-mais-background{
-                        cursor: pointer;
-                        width: 20px;
-                        height: 20px;
-                        background-color: #198754;
-                        border-radius: 50px;
-                        margin-left:10px;
-                        margin-top: 10px;
-                        .icone{
-                            // margin-bottom: 20px;
-                            vertical-align: top;
-                            #path-mais{
-                                fill: #ffffff;
+            .dados{            
+                .subsecao{
+                    margin-bottom: 10px;
+                    .subtitulo{
+                        display: flex;
+                        justify-content: space-between;
+                        width: 100%;
+                        background-color: rgb(211, 211, 211);
+                        padding-left: 10px;
+                        padding-bottom: 3px;
+                        margin-bottom: 5px;
+                        align-items: center;
+                        .add-contato{
+                            width: fit-content;
+                            display: flex;
+                            align-items: center;
+                            .tipo-novo{
+                                appearance: listbox;
+                                width: 150px;
+                                margin: 5px;
                             }
-    
+                            .valor-novo{
+                                margin: 5px;
+                                width: 250px;
+                            }
+                            .icone-mais-background{
+                                margin: 5px;
+                                cursor: pointer;
+                                width: 20px;
+                                height: 20px;
+                                background-color: #000;
+                                border-radius: 50px;
+                                .icone{
+                                    vertical-align: top;
+                                    #path-mais{
+                                        fill: #ffffff;
+                                    }
+            
+                                }
+                            }
                         }
                     }
                 }
-
                 .linha-de-contato{
                     display: flex;
                     flex-direction: row;
                     margin-top: 10px;
+                    padding-left: 10px;
                     
                     .tipo{
                         appearance: listbox;
@@ -228,21 +154,37 @@
                     }
 
                 }
-            }
 
-            .botoes{
-                display: flex;
-                // justify-content: space-between;
-                width: inherit;
-                .botao{
-                    margin-top: 10px;
-                    margin-right: 10px;
-                    width:20vw;
+                .informacao{
+                    
+                    align-content: center;
+                    margin-bottom: 1px;
+                    .label{
+                        font-weight: 600;
+                        font-size:  large;
+                        align-content: center;
+                        margin-bottom: 0px;
+                    }
+                    .cnpj{
+                        width: 180px;
+                    }
+                    .cep{
+                        width: 15vw;
+                    }
+                    
                 }
-                .botao-editar{
-                    margin-top: 10px;
-                    margin-right: 10px;
-                    width:100%;
+                .numero-complemento-bairro,.cidade-estado{
+                    width: fit-content;
+                    display: flex;
+                    .informacao{
+                        padding-right: 10px;
+                        .numero,.complemento,.bairro{
+                            width: 15vw;
+                        }
+                        .cidade,.estado{
+                            width: 20vw;                            
+                        }
+                    }
                 }
             }
         }
@@ -260,7 +202,6 @@
         }
         .botao-editar{
             margin-top: 10px;
-            // margin-right: 10px;
             width:130px;
         }
     

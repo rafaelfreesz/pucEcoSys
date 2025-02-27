@@ -27,7 +27,8 @@ export class FornecedorService{
     }
 
     salvarFornecedor(fornecedor: Fornecedor){
-        if(fornecedor.id === -1){ //alteração
+        //TODO tratar a inserção de traço no cep com diretivas, e corrigir no dump SQL
+        if(fornecedor.id === -1){  //cadastro
             this.httpService.insertFornecedor(fornecedor).subscribe(
                 () => {
                     this.buscarTodosFornecedores()
@@ -35,7 +36,7 @@ export class FornecedorService{
                     this.fornecedorFoiSelecionado.next(this.fornecedorSelecionado)
                 }
             )
-        }else{ //cadastro
+        }else{ //alteração
             this.httpService.updateFornecedor(fornecedor).subscribe(
                 () => {
                     this.buscarTodosFornecedores()
