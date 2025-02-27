@@ -41,7 +41,7 @@ tr:hover{
         height: 361px;
         background-color: #fff;
         .tabela{
-            /* margin-top: 5px; */
+            margin-top: 1px;
             overflow-y: scroll;
             height: 100%;
         
@@ -51,7 +51,9 @@ tr:hover{
                     top:0;
                     background-color: rgba(25, 135, 84);
                     th{
-                        border: 1px solid #fff;
+                        border-bottom: 1px solid #fff;
+                        border-left: 1px solid #fff;
+                        border-right: 1px solid #fff;
                         vertical-align: middle;
                         padding-left: 7px;
                         color: white;

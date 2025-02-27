@@ -61,7 +61,9 @@ table{
         top: 0;
         background-color: rgba(25, 135, 84);
         th{
-            border: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff;
             vertical-align: middle;
             padding-left: 7px;
             padding-right: 7px;
