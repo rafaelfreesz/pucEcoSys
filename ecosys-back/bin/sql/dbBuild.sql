@@ -18,7 +18,7 @@ CREATE TABLE tb_endereco(
     logradouro VARCHAR(100),
     numero VARCHAR(50),
     complemento VARCHAR(10),
-    cep VARCHAR(8),
+    cep VARCHAR(9),
     bairro VARCHAR(100),
     cidade VARCHAR(32),
     estado VARCHAR(18),
