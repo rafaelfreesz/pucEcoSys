@@ -36,7 +36,7 @@ CREATE TABLE tb_contato(
 
 CREATE TABLE tb_entrada(
     id SERIAL PRIMARY KEY,
-    dt_hr_entrada DATE NOT NULL DEFAULT CURRENT_DATE,
+    dt_hr_entrada TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
     nu_nota_fiscal VARCHAR(50),
     fk_fornecedor INT,
     FOREIGN KEY (fk_fornecedor) REFERENCES tb_fornecedor(id) ON DELETE CASCADE
