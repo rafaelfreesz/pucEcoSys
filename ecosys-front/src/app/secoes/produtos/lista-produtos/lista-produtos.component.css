@@ -55,6 +55,9 @@ tfoot{
         }
     }
 }
+.item-paginator:hover{
+    background-color: #104b2f;
+}
 table{
     margin-top: 10px;
 }

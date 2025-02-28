@@ -20,7 +20,7 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
   totalFiltrado:number = 0;
   isNovoProduto: boolean = false;
   isCarregando: boolean = true;
-  itemsListaPorVez = 10;
+  itemsListaPorVez = 20;
   totalDeIndices = 0
   indiceLista = 0
 
@@ -31,6 +31,7 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
         this.totalFiltrado = this.contadorPipe.transform(this.totalFiltrado,this.todosProdutos,this.valorFiltro,this.criterioFiltro)
         this.totalDeIndices = Math.ceil(this.todosProdutos.length/this.itemsListaPorVez)
         this.isCarregando = false
+        setTimeout(() =>{this.selecionarProduto(this.todosProdutos[0])},100)
       }
     )
   }

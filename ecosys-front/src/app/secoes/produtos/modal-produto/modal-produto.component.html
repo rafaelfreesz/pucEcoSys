@@ -1,29 +1,40 @@
 <div class="blackdrop" (click)="comando('fechar')"></div>
 
 <div class="alert-box">
-  <div class="fechar" (click)="comando('fechar')">x</div>
-  <div class="conteudo">
     <!-- VISUALIZAÇÃO -->
-    <div class="visualizar" *ngIf="!inEdicao">
+    <div class="cabecalho">
+      <p class="titulo fs-4 fw-semibold">{{ produto.nome }}</p>
+      <p class="fechar" (click)="comando('fechar')">x</p>
+    </div>
+    
+    <div class="conteudo">
       <img
-        src="https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg"
-        alt=""
+      class= "imagem"
+      src="https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg"
+      alt=""
       />
-      <div class="dados">
-        <p class="nome">{{ produto.nome }}</p>
-        <p class="label">Descricao:</p>
-        <p class="descricao">{{ produto.descricao }}</p>
-        <div class="valores">
-          <div>
-            <p class="label">Quantidade em Estoque:</p>
-            <div class="qtd_estoque">{{ produto.qtd_estoque }}</div>
-          </div>
-          <div>
-            <p class="label">Preço de venda:</p>
-            <div class="preco_venda">R${{ produto.preco_venda }}</div>
+      <div class="informacoes">
+
+        <div class="visualizar" *ngIf="!inEdicao">
+          <div class="subtitulo fs-4 fw-semibold">Dados</div>
+          <div class="dados">
+            <div class="informacao">
+              <p class="label">Descricao:</p>
+              <p class="descricao">{{ produto.descricao }}</p>
+            </div>
+  
+            <div class="informacao">
+              <p class="label">Quantidade em Estoque:</p>
+              <p class="descricao">{{ produto.qtd_estoque }}</p>
+            </div>
+  
+            <div class="informacao">
+              <p class="label">Preço de venda:</p>
+              <p class="descricao">R$ {{ produto.preco_venda }}</p>
+            </div>
           </div>
         </div>
-        <div class="botoes">
+        <div class="botoes" *ngIf="!inEdicao">
           <button class="btn btn-primary botao" (click)="iniciarEdicao()">
             <i class="bi bi-pencil-square"></i> Editar
           </button>
@@ -32,7 +43,10 @@
           </button>
         </div>
       </div>
+
+      
     </div>
+
     <!-- EDIÇÃO -->
     <div class="editar" *ngIf="inEdicao">
       <img
@@ -96,5 +110,4 @@
         </div>
       </form>
     </div>
-  </div>
 </div>
