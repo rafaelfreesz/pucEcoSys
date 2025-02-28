@@ -36,6 +36,7 @@ import { TraduzFormaPagamentoPipe } from './pipes/traduz-forma-pagamento.pipe';
 import { ModalVendaComponent } from './secoes/vendas/modal-venda/modal-venda.component';
 import { NotificacoesComponent } from './home/notificacoes/notificacoes.component';
 import { ResumoDoDiaComponent } from './home/resumo-do-dia/resumo-do-dia.component';
+import { PaginatorPipe } from './pipes/paginator.pipe';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ResumoDoDiaComponent } from './home/resumo-do-dia/resumo-do-dia.compone
     TraduzFormaPagamentoPipe,
     ModalVendaComponent,
     NotificacoesComponent,
-    ResumoDoDiaComponent
+    ResumoDoDiaComponent,
+    PaginatorPipe
   ],
   imports: [
     BrowserModule,

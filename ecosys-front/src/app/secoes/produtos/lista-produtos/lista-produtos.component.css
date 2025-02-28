@@ -22,9 +22,38 @@ th{
     vertical-align: middle;
     padding-left: 7px;
     color: white;
+    
+    border-bottom: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
 }
-thead{
+thead,tfoot{
     background-color: #198754;
+}
+tfoot{
+    th{
+        text-align: center;
+        .paginator{
+            display: inline-flex;
+            background-color: transparent;
+            align-items: center;
+            .item-paginator{
+                margin: 1px;
+                border-radius: 4px;
+                width: 30px;
+                height: 25px;
+                color: #fff;
+                text-align: center;
+                vertical-align: middle;
+                cursor: pointer;
+            }
+            .item-paginator-ativo{
+                color:#198754;
+                background-color: #fff;
+
+            }
+        }
+    }
 }
 table{
     margin-top: 10px;
@@ -44,6 +73,7 @@ td{
     border-width: 1px;
     margin-right: 10px;
 }
+
 .total{
     margin-top: 6px;
     font-weight: 600;

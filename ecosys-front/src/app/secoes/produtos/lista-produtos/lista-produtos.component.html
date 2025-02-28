@@ -34,11 +34,12 @@
             name="filtro-valor"
             id="filtro-valor"
             [(ngModel)]="valorFiltro"
+            (input) = "alteraFiltro()"
           />
             <!-- (input)="filtrarTabela()" -->
         </div>
         <div class="col-sm-2">
-          <div class="total">Total: {{totalFiltrado |contadorFiltro:todosProdutos:valorFiltro:criterioFiltro}}</div>
+          <div class="total">Total: {{totalFiltrado}}</div>
         </div>
   
         <!-- TABELA -->
@@ -57,7 +58,7 @@
                     </thead>
                     <tbody>
                       <tr 
-                      *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
+                      *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro  | paginator:itemsListaPorVez:indiceLista"
                       (click)="selecionarProduto(produto)">
                         <td>{{ produto.id | insereZeros:4}}</td>
                         <td>{{ produto.nome | encurtar:25}}</td>
@@ -67,6 +68,36 @@
                         <td class="celula-imagem"><img src = "https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" class = "imagem"></td>
                       </tr>
                     </tbody>
+                    <tfoot>
+                      
+                      <th colspan="6" >
+                        <div class="paginator">
+                          <div class="item-paginator"
+                            (click) = "selecionaIndicePaginator(1)">
+                            <i class="bi bi-chevron-double-left"></i>
+                          </div>
+                          <div class="item-paginator"
+                            (click) = "selecionaIndicePaginator(indiceLista)">
+                            <i class="bi bi-chevron-left"></i>
+                          </div>
+                          <div class = "item-paginator"
+                              [ngClass]="{'item-paginator-ativo': indice-1 === indiceLista}"
+                              *ngFor="let indice of defineValoresPaginator()"
+                              (click) = "selecionaIndicePaginator(indice)">
+                            {{indice}}
+                          </div>
+                          <div class="item-paginator"
+                            (click) = "selecionaIndicePaginator(indiceLista+2)">
+                            <i class="bi bi-chevron-right"></i>
+                          </div>
+                          <div class="item-paginator"
+                            (click) = "selecionaIndicePaginator(totalDeIndices)">
+                            <i class="bi bi-chevron-double-right"></i>
+                          </div>
+                        </div>
+                      </th>
+                      
+                    </tfoot>
               </table>
               <app-modal-produto
                 *ngIf="produtoSelecionado || isNovoProduto"
