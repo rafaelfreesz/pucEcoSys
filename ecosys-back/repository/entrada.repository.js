@@ -3,7 +3,7 @@ const {pool, executarQuery} = require('../db');
 class EntradaRepository{
 
     consultarTodos(){
-        const sql = 'SELECT * FROM tb_entrada ORDER BY id ASC';
+        const sql = 'SELECT * FROM tb_entrada ORDER BY dt_hr_entrada DESC';
         return executarQuery(sql);
     }
     consultarPorId(id){
