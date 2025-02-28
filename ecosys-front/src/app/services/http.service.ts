@@ -194,6 +194,14 @@ export class HttpService{
 
     }
 
+    getVendasDia(data: string) {
+        return this.http.get<any>(`http://localhost:3000/vendas/data/${data}`)
+        .pipe(
+            map( HTTPResponseParser.buildListaVendas )
+        )
+
+    }
+
     insertVenda(venda: Venda){
         let vendaBody = {
             'venda': {

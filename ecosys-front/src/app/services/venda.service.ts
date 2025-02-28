@@ -13,11 +13,11 @@ export class VendaService {
   vendaFoiFinalizada: Subject<null> = new Subject<null>();
 
   constructor(private httpService: HttpService) {
-    this.buscarTodasVendas();
+    this.buscarVendasDia(new Date().toISOString().split('T')[0]);
   }
 
-  buscarTodasVendas(): void{
-    this.httpService.getTodasVendas().subscribe(
+  buscarVendasDia(data: string): void{
+    this.httpService.getVendasDia(data).subscribe(
       todasVendas => {
         this.todasVendas = todasVendas;
         this.listaVendasAlterada.next(this.todasVendas.slice());

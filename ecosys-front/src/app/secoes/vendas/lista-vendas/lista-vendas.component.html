@@ -33,6 +33,7 @@
                     id="filtro-valor"
                     [(ngModel)]="valorFiltro"
                     *ngIf = "this.criterioFiltro === 'dt_hr_venda'"
+                    (input) = "atualizarLista()"
                   />
                   <input
                     type="search"

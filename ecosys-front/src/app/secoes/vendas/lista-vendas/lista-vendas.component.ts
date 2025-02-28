@@ -13,7 +13,7 @@ export class ListaVendasComponent implements OnInit, OnDestroy {
   todasVendas: Venda[] = []
   private vendasAlteradas: Subscription;
   criterioFiltro: string="dt_hr_venda";
-  valorFiltro: string="";
+  valorFiltro: string= new Date().toISOString().split('T')[0];
   totalFiltrado: number = 0;
   vendaSelecionada: Venda | null = null;
   isCarregando = true;
@@ -44,6 +44,11 @@ export class ListaVendasComponent implements OnInit, OnDestroy {
 
   prepararCadastro():void{
     this.vendaService.prepararCadastro();
+  }
+
+  atualizarLista(){
+    this.isCarregando = true;
+    this.vendaService.buscarVendasDia(this.valorFiltro)
   }
 
 }
