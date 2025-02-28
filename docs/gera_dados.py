@@ -62,10 +62,27 @@ file_in.close()
 entradas = []
 entrada_por_data = round(len(fornecedores)/len(datas_recentes))
 i_data = 0
+hora = 8
+minuto = 0    
+data_hr_entrada = f"{datas_recentes[i_data]}T0{hora}:0{minuto}:00.000Z"
 for i, fornecedor in enumerate(fornecedores):
     if i%entrada_por_data == 0:
+        hora = 8
+        minuto = 0    
         i_data+=1
-    entradas.append([datas_recentes[i_data],random.randint(100000,999999),i+1])
+        data_hr_entrada = f"{datas_recentes[i_data]}T0{hora}:0{minuto}:00.000Z"
+    else:
+        minuto += random.choice([13,26,39,52])
+        if minuto >= 60:
+            hora+=1
+            minuto-=60        
+        str_hora = f'0{hora}' if hora < 10 else str(hora)
+        str_minuto = f'0{minuto}' if minuto < 10 else str(minuto)
+        data_hr_entrada = f"{datas_recentes[i_data]}T{str_hora}:{str_minuto}:00.000Z"
+
+    entradas.append([data_hr_entrada,random.randint(100000,999999),i+1])
+
+data_hr_venda = f"{datas_recentes[i_data]}T0{hora}:0{minuto}:00.000Z" #TODO
 
 #Item Entrada
 items_entrada = []
@@ -217,7 +234,7 @@ for arquivo in arquivos:
 
     file_in.close()
 
-file_out = open("output/dbBuild.sql",'w', encoding="utf8")
+file_out = open("../ecosys-back/bin/sql/dbBuild.sql",'w', encoding="utf8")
 file_out.close()
 
 file_out = open("../ecosys-back/bin/sql/dbBuild.sql",'a', encoding="utf8")
