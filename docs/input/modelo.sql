@@ -86,11 +86,11 @@ CREATE VIEW vw_produtos_vendidos_dia AS
 		INNER JOIN tb_produto as p
 		ON
 		p.id = iv.fk_produto
-		where DATE(v.dt_hr_venda) = '2025-02-02' GROUP BY p.id ORDER BY total_vendido desc;
+		where DATE(v.dt_hr_venda) = CURRENT_DATE GROUP BY p.id ORDER BY total_vendido desc;
 
 -- View para contar as vendas do dia
 CREATE VIEW vw_conta_vendas_dia AS
-	SELECT COUNT(v.id) as vendas_dia FROM tb_venda as v where DATE(v.dt_hr_venda) = '2025-02-02';
+	SELECT COUNT(v.id) as vendas_dia FROM tb_venda as v where DATE(v.dt_hr_venda) = CURRENT_DATE;
   
 -- View para somar o vendido do dia
 CREATE VIEW vw_soma_valor_vendas_dia AS

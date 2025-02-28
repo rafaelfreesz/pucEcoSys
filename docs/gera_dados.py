@@ -220,7 +220,7 @@ for arquivo in arquivos:
 file_out = open("output/dbBuild.sql",'w', encoding="utf8")
 file_out.close()
 
-file_out = open("output/dbBuild.sql",'a', encoding="utf8")
+file_out = open("../ecosys-back/bin/sql/dbBuild.sql",'a', encoding="utf8")
 
 file_in = open("input/modelo.sql",'r', encoding="utf8")
 
