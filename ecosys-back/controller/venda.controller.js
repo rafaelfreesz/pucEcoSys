@@ -24,6 +24,25 @@ class VendaController {
         }
         
     };
+
+    async consultarPorData(request, response, next){
+        try{
+            const vendas = await VendaRepository.consultarPorData(request.params.data);
+            
+            for await(const venda of vendas){
+                const items = await ItemVendaController.getPorVenda(venda.id)
+                if(items){venda.items = items}
+            }
+
+            response.json(vendas)
+
+            
+        }catch(e){
+            e.erro=true;
+            response.json(e);
+        }
+        
+    };
     
     async consultarPorId(request, response, next){
 

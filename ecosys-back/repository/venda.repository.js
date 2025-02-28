@@ -7,6 +7,11 @@ class VendaRepository{
         return executarQuery(sql);
     }
 
+    consultarPorData(data){
+        const sql = `SELECT * FROM tb_venda where DATE(dt_hr_venda)='${data}' ORDER BY dt_hr_venda DESC`;
+        return executarQuery(sql);
+    }
+
     consultarPorId(id){
         const sql = 'SELECT * FROM tb_venda WHERE id = $1';
         return executarQuery(sql,[id]);
