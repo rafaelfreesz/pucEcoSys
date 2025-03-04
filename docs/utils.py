@@ -1,4 +1,6 @@
 import datetime as dt
+import shutil as st
+import os
 
 def gera_datas():
     datas = []
@@ -23,4 +25,20 @@ def traduz_estado(estado):
     else:
         return "Bahia"
 
-# def ler_dump
+def copia_imagens():
+    try:
+        st.rmtree('../ecosys-back/uploads/img_produtos')
+        st.copytree('./output/img_produtos','../ecosys-back/uploads/img_produtos')
+
+    except FileNotFoundError:
+    
+        st.copytree('./output/img_produtos','../ecosys-back/uploads/img_produtos')
+    
+    except FileExistsError:
+    
+        st.rmtree('../ecosys-back/uploads/img_produtos')
+        st.copytree('./output/img_produtos','../ecosys-back/uploads/img_produtos')
+    
+    except Exception as e:
+
+        print(f"Erro ao limpar a pasta: {e}")
