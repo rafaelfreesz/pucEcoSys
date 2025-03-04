@@ -144,7 +144,7 @@ file_out.close()
 file_out = open("output/tb_produto.csv",'a', encoding="utf8")
 id_prod = 1
 for produto in produtos:
-    file_out.write(f"('{produto[0]}','{produto[1]}',{produto[2]},{produto[3]}),img-prod-{id_prod}\n")
+    file_out.write(f"('{produto[0]}','{produto[1]}',{produto[2]},{produto[3]})\n")
     id_prod += 1
 
 file_out.close()
