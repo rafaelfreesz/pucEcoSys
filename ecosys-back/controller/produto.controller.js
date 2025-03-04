@@ -1,14 +1,29 @@
 const {ProdutoRepository} = require('../repository/produto.repository')
+const fs = require('fs')
 
 class ProdutoController {
 
     consultarTodos(request, response, next) {
 
         ProdutoRepository.consultarTodos()
-            .then(retorno => {response.json(retorno)})
+            .then(retorno => {
+                
+                for(var produto of retorno){
+                    const arquivo = fs.readFileSync(`uploads/img_produtos/img-prod-${produto.id}.jpg`);
+                    const arquivoBase64 = arquivo.toString('base64');
+                    produto.imagem = arquivoBase64;
+                }
+
+                response.json(retorno)
+            })
             .catch(erro => {response.json(erro)})
             //Todo implementar lógica que traz as entradas
 
+    }
+    
+
+    serializarImagem(produto){
+        
     }
 
     consultarPorId(request, response, next) {
@@ -65,8 +80,6 @@ class ProdutoController {
        
         return produto
     }
-
-    
 
 }
 
