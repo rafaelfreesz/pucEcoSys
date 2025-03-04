@@ -24,8 +24,7 @@ class ProdutoController {
 
         try{
             const k = await ProdutoRepository.incluir(request.body);
-            const produtos = await ProdutoRepository.consultarTodos()
-            response.json(produtos)
+            response.json({})
 
         }catch(e){
             console.log(e)
