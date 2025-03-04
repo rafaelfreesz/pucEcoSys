@@ -3,6 +3,7 @@ CREATE TABLE tb_produto(
     nome VARCHAR(100),
     descricao VARCHAR(250),
     preco_venda DECIMAL,
+    url_imagem VARCHAR(250),
     qtd_estoque INT
 );
 
@@ -96,7 +97,7 @@ CREATE VIEW vw_conta_vendas_dia AS
 CREATE VIEW vw_soma_valor_vendas_dia AS
 	SELECT SUM(p.valor_total_vendido) as valor_total_vendido from vw_produtos_vendidos_dia as p;
 
-INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque) VALUES 
+INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque, url_imagem) VALUES 
   
 INSERT INTO tb_fornecedor (cnpj, razao_social, nome_empresarial) VALUES
   
