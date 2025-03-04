@@ -7,22 +7,24 @@ import { Contato } from "../models/contato.model";
 @Injectable()
 export class FornecedorService{
     
-    fornecedoresAlterados: Subject<Fornecedor[]> = new Subject<Fornecedor[]>()
+    listaFornecedoresAlterada: Subject<Fornecedor[]> = new Subject<Fornecedor[]>()
     private todosFornecedores: Fornecedor[] = []
 
     private fornecedorSelecionado: Fornecedor | null = null;
     fornecedorFoiSelecionado: Subject<Fornecedor | null> = new Subject<Fornecedor | null>();
 
-    
+    isCarregando: boolean = true;
+
     constructor(private httpService: HttpService){
         this.buscarTodosFornecedores();
     }
     
     buscarTodosFornecedores(): void{
+        this.isCarregando = true;
         this.httpService.getTodosFornecedores().subscribe( todosFornecedores => {
             this.todosFornecedores = todosFornecedores
-            this.fornecedoresAlterados.next(this.todosFornecedores.slice());
-            // this.selecionarFornecedor(this.todosFornecedores[0])
+            this.listaFornecedoresAlterada.next(this.todosFornecedores.slice());
+            this.isCarregando = false;
         })
     }
 
@@ -60,10 +62,6 @@ export class FornecedorService{
             
         }
     }
-    
-    temFornecedorSelecionado(): boolean {
-        return this.fornecedorSelecionado !== null
-    }
 
     selecionarFornecedor(fornecedor: Fornecedor){
         this.fornecedorSelecionado = fornecedor;
@@ -100,7 +98,7 @@ export class FornecedorService{
     // deletarFornecedor(id: number): void{
     //     this.httpService.deleteFornecedor(id).subscribe( todosFornecedores => {
     //         this.todosFornecedores = todosFornecedores
-    //         this.fornecedoresAlterados.next(this.todosFornecedores.slice());
+    //         this.listaFornecedoresAlterada.next(this.todosFornecedores.slice());
     //     })
     // }
 
@@ -108,12 +106,12 @@ export class FornecedorService{
     //     if(fornecedor.id && fornecedor.id !== -1){
     //         this.httpService.updateFornecedor(fornecedor).subscribe( todosFornecedores => {
     //             this.todosFornecedores = todosFornecedores
-    //             this.fornecedoresAlterados.next(this.todosFornecedores.slice());
+    //             this.listaFornecedoresAlterada.next(this.todosFornecedores.slice());
     //         });
     //     }else{
     //         this.httpService.insertFornecedor(fornecedor).subscribe( todosFornecedores => {
     //             this.todosFornecedores = todosFornecedores
-    //             this.fornecedoresAlterados.next(this.todosFornecedores.slice());
+    //             this.listaFornecedoresAlterada.next(this.todosFornecedores.slice());
     //         });
     //     }
     // }

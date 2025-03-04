@@ -47,10 +47,8 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   }
 
   fechar(){
-
     this.fornecedorService.liberarFornecedorSelecionado(this.inHouveAlteracao)
     this.inEdicao = false;
-
   }
 
   excluir(){

@@ -13,11 +13,11 @@ export class ModalAlterarFornecedorComponent implements OnInit, OnDestroy {
   criterioFiltro: string = "razao_social";
   valorFiltro: string = "";
   todosFornecedores: any[] = [];
-  fornecedoresAlterados: Subscription
+  listaFornecedoresAlterada: Subscription
   @Output() fecharModal: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fornecedorService: FornecedorService) {
-    this.fornecedoresAlterados = this.fornecedorService.fornecedoresAlterados.subscribe(
+    this.listaFornecedoresAlterada = this.fornecedorService.listaFornecedoresAlterada.subscribe(
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
       }
@@ -29,7 +29,7 @@ export class ModalAlterarFornecedorComponent implements OnInit, OnDestroy {
 
   
   ngOnDestroy(): void {
-    this.fornecedoresAlterados.unsubscribe()
+    this.listaFornecedoresAlterada.unsubscribe()
   }
 
   cancelar(){

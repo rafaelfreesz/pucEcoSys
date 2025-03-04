@@ -11,17 +11,15 @@ import { FornecedorService } from 'src/app/services/fornecedor.service';
 export class ListaFornecedoresComponent implements OnInit, OnDestroy {
 
   todosFornecedores: Fornecedor[] = [];
-  private fornecedoresAlterados: Subscription
+  private listaFornecedoresAlterada: Subscription
   criterioFiltro: string = "razao_social";
   valorFiltro: string = "";
   totalFiltrado: number = 0;
-  isCarregando = true;
 
   constructor(private fornecedorService: FornecedorService) {
-    this.fornecedoresAlterados = this.fornecedorService.fornecedoresAlterados.subscribe(
+    this.listaFornecedoresAlterada = this.fornecedorService.listaFornecedoresAlterada.subscribe(
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
-        this.isCarregando = false;
       }
     )
   }
@@ -32,11 +30,10 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.fornecedoresAlterados.unsubscribe();
+    this.listaFornecedoresAlterada.unsubscribe();
   }
 
   selecionarFornecedor(fornecedor: Fornecedor){
-    
     this.fornecedorService.selecionarFornecedor(fornecedor)
   }
 
@@ -44,23 +41,9 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
     this.fornecedorService.selecionarFornecedor(new Fornecedor());
   }
 
-  fecharModal(evento: string){
 
-    // if(evento === "fecharComAlteracao"){
-    //   this.fornecedorService.buscarTodosFornecedores();
-    // }else if(evento === 'excluir'){
-    //   if(this.fornecedorSelecionado!=null && this.fornecedorSelecionado.id){
-    //     // this.fornecedorService.deletarProduto(this.fornecedorSelecionado.id);
-    //   }
-    // }else if(evento === 'salvar'){
-    //   if(this.fornecedorSelecionado != null){
-    //     // this.fornecedorService.salvarProduto(this.fornecedorSelecionado);
-    //   }
-    // }
-
-    // this.isNovoFornecedor = false;
-    // this.fornecedorSelecionado = null;
+  isCarregando(): boolean{
+    return this.fornecedorService.isCarregando;
   }
-
 
 }

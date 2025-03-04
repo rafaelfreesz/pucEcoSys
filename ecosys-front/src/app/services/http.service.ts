@@ -3,15 +3,12 @@ import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
 import { Produto } from "../models/produto.model";
 import { Fornecedor } from "../models/fornecedor.model";
-import { Endereco } from "../models/endereco.model";
 import { Contato } from "../models/contato.model";
 import { Entrada } from "../models/entrada.model";
 import { HTTPResponseParser } from "../utils/http_response_parser";
 import { ItemEntrada } from "../models/item_entrada.model";
 import { Venda } from "../models/venda.model";
 import { ItemVenda } from "../models/item_venda.model";
-import { Notificacao } from "../models/notificacao.model";
-import { ResumoDiario } from "../models/resumo_diario";
 
 @Injectable()
 export class HttpService{
@@ -20,15 +17,6 @@ export class HttpService{
 
     //HOME
     getNotificacoes(): any{
-
-        // const selecionaFuncao = (card: string) => {
-        //     switch (card){
-        //         case "notificacoes":
-        //             break;
-        //         default:
-        //             return HTTPResponseParser.buildResumoDiarioFromResposta
-        //     }
-        // }
 
         return this.http.get<any>(`http://localhost:3000/stats/notificacoes`)
         .pipe(
@@ -75,9 +63,6 @@ export class HttpService{
 
     insertProduto(produto: Produto){
         return this.http.post(`http://localhost:3000/produtos/`,produto)
-        .pipe(
-            map( HTTPResponseParser.buildListaProduto )
-        )
     }
 
     //FORNECEDORES

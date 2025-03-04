@@ -12,25 +12,21 @@ import { ContadorFiltroPipe } from 'src/app/pipes/contador-filtro.pipe';
 export class ListaProdutosComponent implements OnInit, OnDestroy {
 
   todosProdutos: Produto[] = []
-  produtoSelecionado: Produto | null = null;
-  private produtosAlterados: Subscription
-  contadorPipe: ContadorFiltroPipe = new ContadorFiltroPipe();
+  private listaProdutosAlterada: Subscription;
   criterioFiltro: string = "nome";
   valorFiltro: string = "";
   totalFiltrado:number = 0;
-  isNovoProduto: boolean = false;
-  isCarregando: boolean = true;
   itemsListaPorVez = 20;
   totalDeIndices = 0
   indiceLista = 0
+  contadorPipe: ContadorFiltroPipe = new ContadorFiltroPipe();
 
   constructor(private produtoService: ProdutoService) {
-    this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
+    this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
       todosProdutos => {
         this.todosProdutos = todosProdutos
         this.totalFiltrado = this.contadorPipe.transform(this.totalFiltrado,this.todosProdutos,this.valorFiltro,this.criterioFiltro)
         this.totalDeIndices = Math.ceil(this.todosProdutos.length/this.itemsListaPorVez)
-        this.isCarregando = false
         setTimeout(() =>{this.selecionarProduto(this.todosProdutos[0])},100)
       }
     )
@@ -40,31 +36,15 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.produtosAlterados.unsubscribe()
-  }
-
-  prepararCadastro(){
-    this.produtoSelecionado = new Produto();
-    this.isNovoProduto = true;
+    this.listaProdutosAlterada.unsubscribe()
   }
 
   selecionarProduto(produto: Produto){
-    this.produtoSelecionado = produto;
+    this.produtoService.selecionarProduto(produto)
   }
 
-  fecharModal(evento: string){
-    if(evento === 'excluir'){
-      if(this.produtoSelecionado!=null && this.produtoSelecionado.id){
-        this.produtoService.deletarProduto(this.produtoSelecionado.id);
-      }
-    }else if(evento === 'salvar'){
-      if(this.produtoSelecionado != null){
-        this.produtoService.salvarProduto(this.produtoSelecionado);
-      }
-    }
-
-    this.isNovoProduto = false;
-    this.produtoSelecionado = null;
+  prepararCadastro(){
+    this.produtoService.selecionarProduto(new Produto())
   }
 
   defineValoresPaginator(){
@@ -91,6 +71,10 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
     this.totalFiltrado = this.contadorPipe.transform(this.totalFiltrado,this.todosProdutos,this.valorFiltro,this.criterioFiltro)
     this.totalDeIndices = Math.ceil(this.totalFiltrado/this.itemsListaPorVez)
     this.defineValoresPaginator()
+  }
+
+  isCarregando(): boolean{
+    return this.produtoService.isCarregando;
   }
 
 }

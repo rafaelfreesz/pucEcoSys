@@ -17,14 +17,14 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   @Input() finalidade: string = "compra"
   todosProdutos: any[] = []
   produtoSelecionado: any;
-  produtosAlterados: Subscription;
+  listaProdutosAlterada: Subscription;
   valorFiltro: string = "";
   criterioFiltro: string = "nome";
   precoCompra: number = 0.01;
   quantidade: number = 1;
 
   constructor(private produtoService: ProdutoService) {
-    this.produtosAlterados = this.produtoService.produtosAlterados.subscribe(
+    this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
         todosProdutos => {
           this.todosProdutos = todosProdutos;
         }
@@ -36,7 +36,7 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
 
   
   ngOnDestroy(): void {
-    this.produtosAlterados.unsubscribe()
+    this.listaProdutosAlterada.unsubscribe()
   }
 
   cancelar(){
