@@ -1,8 +1,1 @@
-docs/output/tb_contato.csv
-docs/output/tb_endereco.csv
-docs/output/tb_entrada.csv
-docs/output/tb_fornecedor.csv
-docs/output/tb_item_entrada.csv
-docs/output/tb_item_venda.csv
-docs/output/tb_produto.csv
-docs/output/tb_venda.csv
+docs/output/*

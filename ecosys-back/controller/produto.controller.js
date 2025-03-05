@@ -10,11 +10,7 @@ class ProdutoController {
             .then(retorno => {
                 
                 for(var produto of retorno){
-                    if(fs.existsSync(`uploads/img_produtos/img-prod-${produto.id}.jpg`)){
-                        const arquivo = fs.readFileSync(`uploads/img_produtos/img-prod-${produto.id}.jpg`);
-                        const arquivoBase64 = arquivo.toString('base64');
-                        produto.imagem = arquivoBase64;
-                    }
+                    Utils.serializarImagem(produto)
                 }
 
                 response.json(retorno)
@@ -46,7 +42,7 @@ class ProdutoController {
         try{
             
             const id = (await ProdutoRepository.incluir(request.body))[0].id;
-            console.log(id)
+            
             if(request.body.imagem){
                 Utils.salvarImagem(request.body.imagem,id)
             }
@@ -64,7 +60,9 @@ class ProdutoController {
         try{
             await ProdutoRepository.alterar(request.params.id,request.body)
             
-            Utils.salvarImagem(request.body.imagem,request.params.id)
+            if(request.body.imagem){
+                Utils.salvarImagem(request.body.imagem,request.params.id)
+            }
 
             response.json({})
         }catch(e){
@@ -77,7 +75,10 @@ class ProdutoController {
 
     async excluirPorId(request, response, next) {
         try{
-            const k = await ProdutoRepository.excluirPorId(request.params.id)
+            await ProdutoRepository.excluirPorId(request.params.id)
+
+            Utils.excluirImagem(request.params.id)
+
             const produtos = await ProdutoRepository.consultarTodos()
             response.json(produtos)
 
