@@ -4,7 +4,7 @@ const fs = require('fs')
 class ProdutoController {
 
     consultarTodos(request, response, next) {
-
+        
         ProdutoRepository.consultarTodos()
             .then(retorno => {
                 
@@ -20,11 +20,6 @@ class ProdutoController {
             //Todo implementar lógica que traz as entradas
 
     }
-    
-
-    serializarImagem(produto){
-        
-    }
 
     consultarPorId(request, response, next) {
 
@@ -38,6 +33,7 @@ class ProdutoController {
     async incluir(request, response, next) {
 
         try{
+            
             const k = await ProdutoRepository.incluir(request.body);
             response.json({})
 
@@ -50,15 +46,26 @@ class ProdutoController {
 
     async alterar(request, response, next) {
         try{
-            const k = await ProdutoRepository.alterar(request.params.id,request.body)
-            const produtos = await ProdutoRepository.consultarTodos()
-            response.json(produtos)
+            await ProdutoRepository.alterar(request.params.id,request.body)
+            
+            //DEFININDO IMAGEM, DEPOIS JOGAR PARA UMA FUNÇÃO
+            const imagemBase64 = request.body.imagem
+            const imagemBuffer = Buffer.from(imagemBase64,'base64')
+            fs.writeFileSync(`uploads/img_produtos/img-prod-${request.params.id}.jpg`,imagemBuffer,(erro) => {
+                if (erro) {
+                  console.error('Erro ao salvar imagem:', erro);
+                  return res.status(500).send('Erro ao salvar imagem.');
+                }
+              });
+
+            response.json({})
         }catch(e){
             console.log(e)
             response.json(e)
         }
         
     }
+    
 
     async excluirPorId(request, response, next) {
         try{
