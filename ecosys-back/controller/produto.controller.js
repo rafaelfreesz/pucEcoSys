@@ -31,6 +31,14 @@ class ProdutoController {
 
     }
 
+    consultarProximoId(request, response, next){
+        
+        ProdutoRepository.consultarProximoId()
+            .then(retorno => {response.json(retorno)})
+            .catch(erro => {response.json(erro)})
+
+    }
+
     async incluir(request, response, next) {
 
         try{

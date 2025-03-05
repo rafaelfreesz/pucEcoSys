@@ -13,6 +13,11 @@ class ProdutoRepository{
 
     };
 
+    consultarProximoId(){
+        const sql = 'SELECT * FROM vw_proximo_id_produto';
+        return executarQuery(sql);
+    }
+
     incluir(produto){
         const sql = 'INSERT INTO tb_produto(nome, descricao, preco_venda, qtd_estoque) VALUES ($1,$2,$3,0)';
         return executarQuery(sql,

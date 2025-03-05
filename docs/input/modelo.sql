@@ -98,7 +98,7 @@ CREATE VIEW vw_soma_valor_vendas_dia AS
 
 --- View para retornar o proximo id disponivel em tbproduto
 CREATE VIEW vw_proximo_id_produto AS
-    SELECT MAX(id) + 1 FROM tb_produto;
+    SELECT (MAX(id) + 1) as prox_id FROM tb_produto;
 
 INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque) VALUES 
   
