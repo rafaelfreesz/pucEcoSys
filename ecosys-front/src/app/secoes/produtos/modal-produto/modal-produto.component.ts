@@ -23,7 +23,7 @@ export class ModalProdutoComponent implements OnInit, OnDestroy {
       produtoSelecionado =>
       {
         this.produto = produtoSelecionado;
-        if(this.produto && this.produto.id === -1){
+        if(this.produto && this.produto.id === this.produtoService.proximo_id){
           this.inEdicao = true;
         }
         if(this.produto){

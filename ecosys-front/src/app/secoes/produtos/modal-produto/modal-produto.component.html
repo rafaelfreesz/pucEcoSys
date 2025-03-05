@@ -20,9 +20,15 @@
           (change)="selecionarImagem($event)">
       </div>
       <img
-      class= "imagem"
-      [src]="produto.imagemURL"
-      alt=""/>
+        *ngIf="produto.imagemURL !== ''"
+        class= "imagem"
+        [src]="produto.imagemURL"
+        alt=""/>
+      <img
+        *ngIf="produto.imagemURL === ''"
+        class= "imagem"
+        src="assets/img-prod-default.jpg"
+        alt="r"/>
     </div>
 
     <div class="dados">

@@ -65,7 +65,11 @@
                         <td>{{ produto.descricao | encurtar:50 }}</td>
                         <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
                         <td>{{ produto.qtd_estoque }}</td>
-                        <td class="celula-imagem"><img [src] = "produto.imagemURL" class = "imagem"></td>
+                        <td class="celula-imagem">
+                          <img [src] = "produto.imagemURL" class = "imagem" *ngIf="produto.imagemURL !== ''">
+                          <img src="assets/img-prod-default.jpg" class = "imagem" *ngIf="produto.imagemURL === ''">
+                        
+                        </td>
                       </tr>
                     </tbody>
                     <tfoot>

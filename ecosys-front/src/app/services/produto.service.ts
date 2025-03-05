@@ -15,6 +15,8 @@ export class ProdutoService{
 
     isCarregando: boolean = true;
 
+    proximo_id = -1
+
 
     constructor(private httpService: HttpService, private sanitizer: DomSanitizer){
         this.buscarTodosProdutos();
@@ -24,6 +26,11 @@ export class ProdutoService{
     buscarTodosProdutos(): void{
         this.isCarregando = true;
         this.httpService.getTodosProdutos().subscribe( todosProdutos => {
+            this.httpService.getProximoIdDisponivel().subscribe(
+                retorno => {
+                    this.proximo_id = retorno.prox_id
+                }
+            )
             this.todosProdutos = todosProdutos;
             this.converterBase64ParaImagem();
             this.listaProdutosAlterada.next(this.todosProdutos.slice());
@@ -68,17 +75,10 @@ export class ProdutoService{
 
     async selecionarProduto(produto: Produto){
         if(produto.id === -1){
-            this.httpService.getProximoIdDisponivel().subscribe(
-                (resposta) => {
-                    produto.id = resposta.prox_id;
-                    this.produtoSelecionado = produto;
-                    this.produtoFoiSelecionado.next(this.produtoSelecionado)
-                }
-            )
-        }else{
-            this.produtoSelecionado = produto;
-            this.produtoFoiSelecionado.next(this.produtoSelecionado)
+            produto.id = this.proximo_id
         }
+        this.produtoSelecionado = produto;
+        this.produtoFoiSelecionado.next(this.produtoSelecionado)
     }
 
     liberarProdutoSelecionado(in_alteracao: boolean){
