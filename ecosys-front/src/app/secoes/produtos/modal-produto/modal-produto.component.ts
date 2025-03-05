@@ -15,7 +15,7 @@ export class ModalProdutoComponent implements OnInit, OnDestroy {
   produtoFoiSelecionado: Subscription
 
   conteudoFormulario: FormGroup | any;
-  inEdicao: boolean = true;
+  inEdicao: boolean = false;
   inHouveAlteracao: boolean = false;
   url_teste: string = 'http://............'
 
@@ -63,6 +63,23 @@ export class ModalProdutoComponent implements OnInit, OnDestroy {
     this.atribuirFormularioAoProduto();
     this.produtoService.salvarProduto(this.produto)
   }
+
+  selecionarImagem(e: any){
+    const file = e.target.files[0]
+    
+    if (file) {
+
+      this.produto.imagem = file;
+
+      const reader = new FileReader();
+
+      reader.onload = (e:any) => {
+        this.produto.imagemURL = e.target.result;        
+      }
+
+      reader.readAsDataURL(file);
+    }
+  }
   
   atribuirFormularioAoProduto(){
     this.produto.nome = this.conteudoFormulario.value.nome;
@@ -78,7 +95,7 @@ export class ModalProdutoComponent implements OnInit, OnDestroy {
         'descricao': new FormControl(this.produto.descricao),
         'preco_venda': new FormControl(this.produto.preco_venda,[Validators.required,Validators.min(0.01)]),
         'qtd_estoque': new FormControl(this.produto.qtd_estoque),
-        'url_imagem': new FormControl(this.url_teste)
+        'url_imagem': new FormControl(this.produto.imagemURL)
   
       })
     }

@@ -44,11 +44,23 @@
         height: 60vh;
         width: 100%;
         display: flex;
-        .imagem{
-            height: 100%;
+        .container-imagem{
             border-left: 5px solid #198754;
             border-right: 5px solid #198754;
             border-bottom: 5px solid #198754;
+            .imagem{
+                height: 100%;
+            }
+
+        }
+        .container-imagem.em-edicao{
+            display: flex;
+            flex-direction: column;
+            .imagem{
+                flex-grow: 1;
+                max-height: 85%;
+            }
+
         }
         .dados{
             width: 100%;

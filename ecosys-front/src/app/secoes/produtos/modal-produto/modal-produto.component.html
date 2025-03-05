@@ -10,10 +10,20 @@
   </div>
 
   <div class="conteudo">
-    <img
+    <div class="container-imagem" [ngClass]="{'em-edicao': inEdicao}">
+      <div class="input-group mb-3" *ngIf="inEdicao">
+        <input type="file"
+          class="form-control"
+          id="inputGroupFile03"
+          aria-describedby="inputGroupFileAddon03"
+          aria-label="Upload"
+          (change)="selecionarImagem($event)">
+      </div>
+      <img
       class= "imagem"
-      src="https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg"
+      [src]="produto.imagemURL"
       alt=""/>
+    </div>
 
     <div class="dados">
       <div class="visualizacao" *ngIf="!inEdicao">

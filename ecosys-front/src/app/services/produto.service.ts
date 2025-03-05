@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Produto } from "../models/produto.model";
 import { Subject } from "rxjs";
 import { HttpService } from "./http.service";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Injectable()
 export class ProdutoService{
@@ -15,7 +16,7 @@ export class ProdutoService{
     isCarregando: boolean = true;
 
 
-    constructor(private httpService: HttpService){
+    constructor(private httpService: HttpService, private sanitizer: DomSanitizer){
         this.buscarTodosProdutos();
     }
     
@@ -23,7 +24,8 @@ export class ProdutoService{
     buscarTodosProdutos(): void{
         this.isCarregando = true;
         this.httpService.getTodosProdutos().subscribe( todosProdutos => {
-            this.todosProdutos = todosProdutos
+            this.todosProdutos = todosProdutos;
+            this.converterBase64ParaImagem();
             this.listaProdutosAlterada.next(this.todosProdutos.slice());
             this.isCarregando = false;
         })
@@ -66,6 +68,25 @@ export class ProdutoService{
         if(in_alteracao){
             this.buscarTodosProdutos();
         }
+    }
+
+    converterBase64ParaImagem(): void{
+
+        this.todosProdutos.forEach(
+            produto => {
+                if(produto.imagem){
+                    const byteCharacters = atob(produto.imagem);
+                    const byteNumbers = new Array(byteCharacters.length);
+                    for (let i = 0; i < byteCharacters.length; i++) {
+                      byteNumbers[i] = byteCharacters.charCodeAt(i);
+                    }
+                    const byteArray = new Uint8Array(byteNumbers);
+                    const blob = new Blob([byteArray], { type: 'image/jpeg' });
+                    produto.imagemURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+                    
+                }
+            }
+        )
     }
 
 }

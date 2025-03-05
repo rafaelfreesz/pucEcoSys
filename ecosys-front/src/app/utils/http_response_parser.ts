@@ -134,6 +134,7 @@ export abstract class HTTPResponseParser{
         produto.descricao = resposta.descricao;
         produto.qtd_estoque= resposta.qtd_estoque
         produto.preco_venda = resposta.preco_venda;
+        produto.imagem = resposta.imagem;
 
         return produto;
     }
