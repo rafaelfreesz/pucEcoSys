@@ -52,13 +52,10 @@ export class HttpService{
         )
     }
 
-    updateProduto(produto: Produto){
+    updateProduto(produto: any){
         const id = produto.id;
         delete produto.id
         return this.http.put(`http://localhost:3000/produtos/${id}`,produto)
-        .pipe(
-            map( HTTPResponseParser.buildListaProduto )
-        )
     }
 
     insertProduto(produto: Produto){

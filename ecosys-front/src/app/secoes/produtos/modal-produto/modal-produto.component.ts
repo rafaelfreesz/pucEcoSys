@@ -17,7 +17,6 @@ export class ModalProdutoComponent implements OnInit, OnDestroy {
   conteudoFormulario: FormGroup | any;
   inEdicao: boolean = false;
   inHouveAlteracao: boolean = false;
-  url_teste: string = 'http://............'
 
   constructor(private produtoService: ProdutoService) {
     this.produtoFoiSelecionado = this.produtoService.produtoFoiSelecionado.subscribe(
@@ -65,19 +64,18 @@ export class ModalProdutoComponent implements OnInit, OnDestroy {
   }
 
   selecionarImagem(e: any){
-    const file = e.target.files[0]
+    const imagem = e.target.files[0]
     
-    if (file) {
+    if (imagem) {
 
-      this.produto.imagem = file;
+      this.produto.imagem = imagem;
 
       const reader = new FileReader();
 
       reader.onload = (e:any) => {
-        this.produto.imagemURL = e.target.result;        
+        this.produto.imagemURL = e.target.result;
       }
-
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(imagem);
     }
   }
   

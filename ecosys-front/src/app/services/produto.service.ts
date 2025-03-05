@@ -31,7 +31,16 @@ export class ProdutoService{
         })
     }
     
-    salvarProduto(produto: Produto): void{
+    async salvarProduto(produto: Produto){
+        const produto_tratado = {
+            id: produto.id,
+            nome: produto.nome,
+            descricao: produto.descricao, 
+            preco_venda: produto.preco_venda, 
+            qtd_estoque: produto.qtd_estoque, 
+            imagem: await this.converterImagemParaBase64(produto.imagem)
+        }
+        console.log(produto_tratado)
         if(produto.id === -1){
             this.httpService.insertProduto(produto).subscribe( () => {
                 this.buscarTodosProdutos()
@@ -39,7 +48,7 @@ export class ProdutoService{
                 this.produtoFoiSelecionado.next(this.produtoSelecionado);
             });
         }else{
-            this.httpService.updateProduto(produto).subscribe( () => {
+            this.httpService.updateProduto(produto_tratado).subscribe( () => {
                 this.buscarTodosProdutos();
                 this.produtoSelecionado = null;
                 this.produtoFoiSelecionado.next(this.produtoSelecionado);
@@ -87,6 +96,29 @@ export class ProdutoService{
                 }
             }
         )
+    }
+
+    async converterImagemParaBase64(imagem: any): Promise<string>{
+        return new Promise((resolve,reject) => {
+            if (imagem instanceof Blob){
+
+                const leitor = new FileReader();
+    
+                leitor.onload = (e: any) => {
+                    const arquivoBase64 = e.target.result.split(',')[1];
+                    resolve(arquivoBase64)
+                };
+                
+                leitor.onerror = (erro) => {
+                    reject(erro);
+                };
+                leitor.readAsDataURL(imagem);
+            }else{
+                resolve(imagem)
+            }
+        })
+      
+    
     }
 
 }

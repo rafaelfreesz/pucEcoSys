@@ -27,7 +27,6 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
         this.todosProdutos = todosProdutos
         this.totalFiltrado = this.contadorPipe.transform(this.totalFiltrado,this.todosProdutos,this.valorFiltro,this.criterioFiltro)
         this.totalDeIndices = Math.ceil(this.todosProdutos.length/this.itemsListaPorVez)
-        setTimeout(() =>{this.selecionarProduto(this.todosProdutos[0])},100)
       }
     )
   }
