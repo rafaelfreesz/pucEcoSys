@@ -19,7 +19,7 @@ class ProdutoRepository{
     }
 
     incluir(produto){
-        const sql = 'INSERT INTO tb_produto(nome, descricao, preco_venda, qtd_estoque) VALUES ($1,$2,$3,0)';
+        const sql = 'INSERT INTO tb_produto(nome, descricao, preco_venda, qtd_estoque) VALUES ($1,$2,$3,0) RETURNING id';
         return executarQuery(sql,
             [
                 produto.nome,

@@ -10,9 +10,11 @@ class ProdutoController {
             .then(retorno => {
                 
                 for(var produto of retorno){
-                    const arquivo = fs.readFileSync(`uploads/img_produtos/img-prod-${produto.id}.jpg`);
-                    const arquivoBase64 = arquivo.toString('base64');
-                    produto.imagem = arquivoBase64;
+                    if(fs.existsSync(`uploads/img_produtos/img-prod-${produto.id}.jpg`)){
+                        const arquivo = fs.readFileSync(`uploads/img_produtos/img-prod-${produto.id}.jpg`);
+                        const arquivoBase64 = arquivo.toString('base64');
+                        produto.imagem = arquivoBase64;
+                    }
                 }
 
                 response.json(retorno)
@@ -43,7 +45,12 @@ class ProdutoController {
 
         try{
             
-            const k = await ProdutoRepository.incluir(request.body);
+            const id = (await ProdutoRepository.incluir(request.body))[0].id;
+            console.log(id)
+            if(request.body.imagem){
+                Utils.salvarImagem(request.body.imagem,id)
+            }
+
             response.json({})
 
         }catch(e){

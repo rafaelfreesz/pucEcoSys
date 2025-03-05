@@ -65,7 +65,7 @@ export class HttpService{
         return this.http.put(`http://localhost:3000/produtos/${id}`,produto)
     }
 
-    insertProduto(produto: Produto){
+    insertProduto(produto: any){
         return this.http.post(`http://localhost:3000/produtos/`,produto)
     }
 

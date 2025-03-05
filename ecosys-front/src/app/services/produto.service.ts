@@ -39,17 +39,20 @@ export class ProdutoService{
     }
     
     async salvarProduto(produto: Produto){
-        const produto_tratado = {
+        let produto_tratado = {
             id: produto.id,
             nome: produto.nome,
             descricao: produto.descricao, 
             preco_venda: produto.preco_venda, 
             qtd_estoque: produto.qtd_estoque, 
-            imagem: await this.converterImagemParaBase64(produto.imagem)
         }
-        console.log(produto_tratado)
-        if(produto.id === -1){
-            this.httpService.insertProduto(produto).subscribe( () => {
+        
+        if(produto.imagemURL !== ""){
+            Object.assign(produto_tratado, {imagem: await this.converterImagemParaBase64(produto.imagem)}) 
+        }
+
+        if(produto.id === this.proximo_id){
+            this.httpService.insertProduto(produto_tratado).subscribe( () => {
                 this.buscarTodosProdutos()
                 this.produtoSelecionado = null
                 this.produtoFoiSelecionado.next(this.produtoSelecionado);
