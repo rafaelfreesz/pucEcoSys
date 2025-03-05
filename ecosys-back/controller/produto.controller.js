@@ -1,5 +1,6 @@
 const {ProdutoRepository} = require('../repository/produto.repository')
-const fs = require('fs')
+const fs = require('fs');
+const { Utils } = require('../utils/utils');
 
 class ProdutoController {
 
@@ -48,15 +49,7 @@ class ProdutoController {
         try{
             await ProdutoRepository.alterar(request.params.id,request.body)
             
-            //DEFININDO IMAGEM, DEPOIS JOGAR PARA UMA FUNÇÃO
-            const imagemBase64 = request.body.imagem
-            const imagemBuffer = Buffer.from(imagemBase64,'base64')
-            fs.writeFileSync(`uploads/img_produtos/img-prod-${request.params.id}.jpg`,imagemBuffer,(erro) => {
-                if (erro) {
-                  console.error('Erro ao salvar imagem:', erro);
-                  return res.status(500).send('Erro ao salvar imagem.');
-                }
-              });
+            Utils.salvarImagem(request.body.imagem,request.params.id)
 
             response.json({})
         }catch(e){
