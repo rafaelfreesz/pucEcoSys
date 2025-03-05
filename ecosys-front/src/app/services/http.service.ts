@@ -43,6 +43,13 @@ export class HttpService{
             map( HTTPResponseParser.buildListaProduto )
         )
 
+
+    }
+    getProximoIdDisponivel() {
+        return this.http.get<any>('http://localhost:3000/produtos/id/proximo')
+        .pipe(
+            map( (resposta) => { return resposta[0]} )
+        )
     }
 
     deleteProduto(id: number){

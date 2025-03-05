@@ -66,9 +66,19 @@ export class ProdutoService{
         }
     }
 
-    selecionarProduto(produto: Produto){
-        this.produtoSelecionado = produto;
-        this.produtoFoiSelecionado.next(this.produtoSelecionado)
+    async selecionarProduto(produto: Produto){
+        if(produto.id === -1){
+            this.httpService.getProximoIdDisponivel().subscribe(
+                (resposta) => {
+                    produto.id = resposta.prox_id;
+                    this.produtoSelecionado = produto;
+                    this.produtoFoiSelecionado.next(this.produtoSelecionado)
+                }
+            )
+        }else{
+            this.produtoSelecionado = produto;
+            this.produtoFoiSelecionado.next(this.produtoSelecionado)
+        }
     }
 
     liberarProdutoSelecionado(in_alteracao: boolean){
