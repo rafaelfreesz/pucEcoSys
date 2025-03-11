@@ -42,7 +42,12 @@ export class HomeService {
   }
 
   buscarValorVendaData(){
-    this.httpService.getValorVendaData().subscribe(
+    const data = new Date();
+    const hoje = data.toISOString().split("T")[0];
+    data.setDate(data.getDate() - 10);
+    const dezDiasAtraz = data.toISOString().split("T")[0];
+
+    this.httpService.getValorVendaData(dezDiasAtraz,hoje).subscribe(
       (valores: any) => {
         this.dadosGraficoValorVendaData = valores;
         this.graficoValorVendaDataAlterado.next(valores.slice());
