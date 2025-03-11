@@ -38,6 +38,9 @@ import { NotificacoesComponent } from './home/notificacoes/notificacoes.componen
 import { ResumoDoDiaComponent } from './home/resumo-do-dia/resumo-do-dia.component';
 import { PaginatorPipe } from './pipes/paginator.pipe';
 import { GraficoComponent } from './home/grafico/grafico.component';
+import { LoginComponent } from './secoes/login/login.component';
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,8 @@ import { GraficoComponent } from './home/grafico/grafico.component';
     NotificacoesComponent,
     ResumoDoDiaComponent,
     PaginatorPipe,
-    GraficoComponent
+    GraficoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +86,7 @@ import { GraficoComponent } from './home/grafico/grafico.component';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

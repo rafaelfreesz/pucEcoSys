@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
   
   modoAtivo = "administracao"
 
@@ -16,6 +17,10 @@ export class HeaderComponent implements OnInit {
 
   trocarModo(modo:string){
     this.modoAtivo = modo
+  }
+
+  loggedIn(){
+    return this.authService.loggedIn
   }
 
 }

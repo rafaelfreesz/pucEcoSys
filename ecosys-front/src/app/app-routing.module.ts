@@ -7,14 +7,17 @@ import { HomeComponent } from './home/home.component';
 import { FornecedoresComponent } from './secoes/fornecedores/fornecedores.component';
 import { EntradasComponent } from './secoes/entradas/entradas.component';
 import { VendasComponent } from './secoes/vendas/vendas.component';
+import { LoginComponent } from './secoes/login/login.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
-  {path:'vendas', component: VendasComponent},
-  {path:'produtos', component: ProdutosComponent},
-  {path:'fornecedores', component: FornecedoresComponent},
-  {path:'entradas', component: EntradasComponent},
-  {path:'not-found', component: NotFoundComponent},
+  {path:'login', component: LoginComponent},
+  {path:'', canActivate:[AuthGuard], component: HomeComponent},
+  {path:'vendas', canActivate:[AuthGuard], component: VendasComponent},
+  {path:'produtos', canActivate:[AuthGuard], component: ProdutosComponent},
+  {path:'fornecedores', canActivate:[AuthGuard], component: FornecedoresComponent},
+  {path:'entradas', canActivate:[AuthGuard], component: EntradasComponent},
+  {path:'not-found', canActivate:[AuthGuard], component: NotFoundComponent},
   {path:'**', redirectTo: 'not-found'}
 ];
 

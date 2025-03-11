@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm barra-navegacao">
     <div class="container-fluid">
-      <div class="logo-nav">
+      <div class="logo-nav" *ngIf="loggedIn()">
         <a routerLink="/" class="navbar-brand logo"
           ><img src="assets/leaf_white.svg" alt="logo" class="icone"
         ><span class="texto-icone">EcoSys</span></a> 
@@ -36,7 +36,7 @@
           </ul>
         </div>
       </div>
-      <div class="menu-direito">
+      <div class="menu-direito" *ngIf="loggedIn()">
 
         <div class="container-fluid">  
 
