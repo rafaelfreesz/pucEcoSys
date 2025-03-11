@@ -40,6 +40,28 @@ class StatsController {
         
     };
 
+    async consultarValorVendaDia(request, response, next){
+
+        try{
+            //TODO tratar possivel falta de query
+            const dt_inicio = request.query.dt_inicio;
+            const dt_fim = request.query.dt_fim;
+
+            const valores_vendas_dia = await StatsRepository.consultarValorVendaDia(dt_inicio,dt_fim);
+
+            response.json({
+                dt_inicio: dt_inicio,
+                dt_fim: dt_fim
+            })
+
+            
+        }catch(e){
+            e.erro=true;
+            response.json(e);
+        }
+
+    }
+
 
     
     
