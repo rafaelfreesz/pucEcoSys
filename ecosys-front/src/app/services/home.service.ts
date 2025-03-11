@@ -9,13 +9,18 @@ export class HomeService {
 
   private dadosNotificacoes: Notificacao[] = []
   private dadosResumoDiario: ResumoDiario | null = null
+  private dadosGraficoValorVendaData: any 
 
   notificacoesAlteradas: Subject<Notificacao[]> = new Subject<Notificacao[]>();
   dadosDiariosAlterados: Subject<ResumoDiario> = new Subject<ResumoDiario>();
+  graficoValorVendaDataAlterado: Subject<any[]> = new Subject<any[]>();
+
+
 
   constructor(private httpService: HttpService) {
     this.buscarNotificacoes()
     this.buscarResumoDiario()
+    this.buscarValorVendaData();
   }
 
   buscarNotificacoes(): void{
@@ -32,6 +37,15 @@ export class HomeService {
       (resumoDiario: ResumoDiario) => {
         this.dadosResumoDiario = resumoDiario;
         this.dadosDiariosAlterados.next({...this.dadosResumoDiario});
+      }
+    )
+  }
+
+  buscarValorVendaData(){
+    this.httpService.getValorVendaData().subscribe(
+      (valores: any) => {
+        this.dadosGraficoValorVendaData = valores;
+        this.graficoValorVendaDataAlterado.next(valores.slice());
       }
     )
   }

@@ -35,6 +35,15 @@ export class HttpService{
         )
     }
 
+    getValorVendaData(): any{
+        return this.http.get<any>(`http://localhost:3000/stats/grafico/valor_venda_dia?dt_inicio=2025-03-06&dt_fim=2025-03-11`)
+        .pipe(
+            map(
+                HTTPResponseParser.buildValorVendaDataFromResposta
+            )
+        )
+    }
+
     //PRODUTOS
     getTodosProdutos() {
 

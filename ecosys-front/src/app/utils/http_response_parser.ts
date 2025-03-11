@@ -13,6 +13,18 @@ import { ResumoDiario } from "../models/resumo_diario";
 export abstract class HTTPResponseParser{
     
     //Builders de lista
+    static buildValorVendaDataFromResposta(resposta: any): any[]{
+        const vendas_dia: any[] = []
+
+        for(const resp of resposta){
+            const data = (resp.data_venda.split("T")[0].split('-').reverse()).join('/')
+            resp.data_venda = data
+            vendas_dia.push(resp)
+        }
+
+        return vendas_dia;
+    }
+
     static buildListaNotificacoes(resposta: any): Notificacao[]{
         const notificacoes: Notificacao[] = []
 
