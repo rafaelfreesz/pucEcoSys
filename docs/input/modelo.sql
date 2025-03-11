@@ -100,6 +100,12 @@ CREATE VIEW vw_soma_valor_vendas_dia AS
 CREATE VIEW vw_proximo_id_produto AS
     SELECT (MAX(id) + 1) as prox_id FROM tb_produto;
 
+-- View para retornar o valor total vendido por data
+CREATE VIEW vw_valor_vendido_por_data as 
+	SELECT DATE(v.dt_hr_venda) AS data_venda, SUM(iv.quantidade * iv.preco_unitario) AS total
+		FROM tb_venda AS v INNER JOIN tb_item_venda as iv on iv.fk_venda = v.id
+		GROUP BY DATE(v.dt_hr_venda);
+
 INSERT INTO tb_produto (nome, descricao, preco_venda, qtd_estoque) VALUES 
   
 INSERT INTO tb_fornecedor (cnpj, razao_social, nome_empresarial) VALUES
