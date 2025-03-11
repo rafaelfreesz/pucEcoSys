@@ -48,11 +48,7 @@ class StatsController {
             const dt_fim = request.query.dt_fim;
 
             const valores_vendas_dia = await StatsRepository.consultarValorVendaDia(dt_inicio,dt_fim);
-
-            response.json({
-                dt_inicio: dt_inicio,
-                dt_fim: dt_fim
-            })
+            response.json(valores_vendas_dia)
 
             
         }catch(e){
