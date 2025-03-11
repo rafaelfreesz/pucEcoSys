@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Chart, registerables} from 'chart.js'
+import {Chart, plugins, registerables} from 'chart.js'
 import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 
@@ -45,6 +45,24 @@ export class GraficoComponent implements OnInit {
             },
 
           ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Venda diária em um intervalo de 10 dias"
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: "Valor de venda (R$)"
+              }
+            }
+          }
+          
         }
       }
       this.chart = new Chart('chart',this.config)

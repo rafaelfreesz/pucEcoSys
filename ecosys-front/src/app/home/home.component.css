@@ -13,7 +13,9 @@
 
 .container-estatistica{
     margin-top: 10px;
+    margin-bottom: 10px;
     border: 2px solid #198754;
+    height: 700px;
     .cabecalho{
         display: flex;
         flex-direction: row;
@@ -26,6 +28,9 @@
         .icone{
             margin-top: 3px;
         }
+    }
+    .grafico{
+        height: 650px
     }
 }
 
