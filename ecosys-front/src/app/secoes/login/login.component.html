@@ -1,1 +1,46 @@
-<button class ="btn btn-primary" (click)="login()">Login</button>
+<div class="container-fluid fundo">
+    
+    <div class="card-login">
+        <div class="tarja">
+            <div class="logo">
+            <img src="assets/leaf_white.svg" alt="logo" class="icone"
+            ><span class="texto-icone">EcoSys</span>
+            </div> 
+        </div>
+
+        <form class="formulario" [formGroup]="conteudoFormulario" (ngSubmit)="login()">
+            <div class="campo">
+                <label class="form-label fw-semibold label">Login:</label>
+                <input
+                    type="text"
+                    class="form-control input"
+                    formControlName = "login"
+                    id="login">
+            </div>
+            <div class="campo">
+                <label class="form-label fw-semibold label">Senha:</label>
+                <input
+                    type="password"
+                    class="form-control input"
+                    formControlName = "senha"
+                    id="senha">
+            </div>
+
+            <div class="botoes">
+                <button class ="btn btn-success fw-semibold botao" type="submit"> <i class="bi bi-box-arrow-in-right"></i> Login</button>
+                <button class ="btn btn-secondary fw-semibold botao" type="button" (click)="esqueciSenha()"> <i class="bi bi-person-lock"></i> Esqueci a senha</button>
+            </div>
+
+        </form>
+
+        
+        <div class="tarja inferior"></div>
+        
+    </div>
+
+    <!-- <div class="alert alert-dark alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Esqueci a senha!</h4>
+        <p>Entre em contato com o suporte técnico em: <a href="mailto:rafaelfreesz@gmail.com?subject=Esqueci a senha" class="alert-link">rafaelfreesz@gmail.com</a>.</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div> -->
+</div>
