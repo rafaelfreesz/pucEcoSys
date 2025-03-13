@@ -4,10 +4,18 @@ var bcrypt = require('bcryptjs');
 var config = require('../bin/config');
 const { password } = require('../secrets/db_configurations');
 
+const tokens_expirados = []
+
 class ContaController {
+
 
     verificaToken(request, response, next){
         const token = request.headers['x-access-token'];
+        
+        tokens_expirados.forEach(
+            item => { if (item === token) {response.status(401).end()}}
+        )
+
         jwt.verify(token,config.secret,(erro,id) =>{
             if(erro) { return response.status(401).end();}
             
@@ -18,7 +26,6 @@ class ContaController {
     async getUsuarios(request, response, next){
 
         const usuarios = await ContaRepository.getUsuarios();
-
         response.json(usuarios)
     }
 
@@ -50,6 +57,11 @@ class ContaController {
 
         response.status(401).end()
 
+    }
+
+    async logout(request,response,next){
+        tokens_expirados.push(request.headers['x-access-token'])
+        response.end();
     }
 }
 
