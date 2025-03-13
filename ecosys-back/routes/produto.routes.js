@@ -1,14 +1,15 @@
 const { Router } = require('express');
 const {ProdutoController} = require('../controller/produto.controller');
+const {ContaController} = require('../controller/conta.controller');
 
 const router = Router();
 
 //Rotas
-router.get('/',ProdutoController.consultarTodos)
-router.get('/:id',ProdutoController.consultarPorId)
-router.get('/id/proximo',ProdutoController.consultarProximoId)
+router.get('/', ContaController.verificaToken,ProdutoController.consultarTodos)
+router.get('/:id', ContaController.verificaToken,ProdutoController.consultarPorId)
+router.get('/id/proximo', ContaController.verificaToken,ProdutoController.consultarProximoId)
 router.post('/',ProdutoController.incluir)
-router.put('/:id',ProdutoController.alterar)
-router.delete('/:id',ProdutoController.excluirPorId)
+router.put('/:id', ContaController.verificaToken,ProdutoController.alterar)
+router.delete('/:id', ContaController.verificaToken,ProdutoController.excluirPorId)
 
 module.exports=router;
