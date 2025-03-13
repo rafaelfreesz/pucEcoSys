@@ -1,5 +1,7 @@
 <div class="container-fluid fundo">
-    
+    <div class="alert alert-danger" *ngIf="erro">
+        <p><span class="fw-semibold">ERRO:</span> {{erro}}</p>
+    </div>
     <div class="card-login">
         <div class="tarja">
             <div class="logo">
@@ -7,8 +9,14 @@
             ><span class="texto-icone">EcoSys</span>
             </div> 
         </div>
+        
+        <div class="box-spinner" *ngIf="this.isLoading">
+            <div class="spinner-border text-success spinner" role="status" >
+                <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
 
-        <form class="formulario" [formGroup]="conteudoFormulario" (ngSubmit)="login()">
+        <form class="formulario" [formGroup]="conteudoFormulario" (ngSubmit)="login()" *ngIf="!isLoading">
             <div class="campo">
                 <label class="form-label fw-semibold label">Login:</label>
                 <input
@@ -37,10 +45,5 @@
         <div class="tarja inferior"></div>
         
     </div>
-
-    <!-- <div class="alert alert-dark alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">Esqueci a senha!</h4>
-        <p>Entre em contato com o suporte técnico em: <a href="mailto:rafaelfreesz@gmail.com?subject=Esqueci a senha" class="alert-link">rafaelfreesz@gmail.com</a>.</p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
-    </div> -->
+    
 </div>

@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   conteudoFormulario: FormGroup | any;
+  isLoading: boolean = false;
+  erro: string = ""
 
   constructor(private authService: AuthService, private router: Router) {
     this.conteudoFormulario = new FormGroup({
@@ -20,8 +22,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.conteudoFormulario.value)
-    // this.authService.login();
+    this.isLoading = true
+    this.authService.login({
+      email: this.conteudoFormulario.value.login,
+      password: this.conteudoFormulario.value.senha
+    }).subscribe(
+      (res) => {console.log('res'); console.log(res); this.isLoading = false; this.erro = ""},
+      (err) => {console.log('err'); console.log(err); this.isLoading = false; this.erro = err.error.error.message}
+    );
     // this.router.navigate(["/"])
   }
   esqueciSenha(){
