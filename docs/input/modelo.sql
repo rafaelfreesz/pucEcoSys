@@ -1,3 +1,9 @@
+CREATE TABLE tb_usuario(
+    id SERIAL PRIMARY KEY,
+    login VARCHAR(14) UNIQUE,
+    senha VARCHAR(250)
+);
+
 CREATE TABLE tb_produto(
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100),
