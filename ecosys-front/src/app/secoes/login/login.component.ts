@@ -27,10 +27,14 @@ export class LoginComponent implements OnInit {
       email: this.conteudoFormulario.value.login,
       password: this.conteudoFormulario.value.senha
     }).subscribe(
-      (res) => {console.log('res'); console.log(res); this.isLoading = false; this.erro = ""},
-      (err) => {console.log('err'); console.log(err); this.isLoading = false; this.erro = err.error.error.message}
+      (res) => {
+        this.isLoading = false;
+        this.erro = "";
+        this.router.navigate(["/"])},
+      (erro) => {
+        this.erro = erro;
+        this.isLoading = false;}
     );
-    // this.router.navigate(["/"])
   }
   esqueciSenha(){
     console.log("Esqueci a senha")

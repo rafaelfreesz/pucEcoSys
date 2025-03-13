@@ -1,0 +1,17 @@
+O front manda pro back o email e o password
+Se estiver certo, o back envia pro front um token, uma string codificada
+O token é gerado no back com um algoritmo (e private key) que só o server conhece, de forma que ele possa validar
+
+Esse token fica mantido no front, que envia ele para cada requisição ao back, que pode verificar a credencial
+
+BehaviorSubject: Permite acesso imediato ao ultimo next emitido, mesmo que o subscribe tenha sido feito depois do ultime next
+
+this.authService.user.pipe(take(1)).subscribe()
+
+O pipe(take(1)) pega o valor do ultimo user enviado em next e automaticamente faz o unsubsctibe
+
+this.authService.user.pipe(take(1), exaustMap( user => {...})).subscribe()
+
+O exaustmap é pra tratar duas observables que serão tratadas em sequencia.
+Como se fosse um then da promise.
+Ele espera o primeiro observable terminar pra executar o segundo, e retorna o user
