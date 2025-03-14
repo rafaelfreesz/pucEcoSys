@@ -28,6 +28,9 @@ class ContaController {
             if(!request.body.login){
                 throw new Error("Login não informado")
             }
+            if(!request.body.categoria){
+                throw new Error("Categoria não informada")
+            }
             if(!request.body.senha){
                 throw new Error("Senha não informada")
             }
@@ -57,6 +60,9 @@ class ContaController {
 
             if(!request.body.login){
                 throw new Error("Login não informado")
+            }
+            if(!request.body.categoria){
+                throw new Error("Categoria não informada")
             }
             if(!request.body.senha){
                 throw new Error("Senha não informada")
@@ -109,12 +115,6 @@ class ContaController {
 
             response.status(401).send({nome: e.name, mensagem: e.message})
         }
-
-
-
-        
-
-
 
     }
 

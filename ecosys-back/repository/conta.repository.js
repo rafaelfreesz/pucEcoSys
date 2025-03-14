@@ -17,11 +17,12 @@ class ContaRepository{
     }
     
     cadastrarUsuario(usuario){
-        const sql = 'INSERT INTO tb_usuario(login, senha) VALUES ($1, $2) returning *';
+        const sql = 'INSERT INTO tb_usuario(login, categoria, senha) VALUES ($1, $2, $3) returning *';
         
         return executarQuery(sql,
             [
                 usuario.login,
+                usuario.categoria,
                 usuario.senha
             ])
     }
