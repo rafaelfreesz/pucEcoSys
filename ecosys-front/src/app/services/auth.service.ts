@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 export class AuthService {
 
   usuario: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(null);
+  private timerToken: any;
   
   constructor(private httpCliente: HttpClient, private router: Router) { }
   
@@ -42,21 +43,37 @@ export class AuthService {
 
     if(usuario.token){
       this.usuario.next(usuario);
+
+      const tempoLogout = new Date(usuarioStorage._dt_hr_expira_token).getTime() - new Date().getTime();
+      this.autoLogout(tempoLogout)
     }
 
   }
 
   logout(){
+
     this.usuario.next(null);
     localStorage.removeItem('usuario')
     this.router.navigate(['/login'])
+
+    if(this.timerToken) { 
+      clearTimeout(this.timerToken)
+    }
+    this.timerToken = null;
+
+  }
+
+  autoLogout(tempoLogout){
+    this.timerToken = setTimeout(() => {
+      this.logout()
+    }, tempoLogout)
   }
 
   trataLogin(resp: any){
     const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em*1000)
     const usuario = new Usuario(resp.login,  resp.id,  resp.token,  dt_hr_expira_token)
     this.usuario.next(usuario);
+    this.autoLogout(resp.expira_em*1000)
     localStorage.setItem('usuario',JSON.stringify(usuario))
-    console.log(localStorage)
   }
 }
