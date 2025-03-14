@@ -39,8 +39,8 @@ export class AuthService {
       return;
     }
 
-    const usuario = new Usuario(usuarioStorage.login, usuarioStorage.id, usuarioStorage.categoria, usuarioStorage._token, new Date(usuarioStorage._dt_hr_expira_token));
-
+    const usuario = new Usuario(usuarioStorage.login, usuarioStorage.id, usuarioStorage._categoria, usuarioStorage._token, new Date(usuarioStorage._dt_hr_expira_token));
+   
     if(usuario.token){
       this.usuario.next(usuario);
 
@@ -63,6 +63,10 @@ export class AuthService {
 
   }
 
+  salvarUsuario(usuario: Usuario){
+    return this.httpCliente.put(`http://localhost:3000/contas/editar/${usuario.id}`,usuario)
+  }
+
   autoLogout(tempoLogout){
     this.timerToken = setTimeout(() => {
       this.logout()
@@ -72,7 +76,6 @@ export class AuthService {
   trataLogin(resp: any){
     const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em*1000)
     const usuario = new Usuario(resp.login,  resp.id,  resp.categoria,  resp.token,  dt_hr_expira_token)
-    this.usuario.next(usuario);
     this.autoLogout(resp.expira_em*1000)
     localStorage.setItem('usuario',JSON.stringify(usuario))
   }
