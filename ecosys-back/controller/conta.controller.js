@@ -3,64 +3,95 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require('../bin/config');
 const { password } = require('../secrets/db_configurations');
-
-const tokens_expirados = []
-
 class ContaController {
 
 
     verificaToken(request, response, next){
         const token = request.headers['x-access-token'];
-        
-        tokens_expirados.forEach(
-            item => { if (item === token) {response.status(401).end()}}
-        )
-
         jwt.verify(token,config.secret,(erro,id) =>{
-            if(erro) { return response.status(401).end();}
+            if(erro) { return response.status(401).send({erro: "Token inválido"});}
+            
             
             next();
         })
     }
 
     async getUsuarios(request, response, next){
-
         const usuarios = await ContaRepository.getUsuarios();
         response.json(usuarios)
     }
 
     async cadastrarUsuario(request, response, next){
-        var hashedPassword = bcrypt.hashSync(request.body.senha, 8);
 
-        request.body.senha = hashedPassword
-        const usuario = await ContaRepository.cadastrarUsuario(request.body);
+        try{
 
-        response.json(request.body)
+            if(!request.body.login){
+                throw new Error("Login não informado")
+            }
+            if(!request.body.senha){
+                throw new Error("Senha não informada")
+            }
+            
+            var hashedPassword = bcrypt.hashSync(request.body.senha, 8);
+            request.body.senha = hashedPassword
+            const usuario = await ContaRepository.cadastrarUsuario(request.body);
+    
+            response.json({status: 'ok'})
+
+        }catch(e) {
+            
+            response.status(401).send({nome: e.name, erro: e.message})
+        }
+        
+        
+
 
     }
 
     async login(request,response,next){
 
-        const usuario_request = {
-            login: request.body.login,
-            senha: request.body.senha
+        try{
+            if(!request.body.login){
+                throw new Error("Login não informado")
+            }
+            if(!request.body.senha){
+                throw new Error("Senha não informada")
+            }
+
+            const usuario_request = {
+                login: request.body.login,
+                senha: request.body.senha
+            }
+
+            const usuario_banco = (await ContaRepository.getUsuario(usuario_request.login))[0]
+            
+            if(!usuario_banco){
+                throw new Error("Usuario nao existe")
+            }
+            const passwordEhValido = await bcrypt.compare(usuario_request.senha,usuario_banco.senha)
+            
+            if(passwordEhValido){
+            
+                const token = jwt.sign({id: usuario_banco.id}, config.secret, {expiresIn: 3600})
+                response.json({id: usuario_banco.id, login: usuario_banco.login, token: token, expira_em: 3600})
+            
+            }else{
+                throw new Error("Senha incorreta")
+            }
+        }catch(e){
+
+            response.status(401).send({nome: e.name, mensagem: e.message})
         }
 
-        const usuario_banco = (await ContaRepository.getUsuario(usuario_request.login))[0]
+
+
         
-        const passwordEhValido = await bcrypt.compare(usuario_request.senha,usuario_banco.senha)
 
-        if(passwordEhValido){
-            const token = jwt.sign({id: usuario_banco.id}, config.secret, {expiresIn: 3600})
-            response.json({id: usuario_banco.id, login: usuario_banco.login, token: token, expira_em: 3600})
-        }
 
-        response.status(401).end()
 
     }
 
     async logout(request,response,next){
-        tokens_expirados.push(request.headers['x-access-token'])
         response.end();
     }
 }
