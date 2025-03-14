@@ -7,11 +7,11 @@ class ContaController {
 
 
     verificaToken(request, response, next){
+
         const token = request.headers['x-access-token'];
+
         jwt.verify(token,config.secret,(erro,id) =>{
-            if(erro) { return response.status(401).send({erro: "Token inválido"});}
-            
-            
+            if(erro) { return response.status(401).send({erro: "Token inválido"});}      
             next();
         })
     }
@@ -43,9 +43,36 @@ class ContaController {
             response.status(401).send({nome: e.name, erro: e.message})
         }
         
+    }
+
+    async cadastrarPrimeiroUsuario(request, response, next){
+
+        try{
+
+            const usuarios = await ContaRepository.getUsuarios();
+
+            if(usuarios.length > 0){
+                throw new Error("Ja existe usuario cadastrado")
+            }
+
+            if(!request.body.login){
+                throw new Error("Login não informado")
+            }
+            if(!request.body.senha){
+                throw new Error("Senha não informada")
+            }
+            
+            var hashedPassword = bcrypt.hashSync(request.body.senha, 8);
+            request.body.senha = hashedPassword
+            const usuario = await ContaRepository.cadastrarUsuario(request.body);
+    
+            response.json({status: 'ok'})
+
+        }catch(e) {
+            
+            response.status(401).send({nome: e.name, erro: e.message})
+        }
         
-
-
     }
 
     async login(request,response,next){
