@@ -7,7 +7,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProdutosComponent } from './secoes/produtos/produtos.component';
 import { HttpService } from './services/http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ListaProdutosComponent } from './secoes/produtos/lista-produtos/lista-produtos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EncurtarPipe } from './pipes/encurtar.pipe';
@@ -41,6 +41,7 @@ import { GraficoComponent } from './home/grafico/grafico.component';
 import { LoginComponent } from './secoes/login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import { AuthService } from './services/auth.service';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [HttpService, AuthService, AuthGuard],
+  providers: [HttpService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

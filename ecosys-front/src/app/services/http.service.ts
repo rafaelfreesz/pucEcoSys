@@ -1,7 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
-import { Produto } from "../models/produto.model";
 import { Fornecedor } from "../models/fornecedor.model";
 import { Contato } from "../models/contato.model";
 import { Entrada } from "../models/entrada.model";
@@ -9,11 +8,12 @@ import { HTTPResponseParser } from "../utils/http_response_parser";
 import { ItemEntrada } from "../models/item_entrada.model";
 import { Venda } from "../models/venda.model";
 import { ItemVenda } from "../models/item_venda.model";
+import { AuthService } from "./auth.service";
 
 @Injectable()
 export class HttpService{
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient, private authService: AuthService){}
 
     //HOME
     getNotificacoes(): any{
@@ -24,6 +24,7 @@ export class HttpService{
                 HTTPResponseParser.buildListaNotificacoes
             )
         )
+
     }
     getResumoDiario(): any{
 

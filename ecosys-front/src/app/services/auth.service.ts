@@ -14,6 +14,7 @@ export class AuthService {
   
 
   login(data: any){
+    
     return this.httpCliente.post<any>(
         `http://localhost:3000/conta/login`,
         {
@@ -21,6 +22,7 @@ export class AuthService {
           senha:	data.senha
         }
       ).pipe(catchError(
+        
           (erro) => {
             return throwError(erro.error.mensagem)
           }
@@ -34,7 +36,8 @@ export class AuthService {
   }
 
   trataLogin(resp: any){
-    const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em)
+    console.log(resp)
+    const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em*1000)
     const usuario = new Usuario(resp.login,  resp.id,  resp.token,  dt_hr_expira_token)
     this.usuario.next(usuario);
   }
