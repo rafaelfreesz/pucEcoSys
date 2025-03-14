@@ -3,14 +3,14 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { Usuario } from "../models/usuario.model";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AuthService {
 
-  usuario: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(null);  
-  loggedIn: boolean = false;
+  usuario: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(null);
   
-  constructor(private httpCliente: HttpClient) { }
+  constructor(private httpCliente: HttpClient, private router: Router) { }
   
 
   login(data: any){
@@ -32,11 +32,11 @@ export class AuthService {
   }
 
   logout(){
-    this.loggedIn = false;
+    this.usuario.next(null);
+    this.router.navigate(['/login'])
   }
 
   trataLogin(resp: any){
-    console.log(resp)
     const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em*1000)
     const usuario = new Usuario(resp.login,  resp.id,  resp.token,  dt_hr_expira_token)
     this.usuario.next(usuario);
