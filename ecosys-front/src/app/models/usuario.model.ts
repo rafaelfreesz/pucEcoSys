@@ -2,6 +2,7 @@ export class Usuario{
     constructor(
         public login: string,
         public id: string,
+        private _categoria: string,
         private _token: string,
         private _dt_hr_expira_token: Date
     ){}
@@ -11,5 +12,9 @@ export class Usuario{
             return null;
         }
         return this._token;
+    }
+
+    get categoria(){
+        return this._categoria;
     }
 }

@@ -39,7 +39,7 @@ export class AuthService {
       return;
     }
 
-    const usuario = new Usuario(usuarioStorage.login, usuarioStorage.id, usuarioStorage._token, new Date(usuarioStorage._dt_hr_expira_token));
+    const usuario = new Usuario(usuarioStorage.login, usuarioStorage.id, usuarioStorage.categoria, usuarioStorage._token, new Date(usuarioStorage._dt_hr_expira_token));
 
     if(usuario.token){
       this.usuario.next(usuario);
@@ -71,7 +71,7 @@ export class AuthService {
 
   trataLogin(resp: any){
     const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em*1000)
-    const usuario = new Usuario(resp.login,  resp.id,  resp.token,  dt_hr_expira_token)
+    const usuario = new Usuario(resp.login,  resp.id,  resp.categoria,  resp.token,  dt_hr_expira_token)
     this.usuario.next(usuario);
     this.autoLogout(resp.expira_em*1000)
     localStorage.setItem('usuario',JSON.stringify(usuario))
