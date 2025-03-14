@@ -31,8 +31,24 @@ export class AuthService {
       )
   }
 
+  autoLogin(){
+    const usuarioStorage = JSON.parse(localStorage.getItem('usuario'));
+
+    if(!usuarioStorage){
+      return;
+    }
+
+    const usuario = new Usuario(usuarioStorage.login, usuarioStorage.id, usuarioStorage._token, new Date(usuarioStorage._dt_hr_expira_token));
+
+    if(usuario.token){
+      this.usuario.next(usuario);
+    }
+
+  }
+
   logout(){
     this.usuario.next(null);
+    localStorage.removeItem('usuario')
     this.router.navigate(['/login'])
   }
 
@@ -40,5 +56,7 @@ export class AuthService {
     const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em*1000)
     const usuario = new Usuario(resp.login,  resp.id,  resp.token,  dt_hr_expira_token)
     this.usuario.next(usuario);
+    localStorage.setItem('usuario',JSON.stringify(usuario))
+    console.log(localStorage)
   }
 }
