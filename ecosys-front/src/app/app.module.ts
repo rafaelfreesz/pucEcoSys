@@ -42,6 +42,7 @@ import { LoginComponent } from './secoes/login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { ModalGerenciarContaComponent } from './header/modal-gerenciar-conta/modal-gerenciar-conta.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     ResumoDoDiaComponent,
     PaginatorPipe,
     GraficoComponent,
-    LoginComponent
+    LoginComponent,
+    ModalGerenciarContaComponent
   ],
   imports: [
     BrowserModule,

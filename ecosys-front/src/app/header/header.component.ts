@@ -13,15 +13,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private usuario: Subscription
   isLogado = false;
   modoAtivo = "administracao"
+  tipoUsuario = "v"
 
-  constructor(private authService: AuthService, private router: Router) {
-    
-  }
+  constructor(private authService: AuthService, private router: Router) {}
   
   
   ngOnInit(): void {
     this.usuario = this.authService.usuario.subscribe(
-      usuario => {this.isLogado = !!usuario}
+      usuario => {
+        this.isLogado = !!usuario;
+        if(usuario){
+          this.tipoUsuario = usuario.categoria
+        }
+      }
     )    
   }
 
@@ -35,6 +39,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout(){
     this.authService.logout();
+  }
+
+  abrirModalEditarConta(){
+    
   }
 
 }

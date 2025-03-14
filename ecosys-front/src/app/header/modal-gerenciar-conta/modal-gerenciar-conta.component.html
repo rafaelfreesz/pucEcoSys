@@ -1,0 +1,57 @@
+<div class="blackdrop" (click)="fechar()" *ngIf="this.mostrarModal"></div>
+
+<div class="alert-box">
+    <div class="cabecalho">
+        <p class="titulo fs-4 fw-semibold" >Editar Conta</p>
+        <div class="fechar" (click)="fechar()">x</div>
+    </div>
+
+    <div class="conteudo">
+        <form class="formulario" [formGroup]="conteudoFormulario" (ngSubmit)="salvar()">
+            <div class="campo">
+                <label class="form-label fw-semibold label">Login:</label>
+                <input
+                    type="text"
+                    class="form-control input"
+                    formControlName = "login"
+                    id="login">
+            </div>
+            <div class="campo">
+                <label class="form-label fw-semibold label">Senha:</label>
+                <input
+                    type="password"
+                    class="form-control input"
+                    formControlName = "senha"
+                    id="senha"
+                    autocomplete="on">
+            </div>
+            <div class="campo">
+                <label class="form-label fw-semibold label">Confirmação de Senha:</label>
+                <input
+                    type="password"
+                    class="form-control input"
+                    formControlName = "senha"
+                    id="senha"
+                    autocomplete="on">
+            </div>
+            <div class="campo">
+                <label class="form-label fw-semibold label">Categoria:</label>
+                <select
+                    name="categoria"
+                    class="form-select input"
+                    formControlName="categoria"
+                    id="categoria">
+                    <option value="g">Gerência</option>
+                    <option value="v">Vendas</option>
+                </select>
+            </div>
+
+            <div class="botoes">
+                <button class ="btn btn-success fw-semibold botao" type="submit"> <i class="bi bi-box-arrow-in-right"></i> Salvar</button>
+                <button class ="btn btn-danger fw-semibold botao" type="button" (click)="fechar()"> <i class="bi bi-person-lock"></i> Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
