@@ -16,16 +16,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {
     this.conteudoFormulario = new FormGroup({
-      'login': new FormControl(null, [Validators.required,Validators.minLength(4),Validators.maxLength(14)]),
-      'senha': new FormControl(null, [Validators.required,Validators.minLength(4),Validators.maxLength(14)])
+      'login': new FormControl(null, [Validators.required,Validators.minLength(2),Validators.maxLength(14)]),
+      'senha': new FormControl(null, [Validators.required,Validators.minLength(2),Validators.maxLength(14)])
     })
   }
 
   login(){
     this.isLoading = true
     this.authService.login({
-      email: this.conteudoFormulario.value.login,
-      password: this.conteudoFormulario.value.senha
+      login: this.conteudoFormulario.value.login,
+      senha: this.conteudoFormulario.value.senha
     }).subscribe(
       (res) => {
         this.isLoading = false;

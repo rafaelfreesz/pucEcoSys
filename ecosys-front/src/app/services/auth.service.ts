@@ -11,31 +11,22 @@ export class AuthService {
   loggedIn: boolean = false;
   
   constructor(private httpCliente: HttpClient) { }
-
-  isAutenticado():Promise<boolean> {
-    
-    const promise = new Promise<boolean>(
-      (resolve, reject) => {() => {resolve(this.loggedIn)}}
-    )
-
-    return promise;
-  }
+  
 
   login(data: any){
     return this.httpCliente.post<any>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAwXFCCL9yibFpDMUf16u-h6hPWA25gFZo`,
-        { email:	data.email,
-          password:	data.password,
-          returnSecureToken: true
+        `http://localhost:3000/conta/login`,
+        {
+          login:	data.login,
+          senha:	data.senha
         }
       ).pipe(catchError(
           (erro) => {
-            return throwError(erro.error.error.message)
+            return throwError(erro.error.mensagem)
           }
         ),
         tap( resp => { this.trataLogin(resp) })
       )
-      // this.loggedIn = true;
   }
 
   logout(){
@@ -43,8 +34,8 @@ export class AuthService {
   }
 
   trataLogin(resp: any){
-    const dt_hr_expira_token = new Date(new Date().getTime() + resp.expiresIn*1000)
-    const usuario = new Usuario(resp.email,  resp.localId,  resp.idToken,  dt_hr_expira_token)
+    const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em)
+    const usuario = new Usuario(resp.login,  resp.id,  resp.token,  dt_hr_expira_token)
     this.usuario.next(usuario);
   }
 }
