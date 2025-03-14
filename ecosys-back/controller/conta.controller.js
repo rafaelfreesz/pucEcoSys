@@ -106,7 +106,7 @@ class ContaController {
             if(passwordEhValido){
             
                 const token = jwt.sign({id: usuario_banco.id}, config.secret, {expiresIn: 3600})
-                response.json({id: usuario_banco.id, login: usuario_banco.login, token: token, expira_em: 3600})
+                response.json({id: usuario_banco.id, login: usuario_banco.login, categoria: usuario_banco.categoria, token: token, expira_em: 3600})
             
             }else{
                 throw new Error("Senha incorreta")
