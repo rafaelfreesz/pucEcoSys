@@ -47,6 +47,30 @@ class ContaController {
         }
         
     }
+    async editarUsuario(request, response, next){
+        try{
+
+            if(!request.body.login){
+                throw new Error("Login não informado")
+            }
+            if(!request.body.categoria){
+                throw new Error("Categoria não informada")
+            }
+            if(!request.body.senha){
+                throw new Error("Senha não informada")
+            }
+            
+            var hashedPassword = bcrypt.hashSync(request.body.senha, 8);
+            request.body.senha = hashedPassword
+            const usuario = await ContaRepository.editarUsuario(request.params.id,request.body);
+    
+            response.json({status: 'ok'})
+
+        }catch(e) {
+            
+            response.status(401).send({nome: e.name, erro: e.message})
+        }
+    }
 
     async cadastrarPrimeiroUsuario(request, response, next){
 
