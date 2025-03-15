@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   modoAtivo = "administracao"
   tipoUsuario = "v"
   mostrarModalEditarConta: boolean = false;
+  mostrarModalGerenciarUsuarios: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
   
@@ -48,6 +49,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   fecharModalEditarConta(){
     this.mostrarModalEditarConta = false;
+  }
+
+  abrirModalGerenciarUsuarios(){
+    this.mostrarModalGerenciarUsuarios = true;
+  }
+  fecharModalGerenciarUsuarios(){
+    this.mostrarModalGerenciarUsuarios = false;
   }
 
   getLogin(){

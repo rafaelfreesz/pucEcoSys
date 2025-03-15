@@ -43,6 +43,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ModalGerenciarContaComponent } from './header/modal-gerenciar-conta/modal-editar-conta.component';
+import { ModalGerenciarUsuariosComponent } from './header/modal-gerenciar-usuarios/modal-gerenciar-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { ModalGerenciarContaComponent } from './header/modal-gerenciar-conta/mod
     PaginatorPipe,
     GraficoComponent,
     LoginComponent,
-    ModalGerenciarContaComponent
+    ModalGerenciarContaComponent,
+    ModalGerenciarUsuariosComponent
   ],
   imports: [
     BrowserModule,

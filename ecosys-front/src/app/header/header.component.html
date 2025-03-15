@@ -50,8 +50,8 @@
             <i class="bi bi-gear-fill"></i>
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" (click)="abrirModalEditarConta()">Editar Conta</a></li>
-            <li *ngIf="tipoUsuario == 'g'"><a class="dropdown-item" href="#">Gerenciar Usuarios</a></li>
+            <li><a class="dropdown-item" (click)="abrirModalEditarConta()">Editar Conta</a></li>
+            <li *ngIf="tipoUsuario == 'g'"><a class="dropdown-item" (click)="abrirModalGerenciarUsuarios()">Gerenciar Usuarios</a></li>
           </ul>
         </div>
       </li>
@@ -72,3 +72,9 @@
     *ngIf="mostrarModalEditarConta"
     (fecharModalEditarConta) = "fecharModalEditarConta()"
     ></app-modal-editar-conta>
+    
+  <app-modal-gerenciar-usuarios
+    *ngIf ="mostrarModalGerenciarUsuarios"
+    >
+
+  </app-modal-gerenciar-usuarios>
