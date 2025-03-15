@@ -74,6 +74,7 @@ export class AuthService {
         (valores_novos: any) => {
           this.usuarioLogado.login = valores_novos.login;
           this.usuarioLogado.categoria = valores_novos.categoria;
+          this.getTodosUsuarios()
           this.usuario.next(this.usuarioLogado)
         }  
       )
@@ -82,9 +83,8 @@ export class AuthService {
 
       this.httpCliente.post(`http://localhost:3000/conta/cadastrar`,usuario).subscribe(
         (valores_novos: any) => {
-          this.usuarioLogado.login = valores_novos.login;
-          this.usuarioLogado.categoria = valores_novos.categoria;
-          this.usuario.next(this.usuarioLogado)
+          this.getTodosUsuarios()
+          this.usuario.next(null)
         }  
       )
 

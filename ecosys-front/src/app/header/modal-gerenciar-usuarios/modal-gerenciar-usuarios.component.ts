@@ -58,12 +58,9 @@ export class ModalGerenciarUsuariosComponent implements OnInit {
     
     if(this.usuarioSelecionado){
       const formulario = this.getFormulario();
-      
-      if(this.usuarioSelecionado.id !== -1){
-          //cadastrar
-      }else{
-        //alterar
-      }
+      this.authService.salvarUsuario(this.usuarioSelecionado.id !== -1? {...formulario, id:this.usuarioSelecionado.id}: formulario)
+      this.usuarioSelecionado = null;
+      this.setFormulario()
     }
 
   }
