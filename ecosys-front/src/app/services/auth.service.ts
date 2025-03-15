@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, exhaustMap, map, take, tap } from "rxjs/operators";
 import { Usuario } from "../models/usuario.model";
 import { Router } from "@angular/router";
 
@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 export class AuthService {
 
   usuario: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(null);
+  usuarioLogado: Usuario;
   private timerToken: any;
   
   constructor(private httpCliente: HttpClient, private router: Router) { }
@@ -43,6 +44,7 @@ export class AuthService {
    
     if(usuario.token){
       this.usuario.next(usuario);
+      this.usuarioLogado = usuario
 
       const tempoLogout = new Date(usuarioStorage._dt_hr_expira_token).getTime() - new Date().getTime();
       this.autoLogout(tempoLogout)
@@ -52,6 +54,7 @@ export class AuthService {
 
   logout(){
 
+    this.usuarioLogado = null;
     this.usuario.next(null);
     localStorage.removeItem('usuario')
     this.router.navigate(['/login'])
@@ -63,8 +66,15 @@ export class AuthService {
 
   }
 
-  salvarUsuario(usuario: Usuario){
-    return this.httpCliente.put(`http://localhost:3000/contas/editar/${usuario.id}`,usuario)
+  salvarUsuario(usuario: any){
+    this.httpCliente.put(`http://localhost:3000/conta/editar/${usuario.id}`,usuario).subscribe(
+      (valores_novos: any) => {
+        this.usuarioLogado.login = valores_novos.login;
+        this.usuarioLogado.categoria = valores_novos.categoria;
+        this.usuario.next(this.usuarioLogado)
+      }  
+    )
+    
   }
 
   autoLogout(tempoLogout){
@@ -76,6 +86,8 @@ export class AuthService {
   trataLogin(resp: any){
     const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em*1000)
     const usuario = new Usuario(resp.login,  resp.id,  resp.categoria,  resp.token,  dt_hr_expira_token)
+    this.usuarioLogado = usuario;
+    this.usuario.next(usuario);
     this.autoLogout(resp.expira_em*1000)
     localStorage.setItem('usuario',JSON.stringify(usuario))
   }

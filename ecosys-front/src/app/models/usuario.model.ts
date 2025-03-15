@@ -17,4 +17,8 @@ export class Usuario{
     get categoria(){
         return this._categoria;
     }
+
+    set categoria(cat){
+        this._categoria = cat
+    }
 }

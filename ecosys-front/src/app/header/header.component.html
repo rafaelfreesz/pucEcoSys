@@ -69,4 +69,7 @@
     </div>
     
   </nav>
-  <app-modal-gerenciar-conta></app-modal-gerenciar-conta>
+  <app-modal-gerenciar-conta
+    *ngIf="mostrarModalEditarConta"
+    (fecharModalEditarConta) = "fecharModalEditarConta()"
+    ></app-modal-gerenciar-conta>

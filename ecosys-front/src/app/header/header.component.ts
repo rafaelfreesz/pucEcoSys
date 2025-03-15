@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Usuario } from '../models/usuario.model';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLogado = false;
   modoAtivo = "administracao"
   tipoUsuario = "v"
+  mostrarModalEditarConta: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
   
@@ -42,7 +44,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   abrirModalEditarConta(){
-    
+    this.mostrarModalEditarConta = true;
+  }
+  fecharModalEditarConta(){
+    this.mostrarModalEditarConta = false;
   }
 
 }

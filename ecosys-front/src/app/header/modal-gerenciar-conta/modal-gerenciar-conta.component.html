@@ -1,4 +1,4 @@
-<div class="blackdrop" (click)="fechar()" *ngIf="this.mostrarModal"></div>
+<div class="blackdrop" (click)="fechar()"></div>
 
 <div class="alert-box">
     <div class="cabecalho">
@@ -7,7 +7,14 @@
     </div>
 
     <div class="conteudo">
-        <form class="formulario" [formGroup]="conteudoFormulario" (ngSubmit)="salvar()">
+
+        <div class="box-spinner" *ngIf="isLoading">
+            <div class="spinner-border text-success spinner" role="status" >
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <form class="formulario" [formGroup]="conteudoFormulario" (ngSubmit)="salvar()" *ngIf="!isLoading">
             <div class="campo">
                 <label class="form-label fw-semibold label">Login:</label>
                 <input
@@ -17,7 +24,7 @@
                     id="login">
             </div>
             <div class="campo">
-                <label class="form-label fw-semibold label">Senha:</label>
+                <label class="form-label fw-semibold label">Nova Senha:</label>
                 <input
                     type="password"
                     class="form-control input"
@@ -30,8 +37,8 @@
                 <input
                     type="password"
                     class="form-control input"
-                    formControlName = "senha"
-                    id="senha"
+                    formControlName = "confirmacao-senha"
+                    id="confirmacao-senha"
                     autocomplete="on">
             </div>
             <div class="campo">
@@ -55,3 +62,4 @@
     </div>
 
 </div>
+
