@@ -58,9 +58,14 @@ class ContaController {
                 var hashedPassword = bcrypt.hashSync(request.body.senha, 8);
                 request.body.senha = hashedPassword
             }
-            const usuario = await ContaRepository.editarUsuario(request.params.id,request.body);
-    
-            response.json({status: 'ok'})
+            await ContaRepository.editarUsuario(request.params.id,request.body);
+            
+            const usuario = (await ContaRepository.getUsuarioById(request.params.id))[0]
+            
+            response.json({
+                login: usuario.login,
+                categoria: usuario.categoria
+            })
 
         }catch(e) {
             

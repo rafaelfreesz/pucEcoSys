@@ -15,6 +15,14 @@ class ContaRepository{
             [login]
         )
     }
+
+    getUsuarioById(id){
+        const sql = 'SELECT * FROM tb_usuario WHERE id = ($1)';
+        
+        return executarQuery(sql,
+            [id]
+        )
+    }
     
     cadastrarUsuario(usuario){
         const sql = 'INSERT INTO tb_usuario(login, categoria, senha) VALUES ($1, $2, $3) returning *';
