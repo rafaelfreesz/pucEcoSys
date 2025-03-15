@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   modoAtivo = "administracao"
   tipoUsuario = "v"
   mostrarModalEditarConta: boolean = false;
-  mostrarModalGerenciarUsuarios: boolean = false;
+  mostrarModalGerenciarUsuarios: boolean = true;
 
   constructor(private authService: AuthService, private router: Router) {}
   

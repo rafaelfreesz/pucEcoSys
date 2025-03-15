@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-modal-gerenciar-usuarios',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalGerenciarUsuariosComponent implements OnInit {
 
-  constructor() { }
+  usuarios: Usuario[] = [];
+  constructor() {
+    for(let i=0; i<10;i++){
+      this.usuarios.push(new Usuario('aaa',String(i),'Gerência','1',new Date()))
+    }
+  }
 
   ngOnInit(): void {
+  }
+
+  fechar(){
+
   }
 
 }

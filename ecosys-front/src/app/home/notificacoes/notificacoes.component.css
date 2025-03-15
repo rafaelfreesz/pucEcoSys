@@ -13,7 +13,6 @@ tr:hover{
     .cabecalho{
         display: flex;
         flex-direction: row;
-        /* justify-content: space-between; */
         background-color: #198754;
         color: #fff;
         .icone,.titulo{
