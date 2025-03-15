@@ -44,6 +44,7 @@ import { AuthService } from './services/auth.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ModalGerenciarContaComponent } from './header/modal-gerenciar-conta/modal-editar-conta.component';
 import { ModalGerenciarUsuariosComponent } from './header/modal-gerenciar-usuarios/modal-gerenciar-usuarios.component';
+import { CategoriaPipe } from './pipes/categoria.pipe';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ModalGerenciarUsuariosComponent } from './header/modal-gerenciar-usuari
     GraficoComponent,
     LoginComponent,
     ModalGerenciarContaComponent,
-    ModalGerenciarUsuariosComponent
+    ModalGerenciarUsuariosComponent,
+    CategoriaPipe
   ],
   imports: [
     BrowserModule,

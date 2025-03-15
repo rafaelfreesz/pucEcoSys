@@ -10,6 +10,7 @@ export class AuthService {
 
   usuario: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(null);
   usuarioLogado: Usuario;
+  todosUsuarios: Subject<Usuario[]> = new Subject<Usuario[]>()
   private timerToken: any;
   
   constructor(private httpCliente: HttpClient, private router: Router) { }
@@ -67,14 +68,52 @@ export class AuthService {
   }
 
   salvarUsuario(usuario: any){
-    this.httpCliente.put(`http://localhost:3000/conta/editar/${usuario.id}`,usuario).subscribe(
-      (valores_novos: any) => {
-        this.usuarioLogado.login = valores_novos.login;
-        this.usuarioLogado.categoria = valores_novos.categoria;
-        this.usuario.next(this.usuarioLogado)
-      }  
-    )
+    if(usuario.id){
+
+      this.httpCliente.put(`http://localhost:3000/conta/editar/${usuario.id}`,usuario).subscribe(
+        (valores_novos: any) => {
+          this.usuarioLogado.login = valores_novos.login;
+          this.usuarioLogado.categoria = valores_novos.categoria;
+          this.usuario.next(this.usuarioLogado)
+        }  
+      )
+      
+    }else{
+
+      this.httpCliente.post(`http://localhost:3000/conta/cadastrar`,usuario).subscribe(
+        (valores_novos: any) => {
+          this.usuarioLogado.login = valores_novos.login;
+          this.usuarioLogado.categoria = valores_novos.categoria;
+          this.usuario.next(this.usuarioLogado)
+        }  
+      )
+
+    }
     
+  }
+
+  getTodosUsuarios() {
+    
+    this.httpCliente.get(`http://localhost:3000/conta/usuarios`).pipe(
+      map(
+        (retorno: any[]) => {
+          const usuarios: Usuario[] = []
+          
+          
+          retorno.forEach(
+            item => {
+              const usuario = new Usuario(item.login, item.id, item.categoria,"",new Date())
+              usuarios.push(usuario)
+            }
+          )
+          return usuarios
+        }
+      ),
+    ).subscribe(
+      usuarios_prontos => {
+        this.todosUsuarios.next(usuarios_prontos);
+      }
+    )
   }
 
   autoLogout(tempoLogout){

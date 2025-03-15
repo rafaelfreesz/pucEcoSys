@@ -1,7 +1,7 @@
 export class Usuario{
     constructor(
         public login: string,
-        public id: string,
+        public id: number,
         private _categoria: string,
         private _token: string,
         private _dt_hr_expira_token: Date

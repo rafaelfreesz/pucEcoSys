@@ -23,8 +23,9 @@ tr:hover{
         color: #fff;
         height: 40px;
         .titulo{
+            display: flex;
             margin-top:3px;
-            margin-left:10px
+            margin-left:10px;
         }
         .fechar{
             text-align: right;
@@ -37,10 +38,25 @@ tr:hover{
         display: flex;
         justify-content: space-between;
         .box-lista-usuarios{
-            height: 40vh;
+            height: 55vh;
             width: 50%;
             border-right: 5px solid #198754;
+            .box-botao-novo{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 7vh;
+                width: 100%;
+                .botao{
+                    width: 98%;
+                    height: 90%;
+                }
+                
+                
+            }
             .tabela{
+                height: 48vh;
+                overflow-y: scroll;
                 thead{
                     position: sticky;
                     top:0;
@@ -60,12 +76,24 @@ tr:hover{
                     background: transparent;
                     cursor: pointer;
                 }
-                height: 100%;
-                overflow-y: scroll;
             }
         }
         .box-editar-usuario{
-            height: 40vh;
+            height: 55vh;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            .formulario{
+                margin-top: 10px;
+                height: 55vh;
+                width: 80%;
+            }
+            .botoes{
+                margin-top: 20px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
         }
     }
 }

@@ -1,12 +1,15 @@
 <div class="blackdrop" (click)="fechar()"></div>
 <div class="alert-box">
     <div class="cabecalho">
-        <p class="titulo fs-4 fw-semibold" >Gerenciar Usuários</p>
+        <p class="titulo fs-4 fw-semibold" >Gerenciar Usuários </p>
         <div class="fechar" (click)="fechar()">x</div>
     </div>
 
     <div class="conteudo">
         <div class="box-lista-usuarios">
+            <div class="box-botao-novo">
+                <button class ="btn btn-success fw-semibold botao" type="button" (click)="prepararCadastro()"> <i class="bi bi-box-arrow-in-right"></i> Novo</button>
+            </div>
             <div class="tabela">
 
                 <table class="table table-striped">
@@ -15,9 +18,9 @@
                         <th class="th-categoria">Categoria</th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let usuario of usuarios">
+                        <tr *ngFor="let usuario of usuarios" (click)="selecionarUsuario(usuario)">
                             <td class="fw-semibold">{{usuario.login}}</td>
-                            <td>{{usuario.categoria}}</td>
+                            <td>{{usuario.categoria | categoria}}</td>
                         </tr>
                     </tbody>
     
@@ -26,7 +29,51 @@
 
         </div>
         <div class="box-editar-usuario">
-
+            <form class="formulario" [formGroup]="conteudoFormulario" (ngSubmit)="salvar()" *ngIf="usuarioSelecionado">
+                <div class="campo">
+                    <label class="form-label fw-semibold label">Login:</label>
+                    <input
+                        type="text"
+                        class="form-control input"
+                        formControlName = "login"
+                        id="login">
+                </div>
+                <div class="campo" *ngIf="usuarioSelecionado.id == -1">
+                    <label class="form-label fw-semibold label" >Nova Senha:</label>
+                    <input
+                        type="password"
+                        class="form-control input"
+                        formControlName = "senha"
+                        id="senha"
+                        autocomplete="on">
+                </div>
+                <div class="campo" *ngIf="usuarioSelecionado.id == -1">
+                    <label class="form-label fw-semibold label">Confirmação de Senha:</label>
+                    <input
+                        type="password"
+                        class="form-control input"
+                        formControlName = "confirmacao-senha"
+                        id="confirmacao-senha"
+                        autocomplete="on">
+                </div>
+                <div class="campo">
+                    <label class="form-label fw-semibold label">Categoria:</label>
+                    <select
+                        name="categoria"
+                        class="form-select input"
+                        formControlName="categoria"
+                        id="categoria">
+                        <option value="g">Gerência</option>
+                        <option value="v">Vendas</option>
+                    </select>
+                </div>
+    
+                <div class="botoes">
+                    <button class ="btn btn-success fw-semibold botao" type="submit"> <i class="bi bi-box-arrow-in-right"></i> Salvar</button>
+                    <button class ="btn btn-danger fw-semibold botao" type="button" (click)="fechar()"> <i class="bi bi-person-lock"></i> Cancelar</button>
+                </div>
+    
+            </form>
         </div>
     </div>
 
