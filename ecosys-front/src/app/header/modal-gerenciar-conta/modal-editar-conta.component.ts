@@ -5,9 +5,9 @@ import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
-  selector: 'app-modal-gerenciar-conta',
-  templateUrl: './modal-gerenciar-conta.component.html',
-  styleUrls: ['./modal-gerenciar-conta.component.css']
+  selector: 'app-modal-editar-conta',
+  templateUrl: './modal-editar-conta.component.html',
+  styleUrls: ['./modal-editar-conta.component.css']
 })
 export class ModalGerenciarContaComponent implements OnInit {
 

@@ -42,7 +42,7 @@ import { LoginComponent } from './secoes/login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
-import { ModalGerenciarContaComponent } from './header/modal-gerenciar-conta/modal-gerenciar-conta.component';
+import { ModalGerenciarContaComponent } from './header/modal-gerenciar-conta/modal-editar-conta.component';
 
 @NgModule({
   declarations: [

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalGerenciarContaComponent } from './modal-gerenciar-conta.component';
+import { ModalGerenciarContaComponent } from './modal-editar-conta.component';
 
 describe('ModalGerenciarContaComponent', () => {
   let component: ModalGerenciarContaComponent;
