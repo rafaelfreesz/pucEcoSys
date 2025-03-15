@@ -3,6 +3,9 @@
     background-color: #198754;
     padding: 0px;
     min-height: 60px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
     .logo-nav{
         display: flex;
         .logo{
@@ -23,10 +26,21 @@
         padding-top: 8px;
         padding-bottom: 8px;
         transition: 0.5s;
+        display: flex;
+        align-items: center;
         cursor: pointer;
         .item-secao-nome{
             color: white;
             font-size: 20px;
+        }
+        .nome-usuario{
+            margin-left: 10px;
+            margin-right: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: #198754;
+            cursor: default;
+
         }
     }
     .item-secao:hover{
@@ -37,11 +51,16 @@
     }
 
     .menu-direito{
-        margin-right: 10px;
         .botao{
             color: white;
             font-size: 20px;
             font-weight: 600;
         }
+    }
+
+    
+    .nav-item.item-secao.usuario{
+        background-color: #c8c8c8;
+        margin-right: 0px;
     }
 }

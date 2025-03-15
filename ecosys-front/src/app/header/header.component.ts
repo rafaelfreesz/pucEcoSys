@@ -50,4 +50,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.mostrarModalEditarConta = false;
   }
 
+  getLogin(){
+    return this.authService.usuarioLogado.login;
+  }
+
 }
