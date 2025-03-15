@@ -40,9 +40,9 @@ class ContaRepository{
             const sql = `UPDATE tb_usuario SET ${fields[i]} = ($1) WHERE id = ($2)`;
     
             if(i === fields.length - 1){
-                return executarQuery(sql,[contato[fields[i]],id]);
+                return executarQuery(sql,[usuario[fields[i]],id]);
             }else{
-                await executarQuery(sql,[contato[fields[i]],id]);
+                await executarQuery(sql,[usuario[fields[i]],id]);
             }
         }
     }

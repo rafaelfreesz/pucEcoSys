@@ -50,18 +50,14 @@ class ContaController {
     async editarUsuario(request, response, next){
         try{
 
-            if(!request.body.login){
-                throw new Error("Login não informado")
-            }
-            if(!request.body.categoria){
-                throw new Error("Categoria não informada")
-            }
-            if(!request.body.senha){
-                throw new Error("Senha não informada")
+            if(!request.params.id){
+                throw new Error("id não informado")
             }
             
-            var hashedPassword = bcrypt.hashSync(request.body.senha, 8);
-            request.body.senha = hashedPassword
+            if(request.body.senha){
+                var hashedPassword = bcrypt.hashSync(request.body.senha, 8);
+                request.body.senha = hashedPassword
+            }
             const usuario = await ContaRepository.editarUsuario(request.params.id,request.body);
     
             response.json({status: 'ok'})
