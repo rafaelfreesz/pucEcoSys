@@ -71,22 +71,13 @@ class VendaController {
                     let ventinha = await ItemVendaRepository.incluir(itemNovo);
                     
                     //Abatendo estoque
-                    console.log(itemNovo)
                     let produto = (await ProdutoRepository.consultarPorId(itemNovo.fk_produto))[0]
                     produto.qtd_estoque-=itemNovo.quantidade
                     await ProdutoRepository.alterar(produto.id,produto)
                 }
-            )
-            //Retornando a lista de todas as entradas atualizada
-            const vendas = await VendaRepository.consultarTodos();
-            
-            for await(const venda of vendas){
-                const items = await ItemVendaController.getPorVenda(venda.id);
-            
-                if(items) {venda.items = items}
-            }
-                        
-            response.json(vendas)
+            ) 
+
+            response.json({status: 'ok'})
 
         }catch(e){
             response.json(e)
