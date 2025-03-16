@@ -42,8 +42,7 @@ class ContaController {
             response.json({status: 'ok'})
 
         }catch(e) {
-            
-            response.status(401).send({nome: e.name, erro: e.message})
+            response.status(401).send("Ja existe usuário com este login!")
         }
         
     }
