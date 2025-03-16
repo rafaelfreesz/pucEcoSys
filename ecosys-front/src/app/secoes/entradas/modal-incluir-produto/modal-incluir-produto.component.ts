@@ -21,6 +21,7 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   criterioFiltro: string = "nome";
   precoCompra: number = 0.01;
   quantidade: number = 1;
+  mostrarErro: boolean = false;
 
   constructor(private produtoService: ProdutoService) {
   }
@@ -60,14 +61,19 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
       novoItem.preco_compra = this.precoCompra;
       novoItem.quantidade = this.quantidade;
       novoItem.produto = this.produtoSelecionado;
+      this.fecharModal.emit(novoItem);
     }else{
-      novoItem = new ItemVenda();
-      novoItem.quantidade = this.quantidade;
-      novoItem.produto = this.produtoSelecionado;
-      novoItem.preco_unitario = this.produtoSelecionado.preco_venda;
+      if(this.quantidade <= this.produtoSelecionado.quantidade){
+        novoItem = new ItemVenda();
+        novoItem.quantidade = this.quantidade;
+        novoItem.produto = this.produtoSelecionado;
+        novoItem.preco_unitario = this.produtoSelecionado.preco_venda;
+        this.fecharModal.emit(novoItem);
+      }else{
+        this.mostrarErro = true;
+      }
 
     }
-    this.fecharModal.emit(novoItem);
   
   }
 

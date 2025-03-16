@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Venda } from '../models/venda.model';
 import { Subject } from 'rxjs';
 import { HttpService } from './http.service';
+import { ProdutoService } from './produto.service';
 
 @Injectable()
 export class VendaService {
@@ -12,7 +13,7 @@ export class VendaService {
   vendaFoiCriada: Subject<Venda | null> = new Subject<Venda | null>();
   vendaFoiFinalizada: Subject<null> = new Subject<null>();
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private produtoService: ProdutoService) {
     this.buscarVendasDia(new Date().toISOString().split('T')[0]);
   }
 
@@ -34,6 +35,7 @@ export class VendaService {
       () => {
         this.buscarVendasDia(hoje);
         this.vendaFoiFinalizada.next();
+        this.produtoService.buscarTodosProdutos();
       }
     )
   }

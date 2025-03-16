@@ -41,35 +41,30 @@
           </div>
           <!-- ---TABELA -->
           <div class="tabela" *ngIf="!isLoading()">
-            <div class="row">
-              <div class="col-md">
-                <table class="table table-striped">
-                    <thead>
-                        <th>Cód.</th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Preço Venda</th>
-                        <th>Estoque</th>
-                        <th>Imagem</th>
-                    </thead>
-                  <tbody>
-                    <tr 
-                        *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
-                        (click)="selecionar(produto)">
-                          <td>{{ produto.id | insereZeros:4}}</td>
-                          <td>{{ produto.nome | encurtar:25}}</td>
-                          <td>{{ produto.descricao | encurtar:50 }}</td>
-                          <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
-                          <td>{{ produto.qtd_estoque }}</td>
-                          <td class="celula-imagem"><img [src] = "produto.imagemURL" class = "imagem"></td>
-                        </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <table class="table table-striped">
+                <thead>
+                    <th>Cód.</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço Venda</th>
+                    <th>Estoque</th>
+                    <th>Imagem</th>
+                </thead>
+              <tbody>
+                <tr 
+                    *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
+                    (click)="selecionar(produto)">
+                      <td>{{ produto.id | insereZeros:4}}</td>
+                      <td>{{ produto.nome | encurtar:25}}</td>
+                      <td>{{ produto.descricao | encurtar:50 }}</td>
+                      <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
+                      <td>{{ produto.qtd_estoque }}</td>
+                      <td class="celula-imagem"><img [src] = "produto.imagemURL" class = "imagem"></td>
+                    </tr>
+              </tbody>
+            </table>
           </div>
-      </div>
-      <div class="linha-vertical"></div>
+        </div>
       <div class="amostra desativado" *ngIf = "!this.produtoSelecionado">
           <p class="informacao">
               Selecione um produto
@@ -125,6 +120,10 @@
                           [(ngModel)]="quantidade">
                   </div>
               </div>
+              <div class="alert alert-danger" role="alert" *ngIf="mostrarErro">
+                <p class="fw-semibold">ERRO!</p>
+                <p>Estoque insuficiente</p>
+            </div>
           </div>
 
           <div class="botoes">

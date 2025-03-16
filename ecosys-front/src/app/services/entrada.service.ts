@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Entrada } from '../models/entrada.model';
 import { Subject } from 'rxjs';
 import { HttpService } from './http.service';
+import { ProdutoService } from './produto.service';
 
 @Injectable()
 export class EntradaService {
@@ -12,7 +13,7 @@ export class EntradaService {
   entradaFoiSelecionada: Subject<Entrada | null> = new Subject<Entrada | null>();
   private entradaSelecionada: Entrada | null = null;
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private produtoService: ProdutoService) {
     this.buscarTodasEntradas();
   }
 
@@ -58,6 +59,7 @@ export class EntradaService {
           this.entradaSelecionada = null;
           this.listaEntradasAlterada.next(this.todasEntradas.slice());
           this.entradaFoiSelecionada.next(null);
+          this.produtoService.buscarTodosProdutos();
           //TODO Tratar depois a regra de negocio para descontar do estoque entradas que foram computadas
         }
       )
@@ -68,6 +70,7 @@ export class EntradaService {
           this.entradaSelecionada = null;
           this.listaEntradasAlterada.next(this.todasEntradas.slice());
           this.entradaFoiSelecionada.next(null);
+          this.produtoService.buscarTodosProdutos();
           //TODO Tratar depois a regra de negocio para descontar do estoque entradas que foram computadas
         }
       )
