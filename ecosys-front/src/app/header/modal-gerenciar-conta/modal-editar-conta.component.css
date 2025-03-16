@@ -44,5 +44,8 @@
             display: flex;
             justify-content: space-between;
         }
+        .alert{
+            margin-top: 20px;
+        }
     }
 }

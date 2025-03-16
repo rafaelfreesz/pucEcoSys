@@ -21,4 +21,8 @@ export class Usuario{
     set categoria(cat){
         this._categoria = cat
     }
+
+    get dt_hr_expira_token(){
+        return this._dt_hr_expira_token
+    }
 }

@@ -9,12 +9,15 @@ import { Router } from "@angular/router";
 export class AuthService {
 
   usuario: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(null);
-  usuarioLogado: Usuario;
+  private _usuarioLogado: Usuario;
   todosUsuarios: Subject<Usuario[]> = new Subject<Usuario[]>()
   private timerToken: any;
   
   constructor(private httpCliente: HttpClient, private router: Router) { }
   
+  get usuarioLogado(){
+    return new Usuario(this._usuarioLogado.login, this._usuarioLogado.id,this._usuarioLogado.categoria,this._usuarioLogado.token,this._usuarioLogado.dt_hr_expira_token);
+  }
 
   login(data: any){
     
@@ -45,7 +48,7 @@ export class AuthService {
    
     if(usuario.token){
       this.usuario.next(usuario);
-      this.usuarioLogado = usuario
+      this._usuarioLogado = usuario
 
       const tempoLogout = new Date(usuarioStorage._dt_hr_expira_token).getTime() - new Date().getTime();
       this.autoLogout(tempoLogout)
@@ -55,7 +58,7 @@ export class AuthService {
 
   logout(){
 
-    this.usuarioLogado = null;
+    this._usuarioLogado = null;
     this.usuario.next(null);
     localStorage.removeItem('usuario')
     this.router.navigate(['/login'])
@@ -67,26 +70,40 @@ export class AuthService {
 
   }
 
-  salvarUsuario(usuario: any){
+  salvarUsuario(usuario: any): Promise<string>{
     if(usuario.id){
 
-      this.httpCliente.put(`http://localhost:3000/conta/editar/${usuario.id}`,usuario).subscribe(
-        (valores_novos: any) => {
-          this.usuarioLogado.login = valores_novos.login;
-          this.usuarioLogado.categoria = valores_novos.categoria;
-          this.getTodosUsuarios()
-          this.usuario.next(this.usuarioLogado)
-        }  
-      )
+      return new Promise((resolve,reject) => {
+
+        this.httpCliente.put(`http://localhost:3000/conta/editar/${usuario.id}`,usuario).subscribe(
+          (valores_novos: any) => {
+            this._usuarioLogado.login = valores_novos.login;
+            this._usuarioLogado.categoria = valores_novos.categoria;
+            this.getTodosUsuarios()
+            this.usuario.next(this._usuarioLogado)
+            resolve("ok")
+          },
+          (erro) => {
+            reject(erro.error)
+          }  
+        )
+
+      })
+
       
     }else{
 
-      this.httpCliente.post(`http://localhost:3000/conta/cadastrar`,usuario).subscribe(
-        (valores_novos: any) => {
-          this.getTodosUsuarios()
-          this.usuario.next(null)
-        }  
-      )
+      return new Promise( (resolve,reject) => {
+
+        this.httpCliente.post(`http://localhost:3000/conta/cadastrar`,usuario).subscribe(
+          (valores_novos: any) => {
+            this.getTodosUsuarios()
+            this.usuario.next(null)
+            resolve("ok")
+          }  
+        )
+      })
+
 
     }
     
@@ -125,7 +142,7 @@ export class AuthService {
   trataLogin(resp: any){
     const dt_hr_expira_token = new Date(new Date().getTime() + resp.expira_em*1000)
     const usuario = new Usuario(resp.login,  resp.id,  resp.categoria,  resp.token,  dt_hr_expira_token)
-    this.usuarioLogado = usuario;
+    this._usuarioLogado = usuario;
     this.usuario.next(usuario);
     this.autoLogout(resp.expira_em*1000)
     localStorage.setItem('usuario',JSON.stringify(usuario))

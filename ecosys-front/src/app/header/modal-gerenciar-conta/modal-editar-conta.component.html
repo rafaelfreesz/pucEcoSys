@@ -24,7 +24,7 @@
                     id="login">
             </div>
             <div class="campo">
-                <label class="form-label fw-semibold label">Nova Senha:</label>
+                <label class="form-label fw-semibold label">Senha:</label>
                 <input
                     type="password"
                     class="form-control input"
@@ -41,21 +41,13 @@
                     id="confirmacao-senha"
                     autocomplete="on">
             </div>
-            <div class="campo">
-                <label class="form-label fw-semibold label">Categoria:</label>
-                <select
-                    name="categoria"
-                    class="form-select input"
-                    formControlName="categoria"
-                    id="categoria">
-                    <option value="g">Gerência</option>
-                    <option value="v">Vendas</option>
-                </select>
+            <div class="alert alert-danger" role="alert" *ngIf="errosFormulario.length">
+                <p class="fw-semibold">ERRO!</p>
+                <p *ngFor = "let erro of errosFormulario">{{erro}}</p>
             </div>
-
             <div class="botoes">
-                <button class ="btn btn-success fw-semibold botao" type="submit"> <i class="bi bi-box-arrow-in-right"></i> Salvar</button>
-                <button class ="btn btn-danger fw-semibold botao" type="button" (click)="fechar()"> <i class="bi bi-person-lock"></i> Cancelar</button>
+                <button class ="btn btn-success fw-semibold botao" type="submit"> <i class="bi bi-floppy-fill"></i> Salvar</button>
+                <button class ="btn btn-danger fw-semibold botao" type="button" (click)="fechar()"> <i class="bi bi-x-circle"></i> Cancelar</button>
             </div>
 
         </form>
