@@ -8,7 +8,7 @@ class VendaRepository{
     }
 
     consultarPorData(data){
-        const sql = `SELECT * FROM tb_venda where DATE(dt_hr_venda)='${data}' ORDER BY dt_hr_venda DESC`;
+        const sql = `SELECT * FROM tb_venda where DATE(dt_hr_venda AT TIME ZONE 'America/Sao_Paulo')='${data}' ORDER BY dt_hr_venda DESC`;
         return executarQuery(sql);
     }
 
@@ -18,7 +18,7 @@ class VendaRepository{
     }
 
     incluir(venda){
-        const sql = 'INSERT INTO tb_venda(dt_hr_venda, forma_pagamento) VALUES ($1, $2) returning *';
+        const sql = `INSERT INTO tb_venda(dt_hr_venda, forma_pagamento) VALUES ($1 AT TIME ZONE 'America/Sao_Paulo', $2) returning *`;
         
         return executarQuery(sql,
             [
