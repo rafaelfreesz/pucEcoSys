@@ -101,14 +101,15 @@ for i, fornecedor in enumerate(entradas):
 #Vendas
 vendas = []
 estoque = [produto[3] for produto in produtos]
-qtd_vendas = 1000
-vendas_por_dia = round(qtd_vendas/len(datas_recentes))
+qtd_vendas = 200
+max_vendas_por_dia = round(qtd_vendas/len(datas_recentes))
 i_data = 0
 for i in range(len(datas_recentes)):
     hora = 8
     minuto = 0
     data_hr_venda = f"{datas_recentes[i_data]}T0{hora}:0{minuto}:00.000Z"
-    for j in range(vendas_por_dia):
+    qtd_vendas_do_dia = random.randint(1,max_vendas_por_dia)
+    for j in range(qtd_vendas_do_dia):
         vendas.append([data_hr_venda,random.choice(['d','p','cc','cd'])])
         minuto += random.choice([8,10,2,4,5,7,12,15,18,16,14,20])
         if minuto >= 60:
@@ -126,13 +127,13 @@ items_venda = []
 total_produtos = sum([produto[3] for produto in produtos])
 produtos_por_venda = round(total_produtos/len(vendas))
 for i, venda in enumerate(vendas):
-    qtd_items = random.randint(1,20)
+    qtd_items = random.randint(1,5)
     for i in range(qtd_items):
         qtd_item = 0
         item = -1
         while qtd_item == 0:
             item = random.choice(produtos)
-            qtd_item = random.randint(min(1,item[3]),min(20,item[3]))
+            qtd_item = random.randint(min(1,item[3]),min(3,item[3]))
         item[3] = item[3] - qtd_item
         items_venda.append([produtos.index(item)+1,vendas.index(venda)+1,qtd_item,round(float(item[2]),2)])
 

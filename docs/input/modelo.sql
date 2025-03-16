@@ -1,7 +1,7 @@
 CREATE TABLE tb_usuario(
     id SERIAL PRIMARY KEY,
     login VARCHAR(14) UNIQUE,
-    categoria VARCHAR(2),
+    categoria VARCHAR(1),
     senha VARCHAR(250)
 );
 
