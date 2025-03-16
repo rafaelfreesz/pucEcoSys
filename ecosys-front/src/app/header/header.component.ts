@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isLogado = !!usuario;
         if(usuario){
           this.tipoUsuario = usuario.categoria
+          this.modoAtivo = this.tipoUsuario == 'v'? 'vendas': 'administracao';
         }
       }
     )    

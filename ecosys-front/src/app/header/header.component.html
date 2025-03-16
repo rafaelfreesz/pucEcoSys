@@ -24,7 +24,7 @@
         </li>
       </ul>
     </div>
-    <div class="container-fluid" *ngIf="this.modoAtivo === 'balcao'">
+    <div class="container-fluid" *ngIf="this.modoAtivo === 'vendas'">
       <ul class="navbar-nav" >
         <li class="nav-item item-secao" routerLinkActive="item-ativo" [routerLinkActiveOptions]="{exact: true}">
           <a routerLink="/vendas" class="nav-link item-secao-nome">Vendas</a>
@@ -38,11 +38,11 @@
   <div class="menu-direito" *ngIf="isLogado">
 
     <ul class="navbar-nav">
-      <li class="nav-item item-secao" (click)="trocarModo('balcao')">
-        <a routerLink="/vendas" class="nav-link item-secao-nome" *ngIf="this.modoAtivo === 'administracao'" ><i class="bi bi-upc-scan"></i></a>
+      <li class="nav-item item-secao" (click)="trocarModo('vendas')">
+        <a routerLink="/vendas" class="nav-link item-secao-nome" *ngIf="this.tipoUsuario === 'g' && this.modoAtivo === 'administracao'" ><i class="bi bi-upc-scan"></i></a>
       </li>
       <li class="nav-item item-secao" (click)="trocarModo('administracao')">
-        <a routerLink="/" class="nav-link item-secao-nome" *ngIf="this.modoAtivo === 'balcao'"><i class="bi bi-briefcase-fill"></i></a>
+        <a routerLink="/" class="nav-link item-secao-nome" *ngIf="this.tipoUsuario === 'g' && this.modoAtivo === 'vendas'"><i class="bi bi-briefcase-fill"></i></a>
       </li>
       <li class="nav-item item-secao">
         <div class="dropdown">
