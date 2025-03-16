@@ -96,10 +96,12 @@ export class AuthService {
       return new Promise( (resolve,reject) => {
 
         this.httpCliente.post(`http://localhost:3000/conta/cadastrar`,usuario).subscribe(
-          (valores_novos: any) => {
+          () => {
             this.getTodosUsuarios()
-            this.usuario.next(null)
             resolve("ok")
+          },
+          (erro) => {
+            reject(erro.error)
           }  
         )
       })

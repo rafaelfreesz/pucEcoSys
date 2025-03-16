@@ -5,10 +5,16 @@
         <div class="fechar" (click)="fechar()">x</div>
     </div>
 
-    <div class="conteudo">
+    <div class="box-spinner" *ngIf="isLoading">
+        <div class="spinner-border text-success spinner" role="status" >
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="conteudo" *ngIf="!isLoading">
         <div class="box-lista-usuarios">
             <div class="box-botao-novo">
-                <button class ="btn btn-success fw-semibold botao" type="button" (click)="prepararCadastro()"> <i class="bi bi-box-arrow-in-right"></i> Novo</button>
+                <button class ="btn btn-success fw-semibold botao" type="button" (click)="prepararCadastro()"> <i class="bi bi-file-earmark-plus-fill"></i> Novo</button>
             </div>
             <div class="tabela">
 
@@ -67,10 +73,13 @@
                         <option value="v">Vendas</option>
                     </select>
                 </div>
-    
+                <div class="alert alert-danger" role="alert" *ngIf="errosFormulario.length">
+                    <p class="fw-semibold">ERRO!</p>
+                    <p *ngFor = "let erro of errosFormulario">{{erro}}</p>
+                </div>
                 <div class="botoes">
-                    <button class ="btn btn-success fw-semibold botao" type="submit"> <i class="bi bi-box-arrow-in-right"></i> Salvar</button>
-                    <button class ="btn btn-danger fw-semibold botao" type="button" (click)="fechar()"> <i class="bi bi-person-lock"></i> Cancelar</button>
+                    <button class ="btn btn-success fw-semibold botao" type="submit"> <i class="bi bi-floppy-fill"></i> Salvar</button>
+                    <button class ="btn btn-danger fw-semibold botao" type="button" (click)="fechar()"> <i class="bi bi-x-circle"></i> Cancelar</button>
                 </div>
     
             </form>
