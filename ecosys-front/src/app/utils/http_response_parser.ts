@@ -184,7 +184,7 @@ export abstract class HTTPResponseParser{
         const venda: Venda = new Venda();
 
         venda.id = resposta.id;
-        venda.dt_hr_venda = resposta.dt_hr_venda;
+        venda.dt_hr_venda = new Date(resposta.dt_hr_venda);
         venda.forma_pagamento = resposta.forma_pagamento;
         
         for(const resp of resposta.items){

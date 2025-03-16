@@ -1,8 +1,9 @@
 import { ItemVenda } from "./item_venda.model";
 
 export class Venda{
+    
     private _id?: number = -1; 
-    public dt_hr_venda: string = "";
+    public dt_hr_venda: Date = new Date();
     public items_venda: ItemVenda [] = [];
     public forma_pagamento: string = "d";
 

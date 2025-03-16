@@ -13,18 +13,7 @@
             </button>
 
             <div class="filtro">
-                <div class="criterio-filtro">
-                    <select
-                      class="form-select"
-                      name="selecionar-filtro"
-                      id="selecionar-filtro"
-                      [(ngModel)]="criterioFiltro"
-                      (change) = "this.valorFiltro = ''"
-                      >
-                      <option value="id">Código</option>
-                      <option value="dt_hr_venda">Data</option>
-                    </select>
-                </div>
+                <p class="form-label fs-5 fw-semibold label">Data:</p>
                 <div class="valor-filtro">
                   <input
                     type="date"
@@ -32,24 +21,14 @@
                     name="filtro-valor"
                     id="filtro-valor"
                     [(ngModel)]="valorFiltro"
-                    *ngIf = "this.criterioFiltro === 'dt_hr_venda'"
                     (input) = "atualizarLista()"
                   />
-                  <input
-                    type="search"
-                    class="form-control"
-                    name="filtro-valor"
-                    id="filtro-valor"
-                    [(ngModel)]="valorFiltro"
-                    *ngIf = "this.criterioFiltro !== 'dt_hr_venda'"
-                  />
                 </div>
-                <div class="total">Total: {{totalFiltrado |contadorFiltro:todasVendas:valorFiltro:criterioFiltro}}</div>
+                <div class="total">Total: {{todasVendas.length}}</div>
             </div>
         </div>
         
         <!-- TABELA -->
-          
         <table class="table table-striped">
             <thead>
                 <th>Cód.</th>
@@ -59,10 +38,10 @@
               </thead>
               <tbody>
                 <tr 
-                *ngFor="let venda of todasVendas | filtroLista:valorFiltro:criterioFiltro;"
+                *ngFor="let venda of todasVendas"
                 (click)="selecionarVenda(venda)">
                   <td>{{ venda.id | insereZeros:4}}</td>
-                  <td>{{ venda.dt_hr_venda | data}}</td>
+                  <td>{{ venda.dt_hr_venda | date:'dd/MM/yyyy HH:mm'}}</td>
                   <td>{{ venda.forma_pagamento | traduzFormaPagamento}}</td>
                   <td>R$ {{ venda.valor_total_venda() | number : "1.2-2"}}</td>
                 </tr>
@@ -78,7 +57,7 @@
             </div>
             <div class="descricao">
                 <div class="informacao"><span class="label">Código: </span>{{vendaSelecionada.id | insereZeros:4}}</div>
-                <div class="informacao"><span class="label">Data/hora: </span>{{vendaSelecionada.dt_hr_venda | data}}</div>
+                <div class="informacao"><span class="label">Data/hora: </span>{{vendaSelecionada.dt_hr_venda | date:'dd/MM/yyyy HH:mm'}}</div>
             </div>
             <div class="cabecalho pagamento">
                 <div class="titulo">Ítems</div>

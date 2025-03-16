@@ -204,7 +204,7 @@ export class HttpService{
     insertVenda(venda: Venda){
         let vendaBody = {
             'venda': {
-                'dt_hr_venda': venda.dt_hr_venda,
+                'dt_hr_venda': venda.dt_hr_venda.toISOString(),
                 'forma_pagamento': venda.forma_pagamento
             },
             'items': venda.items_venda.map((elemento: ItemVenda) => {
