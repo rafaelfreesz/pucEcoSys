@@ -20,10 +20,13 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
   inHouveAlteracao: boolean = false;
 
 
-  constructor(private fornecedorService: FornecedorService) {
+  constructor(private fornecedorService: FornecedorService) {}
+  
+  ngOnInit(): void {    
     this.fornecedorFoiSelecionado = this.fornecedorService.fornecedorFoiSelecionado.subscribe(
       fornecedorSelecionado =>
         {
+          
           this.fornecedor = fornecedorSelecionado
           if(this.fornecedor && this.fornecedor.id === -1){
             this.inEdicao = true;
@@ -33,9 +36,6 @@ export class ModalFornecedorComponent implements OnInit, OnDestroy {
           }
         }
     )
-  }
-
-  ngOnInit(): void {    
   }
 
   ngOnDestroy(): void {

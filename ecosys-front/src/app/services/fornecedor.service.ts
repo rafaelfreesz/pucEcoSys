@@ -19,6 +19,10 @@ export class FornecedorService{
         this.buscarTodosFornecedores();
     }
     
+    getTodosFornecedores(){
+        return this.todosFornecedores.slice()
+    }
+    
     buscarTodosFornecedores(): void{
         this.isLoading = true;
         this.httpService.getTodosFornecedores().subscribe( todosFornecedores => {
@@ -28,9 +32,6 @@ export class FornecedorService{
         })
     }
 
-    getTodosFornecedores(){
-        return this.todosFornecedores.slice()
-    }
 
     salvarFornecedor(fornecedor: Fornecedor){
         //TODO tratar a inserção de traço no cep com diretivas, e corrigir no dump SQL
