@@ -106,8 +106,11 @@ td{
                 .nome-produto{
                     max-width: 10vw;
                 }
+                .tabela-items{
+                    margin-top: 1px;
+                }
                 thead{
-                    background-color: #5ab68b;
+                    background-color: #198754;
                     margin-top: 0px;
                 }
                 tr{
