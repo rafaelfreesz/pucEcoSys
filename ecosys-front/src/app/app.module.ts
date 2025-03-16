@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -45,6 +45,10 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ModalGerenciarContaComponent } from './header/modal-gerenciar-conta/modal-editar-conta.component';
 import { ModalGerenciarUsuariosComponent } from './header/modal-gerenciar-usuarios/modal-gerenciar-usuarios.component';
 import { CategoriaPipe } from './pipes/categoria.pipe';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt'
+
+registerLocaleData(localePt, 'pt-BR')
 
 @NgModule({
   declarations: [
@@ -93,7 +97,7 @@ import { CategoriaPipe } from './pipes/categoria.pipe';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [HttpService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+  providers: [HttpService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
