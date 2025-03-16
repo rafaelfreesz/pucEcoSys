@@ -15,6 +15,7 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
 
   @Output() fecharModal: EventEmitter<any> = new EventEmitter<any>();
   @Input() finalidade: string = "compra"
+  isLoading: boolean = true;
   todosProdutos: any[] = []
   produtoSelecionado: any;
   listaProdutosAlterada: Subscription;
@@ -24,14 +25,16 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   quantidade: number = 1;
 
   constructor(private produtoService: ProdutoService) {
-    this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
-        todosProdutos => {
-          this.todosProdutos = todosProdutos;
-        }
-    )
   }
-
-    ngOnInit(): void {
+  
+  ngOnInit(): void {
+      this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
+          todosProdutos => {
+            this.todosProdutos = todosProdutos;
+            this.isLoading = false;
+          }
+      )
+      this.produtoService.buscarTodosProdutos();
   }
 
   
@@ -50,8 +53,7 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
     }else{
 
       this.produtoSelecionado = produto;
-    }
-    //this.fecharModal.emit(produto);
+    }    
   }
 
   adicionar(){

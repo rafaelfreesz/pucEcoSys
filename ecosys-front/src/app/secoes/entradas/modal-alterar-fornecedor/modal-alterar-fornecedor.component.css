@@ -4,23 +4,15 @@ tr:hover{
         color:white
     }
 }
-
-.blackdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0,0.6);
-    z-index: 0;
+.blackdrop{
+    z-index: 100;
 }
-
 .alert-box{
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60vw;
+    width: 70vw;
     height: fit-content;
     z-index: 100;
     background: white;
@@ -49,23 +41,26 @@ tr:hover{
         margin:10px;
         
         .filtro{
-            width: 65vw;
-            max-width: 65vw;
+            width: 70vw;
         }
 
         .tabela{
             margin-top: 10px;
             border-top: 1px solid #e2e2e2;
-            max-height: 50vh;
             height: 50vh;
+            overflow-y: auto;
+            width: 100%;
         }
 
     }
 }
 
+.botoes{
+    margin-top: 20px;
+}
 
 table{
-    margin-top: 10px;
+    width: 100%;
 }
 
 thead{

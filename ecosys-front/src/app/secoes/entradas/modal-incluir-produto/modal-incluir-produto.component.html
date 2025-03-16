@@ -1,139 +1,143 @@
-<div class="blackdrop">
-  <div class="alert-box">
-    <div class="cabecalho">
-      <div class="titulo">Incluir Produto</div>
-      <div class="fechar" (click)="cancelar()">X</div>
-    </div>
+<div class="blackdrop"></div>
+<div class="alert-box">
+  <div class="cabecalho">
+    <div class="titulo">Incluir Produto</div>
+    <div class="fechar" (click)="cancelar()">X</div>
+  </div>
 
-    <div class="conteudo">
-        <div class="busca">
-            
-            <div class="row filtro">
-              <div class="col-sm-3">
-                <select
-                  class="form-select"
-                  name="selecionar-filtro"
-                  id="selecionar-filtro"
-                  [(ngModel)]="criterioFiltro"
-                >
-                  <option value="nome">Nome</option>
-                  <option value="id">Código</option>
-                  <option value="descricao">Descricao</option>
-                  <option value="qtd_estoque">Quantidade</option>
-                  <option value="preco_venda">Preço de Venda (R$)</option>
-                </select>
+  <div class="conteudo">
+      <div class="busca">
+          
+          <div class="row filtro">
+            <div class="col-sm-3">
+              <select
+                class="form-select"
+                name="selecionar-filtro"
+                id="selecionar-filtro"
+                [(ngModel)]="criterioFiltro"
+              >
+                <option value="nome">Nome</option>
+                <option value="id">Código</option>
+                <option value="descricao">Descricao</option>
+                <option value="qtd_estoque">Quantidade</option>
+                <option value="preco_venda">Preço de Venda (R$)</option>
+              </select>
+            </div>
+            <div class="col-md-8">
+              <input
+                type="search"
+                class="form-control"
+                name="filtro-valor"
+                id="filtro-valor"
+                [(ngModel)]="valorFiltro"
+              />
+            </div>
+          </div>
+          <!-- SPINNER -->
+          <div class="box-spinner" *ngIf="isLoading">
+            <div class="spinner-border text-success spinner" role="status" >
+                <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <!-- ---TABELA -->
+          <div class="tabela" *ngIf="!isLoading">
+            <div class="row">
+              <div class="col-md">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Cód.</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço Venda</th>
+                        <th>Estoque</th>
+                        <th>Imagem</th>
+                    </thead>
+                  <tbody>
+                    <tr 
+                        *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
+                        (click)="selecionar(produto)">
+                          <td>{{ produto.id | insereZeros:4}}</td>
+                          <td>{{ produto.nome | encurtar:25}}</td>
+                          <td>{{ produto.descricao | encurtar:50 }}</td>
+                          <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
+                          <td>{{ produto.qtd_estoque }}</td>
+                          <td class="celula-imagem"><img [src] = "produto.imagemURL" class = "imagem"></td>
+                        </tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="col-md-8">
-                <input
-                  type="search"
-                  class="form-control"
-                  name="filtro-valor"
-                  id="filtro-valor"
-                  [(ngModel)]="valorFiltro"
-                />
-              </div>
             </div>
-      
-            <!-- ---TABELA -->
-            <div class="tabela">
-              <div class="row">
-                <div class="col-md">
-                  <table class="table table-striped">
-                      <thead>
-                          <th>Cód.</th>
-                          <th>Nome</th>
-                          <th>Descrição</th>
-                          <th>Preço Venda</th>
-                          <th>Estoque</th>
-                          <th>Imagem</th>
-                      </thead>
-                    <tbody>
-                      <tr 
-                          *ngFor="let produto of todosProdutos | filtroLista:valorFiltro:criterioFiltro;"
-                          (click)="selecionar(produto)">
-                            <td>{{ produto.id | insereZeros:4}}</td>
-                            <td>{{ produto.nome | encurtar:25}}</td>
-                            <td>{{ produto.descricao | encurtar:50 }}</td>
-                            <td>R$ {{ produto.preco_venda | number : "1.2-2" }}</td>
-                            <td>{{ produto.qtd_estoque }}</td>
-                            <td class="celula-imagem"><img src = "https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" class = "imagem"></td>
-                          </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="linha-vertical"></div>
-        <div class="amostra desativado" *ngIf = "!this.produtoSelecionado">
-            <p class="informacao">
-                Selecione um produto
-            </p>
-            <p class="icone-desativado">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="rgba(200,200,200)" class="bi bi-x-circle" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                  </svg>
-            </p>
-            <div class="container-botao">
-                <button class="btn btn-danger botao" (click)="cancelar()">
-                  <i class="bi bi-x-circle"></i> Cancelar
-                </button>
-            </div>
-        </div>
-        <div class="amostra" *ngIf = "this.produtoSelecionado">
-            <div class="cabecalho">
-                <div class="titulo">Produto Selecionado</div>
-            </div>
-            <div class="container-imagem">
-                <img src = "https://images.tcdn.com.br/img/img_prod/1140357/caneta_esferografica_bic_cristal_dura_mais_azul_ponta_media_de_1_0mm_kit_10_unidades_2640_2_671e4fdf5e2c89e777e6923939970830.jpg" class = "imagem">
-            </div>
-            <div class="descricao">
-                <p class="informacao"><span class="label">Nome: </span>{{produtoSelecionado.nome}}</p>
-                <p class="informacao"><span class="label">Descrição: </span>{{produtoSelecionado.descricao}}</p>
-                <div class="valores">
-                    <div class="campo" *ngIf="finalidade === 'compra'">
-                        <label for="preco_compra" class="label">Pço. de compra (R$):</label>
-                        <input
-                            type="number"
-                            inputmode="numeric"
-                            step="0.01"
-                            id="preco-compra"
-                            class="form-control"
-                            min="0.01"
-                            [(ngModel)]="precoCompra">
-                    </div>
-                    <div class="campo" *ngIf="finalidade === 'venda'">
-                        <span class="label">Pço. unitário:</span>
-                        <p for="preco_compra" > R${{produtoSelecionado.preco_venda}}</p>
-                        
-                    </div>
-                    <div class="campo">
-                        <label for="quantidade" class="label">Quantidade:</label>
-                        <input
-                            type="number"
-                            inputmode="numeric"
-                            step="1"
-                            id="quantidade"
-                            class="form-control"
-                            min="1"
-                            [(ngModel)]="quantidade">
-                    </div>
-                </div>
-            </div>
-
-            <div class="botoes">
+          </div>
+      </div>
+      <div class="linha-vertical"></div>
+      <div class="amostra desativado" *ngIf = "!this.produtoSelecionado">
+          <p class="informacao">
+              Selecione um produto
+          </p>
+          <p class="icone-desativado">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="rgba(200,200,200)" class="bi bi-x-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+          </p>
+          <div class="container-botao">
               <button class="btn btn-danger botao" (click)="cancelar()">
                 <i class="bi bi-x-circle"></i> Cancelar
               </button>
-              <button class="btn btn-primary botao" (click)="adicionar()">
-                <i class="bi bi-plus-circle"></i> Adicionar
-              </button>
-            </div>
-        </div>
+          </div>
+      </div>
+      <div class="amostra" *ngIf = "this.produtoSelecionado">
+          <div class="cabecalho">
+              <div class="titulo">Produto Selecionado</div>
+          </div>
+          <div class="container-imagem">
+              <img [src] = "produtoSelecionado.imagemURL" class = "imagem">
+          </div>
+          <div class="descricao">
+              <p class="informacao"><span class="label">Nome: </span>{{produtoSelecionado.nome}}</p>
+              <p class="informacao"><span class="label">Descrição: </span>{{produtoSelecionado.descricao}}</p>
+              <div class="valores">
+                  <div class="campo" *ngIf="finalidade === 'compra'">
+                      <label for="preco_compra" class="label">Pço. de compra (R$):</label>
+                      <input
+                          type="number"
+                          inputmode="numeric"
+                          step="0.01"
+                          id="preco-compra"
+                          class="form-control"
+                          min="0.01"
+                          [(ngModel)]="precoCompra">
+                  </div>
+                  <div class="campo" *ngIf="finalidade === 'venda'">
+                      <span class="label">Pço. unitário:</span>
+                      <p for="preco_compra" > R${{produtoSelecionado.preco_venda}}</p>
+                      
+                  </div>
+                  <div class="campo">
+                      <label for="quantidade" class="label">Quantidade:</label>
+                      <input
+                          type="number"
+                          inputmode="numeric"
+                          step="1"
+                          id="quantidade"
+                          class="form-control"
+                          min="1"
+                          [(ngModel)]="quantidade">
+                  </div>
+              </div>
+          </div>
+
+          <div class="botoes">
+            <button class="btn btn-danger botao" (click)="cancelar()">
+              <i class="bi bi-x-circle"></i> Cancelar
+            </button>
+            <button class="btn btn-primary botao" (click)="adicionar()">
+              <i class="bi bi-plus-circle"></i> Adicionar
+            </button>
+          </div>
+      </div>
 
 
 
-    </div>
   </div>
 </div>

@@ -36,33 +36,28 @@
 
             <!-- ---TABELA -->
             <div class="tabela">
-                <div class="row">
-                    <div class="col-md">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>Cód.</th>
-                                <th>Razão Social</th>
-                                <th>CNPJ</th>
-                                <th>Nome Empresarial</th>
-                                <th>Cidade</th>
-                                <th>Estado</th>
-                              </thead>
-                              <tbody>
-                                <tr 
-                                *ngFor="let fornecedor of todosFornecedores | filtroLista:valorFiltro:criterioFiltro;"
-                                (click)="selecionar(fornecedor)">
-                                  <td>{{ fornecedor.id | insereZeros:4}}</td>
-                                  <td>{{ fornecedor.razao_social | encurtar:25}}</td>
-                                  <td>{{ fornecedor.cnpj | cnpj}}</td>
-                                  <td>{{ fornecedor.nome_empresarial | encurtar:50 }}</td>
-                                  <td>{{ fornecedor.endereco.cidade }}</td>
-                                  <td>{{ fornecedor.endereco.estado }}</td>
-                                </tr>
-                              </tbody>
-                        </table>
-            
-                    </div>
-                  </div>
+              <table class="table table-striped">
+                  <thead>
+                      <th>Cód.</th>
+                      <th>Razão Social</th>
+                      <th>CNPJ</th>
+                      <th>Nome Empresarial</th>
+                      <th>Cidade</th>
+                      <th>Estado</th>
+                    </thead>
+                    <tbody>
+                      <tr 
+                      *ngFor="let fornecedor of todosFornecedores | filtroLista:valorFiltro:criterioFiltro;"
+                      (click)="selecionar(fornecedor)">
+                        <td>{{ fornecedor.id | insereZeros:4}}</td>
+                        <td>{{ fornecedor.razao_social | encurtar:25}}</td>
+                        <td>{{ fornecedor.cnpj | cnpj}}</td>
+                        <td>{{ fornecedor.nome_empresarial | encurtar:50 }}</td>
+                        <td>{{ fornecedor.endereco.cidade }}</td>
+                        <td>{{ fornecedor.endereco.estado }}</td>
+                      </tr>
+                    </tbody>
+              </table>
             </div>
 
             <div class="botoes">

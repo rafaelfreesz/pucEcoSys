@@ -15,6 +15,8 @@ export class ModalVendaComponent implements OnInit, OnDestroy {
   vendaFoiCriada: Subscription;
   vendaFoiFinalizada: Subscription;
   mostrarModalItem: boolean = false;
+  isLoading: boolean = false;
+
   constructor(private vendaService: VendaService) {
     this.vendaFoiCriada = vendaService.vendaFoiCriada.subscribe(
       () => {
@@ -24,6 +26,7 @@ export class ModalVendaComponent implements OnInit, OnDestroy {
     this.vendaFoiFinalizada = vendaService.vendaFoiFinalizada.subscribe(
       () => {
         this.vendaNova = null;
+        this.isLoading = false;
       }
     )
   }
@@ -64,6 +67,7 @@ export class ModalVendaComponent implements OnInit, OnDestroy {
   }
 
   submeterVenda(){
+    this.isLoading = true;
     if(this.vendaNova){
       this.vendaNova.dt_hr_venda = new Date().toISOString();
       this.vendaService.salvarVenda(this.vendaNova);

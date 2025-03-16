@@ -1,11 +1,5 @@
-.blackdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0,0.6);
-    z-index: 0;
+.blackdrop{
+    z-index: 100;
 }
 .alert-box{
     position: fixed;
@@ -48,6 +42,20 @@
             .filtro{
                 width: 65vw;
                 max-width: 65vw;
+            }
+
+            
+
+            .box-spinner{
+                height: 50vh;
+                width: 58vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .spinner{   
+                    width: 50px;
+                    height: 50px;
+                }
             }
 
             .tabela{

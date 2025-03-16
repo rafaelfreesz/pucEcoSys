@@ -121,7 +121,7 @@
                                         <td class="text-center botao-tabela-excluir">
                                             <div class="icone-mais-background" (click)="excluirItem(item_entrada)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-trash-fill icone" viewBox="0 0 16 16">
-                                                  <path id="path-trash" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                                    <path id="path-trash" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                                 </svg>
                                             </div>
                                         </td>
@@ -139,40 +139,40 @@
                         </div>
                     </div>
                     
-
+                    <div class="botoes" *ngIf="inEdicao">
+                        <button type="submit" class="btn btn-primary botao" [disabled]="!inFoiAlterado()">
+                            <i class="bi bi-floppy-fill"></i> Salvar
+                        </button>
+                        <button class="btn btn-danger botao" *ngIf="!ehNovo()" (click)="excluir()">
+                            <i class="bi bi-trash-fill"></i> Excluir
+                        </button>
+                        <button class="btn btn-danger botao" (click)="fechar()">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
-
         <div class="botoes" *ngIf="!inEdicao">
             <button class="btn btn-primary botao" (click)="iniciarEdicao()">
-              <i class="bi bi-pencil-square"></i> Editar
+                <i class="bi bi-pencil-square"></i> Editar
             </button>
             <button class="btn btn-danger botao" (click)="fechar()">
-              <i class="bi bi-x-circle"></i> Fechar
+                <i class="bi bi-x-circle"></i> Fechar
             </button>
         </div>
 
-        <div class="botoes" *ngIf="inEdicao">
-            <button type="submit" class="btn btn-primary botao" [disabled]="!inFoiAlterado()">
-                <i class="bi bi-floppy-fill"></i> Salvar
-            </button>
-            <button class="btn btn-danger botao" *ngIf="!ehNovo()" (click)="excluir()">
-                <i class="bi bi-trash-fill"></i> Excluir
-            </button>
-            <button class="btn btn-danger botao" (click)="fechar()">
-                <i class="bi bi-x-circle"></i> Cancelar
-            </button>
-        </div>
 
-        <app-modal-alterar-fornecedor
-            *ngIf = "this.mostrarModalTrocaFornecedor"
-            (fecharModal) = "fecharModalAlterarFornecedor($event)"
-            ></app-modal-alterar-fornecedor>
-        <app-modal-incluir-produto
-            *ngIf = "this.mostrarModalItem"
-            finalidade="compra"
-            (fecharModal) = "fecharModalIncluirItem($event)"
-            ></app-modal-incluir-produto>
         
 </div>
+    <app-modal-alterar-fornecedor
+        *ngIf = "this.mostrarModalTrocaFornecedor"
+        (fecharModal) = "fecharModalAlterarFornecedor($event)"
+        ></app-modal-alterar-fornecedor>
+    <app-modal-incluir-produto
+        *ngIf = "this.mostrarModalItem"
+        finalidade="compra"
+        (fecharModal) = "fecharModalIncluirItem($event)"
+        ></app-modal-incluir-produto>
+        
+
