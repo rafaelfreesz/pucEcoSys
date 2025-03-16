@@ -29,11 +29,10 @@ export class VendaService {
     this.vendaFoiCriada.next();
   }
 
-  salvarVenda(venda: Venda){
+  salvarVenda(venda: Venda, hoje: string){
     this.httpService.insertVenda(venda).subscribe(
-      todasVendas => {
-        this.todasVendas = todasVendas;
-        this.listaVendasAlterada.next(this.todasVendas.slice());
+      () => {
+        this.buscarVendasDia(hoje);
         this.vendaFoiFinalizada.next();
       }
     )

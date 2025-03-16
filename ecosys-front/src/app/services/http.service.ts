@@ -217,9 +217,7 @@ export class HttpService{
             })
 
         }
-        return this.http.post(`http://localhost:3000/vendas`,vendaBody).pipe(
-            map( HTTPResponseParser.buildListaVendas )
-        )
+        return this.http.post(`http://localhost:3000/vendas`,vendaBody)
     }
 
 }
