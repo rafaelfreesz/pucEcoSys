@@ -1,10 +1,10 @@
-<div class="box-spinner" *ngIf="this.isCarregando()">
+<div class="box-spinner" *ngIf="this.isLoading()">
   <div class="spinner-border text-success spinner" role="status" >
       <span class="visually-hidden">Loading...</span>
   </div>
 </div>
 
-<div *ngIf="!this.isCarregando()">
+<div *ngIf="!this.isLoading()">
   <div class="row">
       <div class="col-md">
         <button class="btn btn-success botao-novo" (click) = "prepararCadastro()" >

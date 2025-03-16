@@ -34,13 +34,13 @@
             </div>
           </div>
           <!-- SPINNER -->
-          <div class="box-spinner" *ngIf="isLoading">
+          <div class="box-spinner" *ngIf="isLoading()">
             <div class="spinner-border text-success spinner" role="status" >
                 <span class="visually-hidden">Loading...</span>
             </div>
           </div>
           <!-- ---TABELA -->
-          <div class="tabela" *ngIf="!isLoading">
+          <div class="tabela" *ngIf="!isLoading()">
             <div class="row">
               <div class="col-md">
                 <table class="table table-striped">

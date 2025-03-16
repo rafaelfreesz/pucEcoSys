@@ -16,16 +16,15 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
   valorFiltro: string = "";
   totalFiltrado: number = 0;
 
-  constructor(private fornecedorService: FornecedorService) {
+  constructor(private fornecedorService: FornecedorService) {}
+  
+  ngOnInit(): void {
+    this.todosFornecedores = this.fornecedorService.getTodosFornecedores();
     this.listaFornecedoresAlterada = this.fornecedorService.listaFornecedoresAlterada.subscribe(
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
       }
     )
-  }
-
-  ngOnInit(): void {
-    
   
   }
 
@@ -42,8 +41,8 @@ export class ListaFornecedoresComponent implements OnInit, OnDestroy {
   }
 
 
-  isCarregando(): boolean{
-    return this.fornecedorService.isCarregando;
+  isLoading(): boolean{
+    return this.fornecedorService.isLoading;
   }
 
 }

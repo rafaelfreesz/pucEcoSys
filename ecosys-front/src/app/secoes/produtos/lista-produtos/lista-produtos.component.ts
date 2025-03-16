@@ -22,6 +22,10 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
   contadorPipe: ContadorFiltroPipe = new ContadorFiltroPipe();
 
   constructor(private produtoService: ProdutoService) {
+  }
+  
+  ngOnInit(): void {
+    this.todosProdutos = this.produtoService.getTodosProdutos();
     this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
       todosProdutos => {
         this.todosProdutos = todosProdutos
@@ -29,9 +33,6 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
         this.totalDeIndices = Math.ceil(this.todosProdutos.length/this.itemsListaPorVez)
       }
     )
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
@@ -72,8 +73,8 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
     this.defineValoresPaginator()
   }
 
-  isCarregando(): boolean{
-    return this.produtoService.isCarregando;
+  isLoading(): boolean{
+    return this.produtoService.isLoading;
   }
 
 }

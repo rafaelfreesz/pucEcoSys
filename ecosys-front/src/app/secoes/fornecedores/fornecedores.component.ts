@@ -4,8 +4,7 @@ import { FornecedorService } from '../../services/fornecedor.service';
 @Component({
   selector: 'app-fornecedores',
   templateUrl: './fornecedores.component.html',
-  styleUrls: ['./fornecedores.component.scss'],
-  providers: [FornecedorService]
+  styleUrls: ['./fornecedores.component.scss']
 })
 export class FornecedoresComponent implements OnInit {
 

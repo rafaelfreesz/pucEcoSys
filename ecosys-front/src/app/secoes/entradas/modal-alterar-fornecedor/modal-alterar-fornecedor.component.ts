@@ -5,8 +5,7 @@ import { FornecedorService } from 'src/app/services/fornecedor.service';
 @Component({
   selector: 'app-modal-alterar-fornecedor',
   templateUrl: './modal-alterar-fornecedor.component.html',
-  styleUrls: ['./modal-alterar-fornecedor.component.css'],
-  providers: [FornecedorService]
+  styleUrls: ['./modal-alterar-fornecedor.component.css']
 })
 export class ModalAlterarFornecedorComponent implements OnInit, OnDestroy {
 
@@ -16,15 +15,15 @@ export class ModalAlterarFornecedorComponent implements OnInit, OnDestroy {
   listaFornecedoresAlterada: Subscription
   @Output() fecharModal: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private fornecedorService: FornecedorService) {
+  constructor(private fornecedorService: FornecedorService) {}
+  
+  ngOnInit(): void {
+    this.todosFornecedores = this.fornecedorService.getTodosFornecedores()
     this.listaFornecedoresAlterada = this.fornecedorService.listaFornecedoresAlterada.subscribe(
       todosFornecedores => {
         this.todosFornecedores = todosFornecedores
       }
     )
-   }
-
-  ngOnInit(): void {
   }
 
   
@@ -38,6 +37,10 @@ export class ModalAlterarFornecedorComponent implements OnInit, OnDestroy {
 
   selecionar(fornecedor: any){
     this.fecharModal.emit(fornecedor);
+  }
+
+  isLoading(){
+    return this.fornecedorService.isLoading;
   }
 
 }

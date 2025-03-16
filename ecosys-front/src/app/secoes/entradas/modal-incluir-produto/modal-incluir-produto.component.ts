@@ -8,14 +8,12 @@ import { ProdutoService } from 'src/app/services/produto.service';
 @Component({
   selector: 'app-modal-incluir-produto',
   templateUrl: './modal-incluir-produto.component.html',
-  styleUrls: ['./modal-incluir-produto.component.css'],
-  providers: [ProdutoService]
+  styleUrls: ['./modal-incluir-produto.component.css']
 })
 export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
 
   @Output() fecharModal: EventEmitter<any> = new EventEmitter<any>();
   @Input() finalidade: string = "compra"
-  isLoading: boolean = true;
   todosProdutos: any[] = []
   produtoSelecionado: any;
   listaProdutosAlterada: Subscription;
@@ -28,13 +26,12 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
-      this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
+    this.todosProdutos = this.produtoService.getTodosProdutos();
+    this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
           todosProdutos => {
             this.todosProdutos = todosProdutos;
-            this.isLoading = false;
           }
       )
-      this.produtoService.buscarTodosProdutos();
   }
 
   
@@ -72,6 +69,10 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
     }
     this.fecharModal.emit(novoItem);
   
+  }
+
+  isLoading(){
+    return this.produtoService.isLoading;
   }
 
 }

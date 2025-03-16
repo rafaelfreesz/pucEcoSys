@@ -46,6 +46,8 @@ import { ModalGerenciarContaComponent } from './header/modal-gerenciar-conta/mod
 import { ModalGerenciarUsuariosComponent } from './header/modal-gerenciar-usuarios/modal-gerenciar-usuarios.component';
 import { CategoriaPipe } from './pipes/categoria.pipe';
 import { registerLocaleData } from '@angular/common';
+import { ProdutoService } from './services/produto.service';
+import { FornecedorService } from './services/fornecedor.service';
 import localePt from '@angular/common/locales/pt'
 
 registerLocaleData(localePt, 'pt-BR')
@@ -97,7 +99,7 @@ registerLocaleData(localePt, 'pt-BR')
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [HttpService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [HttpService, AuthService, AuthGuard, ProdutoService, FornecedorService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

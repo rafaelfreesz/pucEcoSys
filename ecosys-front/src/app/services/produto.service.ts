@@ -13,7 +13,7 @@ export class ProdutoService{
     private produtoSelecionado: Produto | null = null;
     produtoFoiSelecionado: Subject<Produto | null> = new Subject<Produto | null>();
 
-    isCarregando: boolean = true;
+    isLoading: boolean = true;
 
     proximo_id = -1
 
@@ -22,9 +22,12 @@ export class ProdutoService{
         this.buscarTodosProdutos();
     }
     
+    getTodosProdutos(){
+        return this.todosProdutos.slice();
+    }
 
     buscarTodosProdutos(): void{
-        this.isCarregando = true;
+        this.isLoading = true;
         this.httpService.getTodosProdutos().subscribe( todosProdutos => {
             this.httpService.getProximoIdDisponivel().subscribe(
                 retorno => {
@@ -34,7 +37,8 @@ export class ProdutoService{
             this.todosProdutos = todosProdutos;
             this.converterBase64ParaImagem();
             this.listaProdutosAlterada.next(this.todosProdutos.slice());
-            this.isCarregando = false;
+            this.isLoading = false;
+            
         })
     }
     

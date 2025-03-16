@@ -6,7 +6,12 @@
             </div>
             <div class="fechar" (click) = "cancelar()"> X </div>
         </div>
-        <div class="conteudo">
+        <div class="box-spinner" *ngIf="this.isLoading()">
+          <div class="spinner-border text-success spinner" role="status" >
+              <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="conteudo" *ngIf="!this.isLoading()">
             <div class="row filtro">
                 <div class="col-sm-3">
                     <select

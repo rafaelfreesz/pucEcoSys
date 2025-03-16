@@ -13,19 +13,23 @@ export class FornecedorService{
     private fornecedorSelecionado: Fornecedor | null = null;
     fornecedorFoiSelecionado: Subject<Fornecedor | null> = new Subject<Fornecedor | null>();
 
-    isCarregando: boolean = true;
+    isLoading: boolean = true;
 
     constructor(private httpService: HttpService){
         this.buscarTodosFornecedores();
     }
     
     buscarTodosFornecedores(): void{
-        this.isCarregando = true;
+        this.isLoading = true;
         this.httpService.getTodosFornecedores().subscribe( todosFornecedores => {
             this.todosFornecedores = todosFornecedores
             this.listaFornecedoresAlterada.next(this.todosFornecedores.slice());
-            this.isCarregando = false;
+            this.isLoading = false;
         })
+    }
+
+    getTodosFornecedores(){
+        return this.todosFornecedores.slice()
     }
 
     salvarFornecedor(fornecedor: Fornecedor){
@@ -95,24 +99,4 @@ export class FornecedorService{
         })
     }
 
-    // deletarFornecedor(id: number): void{
-    //     this.httpService.deleteFornecedor(id).subscribe( todosFornecedores => {
-    //         this.todosFornecedores = todosFornecedores
-    //         this.listaFornecedoresAlterada.next(this.todosFornecedores.slice());
-    //     })
-    // }
-
-    // salvarFornecedor(fornecedor: Fornecedor): void{
-    //     if(fornecedor.id && fornecedor.id !== -1){
-    //         this.httpService.updateFornecedor(fornecedor).subscribe( todosFornecedores => {
-    //             this.todosFornecedores = todosFornecedores
-    //             this.listaFornecedoresAlterada.next(this.todosFornecedores.slice());
-    //         });
-    //     }else{
-    //         this.httpService.insertFornecedor(fornecedor).subscribe( todosFornecedores => {
-    //             this.todosFornecedores = todosFornecedores
-    //             this.listaFornecedoresAlterada.next(this.todosFornecedores.slice());
-    //         });
-    //     }
-    // }
 }
