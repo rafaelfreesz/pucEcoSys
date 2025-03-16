@@ -19,10 +19,6 @@ export class ModalGerenciarUsuariosComponent implements OnInit {
   
   constructor(private authService: AuthService) {
 
-    // for(let i=0; i<10;i++){
-    //   this.usuarios.push(new Usuario('aaa',i,'g','1',new Date()))
-    // }
-    // this.usuarioSelecionado = this.usuarios[0]  //TODO remover
     this.setFormulario();
   }
 
@@ -45,7 +41,7 @@ export class ModalGerenciarUsuariosComponent implements OnInit {
   }
 
   prepararCadastro(){
-    this.usuarioSelecionado = new Usuario("",-1,"v","",new Date);
+    this.usuarioSelecionado = new Usuario("",-1,"v","",new Date());
     this.setFormulario();
   }
 
@@ -68,21 +64,21 @@ export class ModalGerenciarUsuariosComponent implements OnInit {
   setFormulario(){
     if(this.usuarioSelecionado){
 
-      this.conteudoFormulario = new FormGroup({
-                'login': new FormControl(this.usuarioSelecionado.login, [Validators.required,Validators.minLength(2),Validators.maxLength(14)]),
-                'senha': new FormControl(null, [Validators.required,Validators.minLength(2),Validators.maxLength(14)]),
-                'categoria': new FormControl(this.usuarioSelecionado.categoria, [Validators.required,]),
-                'confirmacao-senha': new FormControl(null, [Validators.required,Validators.minLength(2),Validators.maxLength(14)])
-              })
-
-    }else{
-
-      this.conteudoFormulario = new FormGroup({
-                'login': new FormControl([Validators.required,Validators.minLength(2),Validators.maxLength(14)]),
-                'senha': new FormControl([Validators.required,Validators.minLength(2),Validators.maxLength(14)]),
-                'categoria': new FormControl([Validators.required,]),
-                'confirmacao-senha': new FormControl([Validators.required,Validators.minLength(2),Validators.maxLength(14)])
-              })
+      if(this.usuarioSelecionado.id == -1){
+        this.conteudoFormulario = new FormGroup({
+          'login': new FormControl(null,[Validators.required,Validators.minLength(2),Validators.maxLength(14)]),
+          'senha': new FormControl(null,[Validators.required,Validators.minLength(2),Validators.maxLength(14)]),
+          'categoria': new FormControl(null,[Validators.required,]),
+          'confirmacao-senha': new FormControl(null,[Validators.required,Validators.minLength(2),Validators.maxLength(14)])
+        })
+      }else{
+        
+        this.conteudoFormulario = new FormGroup({
+            'login': new FormControl(this.usuarioSelecionado.login, [Validators.required,Validators.minLength(2),Validators.maxLength(14)]),
+            'categoria': new FormControl(this.usuarioSelecionado.categoria, [Validators.required,])
+          })
+      }
+      
     }
   }
 
