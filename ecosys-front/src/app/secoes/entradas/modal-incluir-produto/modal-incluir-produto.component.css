@@ -188,7 +188,7 @@
 
 }
 
-thead{
+thead,tfoot{
     background-color: #198754;
 }
 
@@ -208,4 +208,32 @@ tr{
 td{
     vertical-align: middle;
     background: transparent;
+}
+tfoot{
+    th{
+        text-align: center;
+        .paginator{
+            display: inline-flex;
+            background-color: transparent;
+            align-items: center;
+            .item-paginator{
+                margin: 1px;
+                border-radius: 4px;
+                width: 30px;
+                height: 25px;
+                color: #fff;
+                text-align: center;
+                vertical-align: middle;
+                cursor: pointer;
+            }
+            .item-paginator-ativo{
+                color:#198754;
+                background-color: #fff;
+
+            }
+        }
+    }
+}
+.item-paginator:hover{
+    background-color: #104b2f;
 }

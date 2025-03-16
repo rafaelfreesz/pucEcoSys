@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ItemEntrada } from 'src/app/models/item_entrada.model';
 import { ItemVenda } from 'src/app/models/item_venda.model';
 import { Produto } from 'src/app/models/produto.model';
+import { ContadorFiltroPipe } from 'src/app/pipes/contador-filtro.pipe';
 import { ProdutoService } from 'src/app/services/produto.service';
 
 @Component({
@@ -23,14 +24,24 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
   quantidade: number = 1;
   mostrarErro: boolean = false;
 
-  constructor(private produtoService: ProdutoService) {
-  }
+  //Paginator
+  itemsListaPorVez = 10;
+  totalFiltrado:number = 0;
+  totalDeIndices = 0
+  indiceLista = 0
+  contadorPipe: ContadorFiltroPipe = new ContadorFiltroPipe();
+
+  constructor(private produtoService: ProdutoService) {}
   
   ngOnInit(): void {
     this.todosProdutos = this.produtoService.getTodosProdutos();
+    this.totalFiltrado = this.contadorPipe.transform(this.totalFiltrado,this.todosProdutos,this.valorFiltro,this.criterioFiltro)
+    this.totalDeIndices = Math.ceil(this.todosProdutos.length/this.itemsListaPorVez)
     this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
           todosProdutos => {
             this.todosProdutos = todosProdutos;
+            this.totalFiltrado = this.contadorPipe.transform(this.totalFiltrado,this.todosProdutos,this.valorFiltro,this.criterioFiltro)
+            this.totalDeIndices = Math.ceil(this.todosProdutos.length/this.itemsListaPorVez)
           }
       )
   }
@@ -49,9 +60,10 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
     if(this.produtoSelecionado && produto.id === this.produtoSelecionado.id){
       this.produtoSelecionado = null
     }else{
-
       this.produtoSelecionado = produto;
     }    
+    
+    console.log(this.produtoSelecionado)
   }
 
   adicionar(){
@@ -63,7 +75,7 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
       novoItem.produto = this.produtoSelecionado;
       this.fecharModal.emit(novoItem);
     }else{
-      if(this.quantidade <= this.produtoSelecionado.quantidade){
+      if(this.quantidade <= this.produtoSelecionado.qtd_estoque){
         novoItem = new ItemVenda();
         novoItem.quantidade = this.quantidade;
         novoItem.produto = this.produtoSelecionado;
@@ -75,6 +87,31 @@ export class ModalIncluirProdutoComponent implements OnInit, OnDestroy {
 
     }
   
+  }
+
+  defineValoresPaginator(){
+    if (this.indiceLista < 2){
+
+      return Array.from({length: Math.min(5,this.totalDeIndices-this.indiceLista+1)}, (_,i) => i+1)
+    
+    }else if(this.indiceLista > this.totalDeIndices - 4){
+      return Array.from({length: Math.min(5,this.totalDeIndices)}, (_,i) => this.totalDeIndices - 4 + i)
+    
+    }else{
+      return Array.from({length: Math.min(5,this.totalDeIndices-this.indiceLista+1)}, (_,i) => this.indiceLista -1 + i)
+    }
+  }
+
+  selecionaIndicePaginator(indice: number){
+    if(indice > 0 && indice < this.totalDeIndices+1){
+      this.indiceLista = indice-1
+    }
+  }
+  alteraFiltro(){
+    this.indiceLista = 0
+    this.totalFiltrado = this.contadorPipe.transform(this.totalFiltrado,this.todosProdutos,this.valorFiltro,this.criterioFiltro)
+    this.totalDeIndices = Math.ceil(this.totalFiltrado/this.itemsListaPorVez)
+    this.defineValoresPaginator()
   }
 
   isLoading(){

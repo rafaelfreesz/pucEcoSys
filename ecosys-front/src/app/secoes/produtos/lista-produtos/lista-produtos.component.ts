@@ -21,11 +21,12 @@ export class ListaProdutosComponent implements OnInit, OnDestroy {
   indiceLista = 0
   contadorPipe: ContadorFiltroPipe = new ContadorFiltroPipe();
 
-  constructor(private produtoService: ProdutoService) {
-  }
+  constructor(private produtoService: ProdutoService) {}
   
   ngOnInit(): void {
     this.todosProdutos = this.produtoService.getTodosProdutos();
+    this.totalFiltrado = this.contadorPipe.transform(this.totalFiltrado,this.todosProdutos,this.valorFiltro,this.criterioFiltro)
+    this.totalDeIndices = Math.ceil(this.todosProdutos.length/this.itemsListaPorVez)
     this.listaProdutosAlterada = this.produtoService.listaProdutosAlterada.subscribe(
       todosProdutos => {
         this.todosProdutos = todosProdutos
