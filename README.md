@@ -42,7 +42,7 @@ onde,
 9. Neste momento, o *backend* está pronto para ser servido através do comando ***npm run dev***;
 10. Na pasta *ecosys-front*, instalar dependencias do Angular com o comando ***npm install***;
 11. Servir o *front-end* através do comando ***ng serve***;
-12. No Postman, criar o primeiro usuário através do comando POST com o seguinte elemento no *body*:
+12. No Postman, criar o primeiro usuário através do comando POST na rota ***localhost:3000/conta/cadastrarPrimeiro*** com o seguinte elemento no *body*:
 ```js
 {
     "login": "login",
